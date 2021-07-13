@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
+import OrderShare from './Order_Share.jsx';
 
 function App() {
   const { addName } = allActions;
@@ -20,6 +21,7 @@ function App() {
         {name || ''}
       </p>
       <Button color="primary" onClick={handleClick}>add Erik</Button>
+      <OrderShare />
     </div>
   );
 }
