@@ -16,11 +16,6 @@ function App() {
   return (
     <div className="App">
       <OrangeNavbar needBackArrow={true}/>
-      <OrangeButton>
-        orange
-      </OrangeButton>
-      <ProfileImage src='https://media.allure.com/photos/5f5facef647ada9e6a2d1ba8/master/pass/facial%20self-tanner.jpg'/>
-    <MenuItemPage></MenuItemPage>
     </div>
   );
 }

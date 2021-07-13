@@ -15,6 +15,8 @@ export default function MenuItemIncrementor () {
   return(
     <div>
       <CirleButton>-</CirleButton>
+      <div>0</div>
+      <CirleButton>+</CirleButton>
     </div>
   )
 }
