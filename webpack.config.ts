@@ -1,5 +1,6 @@
 import path from "path";
 import webpack from "webpack";
+import autoprefixer from "autoprefixer";
 
 const config: webpack.Configuration = {
   entry: "./src/index.jsx",
@@ -19,6 +20,24 @@ const config: webpack.Configuration = {
           },
         },
       },
+      {
+        test: /\.(sass|css|scss)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: () => [
+                  autoprefixer()
+                ]
+              }
+            },
+          },
+          'sass-loader',
+        ]
+      }
     ],
   },
   resolve: {
