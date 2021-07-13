@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bulma-components';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
-import MenuPage from './MenuPage.jsx';
+import MenuItemPage from './MenuItemPage';
 
 const MobileDiv = styled.div`
 
@@ -20,7 +20,7 @@ function App() {
         orange
       </OrangeButton>
       <ProfileImage src='https://media.allure.com/photos/5f5facef647ada9e6a2d1ba8/master/pass/facial%20self-tanner.jpg'/>
-    <MenuPage></MenuPage>
+    <MenuItemPage></MenuItemPage>
     </div>
   );
 }

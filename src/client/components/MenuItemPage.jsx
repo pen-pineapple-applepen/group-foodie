@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
-import MenuItemContainer from './MenuItemContainer.jsx';
 import {OrangeButton} from '../styles/shared.tsx';
+import MenuItemIncrementor from './MenuItemIncrementor.jsx';
 
 const MainConatiner = styled.div`
   display: flex;
@@ -18,14 +18,15 @@ const CheckoutButton = styled(OrangeButton)`
   width: 50%;
 `;
 
-export default function MenuPage () {
+export default function MenuItemPage () {
 
   return(
     <MainConatiner>
-      <img src={'Dannys_bg.png'}/>
-      <h2>Dannys</h2>
-      <MenuItemContainer></MenuItemContainer>
-      <CheckoutButton>Checkout $0.00</CheckoutButton>
+      <img src='Dannys_bg.png'/>
+      <h2>Item Name</h2>
+      <p>Item description</p>
+      <MenuItemIncrementor/>
+      <CheckoutButton>Add to order{`(${0})`} $0.00</CheckoutButton>
     </MainConatiner>
   )
 }
