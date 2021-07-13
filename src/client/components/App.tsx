@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
 import MainLoginPage from './loginSignUpPage/mainLoginPage';
+import SignUpPage from './loginSignUpPage/SignUpPage';
 
 function App() {
   const { addName } = allActions;
@@ -21,7 +22,8 @@ function App() {
         {name || ''}
       </p>
       <Button color="primary" onClick={handleClick}>add Erik</Button> */}
-      <MainLoginPage />
+      {/* <MainLoginPage /> */}
+      <SignUpPage />
     </div>
   );
 }
