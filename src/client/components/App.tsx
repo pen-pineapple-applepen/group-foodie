@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
 
 function App() {
   const { addName } = allActions;
-  const name = useAppSelector(state => state.names)
+  const name = useAppSelector((state) => state.names);
 
   const dispatch = useAppDispatch();
 
@@ -18,7 +19,7 @@ function App() {
         my name is
         {name || ''}
       </p>
-      <button type="button" onClick={handleClick}>add Erik</button>
+      <Button color="primary" onClick={handleClick}>add Erik</Button>
     </div>
   );
 }
