@@ -3,17 +3,35 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import RouterContainer from './RouterContainer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 
-const MobileDiv = styled.div`
+import mainLoginPage from './loginSignUpPage/mainLoginPage'
+import SignUpPage from './loginSignUpPage/SignUpPage'
+import Testing from './Testing';
+import Testing2 from './Testing2';
+import Testing4 from './Testing4';
 
-`
 
 function App() {
 
-// these are just some test examples
+  // these are just some test examples
   return (
     <div className="App">
-      <RouterContainer />
+      <Router>
+        <div className="RouterContainer">
+          <Switch>
+            <Route exact path="/" component={mainLoginPage} />
+            <Route exact path="/SignUp" component={SignUpPage} />
+            <Route exact path="/testing2" component={Testing2} />
+            <Redirect to="/" />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
