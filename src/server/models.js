@@ -97,8 +97,24 @@ const addPaymentByUserId = async (
     })
 }
 
-
 //groups
+const createGroup = async (due_date) => {
+  await db('groups')
+    .insert({
+      due_date,
+    })
+}
+
+// comments
+const createComment = async (user_id, text, date, group_id) => {
+  await db('comments')
+    .insert({
+      user_id,
+      text,
+      date,
+      group_id,
+    })
+}
 
 
 const models = {
@@ -112,6 +128,8 @@ const models = {
   addOrder,
   getPaymentsByUserId,
   addPaymentByUserId,
+  createGroup,
+  createComment
 }
 
 module.exports = models;

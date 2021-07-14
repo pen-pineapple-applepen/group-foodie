@@ -34,7 +34,7 @@ CREATE TABLE comments (
   id SERIAL NOT NULL,
   user_id INTEGER NOT NULL,
   text VARCHAR NULL,
-  date time NULL,
+  date VARCHAR NULL,
   group_id INTEGER NOT NULL,
   PRIMARY KEY (id)
 );

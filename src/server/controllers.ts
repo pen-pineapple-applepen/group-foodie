@@ -1,4 +1,3 @@
-
 const db = require('./db');
 const models = require('./models');
 
@@ -124,7 +123,7 @@ async function addPaymentByUserId(req, res) {
   }
 }
 
-//groups
+// groups
 async function createGroup(req, res) {
   const { due_date } = req.body;
   try {
@@ -132,6 +131,30 @@ async function createGroup(req, res) {
     res.status(200).send('successfully created group');
   } catch (err) {
     res.status(404).send(err);
+  }
+}
+
+// comments
+async function getCommentsByGroupId(req, res) {
+  const { group_id } = req.body;
+  try {
+    const comments = await models.getCommentsByGroupId(group_id)
+    res.status(200).send(comments);
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
+
+async function createComment(req, res) {
+  const { user_id } = req.params;
+  const { text, date, group_id } = req.body;
+  try {
+    await models.createComment(user_id, text, date, group_id)
+    console.log('created comment')
+    res.status(200).send('created comment')
+  } catch (err) {
+    console.log('failed making comment', err);
+    res.status(400).send(err);
   }
 }
 
@@ -149,4 +172,6 @@ module.exports = {
   getPaymentsByUserId,
   addPaymentByUserId,
   createGroup,
+  getCommentsByGroupId,
+  createComment,
 }
