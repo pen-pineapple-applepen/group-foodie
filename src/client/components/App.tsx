@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
-import Profile from './Profile';
 import styled from 'styled-components';
 import RouterContainer from './RouterContainer';
 
@@ -18,7 +17,6 @@ function App() {
   return (
     <MobileDiv>
       <RouterContainer />
-      <Profile />
     </MobileDiv>
   );
 }
