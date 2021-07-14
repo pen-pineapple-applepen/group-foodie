@@ -4,10 +4,7 @@ import styled from "styled-components";
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
 
 const LandingPage = () => {
-  const StyledButton = styled.button`
-  background-color: #FF6C36;
-  border-radius: 7px;
-  font-size: 32px;
+  const StyledButton = styled(OrangeButton)`
   top: 70%;
   position: absolute;
 
