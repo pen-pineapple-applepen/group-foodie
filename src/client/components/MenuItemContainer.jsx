@@ -34,7 +34,7 @@ const SubInfo = styled.div`
   padding: 10px 10px;
 `;
 
-export default function MenuItemContainer () {
+export default function MenuItemContainer ({name, price}) {
 
   return(
     <MainConatiner>
@@ -43,10 +43,10 @@ export default function MenuItemContainer () {
       </div>
       <InfoContainer>
         <Name>
-          <h3>Big Burger</h3>
+          <h3>{name}</h3>
         </Name>
         <SubInfo>
-          <h4>$5.00</h4>
+          <h4>${price}.00</h4>
         </SubInfo>
       </InfoContainer>
     </MainConatiner>

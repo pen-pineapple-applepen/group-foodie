@@ -5,6 +5,8 @@ import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/s
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import MenuItemPage from './MenuItemPage';
+import MenuPage from './MenuPage';
+
 
 const MobileDiv = styled.div`
 
@@ -16,6 +18,8 @@ function App() {
   return (
     <div className="App">
       <OrangeNavbar needBackArrow={true}/>
+      <MenuItemPage/>
+      <MenuPage/>
     </div>
   );
 }

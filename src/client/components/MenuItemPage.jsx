@@ -19,14 +19,27 @@ const CheckoutButton = styled(OrangeButton)`
 `;
 
 export default function MenuItemPage () {
+  const currentOrder = useAppSelector((state)=>state.currentMenuItem)
+  const item = useAppSelector((state)=>state.currentItemQuantityPrice)
+  const dispatch = useAppDispatch();
+  const totalPrice = item.price*item.count;
+
+  function clickHandler () {
+    dispatch(allActions.UpdateTotalPrice(totalPrice));
+    dispatch(allActions.UpdateItemQuantity(item.count));
+    dispatch(allActions.addItemToOrders(currentOrder));
+    dispatch(allActions.addToPriceTotal(totalPrice));
+    //add user id?
+  }
 
   return(
     <MainConatiner>
       <img src='Dannys_bg.png'/>
-      <h2>Item Name</h2>
-      <p>Item description</p>
+      <h2>{currentOrder.itemName}</h2>
+      <p>{item.description}</p>
+      <p>${item.price}.00</p>
       <MenuItemIncrementor/>
-      <CheckoutButton>Add to order{`(${0})`} $0.00</CheckoutButton>
+      <CheckoutButton onClick={()=> clickHandler()}>Add to order{`(${item.count})`} ${totalPrice}.00</CheckoutButton>
     </MainConatiner>
   )
 }

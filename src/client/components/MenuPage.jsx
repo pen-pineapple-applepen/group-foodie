@@ -19,13 +19,37 @@ const CheckoutButton = styled(OrangeButton)`
 `;
 
 export default function MenuPage () {
+  const currentItem = useAppSelector((state)=>state.currentMenuItem)
+  const dispatch = useAppDispatch();
+  const totalPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
+
+  function clickHandler (entry) {
+    //reroute
+    console.log(entry.name)
+    console.log(entry.price)
+    dispatch(allActions.UpdateItemName(entry.name));
+    dispatch(allActions.UpdateItemPrice(entry.price));
+    dispatch(allActions.UpdateItemDescription(entry.description));
+    dispatch(allActions.UpdateItemId(entry.id));
+
+  }
+
+  //Resets Current Selected Item
+  React.useEffect(()=>{
+    dispatch(allActions.UpdateItemName(''));
+    dispatch(allActions.UpdateItemId(0));
+    dispatch(allActions.UpdateItemQuantity(0));
+    dispatch(allActions.UpdateTotalPrice(0));
+  },[])
 
   return(
     <MainConatiner>
       <img src={'Dannys_bg.png'}/>
       <h2>Dannys</h2>
-      <MenuItemContainer></MenuItemContainer>
-      <CheckoutButton>Checkout $0.00</CheckoutButton>
+      <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
+        <MenuItemContainer  name={'Big Burger'} price={5}></MenuItemContainer>
+      </div>
+      <CheckoutButton>Checkout ${totalPrice}.00</CheckoutButton>
     </MainConatiner>
   )
 }

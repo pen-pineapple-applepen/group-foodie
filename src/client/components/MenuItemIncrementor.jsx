@@ -10,13 +10,22 @@ const CirleButton = styled(OrangeButton)`
   opacity: 0.5;
 `;
 
+const MainConatiner = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export default function MenuItemIncrementor () {
+  const item = useAppSelector((state)=>state.currentItemQuantityPrice)
+  const dispatch = useAppDispatch();
+
 
   return(
-    <div>
-      <CirleButton>-</CirleButton>
-      <div>0</div>
-      <CirleButton>+</CirleButton>
-    </div>
+    <MainConatiner>
+      <CirleButton onClick={()=>{dispatch(allActions.subtractItem())}}>-</CirleButton>
+      <div>{item.count}</div>
+      <CirleButton onClick={()=>{dispatch(allActions.addItem())}}>+</CirleButton>
+    </MainConatiner>
   )
 }
