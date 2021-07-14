@@ -850,3 +850,8 @@ table {
 .react-datepicker__portal .react-datepicker-time__header {
   font-size: 1.44rem;
 }
+
+.caret_right {
+  height: 30px;
+  width: 30px;
+}

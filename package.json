@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/server",
-    "build": "webpack --watch",
+    "build": "webpack --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,6 +24,7 @@
     "react-bulma-components": "^4.0.7",
     "react-datepicker": "^4.1.1",
     "react-dom": "^17.0.2",
+    "react-modal": "^3.14.3",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "sass-loader": "^12.1.0",
