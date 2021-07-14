@@ -25,6 +25,7 @@ const OrangeNavbarContainer = styled(Navbar)`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 414px;
 `
 const NavbarBrand = styled(Navbar.Brand)`
   display: flex;
