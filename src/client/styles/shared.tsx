@@ -106,7 +106,6 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
   const toggleMenu = () => {
     setActive(!active);
   }
-  const history = useHistory();
   return (
     <>
       {/* <OrangeNavbarContainer className="is-fixed-top">
@@ -125,8 +124,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
       <OrangeNavbarContainer className="is-fixed-top" active={active}>
         <NavbarBrand>
           <NavbarItem>
-            {needBackArrow ? <BackArrow onClick={ ()=>history.goBack() } /> : <BackArrowContainer />}
-            {/* {needBackArrow ? <BackArrow onClick={onBackArrowClick} /> : <BackArrowContainer />} */}
+            {needBackArrow ? <BackArrow onClick={onBackArrowClick} /> : <BackArrowContainer />}
           </NavbarItem>
           <NavbarItem>
             <GroupFoodieLogo>
@@ -158,7 +156,7 @@ export const ProfileImage: (props: profileImageProps) => JSX.Element = ({ src, s
 // BackArrow takes 1 prop 'onClick' and behaves the same way that a normal JSX element's 'onClick' would behave
 export const BackArrow: (props: backArrowProps) => JSX.Element = ({ onClick }) => {
   return (
-    <BackArrowContainer>
+    <BackArrowContainer onClick={onClick}>
       <i className="fas fa-angle-left has-text-white-ter is-size-4" />
     </BackArrowContainer>
   )

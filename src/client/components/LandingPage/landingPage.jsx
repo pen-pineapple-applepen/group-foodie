@@ -30,7 +30,7 @@ const LandingPage = () => {
 
   return (
     <div className="login-signup-background">
-      <OrangeNavbar needBackArrow={true}/>
+      <OrangeNavbar needBackArrow={true} onBackArrowClick={goBack}/>
       <StyledContainer>
           <StyledGreeting>
             Welcome, Bob Smith!
@@ -39,9 +39,6 @@ const LandingPage = () => {
             Create Order
           </StyledButton>
       </StyledContainer>
-      <button type="button" onClick={goBack}>
-        Go back
-      </button>
     </div>
   )
 }

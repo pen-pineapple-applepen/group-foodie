@@ -5,13 +5,13 @@ import { OrangeButton } from '/src/client/styles/shared.tsx';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
 import { OrangeNavbar } from '../../styles/shared';
+
 const StyledHeader = styled.h2`
 font-size: 20px;
 font-weight: bold;
 `;
 
 export default function SignUpPage() {
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -29,17 +29,18 @@ export default function SignUpPage() {
       console.log(err)
     })
   }
-  const history = useHistory();
 
+  const history = useHistory();
   function handleHomeClick() {
     history.push("/");
   }
-
-
+  const goBack = () => {
+    history.goBack()
+  }
 
   return (
     <div className="login-signup-background">
-      < OrangeNavbar needBackArrow={true}/>
+      < OrangeNavbar needBackArrow={true} onBackArrowClick={goBack}/>
       <div className="login-signup-page-container">
         <StyledHeader>New Account</StyledHeader>
         <Form.Field className="login-form">
