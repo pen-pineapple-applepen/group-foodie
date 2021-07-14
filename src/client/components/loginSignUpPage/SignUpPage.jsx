@@ -3,6 +3,8 @@ import { Button, Icon, Form } from 'react-bulma-components';
 import styled from 'styled-components';
 import { OrangeButton } from '/src/client/styles/shared.tsx';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom'
+import { OrangeNavbar } from '../../styles/shared';
 
 export default function SignUpPage() {
 
@@ -23,6 +25,11 @@ export default function SignUpPage() {
       console.log(err)
     })
   }
+  const history = useHistory();
+
+  function handleHomeClick() {
+    history.push("/");
+  }
 
   const StyledHeader = styled.h2`
   font-size: 20px;
@@ -31,6 +38,7 @@ export default function SignUpPage() {
 
   return (
     <div className="login-signup-background">
+      < OrangeNavbar needBackArrow={true}/>
       <div className="login-signup-page-container">
         <StyledHeader>New Account</StyledHeader>
         <Form.Field className="login-form">
@@ -60,7 +68,7 @@ export default function SignUpPage() {
           </Form.Control>
         </Form.Field>
         <div className='login-buttons'>
-          <OrangeButton>Sign Up</OrangeButton>
+          <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
         </div>
       </div>
     </div>
