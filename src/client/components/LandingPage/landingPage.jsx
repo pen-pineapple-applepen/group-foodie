@@ -28,7 +28,6 @@ const LandingPage = () => {
     history.goBack()
   }
 
-
   return (
     <div className="login-signup-background">
       <OrangeNavbar needBackArrow={true}/>
