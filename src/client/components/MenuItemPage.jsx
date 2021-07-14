@@ -5,6 +5,7 @@ import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import {OrangeButton} from '../styles/shared.tsx';
 import MenuItemIncrementor from './MenuItemIncrementor.jsx';
+import { useHistory } from 'react-router-dom';
 
 const MainConatiner = styled.div`
   display: flex;
@@ -23,6 +24,8 @@ export default function MenuItemPage () {
   const item = useAppSelector((state)=>state.currentItemQuantityPrice)
   const dispatch = useAppDispatch();
   const totalPrice = item.price*item.count;
+  const history = useHistory();
+
 
   function clickHandler () {
     console.log(totalPrice)
@@ -30,6 +33,7 @@ export default function MenuItemPage () {
     dispatch(allActions.addToPriceTotal(totalPrice));
     dispatch(allActions.addItemToOrders(currentOrder));
     //add user id?
+    history.push("/Menu");
   }
 
   React.useEffect(()=>{

@@ -14,6 +14,8 @@ import SignUpPage from './loginSignUpPage/SignUpPage'
 import Testing from './Testing';
 import Testing2 from './Testing2';
 import Testing4 from './Testing4';
+import MenuPage from './MenuPage';
+import MenuItemPage from './MenuItemPage';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/testing2" component={Testing2} />
+            <Route exact path="/Menu" component={MenuPage} />
+            <Route exact path="/MenuItem" component={MenuItemPage} />
             <Redirect to="/" />
           </Switch>
         </div>
