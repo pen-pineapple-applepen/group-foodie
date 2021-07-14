@@ -13,9 +13,6 @@ function Testing() {
         <Link to={`/testing4`} className="button muted-button">
           Testing 4
         </Link>
-        <Link to={`/profile`} className="button muted-button">
-          Profile
-        </Link>
       </div>
     </div>
   )
