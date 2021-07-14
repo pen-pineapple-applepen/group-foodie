@@ -22,8 +22,8 @@ function App() {
       </p>
       <Button color="primary" onClick={handleClick}>add Erik</Button> */}
       <OrangeNavbar needBackArrow={true}/>
-      <MainLoginPage />
-      {/* <SignUpPage /> */}
+      {/* <MainLoginPage /> */}
+      <SignUpPage />
     </div>
   );
 }

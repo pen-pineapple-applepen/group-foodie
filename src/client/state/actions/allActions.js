@@ -1,7 +1,8 @@
-import { addName, addUserName, setNumber } from '../reducers/namesReducer';
+import { addName, setNumber } from '../reducers/namesReducer';
+import { logIn, logOut } from '../reducers/loginReducer.js'
 
 const allActions = {
-  addName, addEmail
+  addName, logIn, logOut
 }
 
 export default allActions;

@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
-import { Button, Icon, Form } from 'react-bulma-components';
-import styled from 'styled-components'
-import { OrangeButton } from '/src/client/styles/shared.tsx';
 import axios from 'axios';
+import styled from 'styled-components'
+import allActions from '/src/client/state/actions/allActions.js';
+import { useAppDispatch, useAppSelector } from '/src/client/state/hooks.ts';
+import { Button, Icon, Form } from 'react-bulma-components';
+import { OrangeButton } from '/src/client/styles/shared.tsx';
 
 export default function MainLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
 
+  const logInStatus = useAppSelector((state) => state.loggedIn);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogin = () => {
+    dispatch(allActions.logIn())
+    // what goes into login('will be action payload')
   }
 
 
