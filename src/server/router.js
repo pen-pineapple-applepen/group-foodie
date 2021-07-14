@@ -5,7 +5,7 @@ const router = express.Router();
 const users = require('./routes/users.ts');
 const comments = require('./routes/comments');
 const orders = require('./routes/orders.ts');
-const payments = require('./routes/payments');
+const payments = require('./routes/payments.ts');
 
 // actual routing of endpoints
 router.use('/users', users)

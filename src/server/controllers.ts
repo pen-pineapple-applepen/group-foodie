@@ -14,6 +14,19 @@ async function getOneUser(req, res) {
   }
 }
 
+async function createUser(req, res) {
+  const {
+    first_name, last_name, email, username, password, guest
+  } = req.body;
+  try {
+    const user = await models.createUser(first_name, last_name, email, username, password, guest);
+    res.status(200).send('created user');
+  } catch (err) {
+    console.log('error creating user: ', err)
+    res.status(404).send(err);
+  }
+}
+
 async function getFriends(req, res) {
   const { user_id } = req.params;
   try {
@@ -21,6 +34,18 @@ async function getFriends(req, res) {
     res.status(200).send(friends)
   } catch (err) {
     console.log('error getting friends: ', err);
+    res.status(404).send(err);
+  }
+}
+
+async function createFriend(req, res) {
+  const { user_id } = req.params;
+  const { friend_id } = req.body;
+  try {
+    await models.createFriend(user_id, friend_id);
+    res.status(200).send('created friend')
+  } catch (err) {
+    console.log('error creating friend: ', err);
     res.status(404).send(err);
   }
 }
@@ -76,13 +101,52 @@ async function addOrder(req, res) {
   }
 }
 
+// payments
+async function getPaymentsByUserId(req, res) {
+  const { user_id } = req.params;
+  try {
+    const payments = await models.getPaymentsByUserId(user_id)
+    res.status(200).send(payments);
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
+async function addPaymentByUserId(req, res) {
+  const { user_id } = req.params;
+  const { name, card_number, card_type, exp_date, cvv, zip_code } = req.body;
+  try {
+    const payments = await models.addPaymentByUserId(
+      user_id, name, card_number, card_type, exp_date, cvv, zip_code
+    )
+    res.status(200).send('successfully added payments');
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
+
+//groups
+async function createGroup(req, res) {
+  const { due_date } = req.body;
+  try {
+    await models.createGroup(due_date)
+    res.status(200).send('successfully created group');
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
+
 
 
 module.exports = {
   getOneUser,
+  createUser,
   getFriends,
+  createFriend,
   getOneOrderById,
   getOrdersByGroupId,
   getOrdersByUserId,
   addOrder,
+  getPaymentsByUserId,
+  addPaymentByUserId,
+  createGroup,
 }

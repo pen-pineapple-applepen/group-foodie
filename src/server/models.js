@@ -5,8 +5,19 @@ const getOneUserInfo = async (user_id) => {
   const user = await db('users')
     .select('id', 'first_name', 'last_name', 'email', 'username', 'password', 'guest')
     .where({ id: user_id })
-
   return user[0];
+}
+
+const createUser = async(first_name, last_name, email, username, password, guest) => {
+  await db('users')
+    .insert({
+      first_name,
+      last_name,
+      email,
+      username,
+      password,
+      guest,
+    })
 }
 
 const getFriends = async (user_id) => {
@@ -17,9 +28,17 @@ const getFriends = async (user_id) => {
     this.on('friends_join_table.friend_id', '=', 'users.id')
     .andOn('friends_join_table.user_id', '=', user_id)
   })
-
   return friends;
 }
+
+const createFriend = async(user_id, friend_id) => {
+  await db('friends_join_table')
+    .insert({
+      user_id,
+      friend_id,
+    })
+}
+
 
 // orders
 const getOneOrderById = async (order_id) => {
@@ -56,13 +75,43 @@ const addOrder = async (
     })
 }
 
+// payments
+const getPaymentsByUserId = async (user_id) => {
+  const payments = await db('payment_info')
+    .where({ user_id: user_id })
+  return payments;
+}
+
+const addPaymentByUserId = async (
+  user_id, name, card_number, card_type, exp_date, cvv, zip_code
+) => {
+  await db('payment_info')
+    .insert({
+      name,
+      card_number,
+      card_type,
+      exp_date,
+      cvv,
+      zip_code,
+      user_id,
+    })
+}
+
+
+//groups
+
+
 const models = {
   getOneUserInfo,
+  createUser,
   getFriends,
+  createFriend,
   getOneOrderById,
   getOrdersByGroupId,
   getOrdersByUserId,
   addOrder,
+  getPaymentsByUserId,
+  addPaymentByUserId,
 }
 
 module.exports = models;
