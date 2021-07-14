@@ -12,7 +12,16 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
 
   const handleSignUp = () => {
-
+    axios.post('', {
+      //object to send based on database structure
+    })
+    .then(res => {
+      console.log('successfully registered user');
+      //redirect user to the login page?
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   const StyledHeader = styled.h2`
