@@ -90,10 +90,10 @@ async function addOrder(req, res) {
   } = req.body;
 
   try {
-    await models.addOrder(
+    const orderId = await models.addOrder(
       user_id, food, quantity, price, date, food_id, group_id, restaurant_id
     )
-    res.status(200).send('successfully added order');
+    res.status(200).send(orderId);
   } catch (err) {
     console.log('error creating order: ', err);
     res.status(404).send(err);
@@ -114,21 +114,32 @@ async function addPaymentByUserId(req, res) {
   const { user_id } = req.params;
   const { name, card_number, card_type, exp_date, cvv, zip_code } = req.body;
   try {
-    const payments = await models.addPaymentByUserId(
+    const paymentId = await models.addPaymentByUserId(
       user_id, name, card_number, card_type, exp_date, cvv, zip_code
     )
-    res.status(200).send('successfully added payments');
+    res.status(200).send(paymentId);
   } catch (err) {
     res.status(404).send(err);
   }
 }
 
 // groups
+
+
+async function getDueDateByGroupId(req, res) {
+  const { group_id } = req.params;
+  try {
+    const dueDate = await models.getDueDateByGroupId(group_id)
+    res.status(200).send(dueDate);
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
 async function createGroup(req, res) {
   const { due_date } = req.body;
   try {
-    await models.createGroup(due_date)
-    res.status(200).send('successfully created group');
+    const idAndDate = await models.createGroup(due_date)
+    res.status(200).send(idAndDate);
   } catch (err) {
     res.status(404).send(err);
   }
@@ -136,7 +147,7 @@ async function createGroup(req, res) {
 
 // comments
 async function getCommentsByGroupId(req, res) {
-  const { group_id } = req.body;
+  const { group_id } = req.params;
   try {
     const comments = await models.getCommentsByGroupId(group_id)
     res.status(200).send(comments);
@@ -149,9 +160,9 @@ async function createComment(req, res) {
   const { user_id } = req.params;
   const { text, date, group_id } = req.body;
   try {
-    await models.createComment(user_id, text, date, group_id)
+    const insertedId = await models.createComment(user_id, text, date, group_id)
     console.log('created comment')
-    res.status(200).send('created comment')
+    res.status(200).send(insertedId)
   } catch (err) {
     console.log('failed making comment', err);
     res.status(400).send(err);
@@ -171,6 +182,7 @@ module.exports = {
   addOrder,
   getPaymentsByUserId,
   addPaymentByUserId,
+  getDueDateByGroupId,
   createGroup,
   getCommentsByGroupId,
   createComment,

@@ -64,6 +64,7 @@ ALTER TABLE comments ADD FOREIGN KEY (user_id) REFERENCES users (id);
 ALTER TABLE comments ADD FOREIGN KEY (group_id) REFERENCES groups (id);
 ALTER TABLE payment_info ADD FOREIGN KEY (user_id) REFERENCES users (id);
 INSERT INTO groups(due_date)VALUES(10/24/2021);
+-- INSERT INTO orders(user_id, food, quantity, price, date, food_id, group_id, restaurant_id)VALUES(5, 'PIZZA', 3, 3.50, '12/20/2020', 423, 1, 32);
 COPY users(id, first_name, last_name, email, username, password, guest)
 FROM '/Users/erikoh/Desktop/hackreactor/blue-ocean/group-foodie-ppap/src/server/db/seed/users.csv'
 DELIMITER ','

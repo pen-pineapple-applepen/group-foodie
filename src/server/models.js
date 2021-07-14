@@ -62,7 +62,7 @@ const getOrdersByUserId = async (user_id) => {
 const addOrder = async (
   user_id, food, quantity, price, date, food_id, group_id, restaurant_id
 ) => {
-  await db('orders')
+  const insertedId = await db('orders')
     .insert({
       user_id,
       food,
@@ -72,7 +72,8 @@ const addOrder = async (
       food_id,
       group_id,
       restaurant_id,
-    })
+    }, 'id')
+    return insertedId;
 }
 
 // payments
@@ -85,7 +86,7 @@ const getPaymentsByUserId = async (user_id) => {
 const addPaymentByUserId = async (
   user_id, name, card_number, card_type, exp_date, cvv, zip_code
 ) => {
-  await db('payment_info')
+  const insertedId = await db('payment_info')
     .insert({
       name,
       card_number,
@@ -94,26 +95,43 @@ const addPaymentByUserId = async (
       cvv,
       zip_code,
       user_id,
-    })
+    }, 'id')
+  return insertedId;
 }
 
 //groups
+const getDueDateByGroupId = async (group_id) => {
+  const dueDate = await db('groups')
+    .where({
+      id: group_id,
+    })
+    return dueDate;
+}
 const createGroup = async (due_date) => {
-  await db('groups')
+  const idDate = await db('groups')
     .insert({
       due_date,
-    })
+    }, ['id', 'due_date'])
+    return idDate;
 }
 
 // comments
+
+const getCommentsByGroupId = async (group_id) => {
+  const comments = await db('comments')
+    .where({ group_id: group_id })
+  return comments;
+}
+
 const createComment = async (user_id, text, date, group_id) => {
-  await db('comments')
+  const insertedId = await db('comments')
     .insert({
       user_id,
       text,
       date,
       group_id,
-    })
+    }, 'id')
+  return insertedId;
 }
 
 
@@ -128,7 +146,9 @@ const models = {
   addOrder,
   getPaymentsByUserId,
   addPaymentByUserId,
+  getDueDateByGroupId,
   createGroup,
+  getCommentsByGroupId,
   createComment
 }
 
