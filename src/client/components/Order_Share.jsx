@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { Button } from 'react-bulma-components';
 import DatePicker from "react-datepicker";
+import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 
@@ -56,11 +57,12 @@ const OrderShare = () => {
         selected={startDate}
         onChange={(date) => setStartDate(date)}
         showTimeSelect
-        includeTimes={[
-          setHours(setMinutes(new Date(), 0), 17)
-        ]}
-        includeDates={[new Date()]}
-        placeholderText="This only includes today and tomorrow"
+        minDate={new Date()}
+        maxDate={addDays(new Date(), 6)}
+        minTime={setMinutes(new Date(), 31)}
+        maxTime={setHours(setMinutes(addDays(new Date(), 6), 45), 23)}
+        // includeDates={[new Date(), addDays(new Date(), 1),  addDays(new Date(), 2),  addDays(new Date(), 3),  addDays(new Date(), 4),  addDays(new Date(), 5),  addDays(new Date(), 6)]}
+        dateFormat="MMMM d, yyyy h:mm aa"
         />
         <ColoredLine />
       </div>

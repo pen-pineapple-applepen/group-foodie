@@ -5,23 +5,39 @@ import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/s
 import allActions from '../state/actions/allActions';
 import OrderShare from './Order_Share.jsx';
 import styled from 'styled-components';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 
-const MobileDiv = styled.div`
-
-`
+import mainLoginPage from './loginSignUpPage/mainLoginPage'
+import SignUpPage from './loginSignUpPage/SignUpPage'
+import Testing from './Testing';
+import Testing2 from './Testing2';
+import Testing4 from './Testing4';
 
 function App() {
 
-// these are just some test examples
+  // these are just some test examples
   return (
     <div className="App">
       <OrangeNavbar needBackArrow={true}/>
       <OrangeButton>
-        orange
+        Orange Button
       </OrangeButton>
       <ProfileImage src='https://media.allure.com/photos/5f5facef647ada9e6a2d1ba8/master/pass/facial%20self-tanner.jpg'/>
-      <OrderShare />
-
+      <Router>
+        <div className="RouterContainer">
+          <Switch>
+            <Route exact path="/" component={OrderShare} />
+            <Route exact path="/SignUp" component={SignUpPage} />
+            <Route exact path="/testing2" component={Testing2} />
+            <Redirect to="/" />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
