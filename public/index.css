@@ -44,6 +44,17 @@ table {
 
 /* css reset ends here */
 
+.login-signup-background {
+	background-image: url("./BG_Wood.png");
+	position: fixed;
+	min-height: 100%;
+	min-width: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+
 .login-signup-page-container {
 	margin: 20%;
 	display: flex;
@@ -54,9 +65,15 @@ table {
 }
 
 .login-buttons {
+	display: flex;
+	flex-direction: column;
 	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .login-form {
-
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
 }
