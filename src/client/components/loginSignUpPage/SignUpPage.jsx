@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Icon, Form } from 'react-bulma-components';
 import styled from 'styled-components';
 import { OrangeButton } from '/src/client/styles/shared.tsx';
+import axios from 'axios';
 
 export default function SignUpPage() {
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignUp = () => {
+
+  }
+
   const StyledHeader = styled.h2`
   font-size: 20px;
+  font-weight: bold;
 `;
 
   return (
@@ -16,25 +27,24 @@ export default function SignUpPage() {
         <Form.Field className="login-form">
           <Form.Label>First Name</Form.Label>
           <Form.Control>
-            <Form.Input placeholder="First Name" />
+            <Form.Input placeholder="First Name" onChange={e => {setFirstName(e.target.value)}}/>
           </Form.Control>
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control>
+            <Form.Input placeholder="Last Name" onChange={e => {setLastName(e.target.value)}}/>
+          </Form.Control>
+        </Form.Field>
+        <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
           <Form.Control>
-            <Form.Input type="text" placeholder="Email" />
-            <Icon align="left" size="small">
-              <i className="fas fa-envelope" />
-            </Icon>
-          </Form.Control>
-          <Form.Label>Email</Form.Label>
-          <Form.Control>
-            <Form.Input type="text" placeholder="Email" />
+            <Form.Input placeholder="Email" onChange={e => {setEmail(e.target.value)}}/>
             <Icon align="left" size="small">
               <i className="fas fa-envelope" />
             </Icon>
           </Form.Control>
           <Form.Label>Password</Form.Label>
           <Form.Control>
-            <Form.Input type="text" placeholder="Password" />
+            <Form.Input placeholder="Password" onChange={e => {setPassword(e.target.value)}}/>
             <Icon align="left" size="medium">
               <i className="fas fa-key" />
             </Icon>
