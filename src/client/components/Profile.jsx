@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
+import { Link } from 'react-router-dom';
 
 const ProfileDiv = styled.div`
   display: flex;
@@ -35,14 +36,17 @@ const Profile = (props) => {
     // quantity
     // price
     // date
+
   const currentUser = useAppSelector((state) => state.currentUser);
 
   return (
     <ProfileDiv>
-      <OrangeNavbar needBackArrow={true}/>
+      <OrangeNavbar needBackArrow={true} />
       <NameText>firstName lastName</NameText>
       <SpacedButton>View Orders</SpacedButton>
-      <SpacedButton>Friends</SpacedButton>
+      <Link to="/friends">
+        <SpacedButton>Friends</SpacedButton>
+      </Link>
     </ProfileDiv>
   );
 };
