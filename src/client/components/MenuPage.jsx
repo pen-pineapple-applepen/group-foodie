@@ -20,8 +20,8 @@ const CheckoutButton = styled(OrangeButton)`
 
 export default function MenuPage () {
   const currentItem = useAppSelector((state)=>state.currentMenuItem)
+  const totalOrdersPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
   const dispatch = useAppDispatch();
-  const totalPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
 
   function clickHandler (entry) {
     //reroute
@@ -35,12 +35,12 @@ export default function MenuPage () {
   }
 
   //Resets Current Selected Item
-  React.useEffect(()=>{
-    dispatch(allActions.UpdateItemName(''));
-    dispatch(allActions.UpdateItemId(0));
-    dispatch(allActions.UpdateItemQuantity(0));
-    dispatch(allActions.UpdateTotalPrice(0));
-  },[])
+  // React.useEffect(()=>{
+  //   dispatch(allActions.UpdateItemName(''));
+  //   dispatch(allActions.UpdateItemId(0));
+  //   dispatch(allActions.UpdateItemQuantity(0));
+  //   dispatch(allActions.UpdateTotalPrice(0));
+  // },[])
 
   return(
     <MainConatiner>
@@ -49,7 +49,7 @@ export default function MenuPage () {
       <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
         <MenuItemContainer  name={'Big Burger'} price={5}></MenuItemContainer>
       </div>
-      <CheckoutButton>Checkout ${totalPrice}.00</CheckoutButton>
+      <CheckoutButton>Checkout ${totalOrdersPrice}.00</CheckoutButton>
     </MainConatiner>
   )
 }

@@ -17,15 +17,24 @@ const MainConatiner = styled.div`
 `;
 
 export default function MenuItemIncrementor () {
-  const item = useAppSelector((state)=>state.currentItemQuantityPrice)
+  const count = useAppSelector((state)=>state.currentItemQuantityPrice.count)
   const dispatch = useAppDispatch();
 
+  function subtractHandler () {
+    dispatch(allActions.subtractItem())
+    dispatch(allActions.UpdateItemQuantity(count-1));
+  }
+
+  function addHandler () {
+    dispatch(allActions.addItem())
+    dispatch(allActions.UpdateItemQuantity(count+1));
+  }
 
   return(
     <MainConatiner>
-      <CirleButton onClick={()=>{dispatch(allActions.subtractItem())}}>-</CirleButton>
-      <div>{item.count}</div>
-      <CirleButton onClick={()=>{dispatch(allActions.addItem())}}>+</CirleButton>
+      <CirleButton onClick={()=>subtractHandler()}>-</CirleButton>
+      <div>{count}</div>
+      <CirleButton onClick={()=>addHandler()}>+</CirleButton>
     </MainConatiner>
   )
 }

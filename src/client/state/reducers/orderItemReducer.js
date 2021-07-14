@@ -13,6 +13,7 @@ const initialState= {
   quantity: 0,
   price: 0,
   restaurantId: 0,
+  userId: 0,
 };
 
 export const orderItemReducer = createReducer(initialState, (builder) => {

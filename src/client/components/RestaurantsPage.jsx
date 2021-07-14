@@ -5,6 +5,10 @@ import allActions from '../state/actions/allActions';
 
 export default function RestaurantPage () {
   //make sure for clickhandle set restaurantid
+
+  const [ restaurantList, setRestaurantList ] = React.useState([]);
+
+
   return ()
 }
 

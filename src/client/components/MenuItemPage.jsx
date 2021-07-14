@@ -25,12 +25,17 @@ export default function MenuItemPage () {
   const totalPrice = item.price*item.count;
 
   function clickHandler () {
-    dispatch(allActions.UpdateTotalPrice(totalPrice));
-    dispatch(allActions.UpdateItemQuantity(item.count));
-    dispatch(allActions.addItemToOrders(currentOrder));
+    console.log(totalPrice)
+
     dispatch(allActions.addToPriceTotal(totalPrice));
+    dispatch(allActions.addItemToOrders(currentOrder));
     //add user id?
   }
+
+  React.useEffect(()=>{
+    dispatch(allActions.UpdateTotalPrice(totalPrice));
+  },[item])
+
 
   return(
     <MainConatiner>
