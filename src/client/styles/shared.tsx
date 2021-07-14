@@ -51,6 +51,7 @@ export const OrangeButton = styled(Button)`
   background-color: #FF6C36;
   border-radius: 30px;
   color: white;
+  margin-top: 20px;
 `
 // navbar takes 2 props 'needBackArrow' that takes a boolean for if it should have a back arrow or not
 // and 'onBackArrowclick' which takes a callback for when back arrow is clicked
