@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 // importing individual routes
-const users = require('./routes/users');
+const users = require('./routes/users.ts');
 const comments = require('./routes/comments');
-const orders = require('./routes/orders');
+const orders = require('./routes/orders.ts');
 const payments = require('./routes/payments');
 
 // actual routing of endpoints
