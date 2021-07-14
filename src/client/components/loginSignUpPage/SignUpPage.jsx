@@ -5,6 +5,10 @@ import { OrangeButton } from '/src/client/styles/shared.tsx';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
 import { OrangeNavbar } from '../../styles/shared';
+const StyledHeader = styled.h2`
+font-size: 20px;
+font-weight: bold;
+`;
 
 export default function SignUpPage() {
 
@@ -31,10 +35,7 @@ export default function SignUpPage() {
     history.push("/");
   }
 
-  const StyledHeader = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
-`;
+
 
   return (
     <div className="login-signup-background">
