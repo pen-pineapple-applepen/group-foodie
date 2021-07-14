@@ -6,15 +6,19 @@ import {
   Redirect,
 } from 'react-router-dom'
 
+import Testing from './Testing';
+import Testing2 from './Testing2';
+import Testing4 from './Testing4';
+
 function RouterContainer() {
   return (
     <Router>
-    <Navbar />
     <div className="RouterContainer">
       <Switch>
-        <Route exact path="/posts/:postId" component={SinglePostPage} />
-        <Route exact path="/editPost/:postId" component={EditPostForm} />
-        <Redirect to="/" />
+          <Route exact path="/home" component={Testing} />
+          <Route exact path="/testing2" component={Testing2} />
+          <Route exact path="/testing4" component={Testing4} />
+          <Redirect to="/home" />
       </Switch>
     </div>
   </Router>
