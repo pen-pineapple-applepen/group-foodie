@@ -9,8 +9,13 @@ const ProfileDiv = styled.div`
   align-items: center;
 `;
 
-const nameText = styled.span`
+const NameText = styled.span`
+  margin-top: 50px;
+  margin-bottom: 25px;
+`;
 
+const SpacedButton = styled(OrangeButton)`
+  margin: 25px 0;
 `;
 
 const Profile = (props) => {
@@ -35,9 +40,9 @@ const Profile = (props) => {
   return (
     <ProfileDiv>
       <OrangeNavbar needBackArrow={true}/>
-      <nameText>firstName lastName</nameText>
-      <OrangeButton>View Orders</OrangeButton>
-      <OrangeButton>Friends</OrangeButton>
+      <NameText>firstName lastName</NameText>
+      <SpacedButton>View Orders</SpacedButton>
+      <SpacedButton>Friends</SpacedButton>
     </ProfileDiv>
   );
 };
