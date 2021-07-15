@@ -1,4 +1,4 @@
-{
+module.exports = {
   "restaurants": [
     {
       "restaurant_id": 1,
@@ -6,7 +6,7 @@
       "restaurant_phone": "(310) 670-1994",
       "restaurant_website": "https://www.melodylax.com",
       "hours": "Daily:10am-2am",
-      "cuisine": "American",
+      "cuisines": "American",
       "address": {
           "city": "Los Angeles",
           "state": "CA",
