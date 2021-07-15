@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
+import { useHistory } from 'react-router-dom';
 import HistoryList from './HistoryList';
 
 const OrderHistoryDiv = styled.div`
@@ -121,7 +122,7 @@ const OrderHistory = (props) => {
 
   return (
     <OrderHistoryDiv>
-      <OrangeNavbar needBackArrow={true} />
+      <OrangeNavbar needBackArrow={true} onBackArrowClick={useHistory().goBack} />
       <Text>Your Orders</Text>
       {liveOrders.length > 0 && (
         <HistoryList name="Live" orderList={liveOrders} />

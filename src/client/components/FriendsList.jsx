@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
+import { useHistory } from 'react-router-dom';
 
 const FriendsListDiv = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ const FriendsList = (props) => {
 
   return (
     <FriendsListDiv>
-      <OrangeNavbar needBackArrow={true} />
+      <OrangeNavbar needBackArrow={true} onBackArrowClick={useHistory().goBack} />
       <Text>Your Friends</Text>
       <List>
         <ListItem>
