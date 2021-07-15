@@ -33,7 +33,6 @@ const OrangeNavbarContainer = styled(Navbar)`
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 414px;
   height: 60px;
   border-radius: 0 0 22px 22px;
 `
