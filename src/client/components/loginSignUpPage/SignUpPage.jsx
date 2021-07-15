@@ -15,6 +15,8 @@ margin-bottom: 5px;
 `;
 
 export default function SignUpPage() {
+  const [username, setUsername] = useState('');
+
   const history = useHistory();
   function handleHomeClick() {
     history.push("/");
@@ -29,7 +31,7 @@ export default function SignUpPage() {
       first_name: values.firstName,
       last_name: values.lastName,
       email: values.email,
-      username: values.username,
+      username: username,
       password: values.password,
       guest: false
     })
