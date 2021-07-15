@@ -19,6 +19,26 @@ returns:
   "guest": false
 }
 
+-------------------------
+Check users email & password (LOGIN)
+-------------------------
+endpoint: '/users/login'
+request type: get
+additional body params: {
+  email: string,
+  password: string,
+}
+returns:
+{
+  "hasCorrectCredentials": true,
+  "id": 1
+}
+/* OR */
+{
+  "hasCorrectCredentials": false,
+  "id": null
+}
+
 -----------------
 Create 1 new user
 -----------------
@@ -298,3 +318,68 @@ request type: POST
 returns: [6] // returns an array of the inserted comment's ID
 
 
+//////////////////////////////////////////////////
+restaurants
+//////////////////////////////////////////////////
+
+
+--------------------------------------
+Get all restaurants by zipcode
+--------------------------------------
+endpoint: '/restaurants/:zip_code'
+request type: GET
+returns:
+// NOTE: by default the zipcode will always be 90045, but you still have to provide some number
+// in the :zipcode, otherwise it will not return anything
+[
+  {
+      "name": "Melody Bar & Grill",
+      "street": "9132 S Sepulveda Blvd Los Angeles, CA 90045",
+      "cuisines": [
+          "American"
+      ],
+      "hours": "Daily:10am-2am"
+  },
+  {
+      "name": "Asian Street Eats by Chef Hung",
+      "street": "380 World Way Los Angeles, CA 90045",
+      "cuisines": [
+          "Asian"
+      ],
+      "hours": "Daily:11am-5pm"
+  }
+]
+
+--------------------------------------
+Get all menu items by restaurant ID
+--------------------------------------
+endpoint: '/restaurants/:restaurant_id/menu'
+request type: GET
+returns:
+[
+  {
+      "restaurant_id": 1,
+      "menu_item_id": 1,
+      "menu_item_name": "Jalapeno Calamari Late Night",
+      "menu_item_description": "",
+      "menu_item_pricing": 11,
+      "menu_category": "entree"
+  },
+  {
+      "restaurant_id": 1,
+      "menu_item_id": 2,
+      "menu_item_name": "Chicken Sliders Late Night",
+      "menu_item_description": "",
+      "menu_item_pricing": 11,
+      "menu_category": "entree"
+  },
+  {
+      "restaurant_id": 1,
+      "menu_item_id": 3,
+      "menu_item_name": "Caesar Salad Late Night",
+      "menu_item_description": "",
+      "menu_item_pricing": 9,
+      "menu_category": "entree"
+  },
+  {...}
+]
