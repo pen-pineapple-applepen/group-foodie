@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import MainLoginPage from './loginSignUpPage/mainLoginPage';
-import SignUpPage from './loginSignUpPage/SignUpPage';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
