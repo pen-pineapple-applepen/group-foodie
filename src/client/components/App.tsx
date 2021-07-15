@@ -36,7 +36,6 @@ function App() {
 
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
-            <Route exact path="/testing2" component={Testing2} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/friends" component={FriendsList} />
             <Route exact path="/history" component={OrderHistory} />
