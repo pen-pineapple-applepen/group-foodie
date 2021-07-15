@@ -8,7 +8,6 @@ import setMinutes from "date-fns/setMinutes";
 
 const OrderShare = () => {
   let orderDate = useAppSelector((state)=>state.orderDate)
-  let date = new Date();
   let guestEmails = useAppSelector((state)=>state.emails)
   const dispatch = useAppDispatch();
   let [guestEmail, setGuestEmail] = useState('');
