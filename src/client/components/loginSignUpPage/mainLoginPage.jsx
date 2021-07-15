@@ -24,11 +24,15 @@ export default function MainLoginPage() {
   const handleLogin = () => {
     axios.get('/users/login', {email, password})
       .then (res => {
-        if (res.data === true) {
-          //need to get userId to put into action.payload of logIn()
-          dispatch(allActions.logIn())
+        if (res.data.hasCorrectCredentials === true) {
+          dispatch(allActions.logIn(res.data.id));
           history.push("/LandingPage");
+        } else if (res.data.hasCorrectCredentials === false) {
+          alert('Incorrect username or password');
         }
+      })
+      .catch(err => {
+        console.log(err);
       })
   }
 

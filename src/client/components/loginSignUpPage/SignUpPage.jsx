@@ -11,6 +11,7 @@ import useForm from './formValidation.js';
 const StyledHeader = styled.h2`
 font-size: 20px;
 font-weight: bold;
+margin-bottom: 5px;
 `;
 
 export default function SignUpPage() {
@@ -34,10 +35,10 @@ export default function SignUpPage() {
     })
       .then(res => {
         console.log('successfully registered user');
-        goBack()
+        goBack();
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       })
   }
 
