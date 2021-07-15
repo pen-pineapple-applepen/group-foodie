@@ -1,7 +1,8 @@
 import { addName, addUserName, setNumber } from '../reducers/namesReducer';
 import { addItem, subtractItem, UpdateItemPrice, UpdateItemDescription, resetItemQuantity } from '../reducers/menuItemReducer';
 import { UpdateItemName, UpdateItemId, UpdateItemQuantity, UpdateTotalPrice, UpdateRestaurantId } from '../reducers/orderItemReducer';
-import { addItemToOrders, addToPriceTotal } from '../reducers/allOrderItemsReducer';
+import { addItemToOrders, addToPriceTotal, resetAllOrders } from '../reducers/allOrderItemsReducer';
+import { updateCurrentRestaurantId, updateCurrentRestaurantName } from '../reducers/restaurantReducer';
 
 const allActions = {
   addName,
@@ -18,6 +19,10 @@ const allActions = {
   UpdateItemQuantity,
   UpdateTotalPrice,
   UpdateRestaurantId,
+  updateCurrentRestaurantName,
+  updateCurrentRestaurantId,
+  resetAllOrders,
+
 }
 
 export default allActions;

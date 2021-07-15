@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import MenuItemContainer from './MenuItemContainer.jsx';
@@ -22,6 +21,7 @@ const CheckoutButton = styled(OrangeButton)`
 export default function MenuPage () {
   const currentItem = useAppSelector((state)=>state.currentMenuItem)
   const totalOrdersPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
+  const restaurantName = useAppSelector((state)=>state.currentRestaurant.name)
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [ menuList, setMenuList ] = React.useState([]);
@@ -32,7 +32,7 @@ export default function MenuPage () {
     if (!localMenuData) {
       const data = await axios.get()
       localMenuData = data;
-      localStorage.setItem('MenuListData', JSON.stringify(localMenuData))
+      localStorage.setItem(`MenuListData_${restaurantid}`, JSON.stringify(localMenuData))
     } else {
       localMenuData = JSON.parse(localMenuData);
     }
@@ -40,7 +40,6 @@ export default function MenuPage () {
   }
 
   function clickHandler (entry) {
-    //reroute
     console.log(entry.name)
     console.log(entry.price)
     dispatch(allActions.UpdateItemName(entry.name));
@@ -60,17 +59,18 @@ export default function MenuPage () {
     //Order Item
     dispatch(allActions.UpdateItemId(0));
     dispatch(allActions.UpdateItemName(''));
-    dispatch(allActions.UpdateItemId(0));
     dispatch(allActions.UpdateItemQuantity(0));
     dispatch(allActions.UpdateTotalPrice(0));
+    //Get Menu List
+    // getMenuList(currentItem.restaurantId)
   },[])
 
   return(
     <MainConatiner>
       <img src={'Dannys_bg.png'}/>
-      <h2>Dannys</h2>
+      <h2>{restaurantName}</h2>
       <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
-        <MenuItemContainer  name={'Big Burger'} price={5}></MenuItemContainer>
+        <MenuItemContainer  name={'Big Burger'} price={5} category={'entree'}></MenuItemContainer>
       </div>
       <CheckoutButton>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>

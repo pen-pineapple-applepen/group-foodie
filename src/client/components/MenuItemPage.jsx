@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import {OrangeButton} from '../styles/shared.tsx';
@@ -29,11 +28,14 @@ export default function MenuItemPage () {
 
   function clickHandler () {
     console.log(totalPrice)
-
-    dispatch(allActions.addToPriceTotal(totalPrice));//
-    dispatch(allActions.addItemToOrders(currentOrder));
-    //add user id?
-    history.push("/Menu");
+    if(item.count===0){
+      return
+    } else {
+      dispatch(allActions.addToPriceTotal(totalPrice));//
+      dispatch(allActions.addItemToOrders(currentOrder));
+      //add user id?
+      history.push("/Menu");
+    }
   }
 
   React.useEffect(()=>{
