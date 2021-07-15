@@ -9,11 +9,11 @@ import { OrangeNavbar } from '../../styles/shared';
 export default function MainLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const handleLogin = () => {
-
+    history.push("/LandingPage");
   }
-  const history = useHistory();
 
   function handleHomeClick() {
     history.push("/SignUp");
@@ -21,8 +21,8 @@ export default function MainLoginPage() {
 
   return (
     <div className="login-signup-background">
-      < OrangeNavbar />
       <div className="login-signup-page-container">
+      < OrangeNavbar />
         <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
           <Form.Control>
@@ -40,7 +40,7 @@ export default function MainLoginPage() {
           </Form.Control>
         </Form.Field>
         <div className='login-buttons'>
-          <OrangeButton >Login</OrangeButton>
+          <OrangeButton onClick={handleLogin}>Login</OrangeButton>
           <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
         </div>
       </div>
