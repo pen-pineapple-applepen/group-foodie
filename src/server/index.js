@@ -3,8 +3,10 @@ const path = require('path');
 const router = require('./router');
 const port = 4000;
 const app = express();
+const history = require('connect-history-api-fallback');
 
 app.use(express.json());
+app.use(history());
 app.use(express.static(path.join(__dirname, '../../public')));
 
 app.use('/', router);

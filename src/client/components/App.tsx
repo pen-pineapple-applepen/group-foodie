@@ -11,7 +11,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 import mainLoginPage from './loginSignUpPage/mainLoginPage'
+import SignUpPage from './loginSignUpPage/SignUpPage'
+import FriendNameInputPage from './friendsView/FriendNameInputPage';
 import landingPage from './LandingPage/landingPage';
+
 import Testing from './Testing';
 import Testing2 from './Testing2';
 import Testing4 from './Testing4';
@@ -33,6 +36,7 @@ function App() {
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
+            <Route exact path="/Friends" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
             <Redirect to="/" />
           </Switch>
