@@ -14,9 +14,12 @@ import {
 
 import mainLoginPage from './loginSignUpPage/mainLoginPage'
 import SignUpPage from './loginSignUpPage/SignUpPage'
+import landingPage from './landingPage/landingPage'
 import Testing from './Testing';
 import Testing2 from './Testing2';
 import Testing4 from './Testing4';
+import MenuPage from './MenuPage';
+import MenuItemPage from './MenuItemPage';
 
 function App() {
 
@@ -33,7 +36,9 @@ function App() {
           <Switch>
             <Route exact path="/" component={OrderShare} />
             <Route exact path="/SignUp" component={SignUpPage} />
-            <Route exact path="/testing2" component={Testing2} />
+            <Route exact path="/Menu" component={MenuPage} />
+            <Route exact path="/MenuItem" component={MenuItemPage} />
+            <Route exact path="/LandingPage" component={landingPage} />
             <Redirect to="/" />
           </Switch>
         </div>
