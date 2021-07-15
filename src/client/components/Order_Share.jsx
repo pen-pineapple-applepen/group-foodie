@@ -7,21 +7,20 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 
 const OrderShare = () => {
-  const [startDate, setStartDate] = useState(new Date())
-  const [startTime, setStartTime] = useState(setMinutes(new Date(), 30))
+  let orderDate = useAppSelector((state)=>state.orderDate)
+  let date = new Date();
+  let guestEmails = useAppSelector((state)=>state.emails)
+  const dispatch = useAppDispatch();
   let [guestEmail, setGuestEmail] = useState('');
-  let [guestEmails, setGuestEmails] = useState([]);
-  let [paymentWindowOpen, setPaymentWindowOpen] = useState(false);
 
   const handleGuestEmailChange = (event) => {
     setGuestEmail(event.target.value);
   }
 
-  const handleGuestEmailSubmit = (event) => {
-    setGuestEmails([...guestEmails, guestEmail]);
+  const handleGuestEmailSubmit = () => {
+    dispatch(allActions.addEmail(guestEmail));
     setGuestEmail('');
   }
-
 
   // NEED TO ADD CARD TYPE ON SCHEMA
   let userPaymentInfoFilled = {
@@ -51,37 +50,16 @@ const OrderShare = () => {
   return (
     <div className='order_share'>
       <div>
-        Enter Date:
+        Schedule Order Date and Time:
       </div>
       <div>
         <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        selected={orderDate}
+        onChange={(date) => dispatch(allActions.addDate(date))}
+        showTimeSelect
         minDate={new Date()}
         maxDate={addDays(new Date(), 13)}
-        dateFormat="MMMM d, yyyy"
-        />
-      </div>
-      <div>
-        Enter Time:
-      </div>
-      <div>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          showTimeSelect
-          showTimeSelectOnly
-          minTime={() => {
-            if (startDate.getDays() > new Date().getDays()) {
-              return startDate
-            } else {
-              return setHours(setMinutes(startDate, 0), 0)
-            }
-          }}
-          maxTime={setHours(setMinutes(new Date(), 45), 23)}
-          timeIntervals={30}
-          timeCaption="Time"
-          dateFormat="h:mm aa"
+        dateFormat="MMMM d, yyyy h:mm aa"
         />
       </div>
       <ColoredLine />
@@ -108,7 +86,7 @@ const OrderShare = () => {
       </div>
       <div>
         {userPaymentInfoFilled ?
-          <div onClick={() => setPaymentWindowOpen(true)}>
+          <div>
             <span>
               ***{String(userPaymentInfoFilled.card_number).slice(-4)}
             </span>
@@ -131,15 +109,15 @@ const OrderShare = () => {
   )
 }
 
-var timeDisplay = (currentTime) => {
-  times = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  var currentTimes = times.filter(element => (
-    element > currentTime
-  ))
-  return currentTimes.map((element) => (
-    String(element) + ':00'
-  ))
-}
+// var timeDisplay = (currentTime) => {
+//   times = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+//   var currentTimes = times.filter(element => (
+//     element > currentTime
+//   ))
+//   return currentTimes.map((element) => (
+//     String(element) + ':00'
+//   ))
+// }
 
 export default OrderShare;
 

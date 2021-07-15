@@ -11,8 +11,8 @@ export default function MainLoginPage() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-
   }
+
   const history = useHistory();
 
   function handleHomeClick() {
