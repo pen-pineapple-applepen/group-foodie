@@ -62,14 +62,13 @@ table {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 30px;
 }
 
 .login-buttons {
 	display: flex;
 	flex-direction: column;
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-top: 8px;
+	margin-bottom: 8px;
 }
 
 .login-form {
@@ -77,9 +76,12 @@ table {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-top: 15px;
 }
 
-.form-spacing {
-	margin-bottom: 8px;
+.form-spacing-login {
+	margin-bottom: 15px;
+}
+
+.form-spacing-signup {
+	margin-bottom: 2px
 }
