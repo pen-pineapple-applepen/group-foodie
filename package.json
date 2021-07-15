@@ -52,6 +52,7 @@
     "@typescript-eslint/parser": "^4.28.3",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
+    "babel-plugin-styled-components": "^1.13.2",
     "bulma": "^0.9.3",
     "css-loader": "^5.2.7",
     "eslint": "^7.30.0",

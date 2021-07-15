@@ -12,6 +12,7 @@ import {
 import mainLoginPage from './loginSignUpPage/mainLoginPage'
 import SignUpPage from './loginSignUpPage/SignUpPage'
 import landingPage from './landingPage/landingPage'
+import FriendNameInputPage from './friendsView/FriendNameInputPage';
 import Testing from './Testing';
 import Testing2 from './Testing2';
 import Testing4 from './Testing4';
@@ -32,6 +33,7 @@ function App() {
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
+            <Route exact path="/Friends" component={FriendNameInputPage} />
             <Redirect to="/" />
           </Switch>
         </div>
