@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
-import RouterContainer from './RouterContainer';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,12 +10,15 @@ import {
 } from 'react-router-dom';
 import mainLoginPage from './loginSignUpPage/mainLoginPage'
 import SignUpPage from './loginSignUpPage/SignUpPage'
+import landingPage from './landingPage/landingPage'
 import Testing from './Testing';
 import Testing2 from './Testing2';
 import Testing4 from './Testing4';
 import Profile from './Profile';
 import FriendsList from './FriendsList';
 import OrderHistory from './OrderHistory';
+import MenuPage from './MenuPage';
+import MenuItemPage from './MenuItemPage';
 
 const MobileDiv = styled.div`
   max-width: 414px;
@@ -42,6 +44,9 @@ function App() {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/friends" component={FriendsList} />
             <Route exact path="/history" component={OrderHistory} />
+            <Route exact path="/Menu" component={MenuPage} />
+            <Route exact path="/MenuItem" component={MenuItemPage} />
+            <Route exact path="/LandingPage" component={landingPage} />
             <Redirect to="/" />
           </Switch>
         </div>
