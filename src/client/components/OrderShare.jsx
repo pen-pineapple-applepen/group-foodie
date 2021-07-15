@@ -1,3 +1,5 @@
+// NOTE I AM SWITCHING THIS TO REACT STYLED COMPONENTS AFTER THIS PULL REQUEST
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bulma-components';
@@ -53,15 +55,15 @@ const OrderShare = () => {
     setGuestEmail('');
   }
 
-  const Text = styled.span`
-  margin-top: 50px;
-  margin-bottom: 25px;
-  `;
-  const FriendsListDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  `;
+  // const Text = styled.span`
+  // margin-top: 50px;
+  // margin-bottom: 25px;
+  // `;
+  // const FriendsListDiv = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // `;
 
   // NOT WORKING WITH STYLED COMPONENTS WILL HAVE TO LOOK INTO THIS
   // const ColoredLine = styled.hr`

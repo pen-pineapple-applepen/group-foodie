@@ -133,7 +133,6 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
             </GroupFoodieLogo>
           </NavbarItem>
           <NavbarBurger
-            active={active}
             onClick={toggleMenu} />
         </NavbarBrand>
         <Navbar.Menu>
