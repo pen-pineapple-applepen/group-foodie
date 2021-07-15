@@ -7,7 +7,8 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 
 const OrderShare = () => {
-  const [startDate, setStartDate] = useState(setHours(setMinutes(new Date(), 30), 16))
+  const [startDate, setStartDate] = useState(new Date())
+  const [startTime, setStartTime] = useState(setMinutes(new Date(), 30))
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   let [paymentWindowOpen, setPaymentWindowOpen] = useState(false);
@@ -50,21 +51,43 @@ const OrderShare = () => {
   return (
     <div className='order_share'>
       <div>
-        Enter Date/Time:
+        Enter Date:
       </div>
       <div>
         <DatePicker
         selected={startDate}
         onChange={(date) => setStartDate(date)}
-        showTimeSelect
         minDate={new Date()}
-        maxDate={addDays(new Date(), 6)}
-        minTime={setMinutes(new Date(), 31)}
-        maxTime={setHours(setMinutes(addDays(new Date(), 6), 45), 23)}
-        // includeDates={[new Date(), addDays(new Date(), 1),  addDays(new Date(), 2),  addDays(new Date(), 3),  addDays(new Date(), 4),  addDays(new Date(), 5),  addDays(new Date(), 6)]}
-        dateFormat="MMMM d, yyyy h:mm aa"
+        maxDate={addDays(new Date(), 13)}
+        dateFormat="MMMM d, yyyy"
         />
-        <ColoredLine />
+      </div>
+      <div>
+        Enter Time:
+      </div>
+      <div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          showTimeSelect
+          showTimeSelectOnly
+          minTime={() => {
+            if (startDate.getDays() > new Date().getDays()) {
+              return startDate
+            } else {
+              return setHours(setMinutes(startDate, 0), 0)
+            }
+          }}
+          maxTime={setHours(setMinutes(new Date(), 45), 23)}
+          timeIntervals={30}
+          timeCaption="Time"
+          dateFormat="h:mm aa"
+        />
+      </div>
+      <ColoredLine />
+      <div>
+        Set timer for others to pick their order:
+
       </div>
       <div>
         Share Order with Friends:
@@ -73,12 +96,12 @@ const OrderShare = () => {
         <br />
         <input type="text" name='email:' placeholder='Enter email(s)' value={guestEmail} onChange={handleGuestEmailChange} />
         <input type="button" value="Submit" onClick={handleGuestEmailSubmit} />
-        <ColoredLine />
         <div>
           {guestEmails.length === 1 ?
             guestEmails.length + ' Person Added' :
             guestEmails.length + ' People Added'}
         </div>
+        <ColoredLine />
       </div>
       <div>
         Payment Information:
@@ -108,5 +131,16 @@ const OrderShare = () => {
   )
 }
 
+var timeDisplay = (currentTime) => {
+  times = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+  var currentTimes = times.filter(element => (
+    element > currentTime
+  ))
+  return currentTimes.map((element) => (
+    String(element) + ':00'
+  ))
+}
+
 export default OrderShare;
+
 
