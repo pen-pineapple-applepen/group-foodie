@@ -17,6 +17,7 @@ import Testing2 from './Testing2';
 import Testing4 from './Testing4';
 import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
+import ChatPage from './ChatPage';
 
 
 function App() {
@@ -27,12 +28,13 @@ function App() {
       <Router>
         <div className="RouterContainer">
           <Switch>
-            <Route exact path="/" component={mainLoginPage} />
+            {/* <Route exact path="/" component={mainLoginPage} /> */}
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
-            <Redirect to="/" />
+            <Route exact path="/ChatPage" component={ChatPage} />
+            <Redirect to="/ChatPage" />
           </Switch>
         </div>
       </Router>
