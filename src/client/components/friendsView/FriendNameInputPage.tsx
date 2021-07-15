@@ -46,17 +46,18 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
 
   const { addFriendName } = allActions;
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let text = e.target.value;
     dispatch(addFriendName(text));
   }
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     history.push('/Menu')
   }
 
   return (
     <ContainerDiv>
+
       <OrangeNavbar/>
       <HeaderImage src='Dannys_bg.png'/>
 
@@ -67,10 +68,9 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
         <SizedOrangedInput type="text"  onChange={e => handleChange(e)}/>
       </NameInputDiv>
 
-
-        <PositionedOrangeButton onClick={handleClick}>
-          Confirm
-        </PositionedOrangeButton>
+      <PositionedOrangeButton onClick={handleClick}>
+        Confirm
+      </PositionedOrangeButton>
 
     </ContainerDiv>
   )
