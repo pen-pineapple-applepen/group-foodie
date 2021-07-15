@@ -35,14 +35,14 @@ export default function MainLoginPage() {
       < OrangeNavbar />
         <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
-          <Form.Control>
+          <Form.Control className="form-spacing">
             <Form.Input placeholder="Email" onChange={e => {setEmail(e.target.value)}}/>
             <Icon align="left" size="small">
               <i className="fas fa-envelope" />
             </Icon>
           </Form.Control>
           <Form.Label>Password</Form.Label>
-          <Form.Control>
+          <Form.Control className="form-spacing">
             <Form.Input placeholder="Password"onChange={e => {setPassword(e.target.value)}}/>
             <Icon align="left" size="medium">
               <i className="fas fa-key" />

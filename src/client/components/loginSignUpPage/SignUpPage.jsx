@@ -15,20 +15,9 @@ export default function SignUpPage() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = () => {
-    axios.post('', {
-      //object to send based on database structure
-    })
-    .then(res => {
-      console.log('successfully registered user');
-      //redirect user to the login page?
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
 
   const history = useHistory();
   function handleHomeClick() {
@@ -38,6 +27,24 @@ export default function SignUpPage() {
     history.goBack()
   }
 
+  const handleSignUp = () => {
+    axios.post('/create', {
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      username: username,
+      password: password,
+      guest: false
+    })
+    .then(res => {
+      console.log('successfully registered user');
+      goBack()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   return (
     <div className="login-signup-background">
       < OrangeNavbar needBackArrow={true} onBackArrowClick={goBack}/>
@@ -45,24 +52,31 @@ export default function SignUpPage() {
         <StyledHeader>New Account</StyledHeader>
         <Form.Field className="login-form">
           <Form.Label>First Name</Form.Label>
-          <Form.Control>
+          <Form.Control className="form-spacing">
             <Form.Input placeholder="First Name" onChange={e => {setFirstName(e.target.value)}}/>
           </Form.Control>
           <Form.Label>Last Name</Form.Label>
-          <Form.Control>
+          <Form.Control className="form-spacing">
             <Form.Input placeholder="Last Name" onChange={e => {setLastName(e.target.value)}}/>
           </Form.Control>
         </Form.Field>
         <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
-          <Form.Control>
+          <Form.Control className="form-spacing">
             <Form.Input placeholder="Email" onChange={e => {setEmail(e.target.value)}}/>
             <Icon align="left" size="small">
               <i className="fas fa-envelope" />
             </Icon>
           </Form.Control>
+          <Form.Label>Username</Form.Label>
+          <Form.Control className="form-spacing">
+            <Form.Input placeholder="Username" onChange={e => {setUsername(e.target.value)}}/>
+            <Icon align="left" size="small">
+              <i className="fas fa-user" />
+            </Icon>
+          </Form.Control>
           <Form.Label>Password</Form.Label>
-          <Form.Control>
+          <Form.Control className="form-spacing">
             <Form.Input placeholder="Password" onChange={e => {setPassword(e.target.value)}}/>
             <Icon align="left" size="medium">
               <i className="fas fa-key" />

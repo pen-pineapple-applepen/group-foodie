@@ -68,8 +68,8 @@ table {
 .login-buttons {
 	display: flex;
 	flex-direction: column;
-	margin-top: 30px;
-	margin-bottom: 30px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .login-form {
@@ -78,4 +78,8 @@ table {
 	align-items: center;
 	justify-content: center;
 	margin-top: 15px;
+}
+
+.form-spacing {
+	margin-bottom: 8px;
 }
