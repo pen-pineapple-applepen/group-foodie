@@ -46,7 +46,7 @@ export default function MenuItemContainer ({name, price}) {
           <h3>{name}</h3>
         </Name>
         <SubInfo>
-          <h4>${price}.00</h4>
+          <h4>${price.toFixed(2)}</h4>
         </SubInfo>
       </InfoContainer>
     </MainConatiner>

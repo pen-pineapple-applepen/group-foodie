@@ -30,14 +30,14 @@ export default function MenuItemPage () {
   function clickHandler () {
     console.log(totalPrice)
 
-    dispatch(allActions.addToPriceTotal(totalPrice));
+    dispatch(allActions.addToPriceTotal(totalPrice));//
     dispatch(allActions.addItemToOrders(currentOrder));
     //add user id?
     history.push("/Menu");
   }
 
   React.useEffect(()=>{
-    dispatch(allActions.UpdateTotalPrice(totalPrice));
+    dispatch(allActions.UpdateTotalPrice(totalPrice.toFixed(2)));
   },[item])
 
 
@@ -46,9 +46,9 @@ export default function MenuItemPage () {
       <img src='Dannys_bg.png'/>
       <h2>{currentOrder.itemName}</h2>
       <p>{item.description}</p>
-      <p>${item.price}.00</p>
+      <p>${item.price}</p>
       <MenuItemIncrementor/>
-      <CheckoutButton onClick={()=> clickHandler()}>Add to order{`(${item.count})`} ${totalPrice}.00</CheckoutButton>
+      <CheckoutButton onClick={()=> clickHandler()}>Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>
   )
 }
