@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Button } from 'react-bulma-components';
 import DatePicker from "react-datepicker";
 import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
+import axios from "axios";
 
 const OrderShare = () => {
-  const [orderDate, setOrderDate] = useState(new Date())
+  const [orderDate, setOrderDate] = useState(new Date());
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
+  let [paymentData, setPaymentData] = useState([]);
 
   const isSelectedDateToday = new Date().getDate() === orderDate.getDate();
   let minTimeHour = new Date().getHours();
@@ -16,6 +19,30 @@ const OrderShare = () => {
     minTimeHour = 0;
   }
 
+  useEffect(() => {
+    fetchPaymentData();
+  }, []);
+  // [] needs to be the userID that you get from the redux state
+
+  const fetchPaymentData = () => {
+    axios.get('/payments/2')
+    .then(response => {
+      if (response.data.length !== 0) {
+        let formattedCards = [];
+        for (var i = 0; i < response.data.length; i++) {
+          formattedCards.push({
+            id: response.data[i].id,
+            card_number: String(response.data[i].card_number).slice(-4),
+            card_type: response.data[i].card_type
+          })
+        }
+        setPaymentData(formattedCards)
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
   const handleGuestEmailChange = (event) => {
     setGuestEmail(event.target.value);
@@ -26,20 +53,22 @@ const OrderShare = () => {
     setGuestEmail('');
   }
 
-  // NEED TO ADD CARD TYPE ON SCHEMA
-  let userPaymentInfoFilled = {
-    id: 1,
-    name: 'Scott',
-    card_number: 30234932128484,
-    exp_date: '0493',
-    cvv: 332,
-    zip_code: 92660,
-    user_id: 1,
-    card_type: 'Visa'
-  }
-  let userPaymentInfoEmpty = {}
+  const Text = styled.span`
+  margin-top: 50px;
+  margin-bottom: 25px;
+  `;
+  const FriendsListDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  `;
 
-
+  // NOT WORKING WITH STYLED COMPONENTS WILL HAVE TO LOOK INTO THIS
+  // const ColoredLine = styled.hr`
+  // width: '20%',
+  // color: '#FF6C36'
+  // backgroundColor: '#FF6C36'
+  // `;
 
   const ColoredLine = () => (
     <hr
@@ -91,13 +120,13 @@ const OrderShare = () => {
         Payment Information:
       </div>
       <div>
-        {userPaymentInfoFilled ?
+        {paymentData.length !== 0 ?
           <div>
             <span>
-              ***{String(userPaymentInfoFilled.card_number).slice(-4)}
+              ***{String(paymentData[0].card_number)}
             </span>
             <span>
-              {userPaymentInfoFilled.card_type}
+              {paymentData[0].card_type}
             </span>
             <img className='caret_right'
               src={"./caret_right.png"}
@@ -114,16 +143,6 @@ const OrderShare = () => {
     </div>
   )
 }
-
-// var timeDisplay = (currentTime) => {
-//   times = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-//   var currentTimes = times.filter(element => (
-//     element > currentTime
-//   ))
-//   return currentTimes.map((element) => (
-//     String(element) + ':00'
-//   ))
-// }
 
 export default OrderShare;
 

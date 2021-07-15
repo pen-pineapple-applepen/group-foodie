@@ -1,4 +1,5 @@
 node_modules
 build
 public/bundle.js
-*.sql
+schema_scott.sql
+seed_scott.js

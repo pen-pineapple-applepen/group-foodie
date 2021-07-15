@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { Button, Form } from 'react-bulma-components';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
 import allActions from '../state/actions/allActions';
-import OrderShare from './Order_Share.jsx';
+import OrderShare from './OrderShare.jsx';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
