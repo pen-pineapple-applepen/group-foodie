@@ -7,7 +7,7 @@ module.exports = {
           "menu_item_id": 1,
           "menu_item_name": "Jalapeno Calamari Late Night",
           "menu_item_description": "",
-          "menu_item_price": 11,
+          "menu_item_pricing": 11,
           "menu_category": "entree"
         },
         {
@@ -187,126 +187,126 @@ module.exports = {
           "menu_item_id": 1,
           "menu_item_name": "Mixed Bowls",
           "menu_item_description": "Your choice of royal purple rice or mixed greens topped with fire-roasted corn, red cabbage, cucumbers, pickled carrots, caramelized onions & your choice of sauce (salad option available)",
-          "menu_item_price": 8.95,
+          "menu_item_pricing": 8.95,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 2,
           "menu_item_name": "Scallion Pancake Wraps",
           "menu_item_description": "Stuffed with cabbage, caramelized onions, pickled carrots, cucumbers, cilantro, hoisin sauce & Sriracha aioli",
-          "menu_item_price": 8.95,
+          "menu_item_pricing": 8.95,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 3,
           "menu_item_name": "Pot Stickers",
           "menu_item_description": "Served with ginger soy sauce.",
-          "menu_item_price": 7.95,
+          "menu_item_pricing": 7.95,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 4,
           "menu_item_name": "Rice Cracker",
           "menu_item_description": "",
-          "menu_item_price": 2.95,
+          "menu_item_pricing": 2.95,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 5,
           "menu_item_name": "Milk Chocolate Bar",
           "menu_item_description": "",
-          "menu_item_price": 3.5,
+          "menu_item_pricing": 3.5,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 6,
           "menu_item_name": "Meiji Hello Panda Strawberry",
           "menu_item_description": "",
-          "menu_item_price": 3.99,
+          "menu_item_pricing": 3.99,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 7,
           "menu_item_name": "Double Rich Green Tea Pocky",
           "menu_item_description": "",
-          "menu_item_price": 3.75,
+          "menu_item_pricing": 3.75,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 8,
           "menu_item_name": "Strawberry Pocky",
           "menu_item_description": "",
-          "menu_item_price": 3.99,
+          "menu_item_pricing": 3.99,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 9,
           "menu_item_name": "Almond Crush Pocky",
           "menu_item_description": "",
-          "menu_item_price": 3.99,
+          "menu_item_pricing": 3.99,
           "menu_category": "entree"
         },
         {
           "menu_item_id": 10,
           "menu_item_name": "Pepsi Fountain Drink",
           "menu_item_description": "",
-          "menu_item_price": 3.99,
+          "menu_item_pricing": 3.99,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 11,
           "menu_item_name": "Bottled Water",
           "menu_item_description": "",
-          "menu_item_price": 3.99,
+          "menu_item_pricing": 3.99,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 12,
           "menu_item_name": "Melon Ramune",
           "menu_item_description": "",
-          "menu_item_price": 3.25,
+          "menu_item_pricing": 3.25,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 13,
           "menu_item_name": "Green Tea",
           "menu_item_description": "",
-          "menu_item_price": 2.95,
+          "menu_item_pricing": 2.95,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 14,
           "menu_item_name": "Royal Milk Tea",
           "menu_item_description": "",
-          "menu_item_price": 2.95,
+          "menu_item_pricing": 2.95,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 15,
           "menu_item_name": "Iced Coffee",
           "menu_item_description": "",
-          "menu_item_price": 3.25,
+          "menu_item_pricing": 3.25,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 16,
           "menu_item_name": "Strawberry Ramune",
           "menu_item_description": "",
-          "menu_item_price": 3.25,
+          "menu_item_pricing": 3.25,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 17,
           "menu_item_name": "Strawberry Calpico",
           "menu_item_description": "",
-          "menu_item_price": 3.95,
+          "menu_item_pricing": 3.95,
           "menu_category": "drink"
         },
         {
           "menu_item_id": 18,
           "menu_item_name": "Royal Milk Strawberry Tea",
           "menu_item_description": "",
-          "menu_item_price": 3.25,
+          "menu_item_pricing": 3.25,
           "menu_category": "drink"
         }
       ]
