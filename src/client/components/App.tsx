@@ -18,6 +18,7 @@ import Testing4 from './Testing4';
 import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
 import ChatPage from './ChatPage';
+import NewPaymentPage from './NewPaymentPage';
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
     <div className="App">
       <Router>
         <div className="RouterContainer">
-          <Switch>
+          {/* <Switch>
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/Menu" component={MenuPage} />
@@ -35,7 +36,8 @@ function App() {
             <Route exact path="/LandingPage" component={landingPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
             <Redirect to="/" />
-          </Switch>
+          </Switch> */}
+          <NewPaymentPage />
         </div>
       </Router>
     </div>
