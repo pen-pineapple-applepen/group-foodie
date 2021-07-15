@@ -1,4 +1,6 @@
-// NOTE I AM SWITCHING THIS TO REACT STYLED COMPONENTS AFTER THIS PULL REQUEST
+//
+// NOTE I AM SWITCHING THIS TO REACT STYLED COMPONENTS AND REFACTORING THE HTML/CSS AFTER THIS PULL REQUEST
+//
 
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -8,6 +10,33 @@ import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import axios from "axios";
+
+const ColoredLine = () => (
+  <hr
+      style={{
+          width: '20%',
+          color: '#FF6C36',
+          backgroundColor: '#FF6C36',
+      }}
+  />
+);
+
+ // const Text = styled.span`
+  // margin-top: 50px;
+  // margin-bottom: 25px;
+  // `;
+  // const FriendsListDiv = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // `;
+
+  // NOT WORKING WITH STYLED COMPONENTS WILL HAVE TO LOOK INTO THIS
+  // const ColoredLine = styled.hr`
+  // width: '20%',
+  // color: '#FF6C36'
+  // backgroundColor: '#FF6C36'
+  // `;
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
@@ -54,33 +83,6 @@ const OrderShare = () => {
     setGuestEmails([...guestEmails, guestEmail]);
     setGuestEmail('');
   }
-
-  // const Text = styled.span`
-  // margin-top: 50px;
-  // margin-bottom: 25px;
-  // `;
-  // const FriendsListDiv = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // `;
-
-  // NOT WORKING WITH STYLED COMPONENTS WILL HAVE TO LOOK INTO THIS
-  // const ColoredLine = styled.hr`
-  // width: '20%',
-  // color: '#FF6C36'
-  // backgroundColor: '#FF6C36'
-  // `;
-
-  const ColoredLine = () => (
-    <hr
-        style={{
-            width: '20%',
-            color: '#FF6C36',
-            backgroundColor: '#FF6C36',
-        }}
-    />
-  );
 
   return (
     <div className='order_share'>
