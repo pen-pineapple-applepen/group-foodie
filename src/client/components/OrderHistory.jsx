@@ -47,13 +47,13 @@ const OrderHistory = (props) => {
 
   useEffect(() => {
     // FAKE DATA
-    const fakeDueDateLive = new Date(2021, 6, 14, 23); // 7/14/2021 11PM
+    const fakeDueDateLive = new Date(2021, 6, 15, 10); // 7/14/2021 11PM
     const fakeDueDateSched = new Date(2021, 6, 16, 16); // 7/16/2021 4PM
     const fakeDueDateComplete = new Date(2021, 6, 13, 16); // 7/13/2021 4PM
 
     const fakeDueDates = [fakeDueDateLive, fakeDueDateSched, fakeDueDateComplete];
 
-    const fakeLiveDate = new Date(2021, 6, 14, 22); // 7/14/2021 10PM
+    const fakeLiveDate = new Date(2021, 6, 15, 9); // 7/14/2021 10PM
     const fakeScheduledDate = new Date(2021, 6, 16, 15); // 7/16/2021 3PM
     const fakeCompleteDate = new Date(2021, 6, 13, 15); // 7/13/2021 3PM
 
