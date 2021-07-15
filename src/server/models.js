@@ -1,4 +1,6 @@
 const db = require('./db');
+const restaurants = require('./restaurants');
+const menus = require('./menus');
 
 // user friends
 const getOneUserInfo = async (user_id) => {
@@ -134,6 +136,37 @@ const createComment = async (user_id, text, date, group_id) => {
   return insertedId;
 }
 
+const getRestaurantsByZipCode = async (zip_code) => {
+  const restaurantsData = restaurants.restaurants;
+
+  const allRestaurants = restaurantsData.reduce((acc, restaurant) => {
+    const formattedRestaurant = {}
+    formattedRestaurant.name = restaurant.restaurant_name;
+    formattedRestaurant.street = restaurant.address.formatted;
+    formattedRestaurant.cuisines = [restaurant.cuisines];
+    formattedRestaurant.hours = restaurant.hours;
+    acc.push(formattedRestaurant)
+    return acc;
+
+  }, [])
+  return allRestaurants;
+}
+
+const getMenuByRestaurantId = async (restaurant_id) => {
+  const menusData = menus.menus;
+  const currentRestaurant = menusData.find(menu => menu.restaurant_id === Number(restaurant_id));
+  const menuItems = currentRestaurant.menu_items;
+
+  return menuItems;
+}
+
+const checkPasswordWithEmail = async (email, password) => {
+  const emailsThatMatchPassword = await db.select('email').from('users')
+    .where({ email, password })
+
+  return emailsThatMatchPassword.length ? true : false;
+
+}
 
 const models = {
   getOneUserInfo,
@@ -149,7 +182,10 @@ const models = {
   getDueDateByGroupId,
   createGroup,
   getCommentsByGroupId,
-  createComment
+  createComment,
+  getRestaurantsByZipCode,
+  getMenuByRestaurantId,
+  checkPasswordWithEmail,
 }
 
 module.exports = models;

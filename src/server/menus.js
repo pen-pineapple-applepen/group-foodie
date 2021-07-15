@@ -1,4 +1,4 @@
-{
+module.exports = {
   "menus": [
     {
       "restaurant_id": 1,

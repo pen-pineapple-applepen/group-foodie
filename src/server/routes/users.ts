@@ -7,6 +7,10 @@ users
   .post(controllers.createUser)
 
 users
+  .route('/login')
+  .get(controllers.checkPasswordWithEmail)
+
+users
   .route('/:user_id')
   .get(controllers.getOneUser)
 
