@@ -12,22 +12,26 @@ export default function MainLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const history = useHistory();
+  function handleHomeClick() {
+    history.push("/SignUp");
+  }
 
   const logInStatus = useAppSelector((state) => state.loggedIn);
 
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
-    dispatch(allActions.logIn())
-    history.push("/LandingPage");
-    // what goes into login('will be action payload')
+    axios.get('/users/login', {email, password})
+      .then (res => {
+        if (res.data === true) {
+          //need to get userId to put into action.payload of logIn()
+          dispatch(allActions.logIn())
+          history.push("/LandingPage");
+        }
+      })
   }
 
-  const history = useHistory();
-
-  function handleHomeClick() {
-    history.push("/SignUp");
-  }
 
   return (
     <div className="login-signup-background">
