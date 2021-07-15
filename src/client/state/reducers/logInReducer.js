@@ -16,7 +16,7 @@ export const loginReducer = createReducer (initialState, (builder) => {
       state.loggedIn = true,
       state.userId = action.payload
       //axios.get here? OR axios.get outside and whatever the result then put into function and then action.payload would become this
-    });
+    })
     .addCase(logOut, (state, action) => {
       state.loggedIn = false
     })

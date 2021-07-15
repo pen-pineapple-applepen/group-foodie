@@ -5,6 +5,8 @@ import allActions from '/src/client/state/actions/allActions.js';
 import { useAppDispatch, useAppSelector } from '/src/client/state/hooks.ts';
 import { Button, Icon, Form } from 'react-bulma-components';
 import { OrangeButton } from '/src/client/styles/shared.tsx';
+import { useHistory } from 'react-router-dom';
+import { OrangeNavbar } from '../../styles/shared';
 
 export default function MainLoginPage() {
   const [email, setEmail] = useState('');
@@ -17,13 +19,20 @@ export default function MainLoginPage() {
 
   const handleLogin = () => {
     dispatch(allActions.logIn())
+    history.push("/LandingPage");
     // what goes into login('will be action payload')
   }
 
+  const history = useHistory();
+
+  function handleHomeClick() {
+    history.push("/SignUp");
+  }
 
   return (
     <div className="login-signup-background">
       <div className="login-signup-page-container">
+      < OrangeNavbar />
         <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
           <Form.Control>
@@ -41,8 +50,8 @@ export default function MainLoginPage() {
           </Form.Control>
         </Form.Field>
         <div className='login-buttons'>
-          <OrangeButton >Login</OrangeButton>
-          <OrangeButton >Sign Up</OrangeButton>
+          <OrangeButton onClick={handleLogin}>Login</OrangeButton>
+          <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
         </div>
       </div>
     </div>

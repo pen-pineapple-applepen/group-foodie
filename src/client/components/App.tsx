@@ -1,29 +1,38 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { Button, Form } from 'react-bulma-components';
-import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
 import allActions from '../state/actions/allActions';
 import MainLoginPage from './loginSignUpPage/mainLoginPage';
 import SignUpPage from './loginSignUpPage/SignUpPage';
 import styled from 'styled-components';
+import RouterContainer from './RouterContainer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import mainLoginPage from './loginSignUpPage/mainLoginPage'
+import landingPage from './LandingPage/landingPage';
+import Testing from './Testing';
+import Testing2 from './Testing2';
+import Testing4 from './Testing4';
 
-const MobileDiv = styled.div`
-
-`
 
 function App() {
 
-// these are just some test examples
+  // these are just some test examples
   return (
     <div className="App">
-      {/* <p>
-        my name is
-        {name || ''}
-      </p>
-      <Button color="primary" onClick={handleClick}>add Erik</Button> */}
-      <OrangeNavbar needBackArrow={true}/>
-      {/* <MainLoginPage /> */}
-      <SignUpPage />
+      <Router>
+        <div className="RouterContainer">
+          <Switch>
+            <Route exact path="/" component={mainLoginPage} />
+            <Route exact path="/SignUp" component={SignUpPage} />
+            <Route exact path="/LandingPage" component={landingPage} />
+            <Redirect to="/" />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }

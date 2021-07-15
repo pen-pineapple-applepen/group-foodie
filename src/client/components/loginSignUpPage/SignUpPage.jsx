@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { Button, Icon, Form } from 'react-bulma-components';
 import styled from 'styled-components';
-import { OrangeButton } from '/src/client/styles/shared.tsx';
 import axios from 'axios';
+import { Button, Icon, Form } from 'react-bulma-components';
+import { useHistory } from 'react-router-dom'
+import { OrangeNavbar } from '../../styles/shared';
+import { OrangeButton } from '/src/client/styles/shared.tsx';
+
+const StyledHeader = styled.h2`
+font-size: 20px;
+font-weight: bold;
+`;
 
 export default function SignUpPage() {
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,13 +30,17 @@ export default function SignUpPage() {
     })
   }
 
-  const StyledHeader = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
-`;
+  const history = useHistory();
+  function handleHomeClick() {
+    history.push("/");
+  }
+  const goBack = () => {
+    history.goBack()
+  }
 
   return (
     <div className="login-signup-background">
+      < OrangeNavbar needBackArrow={true} onBackArrowClick={goBack}/>
       <div className="login-signup-page-container">
         <StyledHeader>New Account</StyledHeader>
         <Form.Field className="login-form">
@@ -60,7 +70,7 @@ export default function SignUpPage() {
           </Form.Control>
         </Form.Field>
         <div className='login-buttons'>
-          <OrangeButton>Sign Up</OrangeButton>
+          <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
         </div>
       </div>
     </div>
