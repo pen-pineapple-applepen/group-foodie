@@ -3,7 +3,10 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { string } from 'prop-types';
-
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import allActions from '../../state/actions/allActions';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom'
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -12,44 +15,63 @@ const ContainerDiv = styled.div`
   align-items: center;
   height: 100vh;
 `
-
 const NameInputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding-bottom: 80px;
 `
-
-
-
 const EnterHeader = styled.h1`
   font-size: 32px;
+  padding-bottom: 30px;
 `
 
-// const HeaderImage = styled.div<HeaderImageProps>`
-//   background-image: url(${props => props.src});
-//   position: absolute;
-//   top: -50px;
-//   width: 100vw;
-//   height: 250px;
-//   padding-bottom: 200px;
-// `
+const SizedOrangedInput = styled(OrangeInput)`
+  font-size: 24px;
+  text-align: center;
+`
 
+const PositionedOrangeButton = styled(OrangeButton)`
+  position: absolute;
+  bottom: 30px;
+`
 interface FriendNameInputPageProps {
 
 }
 
 export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+
+  const { addFriendName } = allActions;
+
+  const handleChange = (e) => {
+    let text = e.target.value;
+    dispatch(addFriendName(text));
+  }
+
+  const handleClick = (e) => {
+    history.push('/Menu')
+  }
+
   return (
     <ContainerDiv>
       <OrangeNavbar/>
       <HeaderImage src='Dannys_bg.png'/>
+
       <NameInputDiv>
         <EnterHeader>
           Enter Your Name
         </EnterHeader>
-        <OrangeInput/>
+        <SizedOrangedInput type="text"  onChange={e => handleChange(e)}/>
       </NameInputDiv>
+
+
+        <PositionedOrangeButton onClick={handleClick}>
+          Confirm
+        </PositionedOrangeButton>
+
     </ContainerDiv>
   )
 }
