@@ -28,9 +28,16 @@ additional body params: {
   email: string,
   password: string,
 }
-returns: true || false
-// for "security" sake, sending back sensitive info to the client side felt unsafe
-// so checking for email and password match in the back-end and returning back boolean
+returns:
+{
+  "hasCorrectCredentials": true,
+  "id": 1
+}
+/* OR */
+{
+  "hasCorrectCredentials": false,
+  "id": null
+}
 
 -----------------
 Create 1 new user

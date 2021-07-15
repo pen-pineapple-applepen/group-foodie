@@ -162,10 +162,20 @@ const getMenuByRestaurantId = async (restaurant_id) => {
 }
 
 const checkPasswordWithEmail = async (email, password) => {
-  const emailsThatMatchPassword = await db.select('email').from('users')
+  const emailsThatMatchPassword = await db.select('email', 'id').from('users')
     .where({ email, password })
 
-  return emailsThatMatchPassword.length ? true : false;
+  if (emailsThatMatchPassword.length){
+    return {
+      hasCorrectCredentials: true,
+      id: emailsThatMatchPassword[0].id,
+    }
+  } else {
+    return {
+      hasCorrectCredentials: false,
+      id: null,
+    }
+  }
 }
 
 const models = {
