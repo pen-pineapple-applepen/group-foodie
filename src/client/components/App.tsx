@@ -16,6 +16,7 @@ import Testing2 from './Testing2';
 import Testing4 from './Testing4';
 import Profile from './Profile';
 import FriendsList from './FriendsList';
+import OrderHistory from './OrderHistory';
 
 const MobileDiv = styled.div`
   max-width: 414px;
@@ -33,13 +34,14 @@ function App() {
         <div className="RouterContainer">
           <Switch>
             {/* Chris: route to test my component using home page */}
-            {/* <Route exact path="/" component={Profile} /> */}
+            <Route exact path="/" component={Profile} />
 
-            <Route exact path="/" component={mainLoginPage} />
+            {/* <Route exact path="/" component={mainLoginPage} /> */}
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/testing2" component={Testing2} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/friends" component={FriendsList} />
+            <Route exact path="/history" component={OrderHistory} />
             <Redirect to="/" />
           </Switch>
         </div>

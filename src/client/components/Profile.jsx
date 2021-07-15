@@ -43,7 +43,9 @@ const Profile = (props) => {
     <ProfileDiv>
       <OrangeNavbar needBackArrow={true} />
       <NameText>firstName lastName</NameText>
-      <SpacedButton>View Orders</SpacedButton>
+      <Link to="/history">
+        <SpacedButton>View Orders</SpacedButton>
+      </Link>
       <Link to="/friends">
         <SpacedButton>Friends</SpacedButton>
       </Link>
