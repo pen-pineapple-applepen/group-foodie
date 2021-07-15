@@ -17,6 +17,7 @@ import Testing2 from './Testing2';
 import Testing4 from './Testing4';
 import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
+import ChatPage from './ChatPage';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
+            <Route exact path="/ChatPage" component={ChatPage} />
             <Redirect to="/" />
           </Switch>
         </div>
