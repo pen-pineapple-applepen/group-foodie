@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import { useHistory } from 'react-router-dom';
 import RestaurantContainer from './RestaurantContainer.jsx';
-import {OrangeInput} from '../styles/shared.tsx';
+import { OrangeInput } from '../styles/shared.tsx';
 
 
 export default function RestaurantPage () {

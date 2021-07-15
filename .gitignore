@@ -1,3 +1,5 @@
 node_modules
 build
 public/bundle.js
+src/server/db/schema.sql
+src/server/db/index.js
