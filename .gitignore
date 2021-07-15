@@ -2,3 +2,4 @@ node_modules
 build
 public/bundle.js
 schema.sql
+src/server/db/index.js

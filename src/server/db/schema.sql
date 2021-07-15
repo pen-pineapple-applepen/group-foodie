@@ -66,18 +66,12 @@ ALTER TABLE comments ADD FOREIGN KEY (group_id) REFERENCES groups (id);
 ALTER TABLE payment_info ADD FOREIGN KEY (user_id) REFERENCES users (id);
 INSERT INTO groups(due_date)VALUES(10/24/2021);
 -- INSERT INTO orders(user_id, food, quantity, price, date, food_id, group_id, restaurant_id)VALUES(5, 'PIZZA', 3, 3.50, '12/20/2020', 423, 1, 32);
-COPY users(id, first_name, last_name, email, username, password, guest)
-FROM '/Users/chriswu/Desktop/HackReactor/group-foodie/src/server/db/seed/users.csv'
-DELIMITER ','
-CSV HEADER;
-COPY friends_join_table(id, user_id, friend_id)
-FROM '/Users/chriswu/Desktop/HackReactor/group-foodie/src/server/db/seed/friends_join_table.csv'
-DELIMITER ','
-CSV HEADER;
-COPY payment_info(id, name, card_number, card_type, exp_date, cvv, zip_code, user_id)
-FROM '/Users/chriswu/Desktop/HackReactor/group-foodie/src/server/db/seed/payment_info.csv'
-DELIMITER ','
-CSV HEADER;
+-- \COPY users(id, first_name, last_name, email, username, password, guest)
+\COPY users FROM '/Users/chriswu/Desktop/HackReactor/group-foodie/src/server/db/seed/users.csv' DELIMITER ',' CSV HEADER;
+-- \COPY friends_join_table(id, user_id, friend_id)
+\COPY friends_join_table FROM '/Users/chriswu/Desktop/HackReactor/group-foodie/src/server/db/seed/friends_join_table.csv' DELIMITER ',' CSV HEADER;
+-- \COPY payment_info(id, name, card_number, card_type, exp_date, cvv, zip_code, user_id)
+\COPY payment_info FROM '/Users/chriswu/Desktop/HackReactor/group-foodie/src/server/db/seed/payment_info.csv' DELIMITER ',' CSV HEADER;
 SELECT pg_catalog.setval(pg_get_serial_sequence('users', 'id'), (SELECT MAX(id) FROM users)+1);
 SELECT pg_catalog.setval(pg_get_serial_sequence('payment_info', 'id'), (SELECT MAX(id) FROM payment_info)+1);
 SELECT pg_catalog.setval(pg_get_serial_sequence('groups', 'id'), (SELECT MAX(id) FROM groups)+1);
