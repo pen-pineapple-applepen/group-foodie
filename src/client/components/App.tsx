@@ -28,13 +28,13 @@ function App() {
       <Router>
         <div className="RouterContainer">
           <Switch>
-            <Route exact path="/" component={mainLoginPage} />
+            {/* <Route exact path="/" component={mainLoginPage} /> */}
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
-            <Redirect to="/" />
+            <Redirect to="/ChatPage" />
           </Switch>
         </div>
       </Router>

@@ -9,6 +9,10 @@ const Container = styled.div`
   display: flex;
 `;
 
+const getOrder = () => {
+  const group_id = useAppSelector();
+}
+
 const orderDiv = () => {
   return (
     <div>
@@ -65,10 +69,11 @@ const postComment = () => {
 };
 
 export default function ChatPage () {
+  const [comments, setComments] = useState(['']);
 
   useEffect(() => {
     // waiting for further data loaded
-  }, [])
+  }, [comments])
 
   return (
     <Container>
