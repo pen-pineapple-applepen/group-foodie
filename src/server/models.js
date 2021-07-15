@@ -141,6 +141,7 @@ const getRestaurantsByZipCode = async (zip_code) => {
 
   const allRestaurants = restaurantsData.reduce((acc, restaurant) => {
     const formattedRestaurant = {}
+    formattedRestaurant.restaurant_id = restaurant.restaurant_id;
     formattedRestaurant.name = restaurant.restaurant_name;
     formattedRestaurant.street = restaurant.address.formatted;
     formattedRestaurant.cuisines = [restaurant.cuisines];
@@ -165,7 +166,6 @@ const checkPasswordWithEmail = async (email, password) => {
     .where({ email, password })
 
   return emailsThatMatchPassword.length ? true : false;
-
 }
 
 const models = {

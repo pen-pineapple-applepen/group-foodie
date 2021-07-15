@@ -351,6 +351,7 @@ request type: GET
 returns:
 [
   {
+      "restaurant_id": 1,
       "menu_item_id": 1,
       "menu_item_name": "Jalapeno Calamari Late Night",
       "menu_item_description": "",
@@ -358,6 +359,7 @@ returns:
       "menu_category": "entree"
   },
   {
+      "restaurant_id": 1,
       "menu_item_id": 2,
       "menu_item_name": "Chicken Sliders Late Night",
       "menu_item_description": "",
@@ -365,6 +367,7 @@ returns:
       "menu_category": "entree"
   },
   {
+      "restaurant_id": 1,
       "menu_item_id": 3,
       "menu_item_name": "Caesar Salad Late Night",
       "menu_item_description": "",
