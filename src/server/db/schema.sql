@@ -27,6 +27,7 @@ CREATE TABLE orders (
   food_id INTEGER NOT NULL,
   group_id INTEGER NOT NULL,
   restaurant_id INTEGER NULL,
+  live BOOLEAN NOT NULL,
   PRIMARY KEY (id)
 );
 DROP TABLE IF EXISTS comments CASCADE;

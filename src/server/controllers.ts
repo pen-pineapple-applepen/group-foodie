@@ -161,7 +161,6 @@ async function createComment(req, res) {
   const { text, date, group_id } = req.body;
   try {
     const insertedId = await models.createComment(user_id, text, date, group_id)
-    console.log('created comment')
     res.status(200).send(insertedId)
   } catch (err) {
     console.log('failed making comment', err);
@@ -169,6 +168,40 @@ async function createComment(req, res) {
   }
 }
 
+// restaurants
+async function getRestaurantsByZipCode(req, res) {
+  let { zip_code } = req.params;
+  try {
+    const restaurants = await models.getRestaurantsByZipCode(zip_code = 90045)
+    res.status(200).send(restaurants);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+}
+
+async function getMenuByRestaurantId(req, res) {
+  let { restaurant_id } = req.params;
+  try {
+    const menus = await models.getMenuByRestaurantId(restaurant_id)
+    console.log('successfully got menus');
+    res.status(200).send(menus);
+  } catch (err) {
+    console.log('error getting restaurant: ', err)
+    res.status(400).send(err);
+  }
+}
+
+async function checkPasswordWithEmail(req, res) {
+  let { email, password } = req.body;
+  try {
+    const passwordIsCorrect = await models.checkPasswordWithEmail(email, password)
+    console.log('password checks out');
+    res.status(200).send(passwordIsCorrect);
+  } catch (err) {
+    console.log('error getting restaurant: ', err)
+    res.status(400).send(err);
+  }
+}
 
 
 module.exports = {
@@ -186,4 +219,7 @@ module.exports = {
   createGroup,
   getCommentsByGroupId,
   createComment,
+  getRestaurantsByZipCode,
+  getMenuByRestaurantId,
+  checkPasswordWithEmail
 }
