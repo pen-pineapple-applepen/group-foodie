@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
-import { Button, Icon, Form } from 'react-bulma-components';
-import styled from 'styled-components'
-import { OrangeButton } from '/src/client/styles/shared.tsx';
 import axios from 'axios';
+import styled from 'styled-components'
+import allActions from '/src/client/state/actions/allActions.js';
+import { useAppDispatch, useAppSelector } from '/src/client/state/hooks.ts';
+import { Button, Icon, Form } from 'react-bulma-components';
+import { OrangeButton } from '/src/client/styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
 import { OrangeNavbar } from '../../styles/shared';
 
 export default function MainLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const history = useHistory();
-
-  const handleLogin = () => {
-    history.push("/LandingPage");
-  }
-
   function handleHomeClick() {
     history.push("/SignUp");
   }
+
+  const logInStatus = useAppSelector((state) => state.loggedIn);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogin = () => {
+    axios.get('/users/login', {email, password})
+      .then (res => {
+        if (res.data.hasCorrectCredentials === true) {
+          dispatch(allActions.logIn(res.data.id));
+          history.push("/LandingPage");
+        } else if (res.data.hasCorrectCredentials === false) {
+          alert('Incorrect username or password');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
 
   return (
     <div className="login-signup-background">
@@ -25,15 +43,22 @@ export default function MainLoginPage() {
       < OrangeNavbar />
         <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
-          <Form.Control>
-            <Form.Input placeholder="Email" onChange={e => {setEmail(e.target.value)}}/>
+          <Form.Control className="form-spacing-login">
+            <Form.Input
+              placeholder="Email"
+              onChange={e => {setEmail(e.target.value)}}
+            />
             <Icon align="left" size="small">
               <i className="fas fa-envelope" />
             </Icon>
           </Form.Control>
           <Form.Label>Password</Form.Label>
-          <Form.Control>
-            <Form.Input placeholder="Password"onChange={e => {setPassword(e.target.value)}}/>
+          <Form.Control className="form-spacing-login">
+            <Form.Input
+              type="password"
+              placeholder="Password"
+              onChange={e => {setPassword(e.target.value)}}
+            />
             <Icon align="left" size="medium">
               <i className="fas fa-key" />
             </Icon>
