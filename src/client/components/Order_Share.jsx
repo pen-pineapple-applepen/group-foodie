@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { Button } from 'react-bulma-components';
 import DatePicker from "react-datepicker";
 import { addDays } from 'date-fns';
@@ -7,17 +6,23 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 
 const OrderShare = () => {
-  let orderDate = useAppSelector((state)=>state.orderDate)
-  let guestEmails = useAppSelector((state)=>state.emails)
-  const dispatch = useAppDispatch();
+  const [orderDate, setOrderDate] = useState(new Date())
   let [guestEmail, setGuestEmail] = useState('');
+  let [guestEmails, setGuestEmails] = useState([]);
+
+  const isSelectedDateToday = new Date().getDate() === orderDate.getDate();
+  let minTimeHour = new Date().getHours();
+  if (!isSelectedDateToday) {
+    minTimeHour = 0;
+  }
+
 
   const handleGuestEmailChange = (event) => {
     setGuestEmail(event.target.value);
   }
 
   const handleGuestEmailSubmit = () => {
-    dispatch(allActions.addEmail(guestEmail));
+    setGuestEmails([...guestEmails, guestEmail]);
     setGuestEmail('');
   }
 
@@ -54,10 +59,12 @@ const OrderShare = () => {
       <div>
         <DatePicker
         selected={orderDate}
-        onChange={(date) => dispatch(allActions.addDate(date))}
+        onChange={(date) => setOrderDate(date)}
         showTimeSelect
         minDate={new Date()}
-        maxDate={addDays(new Date(), 13)}
+        maxDate={addDays(new Date(), 14)}
+        minTime={new Date(new Date().setHours(minTimeHour, 0, 0, 0))}
+        maxTime={new Date(new Date().setHours(23, 59, 0, 0))}
         dateFormat="MMMM d, yyyy h:mm aa"
         />
       </div>
