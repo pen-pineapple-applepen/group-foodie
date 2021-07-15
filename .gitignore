@@ -1,6 +1,6 @@
 node_modules
 build
 public/bundle.js
-schema_cw.sql
-src/server/db/index_cw.js
+schema.sql
+src/server/db/index.js
 package-lock.json
