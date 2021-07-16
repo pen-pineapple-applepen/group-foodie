@@ -102,7 +102,7 @@ const OrderShare = () => {
         }
         console.log(formattedCards);
         dispatch(allActions.createPaymentsList(formattedCards));
-        dispatch(allActions.addSelectedPayment(formattedCards[0]));
+        // dispatch(allActions.addSelectedPayment(formattedCards[0]));
       }
     })
     .catch(err => {
@@ -194,7 +194,7 @@ const OrderShare = () => {
         Payment Information:
       </div>
       <div>
-        {paymentsList.length !== 0 ?
+        {Object.keys(selectedPayment).length !== 0 ?
           <Payment>
             <div>
               <span>

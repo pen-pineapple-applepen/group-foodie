@@ -9,18 +9,24 @@ export const addSelectedPayment = createAction('CREATE_SELECTEDPAYMENT');
 
 let initialState = {
   paymentsList: [],
-  selectedPayment: {id: null, cardNumber: null, cardType: null}
+  selectedPayment: {}
 };
 
 export const paymentsReducer = createReducer (initialState, (builder) => {
   builder
     .addCase(createPaymentsList, (state, action) => {
+      state.selectedPayment = action.payload[0];
       state.paymentsList = action.payload;
       // action.payload will be an array of the payments
-      state.selectedPayment = state.paymentsList[0];
     })
-    console.log('paymentsList', state.paymentsList);
-    // .addCase(addPayment, (state, action) => {
+    .addCase(addSelectedPayment, (state, action) => {
+      state.selectedPayment = state.paymentsList.filter(payment => (
+        payment.id === action.payload
+      ))[0]
+    })
+})
+
+// .addCase(addPayment, (state, action) => {
     //   state.paymentsList = [...state.paymentsList, action.payload]
     //   // action.payload will be a specific object of a payment
     // })
@@ -30,9 +36,3 @@ export const paymentsReducer = createReducer (initialState, (builder) => {
     //     // action.payload should be the id of the payment that you are attempting to remove
     //   ))
     // })
-    .addCase(addSelectedPayment, (state, action) => {
-      state.selectedPayment = state.paymentsList.filter(payment => (
-        payment.id === action.payload
-      ))[0]
-    })
-})
