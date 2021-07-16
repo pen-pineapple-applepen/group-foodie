@@ -17,8 +17,9 @@ const InfoContainer = styled.div`
 `;
 
 const Image = styled.img`
-  width: 154px;
+  min-width: 154px;
   height: 117px;
+  position : relative;
 `;
 
 const Name = styled.div`
@@ -35,9 +36,7 @@ const SubInfo = styled.div`
 export default function MenuItemContainer ({name, price, category}) {
   return(
     <MainConatiner>
-      <div>
         {category==='entree' ? <Image src={'lunch_icon_24dp.svg'}/> : <Image src={'local_cafe_black_24dp.svg'}/>}
-      </div>
       <InfoContainer>
         <Name>
           <h3>{name}</h3>
