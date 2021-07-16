@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
-import MainLoginPage from './loginSignUpPage/mainLoginPage';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -34,9 +33,9 @@ function App() {
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
-            <Route exact path="/Friends" component={FriendNameInputPage} />
+            <Route path="/Friends/:group_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
-            <Route exact path="/Menu/Friends" component={FriendMenuPage} />
+            <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Redirect to="/" />
           </Switch>
           {/* <NewPaymentPage /> */}

@@ -4,6 +4,7 @@ import { addItem, subtractItem, UpdateItemPrice, UpdateItemDescription, resetIte
 import { UpdateItemName, UpdateItemId, UpdateItemQuantity, UpdateTotalPrice, UpdateRestaurantId } from '../reducers/orderItemReducer';
 import { addItemToOrders, addToPriceTotal } from '../reducers/allOrderItemsReducer';
 import { addFriendName } from '../reducers/friendReducer'
+import { updateCurrentGroup } from '../reducers/groupReducer';
 
 const allActions = {
   addName,
@@ -22,6 +23,7 @@ const allActions = {
   UpdateTotalPrice,
   UpdateRestaurantId,
   addFriendName,
+  updateCurrentGroup,
 }
 
 export default allActions;
