@@ -155,8 +155,8 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
         </NavbarBrand>
         <Navbar.Menu>
           <Navbar.Container>
-            <Navbar.Item>Account</Navbar.Item>
-            <Navbar.Item>Your Orders</Navbar.Item>
+            <Navbar.Item href="/profile">Account</Navbar.Item>
+            <Navbar.Item href="/history">Your Orders</Navbar.Item>
             <Navbar.Item>Log Out</Navbar.Item>
           </Navbar.Container>
         </Navbar.Menu>
