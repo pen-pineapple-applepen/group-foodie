@@ -33,11 +33,8 @@ const SizedImage = styled(Image)`
 `
 const OrangeNavbarContainer = styled(Navbar)`
   background-color: #FF6C36;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
   border-radius: 0 0 22px 22px;
+  font-weight: bold;
 `
 // const OrangeNavbarContainer = styled(Navbar)`
 //   background-color: #FF6C36;
