@@ -27,7 +27,7 @@ const FriendsList = (props) => {
   const [friends, setFriends] = useState([]);
 
   const getFriends = async () => {
-    const res = await axios.get(`/users/${userInfo.id}/friends`);
+    const res = await axios.get(`/api/users/${userInfo.id}/friends`);
     setFriends(res.data);
   };
 

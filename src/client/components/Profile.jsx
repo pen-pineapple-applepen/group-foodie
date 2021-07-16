@@ -29,7 +29,7 @@ const Profile = (props) => {
     try {
       // const userId = useAppSelector((state) => state.loginDetails.userId);
       const userId = 1;
-      const res = await axios.get(`/users/${userId}`);
+      const res = await axios.get(`/api/users/${userId}`);
       // console.log(res.data);
 
       dispatch(allActions.setCurrentUser(res.data));
