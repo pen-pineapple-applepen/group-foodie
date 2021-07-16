@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Button } from 'react-bulma-components';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
 import MenuItemContainer from '../MenuItemContainer.jsx';
 import { OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const MainContainer = styled.div`
@@ -42,7 +43,7 @@ export default function MenuPage () {
   }
 
   //Resets Current Selected Item
-  React.useEffect(()=>{
+  useEffect(()=>{
     //Menu Item
     dispatch(allActions.UpdateItemPrice(0));
     dispatch(allActions.resetItemQuantity());
