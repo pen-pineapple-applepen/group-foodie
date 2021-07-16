@@ -3,8 +3,8 @@ const db = require('knex')({
   connection: {
     host: 'localhost',
     database: 'groupfoodie',
-    user: 'postgres',
-    password: '',
+    user: 'austinyeon',
+    password: '3747',
     port: 5432,
   },
 });

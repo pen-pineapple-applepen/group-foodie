@@ -26,13 +26,39 @@ export default function NewPaymentPage () {
   return (
     <div>
       <OrangeNavbar needBackArrow={true} onBackArrowClick={goBack}/>
-      <Form.Field horizontal>
+      <Form.Field kind="group">
+        <Form.Label>First Name:</Form.Label>
+        <Form.Control>
+          <Form.Input/>
+        </Form.Control>
+        <Form.Label>Last Name:</Form.Label>
+        <Form.Control>
+          <Form.Input/>
+        </Form.Control>
+      </Form.Field>
+      <Form.Field >
         <Form.Label>Card Number:</Form.Label>
         <Form.Control>
           <Form.Input/>
           <Icon align="left" size="small">
             <i className="fas fa-credit-card"/>
           </Icon>
+        </Form.Control>
+      </Form.Field>
+      <Form.Field kind="group">
+        <Form.Label>Expiry Date:</Form.Label>
+        <Form.Control>
+          <Form.Input/>
+        </Form.Control>
+        <Form.Label>CCV:</Form.Label>
+        <Form.Control>
+          <Form.Input/>
+        </Form.Control>
+      </Form.Field>
+      <Form.Field >
+        <Form.Label>Billing Zip:</Form.Label>
+        <Form.Control>
+          <Form.Input/>
         </Form.Control>
       </Form.Field>
     </div>
