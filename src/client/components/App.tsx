@@ -8,8 +8,6 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-
-import MainLoginPage from './loginSignUpPage/mainLoginPage';
 import mainLoginPage from './loginSignUpPage/mainLoginPage'
 import SignUpPage from './loginSignUpPage/SignUpPage'
 import FriendNameInputPage from './friendsView/FriendNameInputPage';
@@ -21,6 +19,8 @@ import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
+import NewPaymentPage from './NewPaymentPage';
+
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
 
@@ -47,6 +47,7 @@ function App() {
             <Route exact path="/ShareOrder" component={OrderShare} />"
             <Redirect to="/" />
           </Switch>
+          {/* <NewPaymentPage /> */}
         </div>
       </Router>
     </div>

@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import allActions from '/src/client/state/actions/allActions.js';
 import { useAppDispatch, useAppSelector } from '/src/client/state/hooks.ts';
 import { Button, Icon, Form } from 'react-bulma-components';
-import { OrangeButton } from '/src/client/styles/shared.tsx';
+import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
-import { OrangeNavbar } from '../../styles/shared';
+
 
 export default function MainLoginPage() {
   const [email, setEmail] = useState('');
@@ -22,7 +22,7 @@ export default function MainLoginPage() {
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
-    axios.get('/api/users/login', {email, password})
+    axios.get('/api/users/login', {params: {email: email, password: password}})
       .then (res => {
         if (res.data.hasCorrectCredentials === true) {
           dispatch(allActions.logIn(res.data.id));

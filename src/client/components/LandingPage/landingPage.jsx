@@ -39,7 +39,7 @@ const LandingPage = () => {
           <StyledGreeting>
             Welcome, Bob Smith!
           </StyledGreeting>
-          <StyledButton onClick={handleCreateOrder}>
+          <StyledButton onClick={history.push("/Restaurants")}>
             Create Order
           </StyledButton>
       </StyledContainer>

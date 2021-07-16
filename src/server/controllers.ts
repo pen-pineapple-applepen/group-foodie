@@ -192,7 +192,8 @@ async function getMenuByRestaurantId(req, res) {
 }
 
 async function checkPasswordWithEmail(req, res) {
-  let { email, password } = req.body;
+  console.log("req.query:", req.query);
+  let { email, password } = req.query;
   try {
     const passwordIsCorrect = await models.checkPasswordWithEmail(email, password)
     console.log('password checks out');
