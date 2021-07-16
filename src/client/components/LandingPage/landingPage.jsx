@@ -24,6 +24,10 @@ justify-content: center;
 const LandingPage = () => {
   const history = useHistory()
 
+  const handleCreateOrder = () => {
+    history.push('/Restaurants')
+  }
+
   const goBack = () => {
     history.goBack()
   }
