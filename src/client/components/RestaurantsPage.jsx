@@ -27,7 +27,7 @@ const OrangeCheckBox = styled(Form.Checkbox)`
 `;
 
 export default function RestaurantPage() {
-  //make sure for clickhandle set restaurantid
+  const userId = useAppSelector((state)=>state.loginDetails.userId)
   const dispatch = useAppDispatch();
   const history = useHistory();
 
@@ -52,6 +52,7 @@ export default function RestaurantPage() {
   }
 
   function clickHandler(entry) {
+    dispatch(allActions.setUsertId(userId))
     dispatch(allActions.UpdateRestaurantId(entry.restaurant_id))
     dispatch(allActions.updateCurrentRestaurantId(entry.restaurant_id))
     dispatch(allActions.updateCurrentRestaurantName(entry.name))

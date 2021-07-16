@@ -27,7 +27,6 @@ export default function MenuItemPage () {
 
 
   function clickHandler () {
-    console.log(totalPrice)
     if(item.count===0){
       return
     } else {

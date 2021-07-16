@@ -33,8 +33,6 @@ const SubInfo = styled.div`
 `;
 
 export default function MenuItemContainer ({name, price, category}) {
-  console.log(typeof price)
-  console.log(price)
   return(
     <MainConatiner>
       <div>

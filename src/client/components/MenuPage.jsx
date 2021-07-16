@@ -40,8 +40,6 @@ export default function MenuPage () {
   }
 
   function clickHandler (entry) {
-    console.log(entry.menu_item_name)
-    console.log(entry.menu_item_pricing)
     dispatch(allActions.UpdateItemName(entry.menu_item_name));
     dispatch(allActions.UpdateItemPrice(entry.menu_item_pricing.toFixed(2)));
     dispatch(allActions.UpdateItemDescription(entry.menu_item_description));
@@ -69,6 +67,7 @@ export default function MenuPage () {
     <MainConatiner>
       <img src={'Dannys_bg.png'}/>
       <h2>{restaurantName}</h2>
+      <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px"}}>
       {menuList.map(entry=>{
         return(
       <div onClick={() => clickHandler(entry)} key={entry.menu_item_id}>
@@ -76,6 +75,7 @@ export default function MenuPage () {
       </div>
         )
       })}
+      </div>
       <CheckoutButton>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>
   )
