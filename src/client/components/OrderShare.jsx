@@ -3,6 +3,8 @@
 //
 
 import React, { useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../state/hooks';
+import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Button, Block, Modal } from 'react-bulma-components';
 import {OrangeButton} from '../styles/shared.tsx';
@@ -69,7 +71,9 @@ const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
-  let [paymentData, setPaymentData] = useState([]);
+  const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
+  const selectedPayment = useAppSelector(state => state.currentPayments.selectedPayment);
+  const dispatch = useAppDispatch();
   let [openModal, setOpenModal] = useState();
   const userId = useAppSelector(state => state.loginDetails.userId);
 
@@ -82,10 +86,10 @@ const OrderShare = () => {
   useEffect(() => {
     fetchPaymentData();
   }, []);
-  // [] needs to be the userID that you get from the redux state
+  // [] needs to be selectedPayment (test this)
 
   const fetchPaymentData = () => {
-    axios.get('/payments/2')
+    axios.get('/api/payments/2')
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];
@@ -93,12 +97,12 @@ const OrderShare = () => {
           formattedCards.push({
             id: response.data[i].id,
             cardNumber: String(response.data[i].card_number).slice(-4),
-            cardType: response.data[i].card_type,
-            defaultPayment: false
+            cardType: response.data[i].card_type
           })
-          formattedCards[0].defaultPayment = true;
         }
-        setPaymentData(formattedCards)
+        console.log(formattedCards);
+        dispatch(allActions.createPaymentsList(formattedCards));
+        dispatch(allActions.addSelectedPayment(formattedCards[0]));
       }
     })
     .catch(err => {
@@ -190,14 +194,14 @@ const OrderShare = () => {
         Payment Information:
       </div>
       <div>
-        {paymentData.length !== 0 ?
+        {paymentsList.length !== 0 ?
           <Payment>
             <div>
               <span>
-                ***{String(paymentData[0].cardNumber)}
+                ***{selectedPayment.cardNumber}
               </span>
               <span>
-                {paymentData[0].cardType}
+                {selectedPayment.cardType}
               </span>
             </div>
             <div>
