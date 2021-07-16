@@ -6,10 +6,10 @@ const app = express();
 const history = require('connect-history-api-fallback');
 
 app.use(express.json());
-app.use(history());
 app.use(express.static(path.join(__dirname, '../../public')));
 
 app.use('/', router);
+app.use(history());
 
 app.listen(port, (err) => {
   if (err) {
