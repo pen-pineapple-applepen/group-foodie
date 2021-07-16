@@ -33,11 +33,12 @@ const SubInfo = styled.div`
 `;
 
 export default function MenuItemContainer ({name, price, category}) {
-
+  console.log(typeof price)
+  console.log(price)
   return(
     <MainConatiner>
       <div>
-        {category==='entree' ? <Image src={'lunch_icon_24dp.svg'}/> : <Image src={'drink_icon_24dp.svg'}/>}
+        {category==='entree' ? <Image src={'lunch_icon_24dp.svg'}/> : <Image src={'local_cafe_black_24dp.svg'}/>}
       </div>
       <InfoContainer>
         <Name>

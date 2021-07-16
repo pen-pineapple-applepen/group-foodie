@@ -4,7 +4,7 @@ import allActions from '../state/actions/allActions';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import RestaurantContainer from './RestaurantContainer.jsx';
-import { OrangeInput } from '../styles/shared.tsx';
+import { OrangeInput, OrangeButton } from '../styles/shared.tsx';
 import { Modal, Button, Form } from 'react-bulma-components';
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ border-bottom: 1px solid #FF6C36;
 `;
 
 const OrangeCheckBox = styled(Form.Checkbox)`
-  background-color: #FF6C36;
+
 `;
 
 export default function RestaurantPage() {
@@ -32,8 +32,10 @@ export default function RestaurantPage() {
   const history = useHistory();
 
   const [restaurantList, setRestaurantList] = React.useState([]);
+  const [sortedRestaurantList, setSortedRestaurantList] = React.useState([]);
+  const [cuisines, setCuisines] = React.useState({});
   const [zipcode, setZipcode] = React.useState(90045)
-  const [openModal, setOpenModal] =React.useState(false)
+  const [openModal, setOpenModal] = React.useState(false)
 
   //axios call function for intial array of restaurants and local storage
   async function getRestaurantList(zipcode) {
@@ -46,11 +48,12 @@ export default function RestaurantPage() {
       localrestaurantData = JSON.parse(localrestaurantData);
     }
     setRestaurantList(localrestaurantData);
+    setSortedRestaurantList(localrestaurantData);
   }
 
   function clickHandler(entry) {
-    dispatch(allActions.UpdateRestaurantId(entry.id))
-    dispatch(allActions.updateCurrentRestaurantId(entry.id))
+    dispatch(allActions.UpdateRestaurantId(entry.restaurant_id))
+    dispatch(allActions.updateCurrentRestaurantId(entry.restaurant_id))
     dispatch(allActions.updateCurrentRestaurantName(entry.name))
     history.push("/Menu");
   }
@@ -65,30 +68,66 @@ export default function RestaurantPage() {
     //Resets order states
     dispatch(allActions.resetAllOrders())
   }, [])
+
+  function filterHandler(e) {
+    setOpenModal(false)
+    let newList = [];
+    newList = restaurantList.filter(entry=>entry.cuisines.some(r=>Object.keys(cuisines).indexOf(r) >=0))
+    setSortedRestaurantList(newList);
+    setCuisines({});
+  }
+
+  function handleChange(e) {
+    if (e.target.checked) {
+      setCuisines(prevCuisines => ({
+        ...prevCuisines,
+        [e.target.value]: e.target.checked
+      }))
+    } else {
+      const copyObj = cuisines
+      delete copyObj[e.target.value];
+      setCuisines(copyObj);
+    }
+  }
+
   return (
     <div>
       <img src={'location_black_24dp.svg'} />
       <OrangeInput placeholder="Playa Vista" />
-      <img src={'sort_black_24dp.svg'} onClick={()=> setOpenModal(true)}/>
-      <div onClick={() => clickHandler({ name: 'Dannys', cuisine: 'Fast Food', hours: '9-5PM', id: 10 })}>
-        <RestaurantContainer name={'Dannys'} cuisine={'Fast Food'} hours={'9-5PM'}></RestaurantContainer>
-      </div>
+      <img src={'sort_black_24dp.svg'} onClick={() => setOpenModal(true)} />
+      {sortedRestaurantList.map(entry => {
+        return (
+          <div onClick={() => clickHandler(entry)} key={entry.restaurant_id} >
+            <RestaurantContainer name={entry.name} cuisine={entry.cuisines[0]} hours={entry.hours}></RestaurantContainer>
+          </div>
+        )
+      })}
       <div>
-         <Modal show={openModal} onClose={()=>setOpenModal(false)}>
-         <ModalContentMain>
-              <Background>
-                <h2>Filters</h2>
-                <UnderlineOrage>Distance</UnderlineOrage>
-                  <Form.Field>
-                    <Form.Control>
-                      <OrangeCheckBox>5 Miles</OrangeCheckBox>
-                    </Form.Control>
-                  </Form.Field>
-                <UnderlineOrage>Cuisines</UnderlineOrage>
-                TESTERER
-              </Background>
-         </ModalContentMain>
-         </Modal>
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <ModalContentMain>
+            <Background>
+              <h2>Filters</h2>
+              <UnderlineOrage>Distance</UnderlineOrage>
+              <Form.Field>
+                <Form.Control>
+                  <OrangeCheckBox defaultChecked>5 Miles</OrangeCheckBox>
+                </Form.Control>
+              </Form.Field>
+              <UnderlineOrage>Cuisines</UnderlineOrage>
+              <Form.Field >
+                <Form.Control >
+                  <OrangeCheckBox value={'American'} onChange={handleChange}>American</OrangeCheckBox>
+                  <OrangeCheckBox value={'Asian'} onChange={handleChange}>Asian</OrangeCheckBox>
+                  <OrangeCheckBox>Greek</OrangeCheckBox>
+                  <OrangeCheckBox>Italian</OrangeCheckBox>
+                  <OrangeCheckBox>Romanian</OrangeCheckBox>
+                  <OrangeCheckBox>Fusion</OrangeCheckBox>
+                  <OrangeButton onClick={filterHandler} >Apply</OrangeButton>
+                </Form.Control>
+              </Form.Field>
+            </Background>
+          </ModalContentMain>
+        </Modal>
       </div>
     </div>
   )

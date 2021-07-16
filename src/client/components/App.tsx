@@ -17,6 +17,7 @@ import Testing2 from './Testing2';
 import Testing4 from './Testing4';
 import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
+import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
 
 

@@ -38,15 +38,15 @@ export default function RestaurantContainer ({name, cuisine, hours, id}) {
   return(
     <MainConatiner>
       <div>
-        <Image src={'sleepyNick.png'}></Image>
+        <Image src={cuisine==='Asian' ? 'Asian_Thumb.png': 'American_Thumb.png'}></Image>
       </div>
       <InfoContainer>
         <Name>
           <h3>{name}</h3>
         </Name>
         <SubInfo>
-          <h4>{cuisine}</h4>
-          <h4>{hours}</h4>
+          <h5>{cuisine}</h5>
+          <h5>{hours}</h5>
         </SubInfo>
       </InfoContainer>
     </MainConatiner>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MenuItemContainer from './MenuItemContainer.jsx';
 import {OrangeButton} from '../styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const MainConatiner = styled.div`
   display: flex;
@@ -25,13 +26,12 @@ export default function MenuPage () {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [ menuList, setMenuList ] = React.useState([]);
-
   //axios call function for intial array of menu items and local storage
   async function getMenuList (restaurantid) {
     let localMenuData = localStorage.getItem(`MenuListData_${restaurantid}`);
     if (!localMenuData) {
-      const data = await axios.get()
-      localMenuData = data;
+      const rawData = await axios.get(`/restaurants/${restaurantid}/menu`)
+      localMenuData = rawData.data;
       localStorage.setItem(`MenuListData_${restaurantid}`, JSON.stringify(localMenuData))
     } else {
       localMenuData = JSON.parse(localMenuData);
@@ -40,12 +40,12 @@ export default function MenuPage () {
   }
 
   function clickHandler (entry) {
-    console.log(entry.name)
-    console.log(entry.price)
-    dispatch(allActions.UpdateItemName(entry.name));
-    dispatch(allActions.UpdateItemPrice(entry.price.toFixed(2)));
-    dispatch(allActions.UpdateItemDescription(entry.description));
-    dispatch(allActions.UpdateItemId(entry.id));
+    console.log(entry.menu_item_name)
+    console.log(entry.menu_item_pricing)
+    dispatch(allActions.UpdateItemName(entry.menu_item_name));
+    dispatch(allActions.UpdateItemPrice(entry.menu_item_pricing.toFixed(2)));
+    dispatch(allActions.UpdateItemDescription(entry.menu_item_description));
+    dispatch(allActions.UpdateItemId(entry.menu_item_id));
     history.push("/MenuItem");
 
   }
@@ -62,16 +62,20 @@ export default function MenuPage () {
     dispatch(allActions.UpdateItemQuantity(0));
     dispatch(allActions.UpdateTotalPrice(0));
     //Get Menu List
-    // getMenuList(currentItem.restaurantId)
+    getMenuList(currentItem.restaurantId)
   },[])
 
   return(
     <MainConatiner>
       <img src={'Dannys_bg.png'}/>
       <h2>{restaurantName}</h2>
-      <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
-        <MenuItemContainer  name={'Big Burger'} price={5} category={'entree'}></MenuItemContainer>
+      {menuList.map(entry=>{
+        return(
+      <div onClick={() => clickHandler(entry)} key={entry.menu_item_id}>
+        <MenuItemContainer  name={entry.menu_item_name} price={entry.menu_item_pricing} category={entry.menu_category}/>
       </div>
+        )
+      })}
       <CheckoutButton>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>
   )
