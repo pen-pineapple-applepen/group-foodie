@@ -41,7 +41,7 @@ function App() {
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
-            <Route exact path="/Friends/:group_id" component={FriendNameInputPage} />
+            <Route exact path="/Friends/:group_id/:restaurant_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Route exact path="/ShareOrder" component={OrderShare} />"
