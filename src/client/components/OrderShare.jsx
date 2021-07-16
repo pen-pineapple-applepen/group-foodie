@@ -156,13 +156,14 @@ const OrderShare = () => {
         <Line>
           <OrangeButton
             onClick={() => {
-            return setOpenModal('card');
+            setOpenModal('card');
             }}
           >
             {guestEmails.length === 1 ?
               guestEmails.length + ' Person Added' :
               guestEmails.length + ' People Added'}
           </OrangeButton>
+          <OrderShareModal openModal={openModal} setOpenModal={setOpenModal}/>
         </Line>
       </div>
       <div>

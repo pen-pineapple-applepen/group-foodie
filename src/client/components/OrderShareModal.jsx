@@ -1,41 +1,39 @@
-import React from 'react';
-import Modal from 'react-bootstrap/Modal';
-import ModalDialog from 'react-bootstrap/ModalDialog';
-import ModalHeader from 'react-bootstrap/ModalHeader';
-import ModalTitle from 'react-bootstrap/ModalTitle';
-import ModalBody from 'react-bootstrap/ModalBody';
-import ModalFooter from 'react-bootstrap/ModalFooter';
-import Button from 'react-bootstrap/Button';
 
-
+import React from 'react'
+import { Button, Block, Content, Image, Media, Modal } from 'react-bulma-components';
 
 function OrderShareModal(props) {
   return (
     <Modal
-      show={props.show}
-      onHide={props.onHide}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
+        show={props.openModal === 'card'}
+        onClose={() => {
+          props.setOpenModal();
+        }}
+      >
+      <Modal.Card>
+        <Modal.Card.Header showClose>
+          <Modal.Card.Title>Added Email(s)</Modal.Card.Title>
+        </Modal.Card.Header>
+        <Modal.Card.Body>
+          <Content>
+            <p>
+              <strong>John Smith</strong> <small>@johnsmith</small>{' '}
+              <small>31m</small>
+              <br />
+              If the children of the Modal is a card, the close button
+              will be on the Card Head instead than the top-right corner
+              You can also pass showClose = false to Card.Head to hide the
+              close button
+            </p>
+          </Content>
+        </Modal.Card.Body>
+        <Modal.Card.Footer renderAs={Button.Group} align="right" hasAddons>
+          <Button color="success">Like</Button>
+          <Button>Share</Button>
+        </Modal.Card.Footer>
+      </Modal.Card>
     </Modal>
-  );
+  )
 }
 
 export default OrderShareModal;
