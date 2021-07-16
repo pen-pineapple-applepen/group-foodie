@@ -68,7 +68,7 @@ export default function MenuPage () {
 
       <h2>Dannys</h2>
       <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
-        <MenuItemContainer  name={'Big Burger'} price={5}></MenuItemContainer>
+        <MenuItemContainer name={'Big Burger'} price={5}></MenuItemContainer>
       </div>
       <CheckoutButton>Checkout ${totalOrdersPrice}.00</CheckoutButton>
     </MainContainer>
