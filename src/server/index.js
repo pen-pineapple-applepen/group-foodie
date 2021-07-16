@@ -5,11 +5,20 @@ const port = 4000;
 const app = express();
 const history = require('connect-history-api-fallback');
 
+app.use(history({
+  rewrites: [
+    {
+      from: /^\/api\/.*$/,
+      to: function(context) {
+        return context.parsedUrl.path
+      }
+    }
+  ]
+}))
 app.use(express.json());
-app.use(history());
 app.use(express.static(path.join(__dirname, '../../public')));
+app.use('/api', router);
 
-app.use('/', router);
 
 app.listen(port, (err) => {
   if (err) {

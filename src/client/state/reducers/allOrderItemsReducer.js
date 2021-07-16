@@ -2,6 +2,7 @@ import { createReducer, createAction } from '@reduxjs/toolkit'
 
 export const addItemToOrders = createAction('Add_ItemToOrders');
 export const addToPriceTotal = createAction('Add_ToPriceTotal');
+export const resetAllOrders = createAction('Reset_AllOrders');
 
 const initialState= {
   orders:[],
@@ -15,6 +16,10 @@ export const allOrderItemsReducer = createReducer(initialState, (builder) => {
     })
     .addCase(addToPriceTotal, (state, action) => {
       state.ordersTotal += action.payload;
+    })
+    .addCase(resetAllOrders, (state, action) => {
+      state.orders = [];
+      state.ordersTotal = 0;
     })
 
 });

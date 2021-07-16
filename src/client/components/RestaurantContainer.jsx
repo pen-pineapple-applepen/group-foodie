@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 
@@ -17,7 +16,7 @@ const InfoContainer = styled.div`
   justify-content: left;
 `;
 
-const Image = styled.div`
+const Image = styled.img`
   background-color: #FF6C36;
   width: 154px;
   height: 117px;
@@ -34,20 +33,20 @@ const SubInfo = styled.div`
   padding: 10px 10px;
 `;
 
-export default function RestaurantContainer () {
+export default function RestaurantContainer ({name, cuisine, hours, id}) {
 
   return(
     <MainConatiner>
       <div>
-        <Image></Image>
+        <Image src={cuisine==='Asian' ? 'Asian_Thumb.png': 'American_Thumb.png'}></Image>
       </div>
       <InfoContainer>
         <Name>
-          <h3>Danny's</h3>
+          <h3>{name}</h3>
         </Name>
         <SubInfo>
-          <h4>Fast Food</h4>
-          <h4>2mi</h4>
+          <h5>{cuisine}</h5>
+          <h5>{hours}</h5>
         </SubInfo>
       </InfoContainer>
     </MainConatiner>

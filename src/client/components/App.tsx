@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
-import MainLoginPage from './loginSignUpPage/mainLoginPage';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -9,18 +8,20 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import mainLoginPage from './loginSignUpPage/mainLoginPage'
-import SignUpPage from './loginSignUpPage/SignUpPage'
+
+import mainLoginPage from './loginSignUpPage/mainLoginPage';
+import SignUpPage from './loginSignUpPage/SignUpPage';
 import FriendNameInputPage from './friendsView/FriendNameInputPage';
 import landingPage from './LandingPage/landingPage';
-
-import Testing from './Testing';
-import Testing2 from './Testing2';
-import Testing4 from './Testing4';
+import Profile from './Profile';
+import FriendsList from './FriendsList';
+import OrderHistory from './OrderHistory';
 import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
+import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
-
+import FriendMenuPage from './friendsView/FriendMenuPage';
+import OrderShare from './OrderShare.jsx';
 
 function App() {
 
@@ -32,11 +33,16 @@ function App() {
           <Switch>
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
+            <Route exact path="/Restaurants" component={RestaurantPage} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/friends" component={FriendsList} />
+            <Route exact path="/history" component={OrderHistory} />
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
-            <Route exact path="/Friends" component={FriendNameInputPage} />
+            <Route exact path="/Friends/:group_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
+            <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Redirect to="/" />
           </Switch>
         </div>
