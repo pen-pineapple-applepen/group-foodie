@@ -163,7 +163,7 @@ const OrderShare = () => {
               guestEmails.length + ' Person Added' :
               guestEmails.length + ' People Added'}
           </OrangeButton>
-          <OrderShareModal openModal={openModal} setOpenModal={setOpenModal}/>
+          <OrderShareModal openModal={openModal} setOpenModal={setOpenModal} guestEmails={guestEmails} setGuestEmails={setGuestEmails}/>
         </Line>
       </div>
       <div>

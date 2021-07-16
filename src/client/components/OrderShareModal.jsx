@@ -1,11 +1,28 @@
 
-import React from 'react'
-import { Button, Block, Content, Image, Media, Modal } from 'react-bulma-components';
+import React from 'react';
+import styled from 'styled-components';
+import { Button, Block, Content, Image, Media, Modal, Columns } from 'react-bulma-components';
+import {OrangeButton} from '../styles/shared.tsx';
+
+const emailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const emailContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 
 function OrderShareModal(props) {
   return (
     <Modal
         show={props.openModal === 'card'}
+        showClose={false}
         onClose={() => {
           props.setOpenModal();
         }}
@@ -16,20 +33,38 @@ function OrderShareModal(props) {
         </Modal.Card.Header>
         <Modal.Card.Body>
           <Content>
-            <p>
-              <strong>John Smith</strong> <small>@johnsmith</small>{' '}
-              <small>31m</small>
-              <br />
-              If the children of the Modal is a card, the close button
-              will be on the Card Head instead than the top-right corner
-              You can also pass showClose = false to Card.Head to hide the
-              close button
-            </p>
+            {props.guestEmails.length === 0 ?
+              <p>You have not added any guest emails!</p> :
+              <emailsContainer>
+                {props.guestEmails.map((email, index) => (
+                  <emailContainer>
+                    <div key={index}>
+                      {email}
+                    </div>
+                    <OrangeButton>
+                      Delete email
+                    </OrangeButton>
+                  </emailContainer>
+                ))}
+              </emailsContainer>
+            }
+             {/* <p>
+               <strong>John Smith</strong> <small>@johnsmith</small>{' '}
+               <small>31m</small>
+               <br />
+               If the children of the Modal is a card, the close button
+               will be on the Card Head instead than the top-right corner
+               You can also pass showClose = false to Card.Head to hide the
+               close button
+             </p> */}
           </Content>
         </Modal.Card.Body>
-        <Modal.Card.Footer renderAs={Button.Group} align="right" hasAddons>
-          <Button color="success">Like</Button>
-          <Button>Share</Button>
+        <Modal.Card.Footer renderAs={Button.Group} align="right">
+          <OrangeButton onClick={() => {
+          props.setOpenModal();
+          }}>
+            Close
+          </OrangeButton>
         </Modal.Card.Footer>
       </Modal.Card>
     </Modal>
