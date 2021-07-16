@@ -67,7 +67,7 @@ ALTER TABLE payment_info ADD FOREIGN KEY (user_id) REFERENCES users (id);
 INSERT INTO groups(due_date)VALUES(10/24/2021);
 -- INSERT INTO orders(user_id, food, quantity, price, date, food_id, group_id, restaurant_id)VALUES(5, 'PIZZA', 3, 3.50, '12/20/2020', 423, 1, 32);
 COPY users(id, first_name, last_name, email, username, password, guest)
-FROM '/Users/austinyeon/Desktop/group-foodie/src/server/db/seed/users.csv'
+FROM '../db/seed/users.csv'
 DELIMITER ','
 CSV HEADER;
 COPY friends_join_table(id, user_id, friend_id)
