@@ -15,6 +15,10 @@ const MainContainer = styled.div`
   align-items: center;
 `;
 
+const CurrentOrderPool = styled.div`
+
+`
+
 const CheckoutButton = styled(OrangeButton)`
   border-radius: 7px;
   width: 50%;
@@ -55,6 +59,12 @@ export default function MenuPage () {
     <MainContainer>
       <OrangeNavbar/>
       <HeaderImage src='/Dannys_bg.png'/>
+
+      <CurrentOrderPool>
+        <p>current orders</p>
+
+      </CurrentOrderPool>
+
       <h2>Dannys</h2>
       <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
         <MenuItemContainer  name={'Big Burger'} price={5}></MenuItemContainer>
