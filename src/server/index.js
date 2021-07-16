@@ -19,9 +19,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use('/api', router);
 
-
-app.use(history());
-
 app.listen(port, (err) => {
   if (err) {
     console.log('error listening on port: ', err);
