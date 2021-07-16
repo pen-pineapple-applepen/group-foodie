@@ -278,6 +278,20 @@ returns:
   }
 ]
 
+--------------------------------------
+get group data by group ID
+--------------------------------------
+endpoint: '/groups/:group_id'
+request type: GET
+
+returns:
+[
+  {
+      "id": 6,
+      "due_date": "12/20/2021 9:53pm" // keep in mind this is not how its always going to look like
+  }
+]
+
 //////////////////////////////////////////////////
 comments
 //////////////////////////////////////////////////

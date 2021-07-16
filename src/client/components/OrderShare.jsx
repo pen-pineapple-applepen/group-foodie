@@ -12,6 +12,7 @@ import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import OrderShareModal from "./OrderShareModal";
+import { useHistory } from 'react-router-dom'
 import axios from "axios";
 
 const ColoredLine = () => (
@@ -72,6 +73,8 @@ const OrderShare = () => {
   let [paymentData, setPaymentData] = useState([]);
   let [openModal, setOpenModal] = useState();
 
+  const history = useHistory();
+
   const isSelectedDateToday = new Date().getDate() === orderDate.getDate();
   let minTimeHour = new Date().getHours();
   if (!isSelectedDateToday) {
@@ -84,7 +87,7 @@ const OrderShare = () => {
   // [] needs to be the userID that you get from the redux state
 
   const fetchPaymentData = () => {
-    axios.get('/payments/2')
+    axios.get('/api/payments/2')
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];
@@ -197,7 +200,7 @@ const OrderShare = () => {
         }
       </div>
       <Line>
-        <OrangeButton>
+        <OrangeButton onClick={() => history.push('/Confirmation')}>
           Share Order
         </OrangeButton>
       </Line>
