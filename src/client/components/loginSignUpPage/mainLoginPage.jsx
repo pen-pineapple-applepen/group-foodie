@@ -22,7 +22,7 @@ export default function MainLoginPage() {
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
-    axios.get('/users/login', {params: {email: email, password: password}})
+    axios.get('/api/users/login', {params: {email: email, password: password}})
       .then (res => {
         if (res.data.hasCorrectCredentials === true) {
           dispatch(allActions.logIn(res.data.id));
