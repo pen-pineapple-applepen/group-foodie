@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { Button, Icon, Form } from 'react-bulma-components';
 import { useHistory } from 'react-router-dom'
-import { OrangeNavbar } from '../../styles/shared';
-import { OrangeButton } from '/src/client/styles/shared.tsx';
+import { OrangeNavbar, OrangeButton } from '../../styles/shared';
 import validate from './validationRules.js';
 import useForm from './formValidation.js';
 
@@ -27,7 +26,7 @@ export default function SignUpPage() {
   }
 
   const signUp = () => {
-    axios.post('/users/create', {
+    axios.post('/api/users/create', {
       first_name: values.firstName,
       last_name: values.lastName,
       email: values.email,
