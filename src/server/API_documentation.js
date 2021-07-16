@@ -58,7 +58,7 @@ returns: n/a
 Get all friends for 1 user
 --------------------------
 endpoint: '/users/:user_id/friends'
-request type: POST
+request type: GET
 returns:
 [
   {
