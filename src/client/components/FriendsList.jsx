@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
 import { useHistory } from 'react-router-dom';
+import FriendsListItem from './FriendsListItem';
+import axios from 'axios';
 
 const FriendsListDiv = styled.div`
   display: flex;
@@ -20,34 +22,25 @@ const List = styled.ul`
   flex-direction: column;
 `;
 
-const ListItem = styled.li`
-  display: flex;
-`;
-
-const ProfilePic = styled.span`
-  margin-right: 10px;
-`;
-
 const FriendsList = (props) => {
-  const currentUser = useAppSelector((state) => state.currentUser);
+  const userInfo = useAppSelector((state) => state.currentUser);
+  const [friends, setFriends] = useState([]);
+
+  const getFriends = async () => {
+    const res = await axios.get(`/users/${userInfo.id}/friends`);
+    setFriends(res.data);
+  };
+
+  useEffect(() => {
+    getFriends();
+  }, [userInfo]);
 
   return (
     <FriendsListDiv>
       <OrangeNavbar needBackArrow={true} onBackArrowClick={useHistory().goBack} />
       <Text>Your Friends</Text>
       <List>
-        <ListItem>
-          <ProfilePic>fake image</ProfilePic>
-          <span>friend 1</span>
-        </ListItem>
-        <ListItem>
-          <ProfilePic>fake image</ProfilePic>
-          <span>friend 2</span>
-        </ListItem>
-        <ListItem>
-          <ProfilePic>fake image</ProfilePic>
-          <span>friend 3</span>
-        </ListItem>
+        {friends.map((friend) => <FriendsListItem friend={friend} key={friend.id} />)}
       </List>
     </FriendsListDiv>
   );
