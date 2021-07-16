@@ -362,7 +362,7 @@ returns:
       "menu_item_id": 1,
       "menu_item_name": "Jalapeno Calamari Late Night",
       "menu_item_description": "",
-      "menu_item_price": 11,
+      "menu_item_pricing": 11,
       "menu_category": "entree"
   },
   {

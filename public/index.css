@@ -76,6 +76,12 @@ table {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
+	margin-top: 15px;
+}
+
+.caret_right {
+  height: 30px;
+  width: 30px;
 }
 
 .form-spacing-login {

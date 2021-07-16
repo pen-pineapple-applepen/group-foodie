@@ -24,6 +24,9 @@ interface minusButtonProps {
 interface backArrowProps {
   onClick?: () => void,
 }
+interface HeaderImageProps {
+  src: string,
+}
 
 // utility subcomponents to create larger components
 const SizedImage = styled(Image)`
@@ -76,6 +79,18 @@ const MinusButtonContainer = styled(Icon)`
   }
   color: #FF6C36;
 `
+const HeaderImageContainer = styled.div`
+  width: 100%;
+  padding-bottom: 150px;
+`
+const HeaderImageImg = styled.div<HeaderImageProps>`
+  background-image: url(${props => props.src});
+  position: absolute;
+  top: -50px;
+  width: 100vw;
+  height: 250px;
+
+`
 
 /////////////////////////
 /* exported components */
@@ -96,6 +111,7 @@ export const OrangeInput = styled.input`
     border-bottom: 1px solid #2e6bbb
   }
 `
+
 
 /////////////////////////////////////
 /* exported complete JSX components*/
@@ -145,6 +161,15 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
           </Navbar.Container>
         </Navbar.Menu>
       </OrangeNavbarContainer></>
+  )
+}
+
+// header image takes one prop 'src'
+export const HeaderImage: (props: HeaderImageProps) => JSX.Element = ({src}) => {
+  return (
+    <HeaderImageContainer>
+      <HeaderImageImg src={src}/>
+    </HeaderImageContainer>
   )
 }
 

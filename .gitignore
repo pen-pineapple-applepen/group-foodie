@@ -3,4 +3,5 @@ build
 public/bundle.js
 schema.sql
 src/server/db/index.js
-package-lock.json
+schema_scott.sql
+seed_scott.js

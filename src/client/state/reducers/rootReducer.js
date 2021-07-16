@@ -5,6 +5,8 @@ import { loginReducer } from './loginReducer';
 import { menuItemReducer } from './menuItemReducer';
 import { orderItemReducer } from './orderItemReducer';
 import { allOrderItemsReducer } from './allOrderItemsReducer';
+import { friendReducer } from './friendReducer';
+import { groupReducer } from './groupReducer';
 
 const rootReducer = combineReducers({
   names: namesReducer,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
   currentItemQuantityPrice: menuItemReducer,
   currentMenuItem: orderItemReducer,
   allOrderItems: allOrderItemsReducer,
+  friendName: friendReducer,
+  currentGroup: groupReducer,
 });
 
 export default rootReducer;
