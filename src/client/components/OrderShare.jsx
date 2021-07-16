@@ -70,6 +70,7 @@ const OrderShare = () => {
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   let [paymentData, setPaymentData] = useState([]);
+  let [modalShow, setModalShow] = useState(false);
 
   const isSelectedDateToday = new Date().getDate() === orderDate.getDate();
   let minTimeHour = new Date().getHours();
@@ -153,11 +154,12 @@ const OrderShare = () => {
           <ColoredLine />
         </Line>
         <Line>
-          <div onClick={handleModalClick}>
+          <div onClick={() => {setModalShow(true)}}>
             {guestEmails.length === 1 ?
               guestEmails.length + ' Person Added' :
               guestEmails.length + ' People Added'}
           </div>
+          <OrderShareModal show={modalShow} onHide={() => setModalShow(false)} guestEmails={guestEmails} />
         </Line>
       </div>
       <div>
@@ -198,5 +200,3 @@ const OrderShare = () => {
 }
 
 export default OrderShare;
-
-
