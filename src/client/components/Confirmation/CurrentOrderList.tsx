@@ -30,7 +30,6 @@ function CurrentOrderList({currentOrders}: CurrentOrderListProps): ReactElement 
   return (
     <OrderListContainer>
       {orderList}
-      {/* <CurrentOrderListItem/> */}
     </OrderListContainer>
   )
 }
