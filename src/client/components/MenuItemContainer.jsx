@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { Button } from 'react-bulma-components';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 
@@ -17,10 +16,10 @@ const InfoContainer = styled.div`
   justify-content: left;
 `;
 
-const Image = styled.div`
-  background-color: #FF6C36;
-  width: 154px;
+const Image = styled.img`
+  min-width: 154px;
   height: 117px;
+  position : relative;
 `;
 
 const Name = styled.div`
@@ -34,19 +33,16 @@ const SubInfo = styled.div`
   padding: 10px 10px;
 `;
 
-export default function MenuItemContainer ({name, price}) {
-
+export default function MenuItemContainer ({name, price, category}) {
   return(
     <MainConatiner>
-      <div>
-        <Image></Image>
-      </div>
+        {category==='entree' ? <Image src={'lunch_icon_24dp.svg'}/> : <Image src={'local_cafe_black_24dp.svg'}/>}
       <InfoContainer>
         <Name>
           <h3>{name}</h3>
         </Name>
         <SubInfo>
-          <h4>${price}.00</h4>
+          <h4>${price.toFixed(2)}</h4>
         </SubInfo>
       </InfoContainer>
     </MainConatiner>

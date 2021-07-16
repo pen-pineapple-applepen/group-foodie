@@ -5,6 +5,7 @@ export const UpdateItemId = createAction('Update_ItemId');
 export const UpdateItemQuantity = createAction('Update_ItemQuantity');
 export const UpdateTotalPrice = createAction('Update_TotalPrice');
 export const UpdateRestaurantId = createAction('Update_RestaurantId');
+export const setUsertId = createAction('Set_UserId');
 
 //Will need Username later?
 const initialState= {
@@ -32,6 +33,9 @@ export const orderItemReducer = createReducer(initialState, (builder) => {
     })
     .addCase(UpdateRestaurantId, (state, action) => {
       state.restaurantId = action.payload;
+    })
+    .addCase(setUsertId, (state, action) => {
+      state.userId = action.payload;
     })
 
 });

@@ -19,6 +19,7 @@ import FriendsList from './FriendsList';
 import OrderHistory from './OrderHistory';
 import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
+import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
@@ -33,6 +34,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
+            <Route exact path="/Restaurants" component={RestaurantPage} />    
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/friends" component={FriendsList} />
             <Route exact path="/history" component={OrderHistory} />

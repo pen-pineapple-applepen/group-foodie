@@ -5,6 +5,7 @@ import { loginReducer } from './loginReducer';
 import { menuItemReducer } from './menuItemReducer';
 import { orderItemReducer } from './orderItemReducer';
 import { allOrderItemsReducer } from './allOrderItemsReducer';
+import { restaurantReducer } from './restaurantReducer';
 import { friendReducer } from './friendReducer';
 import { groupReducer } from './groupReducer';
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   currentItemQuantityPrice: menuItemReducer,
   currentMenuItem: orderItemReducer,
   allOrderItems: allOrderItemsReducer,
+  currentRestaurant: restaurantReducer,
   friendName: friendReducer,
   currentGroup: groupReducer,
 });
