@@ -40,6 +40,7 @@ const TopContainer = styled.div`
 const ThankYouMessage = styled.h1`
   font-size: 36px;
   text-align: center;
+  padding-bottom: 10px;
 `
 
 
@@ -56,8 +57,9 @@ function Confirmation({}: ConfirmationProps): ReactElement {
           Thank you for starting a share order!
         </ThankYouMessage>
       </TopContainer>
-
+      <span>Time left to put in your order:</span>
       <CountDownTimer/>
+
       <CurrentOrderList
         currentOrders={currentOrders}
       />

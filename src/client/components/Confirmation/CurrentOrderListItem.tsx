@@ -41,7 +41,7 @@ const ListItemContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 50px;
+  padding-top: 15px;
 `
 const NameOrderContainer = styled.div`
   display: flex;

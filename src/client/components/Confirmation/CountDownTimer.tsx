@@ -4,11 +4,33 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { ReactElement } from 'react'
 import Countdown, { calcTimeDelta, formatTimeDelta } from 'react-countdown';
 import axios, { AxiosResponse } from 'axios';
+import styled from 'styled-components';
 
 
 interface CountDownTimerProps {
 
 }
+
+const TimerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const Timer = styled.span`
+  color: #929191;
+  padding-bottom: 8px;
+`
+const EditButton = styled.button`
+  background: none;
+	color: #5353db;
+  font-size: 10px;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+`
 
 function CountDownTimer({}: CountDownTimerProps): ReactElement {
   const [ dueDate, setDueDate ] = useState('')
@@ -19,7 +41,7 @@ function CountDownTimer({}: CountDownTimerProps): ReactElement {
       if (completed) {
         return <p>An order has been placed!</p>
       } else {
-        return <span>{days} days {hours} hours {minutes} minutes {seconds} seconds </span>
+        return <Timer>{days} days {hours} hours {minutes} minutes {seconds} seconds </Timer>
       }
   }
 
@@ -29,12 +51,13 @@ function CountDownTimer({}: CountDownTimerProps): ReactElement {
   }, [])
 
   return (
-    <div>
+    <TimerContainer>
       <Countdown
         date={Date.now() + 10000}
         renderer={countdownRenderer}
       />
-    </div>
+      <EditButton>edit</EditButton>
+    </TimerContainer>
   )
 }
 
