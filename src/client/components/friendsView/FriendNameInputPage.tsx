@@ -58,7 +58,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   }
 
   const handleClick = () => {
-    history.push(`/Menu/Friends/`)
+    history.push(`/Menu`)
   }
 
   useEffect(() => {

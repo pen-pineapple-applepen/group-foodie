@@ -34,7 +34,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
-            <Route exact path="/Restaurants" component={RestaurantPage} />    
+            <Route exact path="/Restaurants" component={RestaurantPage} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/friends" component={FriendsList} />
             <Route exact path="/history" component={OrderHistory} />
@@ -44,6 +44,7 @@ function App() {
             <Route exact path="/Friends/:group_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
+            <Route exact path="/ShareOrder" component={OrderShare} />"
             <Redirect to="/" />
           </Switch>
         </div>
