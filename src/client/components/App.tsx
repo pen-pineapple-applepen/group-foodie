@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
+import MainLoginPage from './loginSignUpPage/mainLoginPage';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -18,7 +19,7 @@ import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
 import ChatPage from './ChatPage';
 import FriendMenuPage from './friendsView/FriendMenuPage';
-
+import OrderShare from './OrderShare.jsx';
 
 function App() {
 
