@@ -1,5 +1,6 @@
 import { combineReducers } from "redux"
 import { namesReducer } from './namesReducer';
+import { currentUserReducer } from './currentUserReducer';
 import { loginReducer } from './loginReducer';
 import { menuItemReducer } from './menuItemReducer';
 import { orderItemReducer } from './orderItemReducer';
@@ -11,6 +12,7 @@ import { groupReducer } from './groupReducer';
 const rootReducer = combineReducers({
   names: namesReducer,
   loginDetails: loginReducer,
+  currentUser: currentUserReducer,
   currentItemQuantityPrice: menuItemReducer,
   currentMenuItem: orderItemReducer,
   allOrderItems: allOrderItemsReducer,

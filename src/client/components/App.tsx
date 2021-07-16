@@ -14,6 +14,9 @@ import mainLoginPage from './loginSignUpPage/mainLoginPage'
 import SignUpPage from './loginSignUpPage/SignUpPage'
 import FriendNameInputPage from './friendsView/FriendNameInputPage';
 import landingPage from './LandingPage/landingPage';
+import Profile from './Profile';
+import FriendsList from './FriendsList';
+import OrderHistory from './OrderHistory';
 import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
@@ -31,11 +34,14 @@ function App() {
           <Switch>
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
-            <Route exact path="/Restaurants" component={RestaurantPage} />
+            <Route exact path="/Restaurants" component={RestaurantPage} />    
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/friends" component={FriendsList} />
+            <Route exact path="/history" component={OrderHistory} />
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
-            <Route path="/Friends/:group_id" component={FriendNameInputPage} />
+            <Route exact path="/Friends/:group_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Redirect to="/" />
