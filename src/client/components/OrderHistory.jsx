@@ -40,7 +40,11 @@ const findStatus = (orderObj, dueDate) => {
 
 
 const OrderHistory = (props) => {
+  // get current user data
   const currentUser = useAppSelector((state) => state.currentUser);
+  // get all orders for that user
+  // get group using group_id from each order object
+  // get restaurant name using restaurant_id from each order object
 
   const [liveOrders, setLiveOrders] = useState([]);
   const [scheduledOrders, setScheduledOrders] = useState([]);
