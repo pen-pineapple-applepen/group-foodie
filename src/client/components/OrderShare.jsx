@@ -4,6 +4,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useHistory } from 'react-router-dom';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Button, Block, Modal } from 'react-bulma-components';
