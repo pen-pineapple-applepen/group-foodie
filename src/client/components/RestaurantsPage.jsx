@@ -4,7 +4,7 @@ import allActions from '../state/actions/allActions';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import RestaurantContainer from './RestaurantContainer.jsx';
-import { OrangeInput, OrangeButton } from '../styles/shared.tsx';
+import { OrangeInput, OrangeButton, OrangeNavbar } from '../styles/shared.tsx';
 import { Modal, Button, Form } from 'react-bulma-components';
 import axios from 'axios';
 
@@ -93,6 +93,7 @@ export default function RestaurantPage() {
 
   return (
     <div>
+      <OrangeNavbar/>
       <img src={'location_black_24dp.svg'} />
       <OrangeInput placeholder="Playa Vista" />
       <img src={'sort_black_24dp.svg'} onClick={() => setOpenModal(true)} />

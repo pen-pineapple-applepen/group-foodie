@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import MenuItemContainer from './MenuItemContainer.jsx';
-import {OrangeButton} from '../styles/shared.tsx';
+import {OrangeButton, OrangeNavbar, HeaderImage } from '../styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -45,7 +45,10 @@ export default function MenuPage () {
     dispatch(allActions.UpdateItemDescription(entry.menu_item_description));
     dispatch(allActions.UpdateItemId(entry.menu_item_id));
     history.push("/MenuItem");
+  }
 
+  function handleCheckout() {
+    history.push('/ShareOrder');
   }
 
   //Resets Current Selected Item
@@ -65,7 +68,9 @@ export default function MenuPage () {
 
   return(
     <MainConatiner>
-      <img src={'Dannys_bg.png'}/>
+      <OrangeNavbar/>
+      <HeaderImage src = '/Dannys_bg.png'/>
+      {/* <img src={'Dannys_bg.png'}/> */}
       <h2>{restaurantName}</h2>
       <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px"}}>
       {menuList.map(entry=>{
@@ -76,7 +81,7 @@ export default function MenuPage () {
         )
       })}
       </div>
-      <CheckoutButton>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
+      <CheckoutButton onClick={handleCheckout}>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>
   )
 }
