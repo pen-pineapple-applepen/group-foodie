@@ -1,4 +1,4 @@
-const db = require('./db/scott_index.js');
+const db = require('./db');
 const restaurants = require('./restaurants');
 const menus = require('./menus');
 

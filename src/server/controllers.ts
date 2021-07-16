@@ -1,4 +1,4 @@
-const db = require('./db/scott_index.js');
+const db = require('./db');
 const models = require('./models');
 
 // users
