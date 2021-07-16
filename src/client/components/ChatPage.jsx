@@ -1,56 +1,16 @@
 import * as React from 'react';
-import { useState, useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import styled from 'styled-components';
-import axios from 'axios';
+import ChatComments from './ChatComments.jsx';
 
 
 const Container = styled.div`
   display: flex;
+  background-image: url('BG_Wood.png');
 `;
 
-const orderDiv = () => {
-  return (
-    <div>
-      <div>
-        This is in orderDiv.
-
-      </div>
-    </div>
-  )
-};
-
-const chatDiv = () => {
-  return (
-    <div>
-      <div>
-        This is in chat div.
-      </div>
-    </div>
-  )
-};
-
-const getComments = () => {
-  // axios.get('/endpoint');
-  // using a map to iterate all users and comments
-
-  return (
-    <div>
-      <form>
-        <label>
-        Bob Smith
-        </label>
-        <br></br>
-        <label>
-        Comments here. The food is delicious!
-        </label>
-        <br></br>
-        <label>
-          More comments are coming...
-        </label>
-      </form>
-    </div>
-  )
+const imgStyle = {
+  height: "60px"
 }
 
 const postComment = () => {
@@ -64,19 +24,59 @@ const postComment = () => {
   )
 };
 
+
+const orderDiv = () => {
+
+  return(
+    <div className="orderName">
+      This is in orderDiv.
+      <div>
+        <p>Current Order</p>
+      </div>
+      <div>
+        <div>
+        {/* <img className="restaurantImg" src={incomingGroupInfoFromLiveConfirmationPage.image}></img> */}
+        <img className="restaurantImg" src={"Dannys_bg.png"} style={imgStyle}></img>
+
+        </div>
+        <div>
+          {/* <p>{incomingGroupInfoFromLiveConfirmationPage.restaurantName} Danny's</p>
+          <p>{incomingGroupInfoFromLiveConfirmationPage.date} DD/MM/YYYY</p>
+          <p>{incomingGroupInfoFromLiveConfirmationPage.numberOfUsers} People</p> */}
+          <p>Danny's</p>
+          <p>DD/MM/YYYY</p>
+          <p>3 People</p>
+        </div>
+
+      </div>
+
+    </div>
+  )
+};
+
+const chatDiv = () => {
+  return (
+    <div>
+      <ChatComments />
+    </div>
+  )
+};
+
+
 export default function ChatPage () {
 
-  useEffect(() => {
+  React.useEffect(() => {
     // waiting for further data loaded
+    // setComments(getComments(comments));
+
   }, [])
 
   return (
-    <Container>
-      <div>
+    <Container className="chatPage-background">
+      <div style={{margin: 'auto'}}>
         {orderDiv()}
         <hr></hr>
         {chatDiv()}
-        {getComments()}
         <hr></hr>
         {postComment()}
       </div>
