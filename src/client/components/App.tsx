@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import MainLoginPage from './loginSignUpPage/mainLoginPage';
-import SignUpPage from './loginSignUpPage/SignUpPage';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -31,14 +30,14 @@ function App() {
       <Router>
         <div className="RouterContainer">
           <Switch>
-            {/* <Route exact path="/" component={mainLoginPage} /> */}
+            <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
             <Route exact path="/Friends" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
-            <Redirect to="/ChatPage" />
+            <Redirect to="/" />
           </Switch>
         </div>
       </Router>
