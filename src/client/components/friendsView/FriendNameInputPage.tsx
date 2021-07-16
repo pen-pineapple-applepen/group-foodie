@@ -18,7 +18,7 @@ const ContainerDiv = styled.div`
 const NameInputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding-bottom: 80px;
 `
@@ -52,14 +52,14 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   }
 
   const handleClick = () => {
-    history.push('/Menu')
+    history.push('/Menu/Friends')
   }
 
   return (
     <ContainerDiv>
 
       <OrangeNavbar/>
-      <HeaderImage src='Dannys_bg.png'/>
+      <HeaderImage src='/Dannys_bg.png'/>
 
       <NameInputDiv>
         <EnterHeader>
