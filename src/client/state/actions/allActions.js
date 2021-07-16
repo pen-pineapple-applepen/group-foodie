@@ -1,3 +1,4 @@
+import { setCurrentUser } from '../reducers/currentUserReducer';
 import { addName, setNumber } from '../reducers/namesReducer';
 import { logIn, logOut } from '../reducers/loginReducer.js'
 import { addItem, subtractItem, UpdateItemPrice, UpdateItemDescription, resetItemQuantity } from '../reducers/menuItemReducer';
@@ -8,6 +9,8 @@ import { updateCurrentGroup } from '../reducers/groupReducer';
 
 const allActions = {
   addName,
+  // addEmail,
+  setCurrentUser,
   logIn,
   logOut,
   addItem,
