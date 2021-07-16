@@ -71,6 +71,7 @@ const OrderShare = () => {
   let [guestEmails, setGuestEmails] = useState([]);
   let [paymentData, setPaymentData] = useState([]);
   let [openModal, setOpenModal] = useState();
+  const userId = useAppSelector(state => state.loginDetails.userId);
 
   const isSelectedDateToday = new Date().getDate() === orderDate.getDate();
   let minTimeHour = new Date().getHours();
@@ -91,9 +92,11 @@ const OrderShare = () => {
         for (var i = 0; i < response.data.length; i++) {
           formattedCards.push({
             id: response.data[i].id,
-            card_number: String(response.data[i].card_number).slice(-4),
-            card_type: response.data[i].card_type
+            cardNumber: String(response.data[i].card_number).slice(-4),
+            cardType: response.data[i].card_type,
+            defaultPayment: false
           })
+          formattedCards[0].defaultPayment = true;
         }
         setPaymentData(formattedCards)
       }
@@ -115,6 +118,23 @@ const OrderShare = () => {
   const handleModalClick = () => {
     <OrderShareModal />
   }
+
+  // async function happensWhenShareOrderClick() {
+  //   const currentUserOrders = useAppSelector(state => state.allOrderItems.orders)
+  //   const bodyParams = { due_date: orderDate.toISOString() } // we need to chage date format
+  //   try {
+  //     const groupId = await axios.post(`/groups`, bodyParams)
+  //     const ordersTaggedWithGroupId = currentUserOrders.map(order => {
+  //       order.group_id = groupId;
+  //       return order;
+  //     })
+  //     ordersTaggedWithGroupId.forEach(order => {
+  //       axios.post(`/orders/${userId}/user`, order)
+  //     })
+  //   } catch (err) {
+  //     console.log('order no post!')
+  //   }
+  // }
 
   return (
     <MainContainer>
@@ -174,10 +194,10 @@ const OrderShare = () => {
           <Payment>
             <div>
               <span>
-                ***{String(paymentData[0].card_number)}
+                ***{String(paymentData[0].cardNumber)}
               </span>
               <span>
-                {paymentData[0].card_type}
+                {paymentData[0].cardType}
               </span>
             </div>
             <div>
