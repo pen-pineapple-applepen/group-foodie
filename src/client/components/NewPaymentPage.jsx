@@ -5,6 +5,8 @@ import {OrangeNavbar} from '../styles/shared.tsx';
 import {Button, Icon, Form} from 'react-bulma-components';
 import { useHistory } from 'react-router-dom';
 
+
+
 export default function NewPaymentPage () {
   const [newCCType, setNewCCType] = useState('');
   const [newCCNumber, setNewCCNumber] = useState('');
