@@ -6,7 +6,7 @@ import { string } from 'prop-types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const ContainerDiv = styled.div`
 const NameInputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding-bottom: 80px;
 `
@@ -40,9 +40,15 @@ interface FriendNameInputPageProps {
 
 }
 
+interface GroupIdParams {
+  group_id: string
+}
+
 export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.Element {
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const { group_id } = useParams<GroupIdParams>();
+  const { updateCurrentGroup } = allActions;
 
   const { addFriendName } = allActions;
 
@@ -52,14 +58,18 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   }
 
   const handleClick = () => {
-    history.push('/Menu')
+    history.push(`/Menu/Friends/`)
   }
+
+  useEffect(() => {
+    dispatch(updateCurrentGroup(Number(group_id)));
+  }, [])
 
   return (
     <ContainerDiv>
 
       <OrangeNavbar/>
-      <HeaderImage src='Dannys_bg.png'/>
+      <HeaderImage src='/Dannys_bg.png'/>
 
       <NameInputDiv>
         <EnterHeader>

@@ -33,6 +33,9 @@ const SizedImage = styled(Image)`
 `
 const OrangeNavbarContainer = styled(Navbar)`
   background-color: #FF6C36;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 60px;
   border-radius: 0 0 22px 22px;
 `
@@ -78,6 +81,7 @@ const MinusButtonContainer = styled(Icon)`
 `
 const HeaderImageContainer = styled.div`
   width: 100%;
+  padding-bottom: 150px;
 `
 const HeaderImageImg = styled.div<HeaderImageProps>`
   background-image: url(${props => props.src});
@@ -85,7 +89,7 @@ const HeaderImageImg = styled.div<HeaderImageProps>`
   top: -50px;
   width: 100vw;
   height: 250px;
-  padding-bottom: 200px;
+
 `
 
 /////////////////////////
