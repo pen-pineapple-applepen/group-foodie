@@ -41,7 +41,7 @@ export default function RestaurantPage() {
   async function getRestaurantList(zipcode) {
     let localrestaurantData = localStorage.getItem(`restaurantListData_${zipcode}`);
     if (!localrestaurantData) {
-      const rawData = await axios.get(`/restaurants/${zipcode}`)
+      const rawData = await axios.get(`/api/restaurants/${zipcode}`)
       localrestaurantData = rawData.data;
       localStorage.setItem(`restaurantListData_${zipcode}`, JSON.stringify(localrestaurantData))
     } else {
@@ -77,7 +77,7 @@ export default function RestaurantPage() {
     setSortedRestaurantList(newList);
     setCuisines({});
   }
-
+  //keeps in check the checked values and creates object for filterHandler to use
   function handleChange(e) {
     if (e.target.checked) {
       setCuisines(prevCuisines => ({

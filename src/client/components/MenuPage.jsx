@@ -30,7 +30,7 @@ export default function MenuPage () {
   async function getMenuList (restaurantid) {
     let localMenuData = localStorage.getItem(`MenuListData_${restaurantid}`);
     if (!localMenuData) {
-      const rawData = await axios.get(`/restaurants/${restaurantid}/menu`)
+      const rawData = await axios.get(`/api/restaurants/${restaurantid}/menu`)
       localMenuData = rawData.data;
       localStorage.setItem(`MenuListData_${restaurantid}`, JSON.stringify(localMenuData))
     } else {

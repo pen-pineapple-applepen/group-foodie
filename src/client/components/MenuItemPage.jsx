@@ -32,7 +32,6 @@ export default function MenuItemPage () {
     } else {
       dispatch(allActions.addToPriceTotal(totalPrice));//
       dispatch(allActions.addItemToOrders(currentOrder));
-      //add user id?
       history.push("/Menu");
     }
   }
