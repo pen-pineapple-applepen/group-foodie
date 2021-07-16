@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import styled from 'styled-components';
 import axios from 'axios';
+import ChatComments from './chatComments.jsx';
 
 
 const Container = styled.div`
@@ -162,7 +163,7 @@ export default function ChatPage () {
           {orderDiv()}
           <hr></hr>
           {chatDiv()}
-          {/* {getComments(comments)} */}
+          <ChatComments />
           <hr></hr>
           {postComment()}
         </div>
