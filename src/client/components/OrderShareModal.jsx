@@ -32,21 +32,20 @@ function OrderShareModal(props) {
           <Modal.Card.Title>Added Email(s)</Modal.Card.Title>
         </Modal.Card.Header>
         <Modal.Card.Body>
-          <Content>
             {props.guestEmails.length === 0 ?
               <p>You have not added any guest emails!</p> :
-              <emailsContainer>
+              <div>
                 {props.guestEmails.map((email, index) => (
-                  <emailContainer>
-                    <div key={index}>
+                  <Columns key={index} isMobile={true}>
+                    <Columns.Column>
                       {email}
-                    </div>
-                    <OrangeButton>
-                      Delete email
-                    </OrangeButton>
-                  </emailContainer>
+                    </Columns.Column>
+                    <Columns.Column>
+                        {email}
+                    </Columns.Column>
+                  </Columns>
                 ))}
-              </emailsContainer>
+              </div>
             }
              {/* <p>
                <strong>John Smith</strong> <small>@johnsmith</small>{' '}
@@ -57,7 +56,6 @@ function OrderShareModal(props) {
                You can also pass showClose = false to Card.Head to hide the
                close button
              </p> */}
-          </Content>
         </Modal.Card.Body>
         <Modal.Card.Footer renderAs={Button.Group} align="right">
           <OrangeButton onClick={() => {
