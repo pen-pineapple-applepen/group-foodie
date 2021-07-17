@@ -106,6 +106,8 @@ const SideBarContainer = styled(motion.div)`
   border-bottom-right-radius: 25px;
 `
 const SideBarOptions = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
   padding-top: 30px;
   padding-right: 40px;
   font-size: 20px;
@@ -117,6 +119,10 @@ const UserName = styled.h3`
   margin-bottom: 30px;
   border-bottom: 6px solid #FF6C36;
 `
+
+const Options = styled(Link)`
+  color: #4a4a4a;
+`;
 
 
 const SideBarMenu = ({sideBarOpen}) => {
@@ -133,8 +139,8 @@ const SideBarMenu = ({sideBarOpen}) => {
           >
             <SideBarOptions>
               <UserName>Erik Oh</UserName>
-              <p>Account</p>
-              <p>Your Orders</p>
+              <Options to="/profile">Account</Options>
+              <Options to="/history">Your Orders</Options>
               <p>Log Out</p>
             </SideBarOptions>
           </SideBarContainer>
