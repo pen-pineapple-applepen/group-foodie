@@ -135,6 +135,7 @@ async function getDueDateByGroupId(req, res) {
     res.status(404).send(err);
   }
 }
+
 async function createGroup(req, res) {
   const { due_date } = req.body;
   try {

@@ -51,7 +51,6 @@ const chatDiv = () => {
   )
 };
 
-
 export default function ChatPage () {
 
   React.useEffect(() => {
@@ -61,10 +60,10 @@ export default function ChatPage () {
   }, [])
 
   return (
-    <Container className="chatPage-background">
+    <Container className="chatPage-background" style={{height: "800px"}}>
       <div style={{margin: 'auto', marginTop: "5px"}}>
         < OrangeNavbar />
-        <div >
+        <div style={{width: "200px", height: "400px"}}>
           {orderDiv()}
           <hr></hr>
           {chatDiv()}
