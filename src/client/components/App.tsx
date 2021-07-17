@@ -15,12 +15,12 @@ import landingPage from './LandingPage/landingPage';
 import Profile from './Profile';
 import FriendsList from './FriendsList';
 import OrderHistory from './OrderHistory';
-import MenuPage from './MenuPage';
-import MenuItemPage from './MenuItemPage';
+import MenuPage from './Menu/MenuPage';
+import MenuItemPage from './Menu/MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
 import NewPaymentPage from './NewPaymentPage';
-import Confirmation from './Confirmation/Confirmation';
+import Confirmation from './Confirmation/ConfirmationPage';
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
 
