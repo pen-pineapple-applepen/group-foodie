@@ -68,15 +68,18 @@ const MainContainer = styled.div`
   align-items: left;
 `;
 
-const OrderShare = () => {
+const OrderShare = (props) => {
   const [orderDate, setOrderDate] = useState(new Date());
-  const currentUserOrders = useAppSelector(state => state.currentPayments.orders);
+  const currentUserOrders = useAppSelector(state => state.allOrderItems.orders);
+  const selectedPaymentIndex = useAppSelector(state => state.currentPayments.selectedPaymentIndex);
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
   const dispatch = useAppDispatch();
   let [openModal, setOpenModal] = useState();
   const userId = useAppSelector(state => state.loginDetails.userId);
+  let [selectedPaymentId, makeSelectedPaymentId] = useState(0);
+  console.log('props', props);
 
   const history = useHistory();
 
@@ -104,7 +107,7 @@ const OrderShare = () => {
             selected: false
           })
         }
-        formattedCards[0].selected = true;
+        formattedCards[selectedPaymentIndex].selected = true;
         dispatch(allActions.createPaymentsList(formattedCards));
       }
     })

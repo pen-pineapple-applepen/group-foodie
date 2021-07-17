@@ -59,6 +59,8 @@ const PaymentOptions = (props) => {
     dispatch(allActions.changeSelectedPayment(Number(event.target.id)));
   }
 
+  const history = useHistory();
+
   return (
     <MainContainer>
       <Heading size={3}>
@@ -83,7 +85,7 @@ const PaymentOptions = (props) => {
       <Heading size={5}>
         Add Payment Method
       </Heading>
-      <CheckoutButton>
+      <CheckoutButton onClick={() => history.goBack('/ShareOrder')}>
         Confirm Payment
       </CheckoutButton>
     </MainContainer>
