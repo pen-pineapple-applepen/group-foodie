@@ -8,6 +8,7 @@ import { OrangeInput, OrangeButton, OrangeNavbar } from '../styles/shared.tsx';
 import { Modal, Button, Form } from 'react-bulma-components';
 import axios from 'axios';
 import Checkbox from "react-custom-checkbox";
+import * as Icon from "react-icons/fi";
 
 const Background = styled.div`
   background-color:white;
@@ -156,9 +157,9 @@ export default function RestaurantPage() {
                           display: "flex",
                           flex: 1,
                           backgroundColor: "#FF6C36",
-                          alignSelf: "stretch",
+                          alignSelf: "center",
                         }}
-                      ></div>
+                      ><Icon.FiCheck color="white" size={20} /></div>
                     }
                     checked={true}
                     borderRadius={10}
@@ -177,9 +178,11 @@ export default function RestaurantPage() {
                       display: "flex",
                       flex: 1,
                       backgroundColor: "#FF6C36",
-                      alignSelf: "stretch",
+                      alignSelf: "center",
                     }}
-                  ></div>
+                  >
+                    <Icon.FiCheck color="white" size={20} />
+                  </div>
                 }
                 borderRadius={10}
                 style={{ overflow: "hidden" }}
@@ -194,11 +197,12 @@ export default function RestaurantPage() {
                       display: "flex",
                       flex: 1,
                       backgroundColor: "#FF6C36",
-                      alignSelf: "stretch",
+                      alignSelf: "center",
                     }}
-                  ></div>
+                  ><Icon.FiCheck color="white" size={20} /></div>
                 }
                 borderRadius={10}
+                style={{ overflow: "hidden" }}
                 size={20}
                 label="American" onChange={handleChange2}></Checkbox>
             </Modal.Card.Body>
