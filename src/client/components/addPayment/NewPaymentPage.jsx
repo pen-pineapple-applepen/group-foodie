@@ -55,6 +55,7 @@ export default function NewPaymentPage() {
     }}
       .then(res => {
         console.log('successfully added payment!');
+        history.goBack();
       })
       .catch(err => {
         console.log(err);

@@ -82,7 +82,7 @@ const PaymentOptions = (props) => {
         )
       )}
       </PaymentsContainer>
-      <Heading size={5}>
+      <Heading size={5} onClick={() => history.push('/NewPaymentPage')}>
         Add Payment Method
       </Heading>
       <CheckoutButton onClick={() => history.goBack('/ShareOrder')}>
