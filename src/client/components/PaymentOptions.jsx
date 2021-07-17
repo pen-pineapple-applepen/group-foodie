@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useHistory } from 'react-router-dom';
+import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Heading } from 'react-bulma-components';
 import {OrangeButton} from '../styles/shared.tsx';
@@ -54,8 +56,7 @@ const PaymentOptions = (props) => {
   const dispatch = useAppDispatch();
 
   const handlePaymentClick = (event) => {
-
-
+    dispatch(allActions.changeSelectedPayment(Number(event.target.id)));
   }
 
   return (
@@ -68,13 +69,13 @@ const PaymentOptions = (props) => {
       </Heading>
       <PaymentsContainer>
       {currentPayments.map((payment, index) => payment.selected === true ? (
-        <PaymentContainer key={index}>
-          <SelectedPayment>{payment.cardNumber}</SelectedPayment>
-          <SelectedCard>{payment.cardType}</SelectedCard>
+        <PaymentContainer key={index} id={payment.id} onClick={handlePaymentClick}>
+          <SelectedPayment id={payment.id}>{payment.cardNumber}</SelectedPayment>
+          <SelectedCard id={payment.id}>{payment.cardType}</SelectedCard>
         </PaymentContainer> ) : (
-          <PaymentContainer key={index}>
-            <div>{payment.cardNumber}</div>
-            <Card>{payment.cardType}</Card>
+          <PaymentContainer key={index} id={payment.id} onClick={handlePaymentClick}>
+            <div id={payment.id} >{payment.cardNumber}</div>
+            <Card id={payment.id}>{payment.cardType}</Card>
           </PaymentContainer>
         )
       )}
