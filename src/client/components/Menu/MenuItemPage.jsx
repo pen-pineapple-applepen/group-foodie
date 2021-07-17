@@ -11,6 +11,7 @@ const MainConatiner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 15%
 `;
 
 const CheckoutButton = styled(OrangeButton)`
