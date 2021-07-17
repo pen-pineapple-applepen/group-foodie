@@ -19,6 +19,11 @@ const commentDivStyle = {
   margin: "2px"
 }
 
+const PostInput = styled(OrangeInput)`
+  margin-top: 15px;
+  padding: 2px;
+`;
+
 
 const displayMultiComments = (comments) => {
   return(
@@ -86,14 +91,14 @@ export default function ChatComments (props) {
 
 
   return(
-    <div className="chatComments" style={divStyle}>
-      <form onSubmit={(e) => (e.preventDefault(), handlePost(currentUserId, currentGroupId ,chat))}>
+    <div className="chatComments" >
+      <form style={divStyle}>
         {displayMultiComments(comments)}
-        <input type="text" placeholder="Comment here" onChange={e => {setChat(e.target.value)}}>
-        </input>
-        <br></br>
-        <OrangeButton type="submit">Post</OrangeButton>
       </form>
+      <PostInput type="text" placeholder="Comment here" onChange={e => {setChat(e.target.value)}}>
+        </PostInput>
+        <br></br>
+      <OrangeButton type="submit" onClick={(e) => (e.preventDefault(), handlePost(currentUserId, currentGroupId ,chat))}>Post</OrangeButton>
     </div>
   )
 };

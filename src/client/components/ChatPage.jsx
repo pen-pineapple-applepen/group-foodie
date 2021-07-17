@@ -63,7 +63,7 @@ export default function ChatPage () {
     <Container className="chatPage-background" style={{height: "800px"}}>
       <div style={{margin: 'auto', marginTop: "5px"}}>
         < OrangeNavbar />
-        <div style={{width: "200px", height: "400px"}}>
+        <div style={{width: "250px", height: "400px"}}>
           {orderDiv()}
           <hr></hr>
           {chatDiv()}
