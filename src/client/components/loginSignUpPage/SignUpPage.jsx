@@ -59,7 +59,7 @@ export default function SignUpPage() {
               placeholder="First Name"
               onChange={handleChange}
             />
-            {errors.email && (
+            {errors.firstName && (
               <Form.Help className="help is-danger">{errors.firstName}</Form.Help>
             )}
           </Form.Control>
@@ -70,7 +70,7 @@ export default function SignUpPage() {
               className={`input ${errors.lastName && "is-danger"}`}
               placeholder="Last Name"
               onChange={handleChange} />
-            {errors.email && (
+            {errors.lastName && (
               <Form.Help className="help is-danger">{errors.lastName}</Form.Help>
             )}
           </Form.Control>
@@ -111,7 +111,7 @@ export default function SignUpPage() {
             <Icon align="left" size="medium">
               <i className="fas fa-key" />
             </Icon>
-            {errors.email && (
+            {errors.password && (
               <Form.Help className="help is-danger">{errors.password}</Form.Help>
             )}
           </Form.Control>

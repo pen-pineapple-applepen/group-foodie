@@ -19,7 +19,7 @@ import MenuPage from './Menu/MenuPage';
 import MenuItemPage from './Menu/MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
-import NewPaymentPage from './NewPaymentPage';
+import NewPaymentPage from './addPayment/NewPaymentPage';
 import PaymentOptions from './PaymentOptions';
 import Confirmation from './Confirmation/ConfirmationPage';
 import FriendMenuPage from './friendsView/FriendMenuPage';
@@ -57,7 +57,6 @@ function App() {
             <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
             <Redirect to="/" />
           </Switch>
-          {/* <NewPaymentPage /> */}
         </div>
       </Router>
     </div>
