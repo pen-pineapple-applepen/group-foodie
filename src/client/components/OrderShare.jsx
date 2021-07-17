@@ -104,7 +104,6 @@ const OrderShare = () => {
             cardType: response.data[i].card_type
           })
         }
-        console.log(formattedCards);
         dispatch(allActions.createPaymentsList(formattedCards));
         // dispatch(allActions.addSelectedPayment(formattedCards[0]));
       }
