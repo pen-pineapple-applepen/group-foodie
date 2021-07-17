@@ -10,7 +10,7 @@ import { friendReducer } from './friendReducer';
 import { groupReducer } from './groupReducer';
 import { paymentsReducer } from './paymentsReducer';
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   names: namesReducer,
   loginDetails: loginReducer,
   currentUser: currentUserReducer,
@@ -23,12 +23,5 @@ const appReducer = combineReducers({
   currentPayments: paymentsReducer
 });
 
-const rootReducer = (state, action) => {
-  if (action.type === 'LOG_OUT') {
-    return appReducer(undefined,action);
-  }
-  return appReducer(state,action);
-}
-
-export default appReducer;
-export type RootState = ReturnType<typeof appReducer>
+export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>
