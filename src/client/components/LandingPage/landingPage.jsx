@@ -42,7 +42,7 @@ const LandingPage = () => {
         <StyledGreeting>
           Welcome, {userInfo.first_name} {userInfo.last_name}!
         </StyledGreeting>
-        <StyledButton onClick={() => history.push("/Restaurants")}>
+        <StyledButton onClick={handleCreateOrder}>
           Create Order
         </StyledButton>
       </StyledContainer>

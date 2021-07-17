@@ -7,6 +7,7 @@ import { addItemToOrders, addToPriceTotal, resetAllOrders } from '../reducers/al
 import { updateCurrentRestaurantId, updateCurrentRestaurantName } from '../reducers/restaurantReducer';
 import { addFriendName } from '../reducers/friendReducer'
 import { updateCurrentGroup } from '../reducers/groupReducer';
+import { createPaymentsList, addSelectedPayment} from '../reducers/paymentsReducer';
 
 const allActions = {
   addName,
@@ -33,7 +34,12 @@ const allActions = {
   setUserId,
   updateCurrentGroup,
   setGroupId,
+<<<<<<< HEAD
   setCurrentUserId,
+=======
+  createPaymentsList,
+  addSelectedPayment
+>>>>>>> ef7554a227bf98a6f3bb8513868954688a74e2f6
 }
 
 export default allActions;

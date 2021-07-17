@@ -63,7 +63,7 @@ const getOrdersByUserId = async (user_id) => {
 }
 
 const addOrder = async (
-  user_id, food, quantity, price, date, food_id, group_id, restaurant_id
+  user_id, food, quantity, price, date, food_id, group_id, restaurant_id, live
 ) => {
   const insertedId = await db('orders')
     .insert({
@@ -75,6 +75,7 @@ const addOrder = async (
       food_id,
       group_id,
       restaurant_id,
+      live
     }, 'id')
     return insertedId;
 }
@@ -110,6 +111,9 @@ const getDueDateByGroupId = async (group_id) => {
     })
     return dueDate;
 }
+
+// `insert into times (time) values (to_timestamp(${Date.now()} / 1000.0))`
+
 const createGroup = async (due_date) => {
   const idDate = await db('groups')
     .insert({

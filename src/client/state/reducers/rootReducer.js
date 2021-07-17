@@ -8,6 +8,7 @@ import { allOrderItemsReducer } from './allOrderItemsReducer';
 import { restaurantReducer } from './restaurantReducer';
 import { friendReducer } from './friendReducer';
 import { groupReducer } from './groupReducer';
+import { paymentsReducer } from './paymentsReducer';
 
 const rootReducer = combineReducers({
   names: namesReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   currentRestaurant: restaurantReducer,
   friendName: friendReducer,
   currentGroup: groupReducer,
+  currentPayments: paymentsReducer
 });
 
 export default rootReducer;
