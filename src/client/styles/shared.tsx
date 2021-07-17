@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useHistory, Link } from "react-router-dom";
+import { useAppSelector } from '../state/hooks';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // interfaces
@@ -13,6 +14,7 @@ interface profileImageProps {
 interface orangeNavbarProps {
   needBackArrow?: boolean,
   onBackArrowClick?: () => void,
+  hasBurger?: boolean,
 }
 interface plusButtonProps {
   onClick?: () => void,
@@ -32,33 +34,37 @@ interface HeaderImageProps {
 // utility subcomponents to create larger components
 const SizedImage = styled(Image)`
 `
-const OrangeNavbarContainer = styled(Navbar)`
-  background-color: #FF6C36;
-  border-radius: 0 0 22px 22px;
-  z-index: -11;
-
-`
 // const OrangeNavbarContainer = styled(Navbar)`
 //   background-color: #FF6C36;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 60px;
 //   border-radius: 0 0 22px 22px;
+//   z-index: -11;
 // `
+
+const OrangeNavbarContainer = styled(Navbar)`
+  background-color: #FF6C36;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  border-radius: 0 0 22px 22px;
+`
 const NavbarBrand = styled(Navbar.Brand)`
   display: flex;
   justify-content: center;
+  align-items: center;
 `
 const NavbarItem = styled(Navbar.Item)`
   display: flex;
 `
 const NavbarBurger = styled(Navbar.Burger)`
+  position: absolute;
+  right: 2px;
   padding-left: 120px;
   color: white;
 `
 const BackArrowContainer = styled(Icon)`
-  padding-right: 65px;
+  position: absolute;
+  left: 38px;
 `
 const GroupFoodieLogo = styled.p`
   &:hover {
@@ -126,6 +132,7 @@ const Options = styled(Link)`
 
 
 const SideBarMenu = ({sideBarOpen}) => {
+  const userName = useAppSelector(state => state.currentUser.first_name);
 
   return (
     <AnimatePresence>
@@ -138,7 +145,7 @@ const SideBarMenu = ({sideBarOpen}) => {
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
           >
             <SideBarOptions>
-              <UserName>Erik Oh</UserName>
+              <UserName>{userName || ''}</UserName>
               <Options to="/profile">Account</Options>
               <Options to="/history">Your Orders</Options>
               <p>Log Out</p>
@@ -178,7 +185,11 @@ export const OrangeInput = styled.input`
 
 // navbar takes 2 props 'needBackArrow' that takes a boolean for if it should have a back arrow or not
 // and 'onBackArrowclick' which takes a callback for when back arrow is clicked
-export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBackArrow, onBackArrowClick }) => {
+export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({
+  needBackArrow,
+  onBackArrowClick,
+  hasBurger = true
+}) => {
   const [active, setActive] = useState(false);
   const [ sideBarOpen, setSideBarOpen ] = useState(false);
 
@@ -193,16 +204,19 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
       <SideBarMenu sideBarOpen={sideBarOpen}/>
       <OrangeNavbarContainer className="is-fixed-top" active={active}>
         <NavbarBrand>
-          <NavbarItem>
-            {needBackArrow ? <BackArrow onClick={onBackArrowClick} /> : <BackArrowContainer />}
-          </NavbarItem>
+          {needBackArrow &&
+             <BackArrow onClick={onBackArrowClick} />
+          }
           <NavbarItem>
             <GroupFoodieLogo>
               Group Foodie
             </GroupFoodieLogo>
           </NavbarItem>
-          <NavbarBurger
-            onClick={() => setSideBarOpen(prev => !prev)} />
+
+          {hasBurger && <NavbarBurger
+            onClick={() => setSideBarOpen(prev => !prev)}
+          />}
+
         </NavbarBrand>
         <Navbar.Menu>
           <Navbar.Container>
