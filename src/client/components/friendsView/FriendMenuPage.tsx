@@ -48,7 +48,7 @@ export default function FriendMenuPage () {
   }
 
   function handleCheckout() {
-    history.push('/Confirmation');
+    history.push('/Friends/Confirmation/End');
   }
 
   //Resets Current Selected Item

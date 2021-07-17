@@ -38,7 +38,7 @@ function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
   const isLoggedIn = useAppSelector(state => state.loginDetails.loggedIn)
 
   const countdownRenderer = () => {
-    const { days, hours, minutes, seconds, completed } = calcTimeDelta("2021-07-17T00:07:26") // needs to be updated with dynamic 'dueDate' state
+    const { days, hours, minutes, seconds, completed } = calcTimeDelta("2021-07-19T00:07:26") // needs to be updated with dynamic 'dueDate' state
       if (completed) {
         return <p>An order has been placed!</p>
       } else {
@@ -55,7 +55,7 @@ function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
   return (
     <TimerContainer>
       <Countdown
-        date={"2021-07-17T00:07:26"}
+        date={"2021-07-19T00:07:26"}
         renderer={countdownRenderer}
       />
       {isLoggedIn && <EditButton>edit</EditButton>}
