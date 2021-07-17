@@ -130,13 +130,14 @@ const OrderShare = () => {
     const bodyParams = { due_date: orderDate.toISOString().slice(0, -5) }
     try {
       const groupId = await axios.post(`/api/groups`, bodyParams)
+      dispatch(allActions.updateCurrentGroup(groupId.data[0].id))
       let currentUserOrdersCopy = [];
       for (var i = 0; i < currentUserOrders.length; i++) {
         currentUserOrdersCopy.push({...currentUserOrders[i]})
       }
       const ordersTaggedWithGroupId = currentUserOrdersCopy.map(order => {
-        order.group_id = groupId.id;
-        order.date = groupId.due_date;
+        order.group_id = groupId.data[0].id;
+        order.date = groupId.data[0].due_date;
         return order;
       })
       for(let order of ordersTaggedWithGroupId) {

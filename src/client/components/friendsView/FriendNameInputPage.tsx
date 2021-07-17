@@ -17,6 +17,8 @@ const ContainerDiv = styled.div`
   height: 100vh;
 `
 const NameInputDiv = styled.div`
+  position: relative;
+  bottom: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,8 +52,9 @@ interface GroupIdParams {
 export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.Element {
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const friendName = useAppSelector(state => state.friendName)
   const { group_id, restaurant_id } = useParams<GroupIdParams>();
-  const { addFriendName, updateCurrentGroup, updateCurrentRestaurantId } = allActions;
+  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup } = allActions;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,13 +62,27 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
     dispatch(addFriendName(text));
   }
 
-  const handleClick = () => {
-    history.push(`/Menu`)
+  const handleClick = async () => {
+    const userIdData = await axios.post('/api/users/create', {
+      first_name: friendName,
+      last_name: '',
+      email: '',
+      username: 'GUEST',
+      password: '',
+      guest: true,
+    })
+    const userId = userIdData.data[0]
+    console.log('user ID', userId);
+    dispatch(setUserId(userId))
+    dispatch(setCurrentUserId(userId))
+    history.push(`/Friends/Confirmation`)
   }
 
   useEffect(() => {
+    dispatch(setGroupId(Number(group_id)));
     dispatch(updateCurrentGroup(Number(group_id)));
-    dispatch(updateCurrentRestaurantId(Number(restaurant_id)));
+    dispatch(UpdateRestaurantId(Number(restaurant_id)));
+
   }, [])
 
   return (

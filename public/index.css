@@ -16,6 +16,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
+	font-family: Helvetica, sans-serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -53,10 +54,13 @@ table {
 	background-repeat: no-repeat;
 	background-size: cover;
 	overflow: hidden;
+	top: -5px;
 }
 
 .login-signup-page-container {
 	margin: 20%;
+	top: 20%;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -67,7 +71,7 @@ table {
 .login-buttons {
 	display: flex;
 	flex-direction: column;
-	margin-top: 8px;
+	margin-top: 5px;
 	margin-bottom: 8px;
 }
 
@@ -76,7 +80,7 @@ table {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-top: 15px;
+
 }
 
 .caret_right {
@@ -89,5 +93,5 @@ table {
 }
 
 .form-spacing-signup {
-	margin-bottom: 2px
+	margin-bottom: 1px
 }

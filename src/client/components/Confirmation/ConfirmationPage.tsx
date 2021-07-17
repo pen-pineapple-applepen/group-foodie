@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { ReactElement } from 'react'
 import CountDownTimer from './CountDownTimer';
 import CurrentOrderList from "./CurrentOrderList";
-import { OrangeNavbar, HeaderImage } from '../../styles/shared';
+import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ConfirmationProps {
 
@@ -13,8 +14,8 @@ interface ConfirmationProps {
 
 export interface Order {
   id: number,
-  userId: number,
-  itemName: string,
+  user_id: number,
+  food: string,
   quantity: number,
   price: string,
   date: string,
@@ -42,10 +43,40 @@ const ThankYouMessage = styled.h1`
   text-align: center;
   padding-bottom: 10px;
 `
-
+const FlexEndButton = styled(OrangeButton)`
+  width: 70vw;
+  color: white;
+`
+const Link = styled.button`
+  background: none;
+	color: #4646c2;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  display: flex;
+  justify-content: center;
+`
+const CenteredP = styled.p`
+  display: flex;
+  justify-content: center;
+`
+const CopyConfirm = styled(motion.div)`
+  align-self: center;
+`
 
 function Confirmation({}: ConfirmationProps): ReactElement {
   const currentOrders = useAppSelector(state => state.allOrderItems.orders)
+  const currentGroupId = useAppSelector(state => state.currentGroup)
+  const currentRestaurantId = useAppSelector(state => state.currentRestaurant)
+  const [ copied, setCopied ] = useState(false);
+
+  function copyToClipBoard() {
+    navigator.clipboard.writeText(`localhost:4000/Friends/${currentGroupId}/${currentRestaurantId.id}`)
+    setCopied(true);
+    setTimeout(()=> setCopied(false), 2000);
+  }
 
   return (
     <ConfirmationContainer>
@@ -54,15 +85,39 @@ function Confirmation({}: ConfirmationProps): ReactElement {
 
       <TopContainer>
         <ThankYouMessage>
-          Thank you for starting a share order!
+          Thank you for your order!
         </ThankYouMessage>
-      </TopContainer>
-      <span>Time left to put in your order:</span>
+        <CenteredP>
+          Share this link with your friends:
+        </CenteredP>
+        <Link
+          onClick={copyToClipBoard}
+        >
+          localhost:4000/Friends/{currentGroupId}/{currentRestaurantId.id}
+        </Link>
+        <AnimatePresence>
+          {copied &&
+          <CopyConfirm
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            animate={{ opacity: '100%' }}
+            transition={{ duration: 0.2 }}
+          >
+            Copied to clipboard!
+          </CopyConfirm>}
+        </AnimatePresence>
+
+      </TopContainer >
+      <span>This order will be placed in:</span>
       <CountDownTimer/>
 
       <CurrentOrderList
         currentOrders={currentOrders}
       />
+
+      <FlexEndButton>
+        Chat
+      </FlexEndButton>
     </ConfirmationContainer>
   )
 }

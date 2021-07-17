@@ -2,7 +2,7 @@ export default function validate(values) {
   let errors = {};
 
   if (!values.firstName) {
-    errors.firstName = 'Please enter a first name.';
+    errors.firstName = 'Please enter a first name';
   }
 
   if (!values.lastName) {
