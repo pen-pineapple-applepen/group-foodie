@@ -35,29 +35,28 @@ const Checkmark = styled.div`
   margin-left: 50px;
 `;
 
+const SelectedPayment = styled.div`
+  font-weight: bold;
+  font-style: italic;
+`;
+
+const SelectedCard = styled.div`
+  margin-left: 10px;
+  font-weight: bold;
+  font-style: italic;
+`;
+
 
 
 
 const PaymentOptions = (props) => {
   let currentPayments = useAppSelector(state => state.currentPayments.paymentsList);
-  let selectedPayment = useAppSelector(state => state.currentPayments.selectedPayment);
+  const dispatch = useAppDispatch();
+
+  const handlePaymentClick = (event) => {
 
 
-  // {
-  //   props.content.map(content => content.type === "card" ? (
-  //           <Card title={content.title} />
-  //       ) : (
-  //           <Content title={content.title} paragraph={content.guideline} />
-  //       )
-  // )}
-
-  // {currentPayments.map((payment, index) => payment.selectedPayment === true ? (
-  //   <PaymentContainer>
-  //     <div>{payment.cardNumber}</div>
-  //     <Card>{payment.cardType}</Card>
-  //     <div>selected</div>
-  //   </PaymentContainer>
-  // ))}
+  }
 
   return (
     <MainContainer>
@@ -68,12 +67,17 @@ const PaymentOptions = (props) => {
         Payment Method
       </Heading>
       <PaymentsContainer>
-        {currentPayments.map((payment, index) => (
-          <PaymentContainer>
+      {currentPayments.map((payment, index) => payment.selected === true ? (
+        <PaymentContainer key={index}>
+          <SelectedPayment>{payment.cardNumber}</SelectedPayment>
+          <SelectedCard>{payment.cardType}</SelectedCard>
+        </PaymentContainer> ) : (
+          <PaymentContainer key={index}>
             <div>{payment.cardNumber}</div>
             <Card>{payment.cardType}</Card>
           </PaymentContainer>
-        ))}
+        )
+      )}
       </PaymentsContainer>
       <Heading size={5}>
         Add Payment Method
