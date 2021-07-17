@@ -1,4 +1,4 @@
-export default function paymentValidate (value) {
+export default function paymentValidate (values) {
   let errors = {};
 
   if (!values.cardholderName) {
@@ -24,4 +24,6 @@ export default function paymentValidate (value) {
   if (values.newCCType === '-') {
     errors.newCCType = 'Select a card type';
   }
+
+  return errors;
 }
