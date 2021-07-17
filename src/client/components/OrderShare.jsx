@@ -70,6 +70,7 @@ const MainContainer = styled.div`
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
+  const currentUserOrders = useAppSelector(state => state.allOrderItems.orders);
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
@@ -126,22 +127,27 @@ const OrderShare = () => {
     <OrderShareModal />
   }
 
-  // async function happensWhenShareOrderClick() {
-  //   const currentUserOrders = useAppSelector(state => state.allOrderItems.orders)
-  //   const bodyParams = { due_date: orderDate.toISOString() } // we need to chage date format
-  //   try {
-  //     const groupId = await axios.post(`/groups`, bodyParams)
-  //     const ordersTaggedWithGroupId = currentUserOrders.map(order => {
-  //       order.group_id = groupId;
-  //       return order;
-  //     })
-  //     ordersTaggedWithGroupId.forEach(order => {
-  //       axios.post(`/orders/${userId}/user`, order)
-  //     })
-  //   } catch (err) {
-  //     console.log('order no post!')
-  //   }
-  // }
+  async function happensWhenShareOrderClick() {
+    const bodyParams = { due_date: orderDate.toISOString().slice(0, -5) }
+    try {
+      const groupId = await axios.post(`/api/groups`, bodyParams)
+      let currentUserOrdersCopy = [];
+      for (var i = 0; i < currentUserOrders.length; i++) {
+        currentUserOrdersCopy.push({...currentUserOrders[i]})
+      }
+      const ordersTaggedWithGroupId = currentUserOrdersCopy.map(order => {
+        order.group_id = groupId.id;
+        order.date = groupId.due_date;
+        return order;
+      })
+      for(let order of ordersTaggedWithGroupId) {
+        axios.post(`/api/orders/${userId}/user`, order)
+      }
+      history.push('/Confirmation')
+    } catch (err) {
+      console.log('err', err)
+    }
+  }
 
   return (
     <MainContainer>
@@ -224,7 +230,7 @@ const OrderShare = () => {
         }
       </div>
       <Line>
-        <OrangeButton onClick={() => history.push('/Confirmation')}>
+        <OrangeButton onClick={happensWhenShareOrderClick}>
           Share Order
         </OrangeButton>
       </Line>

@@ -48,7 +48,7 @@ function App() {
             <Route exact path="/ShareOrder" component={OrderShare} />"
             <Route exact path="/Confirmation" component={Confirmation} />"
             <Route exact path="/PaymentOptions" component={PaymentOptions} />"
-
+            <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
             <Redirect to="/" />
           </Switch>
           {/* <NewPaymentPage /> */}

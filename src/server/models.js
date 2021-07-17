@@ -62,7 +62,7 @@ const getOrdersByUserId = async (user_id) => {
 }
 
 const addOrder = async (
-  user_id, food, quantity, price, date, food_id, group_id, restaurant_id
+  user_id, food, quantity, price, date, food_id, group_id, restaurant_id, live
 ) => {
   const insertedId = await db('orders')
     .insert({
@@ -74,6 +74,7 @@ const addOrder = async (
       food_id,
       group_id,
       restaurant_id,
+      live
     }, 'id')
     return insertedId;
 }

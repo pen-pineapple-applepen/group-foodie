@@ -86,12 +86,12 @@ async function getOrdersByUserId(req, res) {
 async function addOrder(req, res) {
   const { user_id } = req.params;
   const {
-    food, quantity, price, date, food_id, group_id, restaurant_id
+    food, quantity, price, date, food_id, group_id, restaurant_id, live
   } = req.body;
 
   try {
     const orderId = await models.addOrder(
-      user_id, food, quantity, price, date, food_id, group_id, restaurant_id
+      user_id, food, quantity, price, date, food_id, group_id, restaurant_id, live
     )
     res.status(200).send(orderId);
   } catch (err) {
