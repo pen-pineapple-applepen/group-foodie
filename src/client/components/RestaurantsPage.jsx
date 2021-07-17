@@ -113,7 +113,7 @@ export default function RestaurantPage() {
 
   return (
     <div>
-      <OrangeNavbar />
+      <OrangeNavbar needBackArrow={true}/>
       <SearchAndFilterDiv>
         <img src={'location_black_24dp.svg'} />
         <OrangeInput placeholder="Playa Vista" />

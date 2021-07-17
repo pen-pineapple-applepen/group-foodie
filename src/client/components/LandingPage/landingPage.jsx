@@ -37,7 +37,7 @@ const LandingPage = () => {
 
   return (
     <div className="login-signup-background">
-      <OrangeNavbar needBackArrow={true} onBackArrowClick={goBack} />
+      <OrangeNavbar needBackArrow={true}/>
       <StyledContainer>
         <StyledGreeting>
           Welcome, {userInfo.first_name} {userInfo.last_name}!

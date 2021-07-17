@@ -11,7 +11,7 @@ interface CurrentOrderListProps {
 }
 
 const OrderListContainer = styled.div`
-  padding-top: 35px;
+  padding-top: 25px;
 `
 
 

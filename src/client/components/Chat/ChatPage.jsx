@@ -1,42 +1,29 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import styled from 'styled-components';
 import ChatComments from './ChatComments.jsx';
+import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
 
 
 const Container = styled.div`
   display: flex;
-  background-image: url('BG_Wood.png');
+  background-image: url('../BG_Wood.png');
 `;
 
 const imgStyle = {
   height: "60px"
 }
 
-const postComment = () => {
-  return (
-    <div>
-      <input type="text" placeholder="Comment here">
-      </input>
-      <br></br>
-      <button>Post</button>
-    </div>
-  )
-};
-
-
 const orderDiv = () => {
-
   return(
     <div className="orderName">
-      This is in orderDiv.
       <div>
         <p>Current Order</p>
       </div>
       <div>
         <div>
         {/* <img className="restaurantImg" src={incomingGroupInfoFromLiveConfirmationPage.image}></img> */}
-        <img className="restaurantImg" src={"Dannys_bg.png"} style={imgStyle}></img>
+        <img className="restaurantImg" src={"../Dannys_bg.png"} style={imgStyle}></img>
 
         </div>
         <div>
@@ -62,7 +49,6 @@ const chatDiv = () => {
   )
 };
 
-
 export default function ChatPage () {
 
   React.useEffect(() => {
@@ -72,13 +58,14 @@ export default function ChatPage () {
   }, [])
 
   return (
-    <Container className="chatPage-background">
-      <div style={{margin: 'auto'}}>
-        {orderDiv()}
-        <hr></hr>
-        {chatDiv()}
-        <hr></hr>
-        {postComment()}
+    <Container className="chatPage-background" style={{height: "800px"}}>
+      <div style={{margin: 'auto', marginTop: "5px"}}>
+        < OrangeNavbar />
+        <div style={{width: "250px", height: "400px"}}>
+          {orderDiv()}
+          <hr></hr>
+          {chatDiv()}
+        </div>
       </div>
     </Container>
   );

@@ -43,7 +43,7 @@ export default function MenuItemPage () {
 
   return(
     <MainConatiner>
-      <OrangeNavbar/>
+      <OrangeNavbar needBackArrow={true}/>
       <HeaderImage src="/Dannys_bg.png"/>
       {/* <img src='Dannys_bg.png'/> */}
       <h2>{currentOrder.itemName}</h2>

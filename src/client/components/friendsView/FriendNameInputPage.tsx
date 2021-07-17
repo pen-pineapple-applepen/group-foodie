@@ -63,18 +63,22 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   }
 
   const handleClick = async () => {
-    const userIdData = await axios.post('/api/users/create', {
-      first_name: friendName,
-      last_name: '',
-      email: '',
-      username: 'GUEST',
-      password: '',
-      guest: true,
-    })
-    const userId = userIdData.data[0]
-    console.log('user ID', userId);
-    dispatch(setUserId(userId))
-    dispatch(setCurrentUserId(userId))
+    try {
+      const userIdData = await axios.post('/api/users/create', {
+        first_name: friendName,
+        last_name: '',
+        email: '',
+        username: 'GUEST',
+        password: '',
+        guest: true,
+      })
+      const userId = userIdData.data[0]
+      console.log('user ID', userId);
+      dispatch(setUserId(userId))
+      dispatch(setCurrentUserId(userId))
+    } catch (err) {
+      console.log('error creating guest user ID', err);
+    }
     history.push(`/Friends/Confirmation`)
   }
 
@@ -88,7 +92,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   return (
     <ContainerDiv>
 
-      <OrangeNavbar/>
+      <OrangeNavbar hasBurger={false}/>
       <HeaderImage src='/Dannys_bg.png'/>
 
       <NameInputDiv>

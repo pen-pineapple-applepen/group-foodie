@@ -7,6 +7,7 @@ import CurrentOrderList from "../Confirmation/CurrentOrderList";
 import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 interface ConfirmationProps {
 
@@ -50,12 +51,20 @@ const FlexEndButton = styled(OrangeButton)`
 
 
 function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
-  const currentOrders = useAppSelector(state => state.allOrderItems.orders)
+  // const currentOrders = useAppSelector(state => state.allOrderItems.orders)
+  const [ currentGroupOrders, setCurrentGroupOrders ] = useState([])
+  const currentGroupId = useAppSelector(state => state.currentGroup)
   const history = useHistory();
 
   const handleStartOrder = () => {
     history.push('/Menu/Friends')
   }
+
+  useEffect( async () => {
+    const currentOrdersData = await axios.get(`/api/orders/${currentGroupId}/group`)
+    setCurrentGroupOrders(currentOrdersData.data)
+    console.log(currentOrdersData.data)
+  }, [])
 
   return (
     <ConfirmationContainer>
@@ -71,7 +80,7 @@ function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
       <CountDownTimer/>
 
       <CurrentOrderList
-        currentOrders={currentOrders}
+        currentOrders={currentGroupOrders}
       />
 
       <FlexEndButton>

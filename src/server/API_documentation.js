@@ -186,6 +186,7 @@ additional body params: {
   food_id: number,
   group_id: number,
   restaurant_id: number,
+  live: boolean,
 }
 returns: [6] // returns an array of the inserted order's ID
 
