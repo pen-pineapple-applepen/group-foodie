@@ -52,7 +52,7 @@ function App() {
             <Route exact path="/ShareOrder" component={OrderShare} />"
             <Route exact path="/Confirmation" component={Confirmation} />"
             <Route exact path="/Friends/Confirmation" component={FriendInitialConfirmationPage} />"
-            <Route exact path="/Friends/Confirmation/End" component={FriendFinalConfirmationPage} />"
+            <Route exact path="/Friends/ConfirmationEnd" component={FriendFinalConfirmationPage} />"
             <Route exact path="/PaymentOptions" component={PaymentOptions} />"
             <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
             <Redirect to="/" />
