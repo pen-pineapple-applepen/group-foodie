@@ -19,10 +19,7 @@ export const loginReducer = createReducer (initialState, (builder) => {
     })
     .addCase(logOut, (state, action) => {
       state.loggedIn = false;
-<<<<<<< HEAD
-=======
       state.userId = 0;
->>>>>>> 00806aa1eea36ae4667395cec46b56db5e670c04
     })
     .addCase(setCurrentUserId, (state, action) => {
       state.userId = action.payload;
