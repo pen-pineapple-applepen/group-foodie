@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import styled from 'styled-components';
 import ChatComments from './ChatComments.jsx';
+import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
 
 
 const Container = styled.div`
@@ -13,23 +14,11 @@ const imgStyle = {
   height: "60px"
 }
 
-const postComment = () => {
-  return (
-    <div>
-      <input type="text" placeholder="Comment here">
-      </input>
-      <br></br>
-      <button>Post</button>
-    </div>
-  )
-};
 
 
 const orderDiv = () => {
-
   return(
     <div className="orderName">
-      This is in orderDiv.
       <div>
         <p>Current Order</p>
       </div>
@@ -73,12 +62,13 @@ export default function ChatPage () {
 
   return (
     <Container className="chatPage-background">
-      <div style={{margin: 'auto'}}>
-        {orderDiv()}
-        <hr></hr>
-        {chatDiv()}
-        <hr></hr>
-        {postComment()}
+      <div style={{margin: 'auto', marginTop: "5px"}}>
+        < OrangeNavbar />
+        <div >
+          {orderDiv()}
+          <hr></hr>
+          {chatDiv()}
+        </div>
       </div>
     </Container>
   );
