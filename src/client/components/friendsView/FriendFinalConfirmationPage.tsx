@@ -83,7 +83,7 @@ function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
         currentOrders={currentGroupOrders}
       />
 
-      <FlexEndButton>
+      <FlexEndButton onClick={() => history.push('/Chat/ChatPage')}>
         Chat
       </FlexEndButton>
     </ConfirmationContainer>
