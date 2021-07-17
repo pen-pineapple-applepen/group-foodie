@@ -92,7 +92,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   return (
     <ContainerDiv>
 
-      <OrangeNavbar/>
+      <OrangeNavbar hasBurger={false}/>
       <HeaderImage src='/Dannys_bg.png'/>
 
       <NameInputDiv>

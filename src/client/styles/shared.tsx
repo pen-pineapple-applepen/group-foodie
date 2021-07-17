@@ -203,6 +203,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({
   const [active, setActive] = useState(false);
   const [ sideBarOpen, setSideBarOpen ] = useState(false);
 
+  const loggedIn = useAppSelector(state => state.loginDetails.loggedIn);
   const history = useHistory();
 
   const toggleMenu = () => {
@@ -212,7 +213,9 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({
     history.goBack();
   }
   const handleLogoClick = () => {
-    history.push('/LandingPage')
+    if (loggedIn) {
+      history.push('/LandingPage')
+    }
   }
 
 
@@ -231,7 +234,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({
             </GroupFoodieLogo>
           </NavbarItem>
 
-          {hasBurger && <NavbarBurger
+          {hasBurger && loggedIn && <NavbarBurger
             onClick={() => setSideBarOpen(prev => !prev)}
           />}
 

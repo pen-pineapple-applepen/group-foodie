@@ -152,7 +152,7 @@ const OrderShare = () => {
 
   return (
     <MainContainer>
-      <OrangeNavbar />
+      <OrangeNavbar needBackArrow={true}/>
       <div>
         Enter Date and Time:
       </div>
