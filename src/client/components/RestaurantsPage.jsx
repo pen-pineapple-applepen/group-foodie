@@ -97,19 +97,8 @@ export default function RestaurantPage() {
     setCuisines({});
   }
   //keeps in check the checked values and creates object for filterHandler to use
-  function handleChange(e) {
-    if (e.target.checked) {
-      setCuisines(prevCuisines => ({
-        ...prevCuisines,
-        [e.target.value]: e.target.checked
-      }))
-    } else {
-      const copyObj = cuisines
-      delete copyObj[e.target.value];
-      setCuisines(copyObj);
-    }
-  }
-  function handleChange2(checked) {
+
+  function handleChange(checked) {
     if (checked) {
       setCuisines(prevCuisines => ({
         ...prevCuisines,
@@ -187,7 +176,7 @@ export default function RestaurantPage() {
                 borderRadius={10}
                 style={{ overflow: "hidden" }}
                 size={20}
-                label="Asian" name="Asian" onChange={handleChange2}></Checkbox>
+                label="Asian" name="Asian" onChange={handleChange}></Checkbox>
               <Checkbox
                 containerStyle={{ margin: 10 }}
                 borderColor="#FF6C36"
@@ -204,7 +193,24 @@ export default function RestaurantPage() {
                 borderRadius={10}
                 style={{ overflow: "hidden" }}
                 size={20}
-                label="American" onChange={handleChange2}></Checkbox>
+                label="American" onChange={handleChange}></Checkbox>
+              <Checkbox
+                containerStyle={{ margin: 10 }}
+                borderColor="#FF6C36"
+                icon={
+                  <div
+                    style={{
+                      display: "flex",
+                      flex: 1,
+                      backgroundColor: "#FF6C36",
+                      alignSelf: "center",
+                    }}
+                  ><Icon.FiCheck color="white" size={20} /></div>
+                }
+                borderRadius={10}
+                style={{ overflow: "hidden" }}
+                size={20}
+                label="Italian" onChange={handleChange}></Checkbox>
             </Modal.Card.Body>
             <Modal.Card.Footer renderAs={Button.Group} align="right">
               <OrangeButton onClick={filterHandler} >Apply</OrangeButton>
