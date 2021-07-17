@@ -49,7 +49,6 @@ const FlexEndButton = styled(OrangeButton)`
   color: white;
 `
 const WhatYourFriendsOrdered = styled.h3`
-  position: relative;
   font-size: 13px;
   top: 15px;
   padding-bottom: -15px;
