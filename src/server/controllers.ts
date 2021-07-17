@@ -93,6 +93,7 @@ async function addOrder(req, res) {
     const orderId = await models.addOrder(
       user_id, food, quantity, price, date, food_id, group_id, restaurant_id, live
     )
+    console.log(`successfully added order with ID: ${orderId} and userID: ${user_id}`)
     res.status(200).send(orderId);
   } catch (err) {
     console.log('error creating order: ', err);

@@ -7,6 +7,7 @@ import CurrentOrderList from "../Confirmation/CurrentOrderList";
 import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 interface ConfirmationProps {
 
@@ -47,15 +48,31 @@ const FlexEndButton = styled(OrangeButton)`
   width: 70vw;
   color: white;
 `
+const WhatYourFriendsOrdered = styled.h3`
+  position: relative;
+  font-size: 13px;
+  top: 15px;
+  padding-bottom: -15px;
+  font-style: italic;
+`
 
 
 function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
   const currentOrders = useAppSelector(state => state.allOrderItems.orders)
+  const [ currentGroupOrders, setCurrentGroupOrders ] = useState([])
+  const currentGroupId = useAppSelector(state => state.currentGroup)
+
   const history = useHistory();
 
   const handleStartOrder = () => {
     history.push('/Menu/Friends')
   }
+
+  useEffect( async () => {
+    const currentOrdersData = await axios.get(`/api/orders/${currentGroupId}/group`)
+    setCurrentGroupOrders(currentOrdersData.data)
+    console.log(currentOrdersData.data)
+  }, [])
 
   return (
     <ConfirmationContainer>
@@ -70,13 +87,16 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
       <span>Time left to put in your order:</span>
       <CountDownTimer/>
 
-      <CurrentOrderList
-        currentOrders={currentOrders}
-      />
+      <WhatYourFriendsOrdered>
+        what your friends have ordered so far:
+      </WhatYourFriendsOrdered>
+
+      <CurrentOrderList currentOrders={currentGroupOrders}/>
 
       <FlexEndButton>
         Chat
       </FlexEndButton>
+
       <FlexEndButton onClick={handleStartOrder}>
         Start Your Order
       </FlexEndButton>

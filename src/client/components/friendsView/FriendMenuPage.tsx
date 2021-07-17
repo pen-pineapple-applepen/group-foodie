@@ -19,10 +19,27 @@ const CheckoutButton = styled(OrangeButton)`
   width: 50%;
 `;
 
+interface Order {
+  user_id: number,
+  food: string,
+  quantity: number,
+  price: number,
+  date: string,
+  food_id: number,
+  group_id: number,
+  restuarant_id: number,
+  live: boolean,
+}
+
+
 export default function FriendMenuPage () {
   const currentItem = useAppSelector((state)=>state.currentMenuItem)
   const totalOrdersPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
   const restaurantName = useAppSelector((state)=>state.currentRestaurant.name)
+  const friendsOrders = useAppSelector<Array<Order>>((state) => state.allOrderItems.orders)
+  const currentGroupId = useAppSelector((state) => state.currentGroup);
+  const currentUserId = useAppSelector((state) => state.loginDetails.userId);
+
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [ menuList, setMenuList ] = React.useState([]);
@@ -39,6 +56,26 @@ export default function FriendMenuPage () {
     setMenuList(localMenuData);
   }
 
+  async function postOrdersToDB () {
+    for (let order of friendsOrders) {
+      const bodyParams = {
+        food: order.food,
+        quantity: order.quantity,
+        price: order.price,
+        date: '12/20/2020',
+        food_id: order.food_id,
+        group_id: currentGroupId,
+        restaurant_id: order.restuarant_id,
+        live: true,
+      }
+      try {
+        await axios.post(`/api/orders/${currentUserId}/user`, bodyParams)
+      } catch (err) {
+        console.log('error posting friends orders: ', err);
+      }
+    }
+  }
+
   function clickHandler (entry) {
     dispatch(allActions.UpdateItemName(entry.menu_item_name));
     dispatch(allActions.UpdateItemPrice(entry.menu_item_pricing.toFixed(2)));
@@ -49,6 +86,8 @@ export default function FriendMenuPage () {
 
   function handleCheckout() {
     history.push("/Friends/ConfirmationEnd");
+    postOrdersToDB();
+
   }
 
   //Resets Current Selected Item
