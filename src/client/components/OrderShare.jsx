@@ -70,7 +70,7 @@ const MainContainer = styled.div`
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
-  const currentUserOrders = useAppSelector(state => state.allOrderItems.orders);
+  const currentUserOrders = useAppSelector(state => state.currentPayments.orders);
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
@@ -101,9 +101,11 @@ const OrderShare = () => {
           formattedCards.push({
             id: response.data[i].id,
             cardNumber: String(response.data[i].card_number).slice(-4),
-            cardType: response.data[i].card_type
+            cardType: response.data[i].card_type,
+            selected: false
           })
         }
+        formattedCards[0].selected = true;
         dispatch(allActions.createPaymentsList(formattedCards));
         // dispatch(allActions.addSelectedPayment(formattedCards[0]));
       }
@@ -203,14 +205,16 @@ const OrderShare = () => {
         Payment Information:
       </div>
       <div>
-        {Object.keys(selectedPayment).length !== 0 ?
+        {paymentsList.length !== 0 ?
           <Payment onClick={() => history.push('/PaymentOptions')}>
             <div>
               <span>
-                ***{selectedPayment.cardNumber}
+                ***{paymentsList.filter(payment => (
+                  payment.selected === true))[0].cardNumber}
               </span>
               <span>
-                {selectedPayment.cardType}
+              {paymentsList.filter(payment => (
+                  payment.selected === true))[0].cardType}
               </span>
             </div>
             <div>
