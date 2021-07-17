@@ -15,6 +15,12 @@ export default function paymentValidate (values) {
     errors.newCCV = 'CCV is a 3-digit or 4-digit number';
   }
 
+  if (!values.newCCExpiry) {
+    errors.newCCExpiry = 'Please enter the card expiry date';
+  } else if (!values.newCCExpiry.includes('/')) {
+    errors.newCCExpiry = 'Please enter expiry date as MM/YY'
+  }
+
   if (!values.zipCode) {
     errors.zipCode = 'Please enter a valid zip code';
   } else if (!values.zipCode.length === 5) {

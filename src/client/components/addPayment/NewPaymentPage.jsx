@@ -60,21 +60,27 @@ export default function NewPaymentPage() {
               className={`input ${errors.cardholderName && "is-danger"}`}
               onChange={handleChange}
             />
+            {errors.cardholderName && (
+              <Form.Help className="help is-danger">{errors.cardholderName}</Form.Help>
+            )}
           </Form.Control>
-        </Form.Field>
-        <Form.Field>
-          <Form.Label>Card Details:</Form.Label>
+
+          <Form.Label>Card Number:</Form.Label>
           <Form.Control>
             <Form.Input
               name="newCCNumber"
               placeholder="Credit Card Number"
+              className={`input ${errors.newCCNumber && "is-danger"}`}
+              onChange={handleChange}
             />
             <Icon align="left" size="small">
               <i className="fas fa-credit-card" />
             </Icon>
+            {errors.newCCNumber && (
+              <Form.Help className="help is-danger">{errors.newCCNumber}</Form.Help>
+            )}
           </Form.Control>
-        </Form.Field>
-        <Form.Field>
+
           <Form.Label>Type:</Form.Label>
           <Form.Select>
             <option>-</option>
@@ -83,30 +89,46 @@ export default function NewPaymentPage() {
             <option>Discover</option>
             <option>American Express</option>
           </Form.Select>
-        </Form.Field>
-        <Form.Field>
+
           <Form.Label>Expiry Date:</Form.Label>
           <Form.Control>
             <Form.Input
               name="newCCExpiry"
               placeholder="MM/YY"
+              className={`input ${errors.newCCExpiry && "is-danger"}`}
+              onChange={handleChange}
             />
+            {errors.newCCExpiry && (
+              <Form.Help className="help is-danger">{errors.newCCExpiry}</Form.Help>
+            )}
           </Form.Control>
           <Form.Label>CCV:</Form.Label>
           <Form.Control>
-            <Form.Input />
+            <Form.Input
+              name="newCCV"
+              placeholder="CCV"
+              className={`input ${errors.newCCV && "is-danger"}`}
+              onChange={handleChange}
+            />
+            {errors.newCCV && (
+              <Form.Help className="help is-danger">{errors.newCCV}</Form.Help>
+            )}
             <Icon align="right" size="small">
               <i className="fas fa-question-circle" />
             </Icon>
           </Form.Control>
-        </Form.Field>
-        <Form.Field kind="group" >
+
           <Form.Label>Billing Zip:</Form.Label>
           <Form.Control>
             <Form.Input
               name="zipCode"
               placeholder="Zip Code"
+              className={`input ${errors.zipCode && "is-danger"}`}
+              onChange={handleChange}
             />
+            {errors.zipCode && (
+              <Form.Help className="help is-danger">{errors.zipCode}</Form.Help>
+            )}
           </Form.Control>
         </Form.Field>
         <OrangeButton onClick={handleSubmit}>Add Payment Method</OrangeButton>
