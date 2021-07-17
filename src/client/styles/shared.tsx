@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useHistory, Link } from "react-router-dom";
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -33,11 +34,9 @@ const SizedImage = styled(Image)`
 `
 const OrangeNavbarContainer = styled(Navbar)`
   background-color: #FF6C36;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
   border-radius: 0 0 22px 22px;
+  z-index: -11;
+
 `
 // const OrangeNavbarContainer = styled(Navbar)`
 //   background-color: #FF6C36;
@@ -89,8 +88,67 @@ const HeaderImageImg = styled.div<HeaderImageProps>`
   top: -50px;
   width: 100vw;
   height: 250px;
-
+  z-index: -11;
 `
+
+const SideBarContainer = styled(motion.div)`
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 93.5vh;
+  z-index: 100;
+  background-color: white;
+  border: 1px solid white;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 25px;
+`
+const SideBarOptions = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  padding-right: 40px;
+  font-size: 20px;
+  p {
+    padding-bottom: 8px;
+  }
+`
+const UserName = styled.h3`
+  margin-bottom: 30px;
+  border-bottom: 6px solid #FF6C36;
+`
+
+const Options = styled(Link)`
+  color: #4a4a4a;
+`;
+
+
+const SideBarMenu = ({sideBarOpen}) => {
+
+  return (
+    <AnimatePresence>
+      {sideBarOpen && (
+        <div>
+          <SideBarContainer
+            initial={{ x: '-100%' }}
+            animate={{ x: '-50%' }}
+            exit={{ x: '-100%' }}
+            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+          >
+            <SideBarOptions>
+              <UserName>Erik Oh</UserName>
+              <Options to="/profile">Account</Options>
+              <Options to="/history">Your Orders</Options>
+              <p>Log Out</p>
+            </SideBarOptions>
+          </SideBarContainer>
+        </div>
+      )}
+    </AnimatePresence>
+  )
+}
 
 /////////////////////////
 /* exported components */
@@ -101,6 +159,7 @@ export const OrangeButton = styled(Button)`
   border-radius: 30px;
   color: white;
   margin-top: 20px;
+  font-weight: bold;
 `
 export const OrangeInput = styled.input`
   background: transparent;
@@ -121,25 +180,17 @@ export const OrangeInput = styled.input`
 // and 'onBackArrowclick' which takes a callback for when back arrow is clicked
 export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBackArrow, onBackArrowClick }) => {
   const [active, setActive] = useState(false);
+  const [ sideBarOpen, setSideBarOpen ] = useState(false);
 
   const toggleMenu = () => {
     setActive(!active);
   }
+  const logOut = () => {
+    console.log('hello')
+  }
   return (
     <>
-      {/* <OrangeNavbarContainer className="is-fixed-top">
-        <NavbarBrand>
-          <NavbarItem>
-            {needBackArrow ? <BackArrow onClick={onBackArrowClick} /> : <BackArrowContainer />}
-          </NavbarItem>
-          <NavbarItem>
-            <GroupFoodieLogo>
-              Group Foodie
-            </GroupFoodieLogo>
-          </NavbarItem>
-          <NavbarBurger className="is-size-2" />
-        </NavbarBrand>
-      </OrangeNavbarContainer> */}
+      <SideBarMenu sideBarOpen={sideBarOpen}/>
       <OrangeNavbarContainer className="is-fixed-top" active={active}>
         <NavbarBrand>
           <NavbarItem>
@@ -151,16 +202,18 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
             </GroupFoodieLogo>
           </NavbarItem>
           <NavbarBurger
-            onClick={toggleMenu} />
+            onClick={() => setSideBarOpen(prev => !prev)} />
         </NavbarBrand>
         <Navbar.Menu>
           <Navbar.Container>
             <NavbarItem to="/profile" renderAs={Link}>Account</NavbarItem>
             <NavbarItem to="/history" renderAs={Link}>Your Orders</NavbarItem>
+            <NavbarItem to="/" renderAs={Link} onClick={logOut}>Log Out</NavbarItem>
             <Navbar.Item>Log Out</Navbar.Item>
           </Navbar.Container>
         </Navbar.Menu>
-      </OrangeNavbarContainer></>
+      </OrangeNavbarContainer>
+    </>
   )
 }
 

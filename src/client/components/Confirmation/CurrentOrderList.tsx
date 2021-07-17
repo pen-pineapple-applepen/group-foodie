@@ -17,11 +17,11 @@ const OrderListContainer = styled.div`
 
 function CurrentOrderList({currentOrders}: CurrentOrderListProps): ReactElement {
 
-  const orderList = currentOrders.map(order => (
+  const orderList = currentOrders.map((order, idx) => (
     <CurrentOrderListItem
-      key={order.id}
-      userId={order.userId}
-      food={order.itemName}
+      key={idx}
+      userId={order.user_id}
+      food={order.food}
       quantity={order.quantity}
       price={order.price}
     />

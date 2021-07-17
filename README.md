@@ -7,13 +7,14 @@
 * [Setup](#setup)
 
 ## General info
-browser based app for mobile experience as beta
+Browser based app for mobile experience of scheduling a group food order
 	
 ## Technologies
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+* React version: 17.02
+* Redux version 4.1.0
+* Express version: 4.17.1
+* Postgres version: 8.6.0
 	
 ## Setup
 ### Seed Initial Database (WIP)
