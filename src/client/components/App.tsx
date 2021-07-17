@@ -18,7 +18,7 @@ import OrderHistory from './OrderHistory';
 import MenuPage from './Menu/MenuPage';
 import MenuItemPage from './Menu/MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
-import ChatPage from './ChatPage';
+import ChatPage from './Chat/ChatPage';
 import NewPaymentPage from './addPayment/NewPaymentPage';
 import PaymentOptions from './PaymentOptions';
 import Confirmation from './Confirmation/ConfirmationPage';
@@ -46,7 +46,7 @@ function App() {
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
             <Route exact path="/Friends/:group_id/:restaurant_id" component={FriendNameInputPage} />
-            <Route exact path="/ChatPage" component={ChatPage} />
+            <Route exact path="/Chat/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Route exact path="/MenuItem/Friends/" component={FriendMenuItemPage} />"
             <Route exact path="/ShareOrder" component={OrderShare} />"

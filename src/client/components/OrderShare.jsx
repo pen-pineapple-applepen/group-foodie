@@ -60,13 +60,21 @@ const Payment = styled.div`
   align-items: center;
 `;
 
-
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: left;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
+const EnterDateTime = styled.div`
+  padding-top: 20px;
+  padding-bottom: 10px;
+`
+const PaymentInformationDiv = styled.div`
+  padding-top: 15px;
+`
 
 const OrderShare = (props) => {
   const [orderDate, setOrderDate] = useState(new Date());
@@ -138,11 +146,14 @@ const OrderShare = (props) => {
       for (var i = 0; i < currentUserOrders.length; i++) {
         currentUserOrdersCopy.push({...currentUserOrders[i]})
       }
+      console.log('GroupID',groupId)
+      dispatch(allActions.updateCurrentGroup(groupId.data[0].id));
       const ordersTaggedWithGroupId = currentUserOrdersCopy.map(order => {
         order.group_id = groupId.data[0].id;
         order.date = groupId.data[0].due_date;
         return order;
       })
+      console.log('After',ordersTaggedWithGroupId)
       for(let order of ordersTaggedWithGroupId) {
         axios.post(`/api/orders/${userId}/user`, order)
       }
@@ -154,10 +165,10 @@ const OrderShare = (props) => {
 
   return (
     <MainContainer>
-      <OrangeNavbar />
-      <div>
+      <OrangeNavbar needBackArrow={true}/>
+      <EnterDateTime>
         Enter Date and Time:
-      </div>
+      </EnterDateTime>
       <Line>
         <DatePicker
         selected={orderDate}
@@ -202,9 +213,9 @@ const OrderShare = (props) => {
           <OrderShareModal openModal={openModal} setOpenModal={setOpenModal} guestEmails={guestEmails} setGuestEmails={setGuestEmails}/>
         </Line>
       </div>
-      <div>
+      <PaymentInformationDiv>
         Payment Information:
-      </div>
+      </PaymentInformationDiv>
       <div>
         {paymentsList.length !== 0 ?
           <Payment onClick={() => history.push('/PaymentOptions')}>
