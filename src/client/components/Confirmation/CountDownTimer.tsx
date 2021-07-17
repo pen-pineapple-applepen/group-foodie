@@ -55,7 +55,7 @@ function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
   return (
     <TimerContainer>
       <Countdown
-        date={Date.now()}
+        date={"2021-07-17T00:07:26"}
         renderer={countdownRenderer}
       />
       {isLoggedIn && <EditButton>edit</EditButton>}
