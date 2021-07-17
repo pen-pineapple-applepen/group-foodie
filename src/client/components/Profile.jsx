@@ -22,38 +22,17 @@ const SpacedButton = styled(OrangeButton)`
 `;
 
 const Profile = (props) => {
-  const [userInfo, setUserInfo] = useState();
-  const dispatch = useAppDispatch();
-
-  const getUserData = async () => {
-    try {
-      // const userId = useAppSelector((state) => state.loginDetails.userId);
-      const userId = 1;
-      const res = await axios.get(`/api/users/${userId}`);
-      // console.log(res.data);
-
-      dispatch(allActions.setCurrentUser(res.data));
-
-      setUserInfo(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
+  const userInfo = useAppSelector((state) => state.currentUser);
 
   return (
     <ProfileDiv>
       <OrangeNavbar needBackArrow={true} onBackArrowClick={useHistory().goBack} />
-      {userInfo && <NameText>{`${userInfo.first_name} ${userInfo.last_name}`}</NameText>}
-      <Link to="/history">
-        <SpacedButton>View Orders</SpacedButton>
-      </Link>
+      <NameText>{`${userInfo.first_name} ${userInfo.last_name}`}</NameText>
       <Link to="/friends">
         <SpacedButton>Friends</SpacedButton>
       </Link>
+      <SpacedButton>Payments</SpacedButton>
+      <SpacedButton>Login & security</SpacedButton>
     </ProfileDiv>
   );
 };

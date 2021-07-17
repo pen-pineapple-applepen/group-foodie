@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
-import allActions from '../state/actions/allActions';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
 import MenuItemContainer from './MenuItemContainer.jsx';
-import {OrangeButton, OrangeNavbar, HeaderImage } from '../styles/shared.tsx';
+import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -63,7 +63,7 @@ export default function MenuPage () {
     dispatch(allActions.UpdateItemQuantity(0));
     dispatch(allActions.UpdateTotalPrice(0));
     //Get Menu List
-    getMenuList(currentItem.restaurantId)
+    getMenuList(currentItem.restaurant_id)
   },[])
 
   return(

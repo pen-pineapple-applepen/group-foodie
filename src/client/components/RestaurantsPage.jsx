@@ -18,12 +18,28 @@ const ModalContentMain = styled(Modal.Content)`
   height: 100%;
 `;
 
-const UnderlineOrage = styled.h3`
+const UnderlineOrage = styled.div`
 border-bottom: 1px solid #FF6C36;
+width: 50%;
+`;
+
+const UnderlineOrageThick = styled.div`
+border-bottom: 2px solid #FF6C36;
+width: 50%;
+margin: 5px;
+margin-left: auto;
+margin-right: auto;
 `;
 
 const OrangeCheckBox = styled(Form.Checkbox)`
 
+`;
+
+const SearchAndFilterDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px;
 `;
 
 export default function RestaurantPage() {
@@ -94,13 +110,16 @@ export default function RestaurantPage() {
   return (
     <div>
       <OrangeNavbar/>
-      <img src={'location_black_24dp.svg'} />
-      <OrangeInput placeholder="Playa Vista" />
-      <img src={'sort_black_24dp.svg'} onClick={() => setOpenModal(true)} />
+      <SearchAndFilterDiv>
+        <img src={'location_black_24dp.svg'} />
+        <OrangeInput placeholder="Playa Vista" />
+        <img src={'sort_black_24dp.svg'} onClick={() => setOpenModal(true)} />
+      </SearchAndFilterDiv>
       {sortedRestaurantList.map(entry => {
         return (
           <div onClick={() => clickHandler(entry)} key={entry.restaurant_id} >
             <RestaurantContainer name={entry.name} cuisine={entry.cuisines[0]} hours={entry.hours}></RestaurantContainer>
+            <UnderlineOrageThick/>
           </div>
         )
       })}
