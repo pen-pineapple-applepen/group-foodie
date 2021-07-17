@@ -98,6 +98,7 @@ export const OrangeButton = styled(Button)`
   border-radius: 30px;
   color: white;
   margin-top: 20px;
+  font-weight: bold;
 `
 export const OrangeInput = styled.input`
   background: transparent;
