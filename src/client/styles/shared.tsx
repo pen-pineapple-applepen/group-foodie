@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useHistory, Link } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../state/hooks';
+import allActions from '../state/actions/allActions';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // interfaces
@@ -126,6 +129,17 @@ const Options = styled(Link)`
 
 
 const SideBarMenu = ({sideBarOpen}) => {
+  const history = useHistory()
+  const dispatch = useAppDispatch();
+
+  const handleLogOut = () => {
+    dispatch(allActions.currentUserReducer({}));
+    dispatch(allActions.groupReducer(0));
+    dispatch(allActions.logOut());
+    dispatch(allActions.setCurrentUserId(0));
+    history.push('/')
+  }
+  const userInfo = useSelector((state) => state.currentUser);
 
   return (
     <AnimatePresence>
@@ -138,10 +152,10 @@ const SideBarMenu = ({sideBarOpen}) => {
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
           >
             <SideBarOptions>
-              <UserName>Erik Oh</UserName>
+              <UserName>{userInfo.first_name} {userInfo.last_name}</UserName>
               <Options to="/profile">Account</Options>
               <Options to="/history">Your Orders</Options>
-              <p>Log Out</p>
+              <p onClick={handleLogOut}>Log Out</p>
             </SideBarOptions>
           </SideBarContainer>
         </div>
@@ -185,9 +199,9 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
   const toggleMenu = () => {
     setActive(!active);
   }
-  const logOut = () => {
-    console.log('hello')
-  }
+  const history = useHistory();
+
+
   return (
     <>
       <SideBarMenu sideBarOpen={sideBarOpen}/>
@@ -197,7 +211,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
             {needBackArrow ? <BackArrow onClick={onBackArrowClick} /> : <BackArrowContainer />}
           </NavbarItem>
           <NavbarItem>
-            <GroupFoodieLogo>
+            <GroupFoodieLogo onClick={() => history.push('/LandingPage')}>
               Group Foodie
             </GroupFoodieLogo>
           </NavbarItem>
@@ -208,7 +222,6 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
           <Navbar.Container>
             <NavbarItem to="/profile" renderAs={Link}>Account</NavbarItem>
             <NavbarItem to="/history" renderAs={Link}>Your Orders</NavbarItem>
-            <NavbarItem to="/" renderAs={Link} onClick={logOut}>Log Out</NavbarItem>
             <Navbar.Item>Log Out</Navbar.Item>
           </Navbar.Container>
         </Navbar.Menu>
