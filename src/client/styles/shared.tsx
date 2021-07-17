@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useHistory } from "react-router-dom";
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -89,8 +90,31 @@ const HeaderImageImg = styled.div<HeaderImageProps>`
   top: -50px;
   width: 100vw;
   height: 250px;
-
 `
+
+const SideBarContainer = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+`
+
+const SideBarMenu = ({sideBarOpen}) => {
+
+  return (
+    <AnimatePresence>
+      {sideBarOpen && (
+        <>
+          <SideBarContainer
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+          >
+
+          </SideBarContainer>
+        </>
+      )}
+    </AnimatePresence>
+  )
+}
 
 /////////////////////////
 /* exported components */
@@ -121,25 +145,14 @@ export const OrangeInput = styled.input`
 // and 'onBackArrowclick' which takes a callback for when back arrow is clicked
 export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBackArrow, onBackArrowClick }) => {
   const [active, setActive] = useState(false);
+  const [ sideBarOpen, setSideBarOpen ] = useState(false);
 
   const toggleMenu = () => {
     setActive(!active);
   }
   return (
     <>
-      {/* <OrangeNavbarContainer className="is-fixed-top">
-        <NavbarBrand>
-          <NavbarItem>
-            {needBackArrow ? <BackArrow onClick={onBackArrowClick} /> : <BackArrowContainer />}
-          </NavbarItem>
-          <NavbarItem>
-            <GroupFoodieLogo>
-              Group Foodie
-            </GroupFoodieLogo>
-          </NavbarItem>
-          <NavbarBurger className="is-size-2" />
-        </NavbarBrand>
-      </OrangeNavbarContainer> */}
+      <SideBarMenu sideBarOpen={sideBarOpen}/>
       <OrangeNavbarContainer className="is-fixed-top" active={active}>
         <NavbarBrand>
           <NavbarItem>
@@ -151,7 +164,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
             </GroupFoodieLogo>
           </NavbarItem>
           <NavbarBurger
-            onClick={toggleMenu} />
+            onClick={() => setSideBarOpen(prev => !prev)} />
         </NavbarBrand>
         <Navbar.Menu>
           <Navbar.Container>

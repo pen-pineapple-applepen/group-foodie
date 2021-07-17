@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { ReactElement } from 'react'
 import CountDownTimer from './CountDownTimer';
 import CurrentOrderList from "./CurrentOrderList";
-import { OrangeNavbar, HeaderImage } from '../../styles/shared';
+import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 import styled from 'styled-components';
 
 interface ConfirmationProps {
@@ -13,8 +13,8 @@ interface ConfirmationProps {
 
 export interface Order {
   id: number,
-  userId: number,
-  itemName: string,
+  user_id: number,
+  food: string,
   quantity: number,
   price: string,
   date: string,
@@ -42,6 +42,10 @@ const ThankYouMessage = styled.h1`
   text-align: center;
   padding-bottom: 10px;
 `
+const FlexEndButton = styled(OrangeButton)`
+  width: 70vw;
+  color: white;
+`
 
 
 function Confirmation({}: ConfirmationProps): ReactElement {
@@ -63,6 +67,10 @@ function Confirmation({}: ConfirmationProps): ReactElement {
       <CurrentOrderList
         currentOrders={currentOrders}
       />
+
+      <FlexEndButton>
+        Chat
+      </FlexEndButton>
     </ConfirmationContainer>
   )
 }

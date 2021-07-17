@@ -37,7 +37,7 @@ function CountDownTimer({}: CountDownTimerProps): ReactElement {
   const groupId = useAppSelector(state => state.currentGroup)
 
   const countdownRenderer = () => {
-    const { days, hours, minutes, seconds, completed } = calcTimeDelta('2021-07-18T01:02:03') // needs to be updated with dynamic 'dueDate' state
+    const { days, hours, minutes, seconds, completed } = calcTimeDelta("2021-07-17T00:07:26") // needs to be updated with dynamic 'dueDate' state
       if (completed) {
         return <p>An order has been placed!</p>
       } else {
@@ -46,14 +46,15 @@ function CountDownTimer({}: CountDownTimerProps): ReactElement {
   }
 
   useEffect(async () => {
-    const dueDate = await axios.get(`/api/groups/${groupId}`)
-    setDueDate(dueDate);
+    const dateData = await axios.get(`/api/groups/${groupId}`)
+    const date = dateData.data
+    setDueDate(date);
   }, [])
 
   return (
     <TimerContainer>
       <Countdown
-        date={Date.now() + 10000}
+        date={Date.now()}
         renderer={countdownRenderer}
       />
       <EditButton>edit</EditButton>
