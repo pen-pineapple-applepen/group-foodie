@@ -71,7 +71,7 @@ table {
 .login-buttons {
 	display: flex;
 	flex-direction: column;
-	margin-top: 8px;
+	margin-top: 5px;
 	margin-bottom: 8px;
 }
 
@@ -80,7 +80,7 @@ table {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-top: 15px;
+
 }
 
 .caret_right {
@@ -93,5 +93,5 @@ table {
 }
 
 .form-spacing-signup {
-	margin-bottom: 2px
+	margin-bottom: 1px
 }

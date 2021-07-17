@@ -185,6 +185,9 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
   const toggleMenu = () => {
     setActive(!active);
   }
+  const logOut = () => {
+    console.log('hello')
+  }
   return (
     <>
       <SideBarMenu sideBarOpen={sideBarOpen}/>
@@ -205,6 +208,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
           <Navbar.Container>
             <NavbarItem to="/profile" renderAs={Link}>Account</NavbarItem>
             <NavbarItem to="/history" renderAs={Link}>Your Orders</NavbarItem>
+            <NavbarItem to="/" renderAs={Link} onClick={logOut}>Log Out</NavbarItem>
             <Navbar.Item>Log Out</Navbar.Item>
           </Navbar.Container>
         </Navbar.Menu>

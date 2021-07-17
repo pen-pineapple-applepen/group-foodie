@@ -46,7 +46,7 @@ export default function FriendMenuItemPage () {
       <OrangeNavbar/>
       <HeaderImage src="/Dannys_bg.png"/>
       {/* <img src='Dannys_bg.png'/> */}
-      <h2>{currentOrder.itemName}</h2>
+      <h2>{currentOrder.food}</h2>
       <p>{item.description}</p>
       <p>${item.price}</p>
       <MenuItemIncrementor/>

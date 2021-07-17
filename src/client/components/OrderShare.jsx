@@ -131,6 +131,7 @@ const OrderShare = () => {
     const bodyParams = { due_date: orderDate.toISOString().slice(0, -5) }
     try {
       const groupId = await axios.post(`/api/groups`, bodyParams)
+      dispatch(allActions.updateCurrentGroup(groupId.data[0].id))
       let currentUserOrdersCopy = [];
       for (var i = 0; i < currentUserOrders.length; i++) {
         currentUserOrdersCopy.push({...currentUserOrders[i]})
