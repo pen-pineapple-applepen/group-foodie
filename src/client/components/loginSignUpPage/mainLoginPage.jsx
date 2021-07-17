@@ -48,7 +48,7 @@ export default function MainLoginPage() {
   return (
     <div className="login-signup-background">
       <div className="login-signup-page-container">
-      < OrangeNavbar />
+      <OrangeNavbar hasBurger={false}/>
         <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
           <Form.Control className="form-spacing-login">
