@@ -48,7 +48,6 @@ export default function MenuPage () {
   }
 
   function handleCheckout() {
-    dispatch(allActions.updateCurrentGroup())
     history.push('/ShareOrder');
   }
 

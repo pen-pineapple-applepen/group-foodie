@@ -73,7 +73,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
   const [ copied, setCopied ] = useState(false);
 
   function copyToClipBoard() {
-    navigator.clipboard.writeText(`localhost:4000/Friends/${currentGroupId}${currentRestaurantId.id}`)
+    navigator.clipboard.writeText(`localhost:4000/Friends/${currentGroupId}/${currentRestaurantId.id}`)
     setCopied(true);
     setTimeout(()=> setCopied(false), 2000);
   }
@@ -93,7 +93,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
         <Link
           onClick={copyToClipBoard}
         >
-          localhost:4000/Friends/{currentGroupId}{currentRestaurantId.id}
+          localhost:4000/Friends/{currentGroupId}/{currentRestaurantId.id}
         </Link>
         <AnimatePresence>
           {copied &&
