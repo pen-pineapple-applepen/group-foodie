@@ -49,7 +49,7 @@ function App() {
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Route exact path="/MenuItem/Friends/" component={FriendMenuItemPage} />"
-            <Route exact path="/ShareOrder" component={() =>OrderShare} />"
+            <Route exact path="/ShareOrder" component={OrderShare} />"
             <Route exact path="/Confirmation" component={Confirmation} />"
             <Route exact path="/Friends/Confirmation" component={FriendInitialConfirmationPage} />"
             <Route exact path="/Friends/ConfirmationEnd" component={FriendFinalConfirmationPage} />"
