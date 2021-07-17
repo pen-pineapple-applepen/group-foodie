@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import styled from 'styled-components';
 import ChatComments from './ChatComments.jsx';
 import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
@@ -7,14 +7,12 @@ import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
 
 const Container = styled.div`
   display: flex;
-  background-image: url('BG_Wood.png');
+  background-image: url('../BG_Wood.png');
 `;
 
 const imgStyle = {
   height: "60px"
 }
-
-
 
 const orderDiv = () => {
   return(
@@ -25,7 +23,7 @@ const orderDiv = () => {
       <div>
         <div>
         {/* <img className="restaurantImg" src={incomingGroupInfoFromLiveConfirmationPage.image}></img> */}
-        <img className="restaurantImg" src={"Dannys_bg.png"} style={imgStyle}></img>
+        <img className="restaurantImg" src={"../Dannys_bg.png"} style={imgStyle}></img>
 
         </div>
         <div>
