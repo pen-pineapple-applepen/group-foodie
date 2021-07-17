@@ -24,7 +24,6 @@ const PostInput = styled(OrangeInput)`
   padding: 2px;
 `;
 
-
 const displayMultiComments = (comments) => {
   return(
     <>
@@ -56,10 +55,10 @@ export default function ChatComments (props) {
     // console.log('clicked')
 
     // Hard code here
-    axios.post(`/api/comments/${9}/create`, {
+    axios.post(`/api/comments/${userId}/create`, {
       text: chat,
       date: new Date(),
-      group_id: 1
+      group_id: groupId
     })
       .then(res => {
         // getComments(groupId);
@@ -71,10 +70,6 @@ export default function ChatComments (props) {
   }
 
   function getComments(group_id) {
-    // use redux to get order id to get group_ud.
-    // this is for getting all the user info in current order/group.
-    // and after this, i could get all the respective comments to each user.
-    // console.log('workd?');
     axios.get(`/api/comments/${group_id}/group`)
       .then(res => {
         setComments(res.data);
@@ -82,8 +77,8 @@ export default function ChatComments (props) {
   }
 
   React.useEffect(() => {
-    // getComments(currentGroupId)
-    getComments(1); // Hard code
+    getComments(currentGroupId)
+    // getComments(1); // Hard code
   }, [posted]);
 
 

@@ -92,7 +92,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
 
       <CurrentOrderList currentOrders={currentGroupOrders}/>
 
-      <FlexEndButton>
+      <FlexEndButton onClick={() => history.push('/Chat/ChatPage')}>
         Chat
       </FlexEndButton>
 

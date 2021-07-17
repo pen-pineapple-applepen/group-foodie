@@ -14,33 +14,6 @@ const imgStyle = {
   height: "60px"
 }
 
-const orderDiv = () => {
-  return(
-    <div className="orderName">
-      <div>
-        <p>Current Order</p>
-      </div>
-      <div>
-        <div>
-        {/* <img className="restaurantImg" src={incomingGroupInfoFromLiveConfirmationPage.image}></img> */}
-        <img className="restaurantImg" src={"../Dannys_bg.png"} style={imgStyle}></img>
-
-        </div>
-        <div>
-          {/* <p>{incomingGroupInfoFromLiveConfirmationPage.restaurantName} Danny's</p>
-          <p>{incomingGroupInfoFromLiveConfirmationPage.date} DD/MM/YYYY</p>
-          <p>{incomingGroupInfoFromLiveConfirmationPage.numberOfUsers} People</p> */}
-          <p>Danny's</p>
-          <p>DD/MM/YYYY</p>
-          <p>3 People</p>
-        </div>
-
-      </div>
-
-    </div>
-  )
-};
-
 const chatDiv = () => {
   return (
     <div>
@@ -50,12 +23,32 @@ const chatDiv = () => {
 };
 
 export default function ChatPage () {
+  const restaurantName = useAppSelector(state => state.currentRestaurant.name);
 
   React.useEffect(() => {
     // waiting for further data loaded
     // setComments(getComments(comments));
-
   }, [])
+
+  const orderDiv = () => {
+    return(
+      <div className="orderName">
+        <div>
+          <p>Current Order</p>
+        </div>
+        <div>
+          <div>
+          <img className="restaurantImg" src={"../Dannys_bg.png"} style={imgStyle}></img>
+          </div>
+          <div>
+            <p>{restaurantName}</p>
+            <p>DD/MM/YYYY</p>
+            <p>3 People</p>
+          </div>
+        </div>
+      </div>
+    )
+  };
 
   return (
     <Container className="chatPage-background" style={{height: "800px"}}>
