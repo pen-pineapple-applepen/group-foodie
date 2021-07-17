@@ -18,7 +18,6 @@ const NewPaymentContainer = styled.div`
 `;
 
 const AddPaymentHeader = styled.h2`
-  color: navy;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
