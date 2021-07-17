@@ -34,12 +34,9 @@ const SizedImage = styled(Image)`
 `
 const OrangeNavbarContainer = styled(Navbar)`
   background-color: #FF6C36;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
   border-radius: 0 0 22px 22px;
   z-index: -11;
+
 `
 // const OrangeNavbarContainer = styled(Navbar)`
 //   background-color: #FF6C36;
@@ -156,6 +153,7 @@ export const OrangeButton = styled(Button)`
   border-radius: 30px;
   color: white;
   margin-top: 20px;
+  font-weight: bold;
 `
 export const OrangeInput = styled.input`
   background: transparent;
