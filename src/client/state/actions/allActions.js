@@ -1,6 +1,6 @@
 import { setCurrentUser } from '../reducers/currentUserReducer';
 import { addName, setNumber } from '../reducers/namesReducer';
-import { logIn, logOut } from '../reducers/loginReducer.js'
+import { logIn, logOut, setCurrentUserId } from '../reducers/loginReducer.js'
 import { addItem, subtractItem, UpdateItemPrice, UpdateItemDescription, resetItemQuantity } from '../reducers/menuItemReducer';
 import { UpdateItemName, UpdateItemId, UpdateItemQuantity, UpdateTotalPrice, UpdateRestaurantId, setUserId, setGroupId } from '../reducers/orderItemReducer';
 import { addItemToOrders, addToPriceTotal, resetAllOrders } from '../reducers/allOrderItemsReducer';
@@ -34,6 +34,7 @@ const allActions = {
   setUserId,
   updateCurrentGroup,
   setGroupId,
+  setCurrentUserId,
   createPaymentsList,
   addSelectedPayment
 }

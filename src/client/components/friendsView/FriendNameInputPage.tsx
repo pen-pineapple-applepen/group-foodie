@@ -17,6 +17,8 @@ const ContainerDiv = styled.div`
   height: 100vh;
 `
 const NameInputDiv = styled.div`
+  position: relative;
+  bottom: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,7 +54,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   const history = useHistory();
   const friendName = useAppSelector(state => state.friendName)
   const { group_id, restaurant_id } = useParams<GroupIdParams>();
-  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId } = allActions;
+  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup } = allActions;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,12 +74,13 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
     const userId = userIdData.data[0]
     console.log('user ID', userId);
     dispatch(setUserId(userId))
-
+    dispatch(setCurrentUserId(userId))
     history.push(`/Friends/Confirmation`)
   }
 
   useEffect(() => {
     dispatch(setGroupId(Number(group_id)));
+    dispatch(updateCurrentGroup(Number(group_id)));
     dispatch(UpdateRestaurantId(Number(restaurant_id)));
 
   }, [])
