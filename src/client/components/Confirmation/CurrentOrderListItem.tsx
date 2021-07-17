@@ -75,7 +75,7 @@ function CurrentOrderListItem({userId, food, quantity, price}: CurrentOrderListI
 
   return (
     <ListItemContainer>
-      <ProfileImage src="/sleepyNick.png"/>
+      <ProfileImage src="/account_circle_24dp.svg"/>
 
       <NameOrderContainer>
         <div>
