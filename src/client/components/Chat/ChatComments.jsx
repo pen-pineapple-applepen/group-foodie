@@ -56,14 +56,11 @@ export default function ChatComments (props) {
     // console.log('clicked')
 
     // Hard code here
-    axios.post(`api/comments/${9}/create`, {
+    axios.post(`/api/comments/${9}/create`, {
       text: chat,
       date: new Date(),
       group_id: 1
     })
-      .then(res => {
-        console.log('create successfully');
-      })
       .then(res => {
         // getComments(groupId);
         setPosted(posted + 1);
