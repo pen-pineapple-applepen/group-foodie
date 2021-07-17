@@ -70,10 +70,6 @@ export default function ChatComments (props) {
   }
 
   function getComments(group_id) {
-    // use redux to get order id to get group_ud.
-    // this is for getting all the user info in current order/group.
-    // and after this, i could get all the respective comments to each user.
-    // console.log('workd?');
     axios.get(`/api/comments/${group_id}/group`)
       .then(res => {
         setComments(res.data);
