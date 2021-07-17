@@ -60,13 +60,21 @@ const Payment = styled.div`
   align-items: center;
 `;
 
-
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: left;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
+const EnterDateTime = styled.div`
+  padding-top: 20px;
+  padding-bottom: 10px;
+`
+const PaymentInformationDiv = styled.div`
+  padding-top: 15px;
+`
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
@@ -153,9 +161,9 @@ const OrderShare = () => {
   return (
     <MainContainer>
       <OrangeNavbar needBackArrow={true}/>
-      <div>
+      <EnterDateTime>
         Enter Date and Time:
-      </div>
+      </EnterDateTime>
       <Line>
         <DatePicker
         selected={orderDate}
@@ -200,9 +208,9 @@ const OrderShare = () => {
           <OrderShareModal openModal={openModal} setOpenModal={setOpenModal} guestEmails={guestEmails} setGuestEmails={setGuestEmails}/>
         </Line>
       </div>
-      <div>
+      <PaymentInformationDiv>
         Payment Information:
-      </div>
+      </PaymentInformationDiv>
       <div>
         {Object.keys(selectedPayment).length !== 0 ?
           <Payment onClick={() => history.push('/PaymentOptions')}>
