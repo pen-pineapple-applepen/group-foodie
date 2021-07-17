@@ -79,6 +79,10 @@ export default function ChatComments (props) {
   React.useEffect(() => {
     getComments(currentGroupId)
     // getComments(1); // Hard code
+    const getNewCommentIn2Secs = setTimeout(() => {
+      setPosted(posted + 1);
+    }, 2000);
+
   }, [posted]);
 
 
