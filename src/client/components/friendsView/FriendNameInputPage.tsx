@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom'
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -41,16 +42,17 @@ interface FriendNameInputPageProps {
 }
 
 interface GroupIdParams {
-  group_id: string
+  group_id: string,
+  restaurant_id: string,
 }
+
 
 export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.Element {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { group_id } = useParams<GroupIdParams>();
-  const { updateCurrentGroup } = allActions;
+  const { group_id, restaurant_id } = useParams<GroupIdParams>();
+  const { addFriendName, updateCurrentGroup, updateCurrentRestaurantId } = allActions;
 
-  const { addFriendName } = allActions;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let text = e.target.value;
@@ -58,11 +60,12 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   }
 
   const handleClick = () => {
-    history.push(`/Menu/Friends/`)
+    history.push(`/Menu`)
   }
 
   useEffect(() => {
     dispatch(updateCurrentGroup(Number(group_id)));
+    dispatch(updateCurrentRestaurantId(Number(restaurant_id)));
   }, [])
 
   return (

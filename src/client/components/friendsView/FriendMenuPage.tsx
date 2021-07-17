@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Button } from 'react-bulma-components';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
-import MenuItemContainer from '../MenuItemContainer.jsx';
+import MenuItemContainer from '../Menu/MenuItemContainer.jsx';
 import { OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -68,7 +68,7 @@ export default function MenuPage () {
 
       <h2>Dannys</h2>
       <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
-        <MenuItemContainer  name={'Big Burger'} price={5}></MenuItemContainer>
+        <MenuItemContainer name={'Big Burger'} price={5}></MenuItemContainer>
       </div>
       <CheckoutButton>Checkout ${totalOrdersPrice}.00</CheckoutButton>
     </MainContainer>

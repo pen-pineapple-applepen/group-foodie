@@ -1,7 +1,7 @@
 import { createReducer, createAction } from '@reduxjs/toolkit'
 
-export const updateCurrentRestaurantName = createAction('Update_RestaurantName');
-export const updateCurrentRestaurantId = createAction('Update_RestaurantId');
+export const updateCurrentRestaurantName = createAction<string>('Update_RestaurantName');
+export const updateCurrentRestaurantId = createAction<number>('Update_RestaurantId');
 
 const initialState= {
   name: '',
