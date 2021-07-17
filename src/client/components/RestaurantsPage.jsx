@@ -71,7 +71,7 @@ export default function RestaurantPage() {
   }
 
   function clickHandler(entry) {
-    dispatch(allActions.setUsertId(userId))
+    dispatch(allActions.setUserId(userId))
     dispatch(allActions.UpdateRestaurantId(entry.restaurant_id))
     dispatch(allActions.updateCurrentRestaurantId(entry.restaurant_id))
     dispatch(allActions.updateCurrentRestaurantName(entry.name))
