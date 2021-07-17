@@ -9,21 +9,24 @@ export const setUsertId = createAction('Set_UserId');
 
 //Will need Username later?
 const initialState= {
-  itemName:'',
-  itemId: 0,
+  user_id: 0,
+  food:'',
   quantity: 0,
   price: 0,
-  restaurantId: 0,
-  userId: 0,
+  date: '',
+  food_id: 0,
+  group_id: 0,
+  restaurant_id: 0,
+  live: true,
 };
 
 export const orderItemReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(UpdateItemName, (state, action) => {
-      state.itemName = action.payload;
+      state.food = action.payload;
     })
     .addCase(UpdateItemId, (state, action) => {
-      state.itemId = action.payload;
+      state.food_id = action.payload;
     })
     .addCase(UpdateItemQuantity, (state, action) => {
       state.quantity = action.payload;
@@ -32,10 +35,10 @@ export const orderItemReducer = createReducer(initialState, (builder) => {
       state.price = action.payload;
     })
     .addCase(UpdateRestaurantId, (state, action) => {
-      state.restaurantId = action.payload;
+      state.restaurant_id = action.payload;
     })
     .addCase(setUsertId, (state, action) => {
-      state.userId = action.payload;
+      state.user_id = action.payload;
     })
 
 });
