@@ -33,7 +33,7 @@ function App() {
       <Router>
         <div className="RouterContainer">
           <Switch>
-            <Route exact path="/" component={OrderShare} />
+            <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/Restaurants" component={RestaurantPage} />
             <Route exact path="/profile" component={Profile} />
