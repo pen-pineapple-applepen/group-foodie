@@ -34,7 +34,7 @@ function App() {
     <div className="App">
       <Router>
         <div className="RouterContainer">
-          {/* <Switch>
+          <Switch>
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
             <Route exact path="/Restaurants" component={RestaurantPage} />
@@ -54,8 +54,7 @@ function App() {
             <Route exact path="/PaymentOptions" component={PaymentOptions} />"
             <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
             <Redirect to="/" />
-          </Switch> */}
-          <NewPaymentPage />
+          </Switch>
         </div>
       </Router>
     </div>
