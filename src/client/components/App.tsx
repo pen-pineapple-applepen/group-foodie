@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useState} from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
@@ -31,8 +30,6 @@ import FriendMenuItemPage from './friendsView/FriendMenuItemPage';
 
 function App() {
 
-  let [selectedPaymentIndex, makeSelectedPaymentIndex] = useState(0);
-
   // these are just some test examples
   return (
     <div className="App">
@@ -52,15 +49,12 @@ function App() {
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Route exact path="/MenuItem/Friends/" component={FriendMenuItemPage} />"
-            <Route exact path="/ShareOrder" component={() =>OrderShare({selectedPaymentIndex, makeSelectedPaymentIndex})} />"
+            <Route exact path="/ShareOrder" component={() =>OrderShare} />"
             <Route exact path="/Confirmation" component={Confirmation} />"
             <Route exact path="/Friends/Confirmation" component={FriendInitialConfirmationPage} />"
             <Route exact path="/Friends/ConfirmationEnd" component={FriendFinalConfirmationPage} />"
             <Route exact path="/PaymentOptions" component={PaymentOptions} />"
             <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
-            {/* {(props) => (
-              <Dashboard {...props} isAuthed={true} />
-            )} */}
             <Redirect to="/" />
           </Switch>
         </div>
