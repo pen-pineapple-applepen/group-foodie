@@ -131,7 +131,6 @@ const OrderShare = () => {
     const bodyParams = { due_date: orderDate.toISOString().slice(0, -5) }
     try {
       const groupId = await axios.post(`/api/groups`, bodyParams)
-      console.log('GroupID from Call',groupId)
       let currentUserOrdersCopy = [];
       for (var i = 0; i < currentUserOrders.length; i++) {
         currentUserOrdersCopy.push({...currentUserOrders[i]})
@@ -141,7 +140,6 @@ const OrderShare = () => {
         order.date = groupId.data[0].due_date;
         return order;
       })
-      console.log('New Orders',ordersTaggedWithGroupId)
       for(let order of ordersTaggedWithGroupId) {
         axios.post(`/api/orders/${userId}/user`, order)
       }
