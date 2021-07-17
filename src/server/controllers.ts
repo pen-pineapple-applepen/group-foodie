@@ -18,8 +18,8 @@ async function createUser(req, res) {
     first_name, last_name, email, username, password, guest
   } = req.body;
   try {
-    const user = await models.createUser(first_name, last_name, email, username, password, guest);
-    res.status(200).send('created user');
+    const userId = await models.createUser(first_name, last_name, email, username, password, guest);
+    res.status(200).send(userId);
   } catch (err) {
     console.log('error creating user: ', err)
     res.status(404).send(err);

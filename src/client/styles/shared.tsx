@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useHistory } from "react-router-dom";
 import { useHistory, Link } from "react-router-dom";
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -40,6 +39,7 @@ const OrangeNavbarContainer = styled(Navbar)`
   align-items: center;
   height: 60px;
   border-radius: 0 0 22px 22px;
+  z-index: -11;
 `
 // const OrangeNavbarContainer = styled(Navbar)`
 //   background-color: #FF6C36;
@@ -91,27 +91,57 @@ const HeaderImageImg = styled.div<HeaderImageProps>`
   top: -50px;
   width: 100vw;
   height: 250px;
+  z-index: -11;
 `
 
 const SideBarContainer = styled(motion.div)`
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  display: flex;
+  justify-content: flex-end;
   width: 100vw;
-  height: 100vh;
+  height: 93.5vh;
+  z-index: 100;
+  background-color: white;
+  border: 1px solid white;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 25px;
 `
+const SideBarOptions = styled(motion.div)`
+  padding-top: 30px;
+  padding-right: 40px;
+  font-size: 20px;
+  p {
+    padding-bottom: 8px;
+  }
+`
+const UserName = styled.h3`
+  margin-bottom: 30px;
+  border-bottom: 6px solid #FF6C36;
+`
+
 
 const SideBarMenu = ({sideBarOpen}) => {
 
   return (
     <AnimatePresence>
       {sideBarOpen && (
-        <>
+        <div>
           <SideBarContainer
             initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
+            animate={{ x: '-50%' }}
             exit={{ x: '-100%' }}
+            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
           >
-
+            <SideBarOptions>
+              <UserName>Erik Oh</UserName>
+              <p>Account</p>
+              <p>Your Orders</p>
+              <p>Log Out</p>
+            </SideBarOptions>
           </SideBarContainer>
-        </>
+        </div>
       )}
     </AnimatePresence>
   )
@@ -174,7 +204,8 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
             <Navbar.Item>Log Out</Navbar.Item>
           </Navbar.Container>
         </Navbar.Menu>
-      </OrangeNavbarContainer></>
+      </OrangeNavbarContainer>
+    </>
   )
 }
 

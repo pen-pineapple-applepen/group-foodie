@@ -2,10 +2,11 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { ReactElement } from 'react'
-import CountDownTimer from './CountDownTimer';
-import CurrentOrderList from "./CurrentOrderList";
+import CountDownTimer from '../Confirmation/CountDownTimer';
+import CurrentOrderList from "../Confirmation/CurrentOrderList";
 import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 interface ConfirmationProps {
 
@@ -48,8 +49,13 @@ const FlexEndButton = styled(OrangeButton)`
 `
 
 
-function Confirmation({}: ConfirmationProps): ReactElement {
+function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
   const currentOrders = useAppSelector(state => state.allOrderItems.orders)
+  const history = useHistory();
+
+  const handleStartOrder = () => {
+    history.push('/Menu/Friends')
+  }
 
   return (
     <ConfirmationContainer>
@@ -58,11 +64,11 @@ function Confirmation({}: ConfirmationProps): ReactElement {
 
       <TopContainer>
         <ThankYouMessage>
-          Thank you for your order!
+          Share Order for Danny's
         </ThankYouMessage>
       </TopContainer>
-      <span>This order will be placed in:</span>
-      <CountDownTimer/>
+      <span>Time left to put in your order:</span>
+      <CountDownTimer edit={false}/>
 
       <CurrentOrderList
         currentOrders={currentOrders}
@@ -71,8 +77,11 @@ function Confirmation({}: ConfirmationProps): ReactElement {
       <FlexEndButton>
         Chat
       </FlexEndButton>
+      <FlexEndButton onClick={handleStartOrder}>
+        Start Your Order
+      </FlexEndButton>
     </ConfirmationContainer>
   )
 }
 
-export default Confirmation
+export default FriendInitialConfirmation;

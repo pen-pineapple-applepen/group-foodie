@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 
 interface CountDownTimerProps {
-
+  edit?: boolean,
 }
 
 const TimerContainer = styled.div`
@@ -32,9 +32,10 @@ const EditButton = styled.button`
 	outline: inherit;
 `
 
-function CountDownTimer({}: CountDownTimerProps): ReactElement {
+function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
   const [ dueDate, setDueDate ] = useState('')
   const groupId = useAppSelector(state => state.currentGroup)
+  const isLoggedIn = useAppSelector(state => state.loginDetails.loggedIn)
 
   const countdownRenderer = () => {
     const { days, hours, minutes, seconds, completed } = calcTimeDelta("2021-07-17T00:07:26") // needs to be updated with dynamic 'dueDate' state
@@ -57,7 +58,7 @@ function CountDownTimer({}: CountDownTimerProps): ReactElement {
         date={Date.now()}
         renderer={countdownRenderer}
       />
-      <EditButton>edit</EditButton>
+      {isLoggedIn && <EditButton>edit</EditButton>}
     </TimerContainer>
   )
 }
