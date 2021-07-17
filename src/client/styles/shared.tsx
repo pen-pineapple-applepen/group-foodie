@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // interfaces
@@ -168,8 +169,8 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({ needBa
         </NavbarBrand>
         <Navbar.Menu>
           <Navbar.Container>
-            <Navbar.Item>Account</Navbar.Item>
-            <Navbar.Item>Your Orders</Navbar.Item>
+            <NavbarItem to="/profile" renderAs={Link}>Account</NavbarItem>
+            <NavbarItem to="/history" renderAs={Link}>Your Orders</NavbarItem>
             <Navbar.Item>Log Out</Navbar.Item>
           </Navbar.Container>
         </Navbar.Menu>
