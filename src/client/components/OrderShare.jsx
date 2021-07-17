@@ -3,6 +3,9 @@
 //
 
 import React, { useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useHistory } from 'react-router-dom';
+import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Button, Block, Modal } from 'react-bulma-components';
 import {OrangeButton} from '../styles/shared.tsx';
@@ -12,7 +15,6 @@ import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import OrderShareModal from "./OrderShareModal";
-import { useHistory } from 'react-router-dom'
 import axios from "axios";
 
 const ColoredLine = () => (
@@ -68,10 +70,14 @@ const MainContainer = styled.div`
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
+  const currentUserOrders = useAppSelector(state => state.allOrderItems.orders);
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
-  let [paymentData, setPaymentData] = useState([]);
+  const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
+  const selectedPayment = useAppSelector(state => state.currentPayments.selectedPayment);
+  const dispatch = useAppDispatch();
   let [openModal, setOpenModal] = useState();
+  const userId = useAppSelector(state => state.loginDetails.userId);
 
   const history = useHistory();
 
@@ -84,7 +90,7 @@ const OrderShare = () => {
   useEffect(() => {
     fetchPaymentData();
   }, []);
-  // [] needs to be the userID that you get from the redux state
+  // [] needs to be selectedPayment (test this)
 
   const fetchPaymentData = () => {
     axios.get('/api/payments/2')
@@ -94,11 +100,13 @@ const OrderShare = () => {
         for (var i = 0; i < response.data.length; i++) {
           formattedCards.push({
             id: response.data[i].id,
-            card_number: String(response.data[i].card_number).slice(-4),
-            card_type: response.data[i].card_type
+            cardNumber: String(response.data[i].card_number).slice(-4),
+            cardType: response.data[i].card_type
           })
         }
-        setPaymentData(formattedCards)
+        console.log(formattedCards);
+        dispatch(allActions.createPaymentsList(formattedCards));
+        // dispatch(allActions.addSelectedPayment(formattedCards[0]));
       }
     })
     .catch(err => {
@@ -117,6 +125,28 @@ const OrderShare = () => {
 
   const handleModalClick = () => {
     <OrderShareModal />
+  }
+
+  async function happensWhenShareOrderClick() {
+    const bodyParams = { due_date: orderDate.toISOString().slice(0, -5) }
+    try {
+      const groupId = await axios.post(`/api/groups`, bodyParams)
+      let currentUserOrdersCopy = [];
+      for (var i = 0; i < currentUserOrders.length; i++) {
+        currentUserOrdersCopy.push({...currentUserOrders[i]})
+      }
+      const ordersTaggedWithGroupId = currentUserOrdersCopy.map(order => {
+        order.group_id = groupId.id;
+        order.date = groupId.due_date;
+        return order;
+      })
+      for(let order of ordersTaggedWithGroupId) {
+        axios.post(`/api/orders/${userId}/user`, order)
+      }
+      history.push('/Confirmation')
+    } catch (err) {
+      console.log('err', err)
+    }
   }
 
   return (
@@ -173,14 +203,14 @@ const OrderShare = () => {
         Payment Information:
       </div>
       <div>
-        {paymentData.length !== 0 ?
-          <Payment>
+        {Object.keys(selectedPayment).length !== 0 ?
+          <Payment onClick={() => history.push('/PaymentOptions')}>
             <div>
               <span>
-                ***{String(paymentData[0].card_number)}
+                ***{selectedPayment.cardNumber}
               </span>
               <span>
-                {paymentData[0].card_type}
+                {selectedPayment.cardType}
               </span>
             </div>
             <div>
@@ -200,7 +230,7 @@ const OrderShare = () => {
         }
       </div>
       <Line>
-        <OrangeButton onClick={() => history.push('/Confirmation')}>
+        <OrangeButton onClick={happensWhenShareOrderClick}>
           Share Order
         </OrangeButton>
       </Line>

@@ -20,8 +20,8 @@ function CurrentOrderList({currentOrders}: CurrentOrderListProps): ReactElement 
   const orderList = currentOrders.map(order => (
     <CurrentOrderListItem
       key={order.id}
-      userId={order.userId}
-      food={order.itemName}
+      userId={order.user_id}
+      food={order.food}
       quantity={order.quantity}
       price={order.price}
     />
