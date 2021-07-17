@@ -133,8 +133,8 @@ const SideBarMenu = ({sideBarOpen}) => {
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
-    dispatch(allActions.currentUserReducer({}));
-    dispatch(allActions.groupReducer(0));
+    dispatch(allActions.setCurrentUser({}));
+    dispatch(allActions.updateCurrentGroup(0));
     dispatch(allActions.logOut());
     dispatch(allActions.setCurrentUserId(0));
     history.push('/')
