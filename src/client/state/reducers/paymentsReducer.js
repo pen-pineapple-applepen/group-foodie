@@ -8,8 +8,7 @@ export const addSelectedPayment = createAction('CREATE_SELECTEDPAYMENT');
 // logIn will only store the UserId in state!
 
 let initialState = {
-  paymentsList: [],
-  selectedPayment: {}
+  paymentsList: []
 };
 
 export const paymentsReducer = createReducer (initialState, (builder) => {
@@ -18,11 +17,6 @@ export const paymentsReducer = createReducer (initialState, (builder) => {
       state.selectedPayment = action.payload[0];
       state.paymentsList = action.payload;
       // action.payload will be an array of the payments
-    })
-    .addCase(addSelectedPayment, (state, action) => {
-      state.selectedPayment = state.paymentsList.filter(payment => (
-        payment.id === action.payload
-      ))[0]
     })
 })
 

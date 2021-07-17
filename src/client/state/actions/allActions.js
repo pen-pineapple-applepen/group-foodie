@@ -35,8 +35,7 @@ const allActions = {
   updateCurrentGroup,
   setGroupId,
   setCurrentUserId,
-  createPaymentsList,
-  addSelectedPayment
+  createPaymentsList
 }
 
 export default allActions;

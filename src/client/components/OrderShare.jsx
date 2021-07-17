@@ -74,7 +74,6 @@ const OrderShare = () => {
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
-  const selectedPayment = useAppSelector(state => state.currentPayments.selectedPayment);
   const dispatch = useAppDispatch();
   let [openModal, setOpenModal] = useState();
   const userId = useAppSelector(state => state.loginDetails.userId);
@@ -107,7 +106,6 @@ const OrderShare = () => {
         }
         formattedCards[0].selected = true;
         dispatch(allActions.createPaymentsList(formattedCards));
-        // dispatch(allActions.addSelectedPayment(formattedCards[0]));
       }
     })
     .catch(err => {
