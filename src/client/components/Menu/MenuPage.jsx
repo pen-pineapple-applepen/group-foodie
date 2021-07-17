@@ -63,7 +63,7 @@ export default function MenuPage () {
     dispatch(allActions.UpdateItemQuantity(0));
     dispatch(allActions.UpdateTotalPrice(0));
     //Get Menu List
-    getMenuList(currentItem.restaurantId)
+    getMenuList(currentItem.restaurant_id)
   },[])
 
   return(
