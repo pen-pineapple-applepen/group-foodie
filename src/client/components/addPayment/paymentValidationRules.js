@@ -9,8 +9,8 @@ export default function paymentValidate (values) {
     errors.newCCNumber = 'Please enter a valid credit card number';
   }
 
-  if (!values.newCCV) {
-    errors.newCCV = 'Please enter a valid CCV number';
+  if (!values.newCVV) {
+    errors.newCVV = 'Please enter a valid CCV number';
   }
 
   if (!values.newCCExpiry) {

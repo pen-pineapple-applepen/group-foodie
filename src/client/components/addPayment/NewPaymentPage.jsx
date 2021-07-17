@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { useAppSelector } from '/src/client/state/hooks.ts'
 import useForm from '../loginSignUpPage/formValidation.js';
 import validate from './paymentValidationRules.js';
+// import CreditCardInput from 'react-credit-card-input';
 
 const NewPaymentContainer = styled.div`
   margin: 10%;
@@ -48,7 +49,7 @@ export default function NewPaymentPage() {
       card_number: Number(values.newCCNumber),
       card_type: newCCType,
       exp_date: values.newCCExpiry,
-      cvv: Number(values.newCCV),
+      cvv: Number(values.newCVV),
       zip_code: Number(values.zipCode),
       user_id: userId,
     }}
@@ -116,23 +117,27 @@ export default function NewPaymentPage() {
               <Form.Help className="help is-danger">{errors.newCCExpiry}</Form.Help>
             )}
           </Form.Control>
-          <Form.Label>CCV:</Form.Label>
+          <Form.Label>CVV:</Form.Label>
           <Form.Control>
             <Form.Input
-              name="newCCV"
-              placeholder="CCV"
-              className={`input ${errors.newCCV && "is-danger"}`}
+              name="newCVV"
+              placeholder="CVV"
+              className={`input ${errors.newCVV && "is-danger"}`}
               onChange={handleChange}
             />
             {errors.newCCV && (
-              <Form.Help className="help is-danger">{errors.newCCV}</Form.Help>
+              <Form.Help className="help is-danger">{errors.newCVV}</Form.Help>
             )}
             <Icon align="right" size="small">
               <i className="fas fa-question-circle" />
             </Icon>
           </Form.Control>
-          <Form.Label>Billing Zip:</Form.Label>
+            <Form.Label>Billing Zip:</Form.Label>
           <Form.Control>
+          {/* <CreditCardInput
+            cardNumberInputProps={{onChange: handleChange}}
+            fieldStyle = {{size: "large", border: "0.5px solid"}}
+          /> */}
             <Form.Input
               name="zipCode"
               placeholder="Zip Code"
