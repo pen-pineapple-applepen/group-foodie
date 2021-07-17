@@ -11,7 +11,7 @@ const getOneUserInfo = async (user_id) => {
 }
 
 const createUser = async(first_name, last_name, email, username, password, guest) => {
-  await db('users')
+  const insertedId = await db('users')
     .insert({
       first_name,
       last_name,
@@ -19,7 +19,8 @@ const createUser = async(first_name, last_name, email, username, password, guest
       username,
       password,
       guest,
-    })
+    }, 'id')
+  return insertedId;
 }
 
 const getFriends = async (user_id) => {
