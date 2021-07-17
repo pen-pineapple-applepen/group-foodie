@@ -19,7 +19,7 @@ import MenuPage from './MenuPage';
 import MenuItemPage from './MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
-import NewPaymentPage from './NewPaymentPage';
+import NewPaymentPage from './addPayment/NewPaymentPage';
 
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
@@ -31,10 +31,10 @@ function App() {
     <div className="App">
       <Router>
         <div className="RouterContainer">
-          <Switch>
+          {/* <Switch>
             <Route exact path="/" component={mainLoginPage} />
             <Route exact path="/SignUp" component={SignUpPage} />
-            <Route exact path="/Restaurants" component={RestaurantPage} />    
+            <Route exact path="/Restaurants" component={RestaurantPage} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/friends" component={FriendsList} />
             <Route exact path="/history" component={OrderHistory} />
@@ -45,8 +45,8 @@ function App() {
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Redirect to="/" />
-          </Switch>
-          {/* <NewPaymentPage /> */}
+          </Switch> */}
+          <NewPaymentPage />
         </div>
       </Router>
     </div>
