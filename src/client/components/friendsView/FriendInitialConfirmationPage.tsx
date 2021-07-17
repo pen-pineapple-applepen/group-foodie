@@ -68,7 +68,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
         </ThankYouMessage>
       </TopContainer>
       <span>Time left to put in your order:</span>
-      <CountDownTimer edit={false}/>
+      <CountDownTimer/>
 
       <CurrentOrderList
         currentOrders={currentOrders}
