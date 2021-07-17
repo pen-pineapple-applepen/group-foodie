@@ -26,7 +26,15 @@ export default function MainLoginPage() {
       .then (res => {
         if (res.data.hasCorrectCredentials === true) {
           dispatch(allActions.logIn(res.data.id));
+          axios.get(`/api/users/${res.data.id}`)
+            .then((results) => {
+              dispatch(allActions.setCurrentUser(results.data))
+            })
+            .catch((err) => {
+              console.log(err);
+            })
           history.push("/LandingPage");
+
         } else if (res.data.hasCorrectCredentials === false) {
           alert('Incorrect username or password');
         }

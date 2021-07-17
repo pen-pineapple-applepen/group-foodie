@@ -4,45 +4,76 @@
 
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-bulma-components';
+import { Button, Block, Modal } from 'react-bulma-components';
+import {OrangeButton} from '../styles/shared.tsx';
+import { OrangeNavbar } from '../styles/shared.tsx';
 import DatePicker from "react-datepicker";
 import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
+import OrderShareModal from "./OrderShareModal";
+import { useHistory } from 'react-router-dom'
 import axios from "axios";
 
 const ColoredLine = () => (
   <hr
       style={{
-          width: '20%',
+          width: '60%',
           color: '#FF6C36',
           backgroundColor: '#FF6C36',
       }}
   />
 );
 
- // const Text = styled.span`
-  // margin-top: 50px;
-  // margin-bottom: 25px;
-  // `;
-  // const FriendsListDiv = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // `;
+const CenteredButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+`
 
-  // NOT WORKING WITH STYLED COMPONENTS WILL HAVE TO LOOK INTO THIS
-  // const ColoredLine = styled.hr`
-  // width: '20%',
-  // color: '#FF6C36'
-  // backgroundColor: '#FF6C36'
-  // `;
+const CircleButton = styled(OrangeButton)`
+  border-radius: 30px;
+  margin-top 3px;
+`;
+
+const Line = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LineCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Payment = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+`;
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   let [paymentData, setPaymentData] = useState([]);
+  let [openModal, setOpenModal] = useState();
+
+  const history = useHistory();
 
   const isSelectedDateToday = new Date().getDate() === orderDate.getDate();
   let minTimeHour = new Date().getHours();
@@ -56,7 +87,7 @@ const OrderShare = () => {
   // [] needs to be the userID that you get from the redux state
 
   const fetchPaymentData = () => {
-    axios.get('/payments/2')
+    axios.get('/api/payments/2')
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];
@@ -84,12 +115,17 @@ const OrderShare = () => {
     setGuestEmail('');
   }
 
+  const handleModalClick = () => {
+    <OrderShareModal />
+  }
+
   return (
-    <div className='order_share'>
+    <MainContainer>
+      <OrangeNavbar />
       <div>
-        Schedule Order Date and Time:
+        Enter Date and Time:
       </div>
-      <div>
+      <Line>
         <DatePicker
         selected={orderDate}
         onChange={(date) => setOrderDate(date)}
@@ -100,54 +136,76 @@ const OrderShare = () => {
         maxTime={new Date(new Date().setHours(23, 59, 0, 0))}
         dateFormat="MMMM d, yyyy h:mm aa"
         />
-      </div>
-      <ColoredLine />
-      <div>
-        Set timer for others to pick their order:
-
-      </div>
-      <div>
-        Share Order with Friends:
-        <br />
-        ** An order link to share will also be given after you submit your payment information **
-        <br />
-        <input type="text" name='email:' placeholder='Enter email(s)' value={guestEmail} onChange={handleGuestEmailChange} />
-        <input type="button" value="Submit" onClick={handleGuestEmailSubmit} />
-        <div>
-          {guestEmails.length === 1 ?
-            guestEmails.length + ' Person Added' :
-            guestEmails.length + ' People Added'}
-        </div>
+      </Line>
+      <Line>
         <ColoredLine />
+      </Line>
+      <div>
+        <div>
+          Share Order with Friends:
+        </div>
+        <Line>
+          ** An order link to share will also be given after you submit your payment information **
+        </Line>
+        <LineCenter>
+          <input type="text" name='email:' placeholder='Enter email(s)' value={guestEmail} onChange={handleGuestEmailChange} />
+          <CenteredButton>
+            <CircleButton onClick={handleGuestEmailSubmit} />
+          </CenteredButton>
+        </LineCenter>
+        <Line>
+          <ColoredLine />
+        </Line>
+        <Line>
+          <OrangeButton
+            onClick={() => {
+            setOpenModal('card');
+            }}
+          >
+            {guestEmails.length === 1 ?
+              guestEmails.length + ' Person Added' :
+              guestEmails.length + ' People Added'}
+          </OrangeButton>
+          <OrderShareModal openModal={openModal} setOpenModal={setOpenModal} guestEmails={guestEmails} setGuestEmails={setGuestEmails}/>
+        </Line>
       </div>
       <div>
         Payment Information:
       </div>
       <div>
         {paymentData.length !== 0 ?
-          <div>
-            <span>
-              ***{String(paymentData[0].card_number)}
-            </span>
-            <span>
-              {paymentData[0].card_type}
-            </span>
+          <Payment>
+            <div>
+              <span>
+                ***{String(paymentData[0].card_number)}
+              </span>
+              <span>
+                {paymentData[0].card_type}
+              </span>
+            </div>
+            <div>
+              <img className='caret_right'
+                src={"./caret_right.png"}
+              />
+            </div>
+          </Payment> :
+          <Payment>
+            <div>
+              Add Card
+            </div>
             <img className='caret_right'
-              src={"./caret_right.png"}
+                src={"./caret_right.png"}
             />
-          </div> :
-          <div>
-            Add Card
-          </div>
+          </Payment>
         }
       </div>
-      <div>
-        Share Order Button
-      </div>
-    </div>
+      <Line>
+        <OrangeButton onClick={() => history.push('/Confirmation')}>
+          Share Order
+        </OrangeButton>
+      </Line>
+    </ MainContainer>
   )
 }
 
 export default OrderShare;
-
-

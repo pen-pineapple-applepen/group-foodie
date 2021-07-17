@@ -18,19 +18,20 @@ const InfoContainer = styled.div`
 
 const Image = styled.img`
   background-color: #FF6C36;
-  width: 154px;
+  min-width: 154px;
   height: 117px;
+  position:relative;
 `;
 
 const Name = styled.div`
-  padding: 10px 10px;
+  padding: 2px 2px;
 `;
 
 const SubInfo = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px 10px;
+  padding: 2px 2px;
 `;
 
 export default function RestaurantContainer ({name, cuisine, hours, id}) {
@@ -46,6 +47,8 @@ export default function RestaurantContainer ({name, cuisine, hours, id}) {
         </Name>
         <SubInfo>
           <h5>{cuisine}</h5>
+        </SubInfo>
+        <SubInfo>
           <h5>{hours}</h5>
         </SubInfo>
       </InfoContainer>

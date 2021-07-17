@@ -2,6 +2,7 @@ node_modules
 build
 public/bundle.js
 schema.sql
-src/server/db/index.js
+src/server/db/scott_index.js
 schema_scott.sql
 seed_scott.js
+src/server/db/index.js

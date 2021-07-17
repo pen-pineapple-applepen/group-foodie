@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
-import allActions from '../state/actions/allActions';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
-import {OrangeButton} from '../styles/shared.tsx';
+import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared.tsx';
 import MenuItemIncrementor from './MenuItemIncrementor.jsx';
 import { useHistory } from 'react-router-dom';
 
@@ -43,7 +43,9 @@ export default function MenuItemPage () {
 
   return(
     <MainConatiner>
-      <img src='Dannys_bg.png'/>
+      <OrangeNavbar/>
+      <HeaderImage src="/Dannys_bg.png"/>
+      {/* <img src='Dannys_bg.png'/> */}
       <h2>{currentOrder.itemName}</h2>
       <p>{item.description}</p>
       <p>${item.price}</p>

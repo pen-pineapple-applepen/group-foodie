@@ -15,12 +15,12 @@ import landingPage from './LandingPage/landingPage';
 import Profile from './Profile';
 import FriendsList from './FriendsList';
 import OrderHistory from './OrderHistory';
-import MenuPage from './MenuPage';
-import MenuItemPage from './MenuItemPage';
+import MenuPage from './Menu/MenuPage';
+import MenuItemPage from './Menu/MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
 import NewPaymentPage from './NewPaymentPage';
-
+import Confirmation from './Confirmation/ConfirmationPage';
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
 
@@ -41,9 +41,12 @@ function App() {
             <Route exact path="/Menu" component={MenuPage} />
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
-            <Route exact path="/Friends/:group_id" component={FriendNameInputPage} />
+            <Route exact path="/Friends/:group_id/:restaurant_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
+            <Route exact path="/ShareOrder" component={OrderShare} />"
+            <Route exact path="/Confirmation" component={Confirmation} />"
+
             <Redirect to="/" />
           </Switch>
           {/* <NewPaymentPage /> */}
