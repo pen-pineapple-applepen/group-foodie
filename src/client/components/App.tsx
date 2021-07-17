@@ -20,7 +20,7 @@ import MenuItemPage from './MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
 import ChatPage from './ChatPage';
 import NewPaymentPage from './NewPaymentPage';
-
+import PaymentOptions from './PaymentOptions';
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
 
@@ -43,7 +43,6 @@ function App() {
             <Route exact path="/LandingPage" component={landingPage} />
             <Route exact path="/Friends/:group_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
-            <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Redirect to="/" />
           </Switch>
           {/* <NewPaymentPage /> */}
