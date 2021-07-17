@@ -17,8 +17,9 @@ Project is created with:
 	
 ## Setup
 ### Seed Initial Database (WIP)
-* Make copy of example.schema.sql and src/server/db/example.index.js
-* Create database groupfoodie on postgres
+* Make copy of src/server/db/example.index.js and example.schema.sql
+* Rename to index.js and schema.sql in same folder
+* If no database, create database groupfoodie on postgres
 * Change copy file path from schema.sql to seed files in src/server/db/seed
 ```
 $ npm run database

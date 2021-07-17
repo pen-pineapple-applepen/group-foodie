@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
-import allActions from '../state/actions/allActions';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
 
 const MainConatiner = styled.div`
@@ -36,7 +36,7 @@ const SubInfo = styled.div`
 export default function MenuItemContainer ({name, price, category}) {
   return(
     <MainConatiner>
-        {category==='entree' ? <Image src={'lunch_icon_24dp.svg'}/> : <Image src={'local_cafe_black_24dp.svg'}/>}
+        {category==='entree' ? <Image src={'/lunch_icon_24dp.svg'}/> : <Image src={'/local_cafe_black_24dp.svg'}/>}
       <InfoContainer>
         <Name>
           <h3>{name}</h3>

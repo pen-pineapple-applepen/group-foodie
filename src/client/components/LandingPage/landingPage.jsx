@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Navbar, Columns } from 'react-bulma-components';
 import styled from "styled-components";
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../../styles/shared';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 const StyledButton = styled(OrangeButton)`
 top: 70%;
@@ -24,20 +25,26 @@ justify-content: center;
 const LandingPage = () => {
   const history = useHistory()
 
+  const handleCreateOrder = () => {
+    history.push('/Restaurants')
+  }
+
   const goBack = () => {
     history.goBack()
   }
 
+  const userInfo = useSelector((state) => state.currentUser);
+
   return (
     <div className="login-signup-background">
-      <OrangeNavbar needBackArrow={true} onBackArrowClick={goBack}/>
+      <OrangeNavbar needBackArrow={true} onBackArrowClick={goBack} />
       <StyledContainer>
-          <StyledGreeting>
-            Welcome, Bob Smith!
-          </StyledGreeting>
-          <StyledButton onClick={history.push("/Restaurants")}>
-            Create Order
-          </StyledButton>
+        <StyledGreeting>
+          Welcome, {userInfo.first_name} {userInfo.last_name}!
+        </StyledGreeting>
+        <StyledButton onClick={() => history.push("/Restaurants")}>
+          Create Order
+        </StyledButton>
       </StyledContainer>
     </div>
   )

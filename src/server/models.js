@@ -109,6 +109,9 @@ const getDueDateByGroupId = async (group_id) => {
     })
     return dueDate;
 }
+
+// `insert into times (time) values (to_timestamp(${Date.now()} / 1000.0))`
+
 const createGroup = async (due_date) => {
   const idDate = await db('groups')
     .insert({

@@ -78,6 +78,8 @@ const OrderShare = () => {
   let [openModal, setOpenModal] = useState();
   const userId = useAppSelector(state => state.loginDetails.userId);
 
+  const history = useHistory();
+
   const isSelectedDateToday = new Date().getDate() === orderDate.getDate();
   let minTimeHour = new Date().getHours();
   if (!isSelectedDateToday) {
@@ -196,7 +198,7 @@ const OrderShare = () => {
       </div>
       <div>
         {Object.keys(selectedPayment).length !== 0 ?
-          <Payment>
+          <Payment onClick={() => history.push('/PaymentOptions')}>
             <div>
               <span>
                 ***{selectedPayment.cardNumber}
@@ -222,7 +224,7 @@ const OrderShare = () => {
         }
       </div>
       <Line>
-        <OrangeButton>
+        <OrangeButton onClick={() => history.push('/Confirmation')}>
           Share Order
         </OrangeButton>
       </Line>
