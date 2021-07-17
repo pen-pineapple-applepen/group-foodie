@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import {OrangeNavbar, OrangeButton} from '/src/client/styles/shared.tsx';
 import {Button, Icon, Form} from 'react-bulma-components';
 import { useHistory } from 'react-router-dom';
+import useForm from '../loginSignUpPage/formValidation.js';
+import validate from './paymentValidationRules.js';
 
 const NewPaymentContainer = styled.div`
   margin: 10%;
@@ -22,7 +24,7 @@ export default function NewPaymentPage () {
   const [newCCNumber, setNewCCNumber] = useState(0);
   const [newCCExpiry, setNewCCExpiry] = useState('');
   const [newCCV, setNewCCV] = useState(0);
-  const [cardName, setCardName] = useState('');
+  const [cardholderName, setCardholderName] = useState('');
   const [zipCode, setZipCode] = useState(0);
 
   const history = useHistory();
@@ -43,8 +45,8 @@ export default function NewPaymentPage () {
     <div>
       <OrangeNavbar needBackArrow={true} onBackArrowClick={goBack}/>
       <NewPaymentContainer>
-        <AddPaymentHeader>Add a new credit card</AddPaymentHeader>
-        <Form.Field className="is-small">
+        <AddPaymentHeader>Add a New Credit Card</AddPaymentHeader>
+        <Form.Field>
           <Form.Label>Cardholder Name:</Form.Label>
           <Form.Control>
             <Form.Input/>
