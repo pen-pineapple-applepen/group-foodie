@@ -11,8 +11,6 @@ export default function paymentValidate (values) {
 
   if (!values.newCCV) {
     errors.newCCV = 'Please enter a valid CCV number';
-  } else if (!values.newCCV.length === 4 || !values.newCCV.length === 3) {
-    errors.newCCV = 'CCV is a 3-digit or 4-digit number';
   }
 
   if (!values.newCCExpiry) {
@@ -23,7 +21,7 @@ export default function paymentValidate (values) {
 
   if (!values.zipCode) {
     errors.zipCode = 'Please enter a valid zip code';
-  } else if (!values.zipCode.length === 5) {
+  } else if (values.zipCode.length !== 5) {
     errors.zipCode = 'Not a valid zip code';
   }
 

@@ -21,12 +21,7 @@ const AddPaymentHeader = styled.h2`
 `;
 
 export default function NewPaymentPage() {
-  // const [newCCType, setNewCCType] = useState('');
-  // const [newCCNumber, setNewCCNumber] = useState(0);
-  // const [newCCExpiry, setNewCCExpiry] = useState('');
-  // const [newCCV, setNewCCV] = useState(0);
-  // const [cardholderName, setCardholderName] = useState('');
-  // const [zipCode, setZipCode] = useState(0);
+  const [newCCType, setNewCCType] = useState('');
 
   const userInfo = useAppSelector((state) => state.currentUser);
   const userId = userInfo.id;
@@ -40,9 +35,28 @@ export default function NewPaymentPage() {
     history.goBack();
   };
 
+  const selectCardType = (e) => {
+    setNewCCType(e.target.value)
+  };
+
   const addPayment = () => {
-    console.log('added payment!')
+    axios.post(`/api/payments/${userId}`), {params: {
+      name: values.cardholderName,
+      card_number: Number(values.newCCNumber),
+      card_type: newCCType,
+      exp_date: values.newCCExpiry,
+      cvv: Number(values.newCCV),
+      zip_code: Number(values.zipCode),
+      user_id: userId,
+    }}
+      .then(res => {
+        console.log('successfully added payment!');
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
+
 
   const { values, handleChange, errors, handleSubmit } = useForm(addPayment, validate);
 
@@ -64,7 +78,6 @@ export default function NewPaymentPage() {
               <Form.Help className="help is-danger">{errors.cardholderName}</Form.Help>
             )}
           </Form.Control>
-
           <Form.Label>Card Number:</Form.Label>
           <Form.Control>
             <Form.Input
@@ -80,16 +93,14 @@ export default function NewPaymentPage() {
               <Form.Help className="help is-danger">{errors.newCCNumber}</Form.Help>
             )}
           </Form.Control>
-
           <Form.Label>Type:</Form.Label>
-          <Form.Select>
+          <Form.Select onChange={selectCardType}>
             <option>-</option>
             <option>Visa</option>
             <option>MasterCard</option>
             <option>Discover</option>
             <option>American Express</option>
           </Form.Select>
-
           <Form.Label>Expiry Date:</Form.Label>
           <Form.Control>
             <Form.Input
@@ -117,7 +128,6 @@ export default function NewPaymentPage() {
               <i className="fas fa-question-circle" />
             </Icon>
           </Form.Control>
-
           <Form.Label>Billing Zip:</Form.Label>
           <Form.Control>
             <Form.Input
