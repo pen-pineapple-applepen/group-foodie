@@ -1,49 +1,58 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { Button } from 'react-bulma-components';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
-import MenuItemContainer from '../Menu/MenuItemContainer.jsx';
-import { OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared';
-import { useHistory, useParams } from 'react-router-dom';
+import MenuItemContainer from '../Menu/MenuItemContainer';
+import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared.tsx';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const MainContainer = styled.div`
+const MainConatiner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-const CurrentOrderPool = styled.div`
-
-`
-
 const CheckoutButton = styled(OrangeButton)`
   border-radius: 7px;
   width: 50%;
 `;
 
-export default function MenuPage () {
+export default function FriendMenuPage () {
   const currentItem = useAppSelector((state)=>state.currentMenuItem)
   const totalOrdersPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
+  const restaurantName = useAppSelector((state)=>state.currentRestaurant.name)
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const [ menuList, setMenuList ] = React.useState([]);
+  //axios call function for intial array of menu items and local storage
+  async function getMenuList (restaurantid) {
+    let localMenuData = localStorage.getItem(`MenuListData_${restaurantid}`);
+    if (!localMenuData) {
+      const rawData = await axios.get(`/api/restaurants/${restaurantid}/menu`)
+      localMenuData = rawData.data;
+      localStorage.setItem(`MenuListData_${restaurantid}`, JSON.stringify(localMenuData))
+    } else {
+      localMenuData = JSON.parse(localMenuData);
+    }
+    setMenuList(localMenuData);
+  }
 
   function clickHandler (entry) {
-    //reroute
-    console.log(entry.name)
-    console.log(entry.price)
-    dispatch(allActions.UpdateItemName(entry.name));
-    dispatch(allActions.UpdateItemPrice(entry.price));
-    dispatch(allActions.UpdateItemDescription(entry.description));
-    dispatch(allActions.UpdateItemId(entry.id));
-    history.push("/MenuItem");
+    dispatch(allActions.UpdateItemName(entry.menu_item_name));
+    dispatch(allActions.UpdateItemPrice(entry.menu_item_pricing.toFixed(2)));
+    dispatch(allActions.UpdateItemDescription(entry.menu_item_description));
+    dispatch(allActions.UpdateItemId(entry.menu_item_id));
+    history.push("/MenuItem/Friends");
+  }
+
+  function handleCheckout() {
+    history.push('/Confirmation');
   }
 
   //Resets Current Selected Item
-  useEffect(()=>{
+  React.useEffect(()=>{
     //Menu Item
     dispatch(allActions.UpdateItemPrice(0));
     dispatch(allActions.resetItemQuantity());
@@ -51,26 +60,28 @@ export default function MenuPage () {
     //Order Item
     dispatch(allActions.UpdateItemId(0));
     dispatch(allActions.UpdateItemName(''));
-    dispatch(allActions.UpdateItemId(0));
     dispatch(allActions.UpdateItemQuantity(0));
     dispatch(allActions.UpdateTotalPrice(0));
+    //Get Menu List
+    getMenuList(currentItem.restaurant_id)
   },[])
 
   return(
-    <MainContainer>
+    <MainConatiner>
       <OrangeNavbar/>
-      <HeaderImage src='/Dannys_bg.png'/>
-
-      <CurrentOrderPool>
-        <p>current orders</p>
-
-      </CurrentOrderPool>
-
-      <h2>Dannys</h2>
-      <div onClick={() => clickHandler({name:'BigTop', price: 5, description: 'BigTop Item Description', id:10})}>
-        <MenuItemContainer name={'Big Burger'} price={5}></MenuItemContainer>
+      <HeaderImage src = '/Dannys_bg.png'/>
+      {/* <img src={'Dannys_bg.png'}/> */}
+      <h2>{restaurantName}</h2>
+      <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px"}}>
+      {menuList.map(entry=>{
+        return(
+      <div onClick={() => clickHandler(entry)} key={entry.menu_item_id}>
+        <MenuItemContainer  name={entry.menu_item_name} price={entry.menu_item_pricing} category={entry.menu_category}/>
       </div>
-      <CheckoutButton>Checkout ${totalOrdersPrice}.00</CheckoutButton>
-    </MainContainer>
+        )
+      })}
+      </div>
+      <CheckoutButton onClick={handleCheckout}>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
+    </MainConatiner>
   )
 }

@@ -24,6 +24,8 @@ import PaymentOptions from './PaymentOptions';
 import Confirmation from './Confirmation/ConfirmationPage';
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
+import FriendInitialConfirmationPage from './friendsView/FriendInitialConfirmationPage';
+import FriendMenuItemPage from './friendsView/FriendMenuItemPage';
 
 function App() {
 
@@ -45,8 +47,10 @@ function App() {
             <Route exact path="/Friends/:group_id/:restaurant_id" component={FriendNameInputPage} />
             <Route exact path="/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
+            <Route exact path="/MenuItem/Friends/" component={FriendMenuItemPage} />"
             <Route exact path="/ShareOrder" component={OrderShare} />"
             <Route exact path="/Confirmation" component={Confirmation} />"
+            <Route exact path="/Friends/Confirmation" component={FriendInitialConfirmationPage} />"
             <Route exact path="/PaymentOptions" component={PaymentOptions} />"
             <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
             <Redirect to="/" />
