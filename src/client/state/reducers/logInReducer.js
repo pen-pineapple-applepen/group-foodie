@@ -14,11 +14,12 @@ let initialState = {
 export const loginReducer = createReducer (initialState, (builder) => {
   builder
     .addCase(logIn, (state, action) => {
-      state.loggedIn = true,
-      state.userId = action.payload
+      state.loggedIn = true;
+      state.userId = action.payload;
     })
     .addCase(logOut, (state, action) => {
-      state.loggedIn = false,
+      state.loggedIn = false;
+      state.userId = 0;
     })
     .addCase(setCurrentUserId, (state, action) => {
       state.userId = action.payload;
