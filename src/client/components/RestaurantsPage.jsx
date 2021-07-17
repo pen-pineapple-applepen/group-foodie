@@ -7,6 +7,7 @@ import RestaurantContainer from './RestaurantContainer.jsx';
 import { OrangeInput, OrangeButton, OrangeNavbar } from '../styles/shared.tsx';
 import { Modal, Button, Form } from 'react-bulma-components';
 import axios from 'axios';
+import Checkbox from "react-custom-checkbox";
 
 const Background = styled.div`
   background-color:white;
@@ -21,6 +22,7 @@ const ModalContentMain = styled(Modal.Content)`
 const UnderlineOrage = styled.div`
 border-bottom: 1px solid #FF6C36;
 width: 50%;
+font-weight: bold;
 `;
 
 const UnderlineOrageThick = styled.div`
@@ -43,7 +45,7 @@ const SearchAndFilterDiv = styled.div`
 `;
 
 export default function RestaurantPage() {
-  const userId = useAppSelector((state)=>state.loginDetails.userId)
+  const userId = useAppSelector((state) => state.loginDetails.userId)
   const dispatch = useAppDispatch();
   const history = useHistory();
 
@@ -89,7 +91,7 @@ export default function RestaurantPage() {
   function filterHandler(e) {
     setOpenModal(false)
     let newList = [];
-    newList = restaurantList.filter(entry=>entry.cuisines.some(r=>Object.keys(cuisines).indexOf(r) >=0))
+    newList = restaurantList.filter(entry => entry.cuisines.some(r => Object.keys(cuisines).indexOf(r) >= 0))
     setSortedRestaurantList(newList);
     setCuisines({});
   }
@@ -106,10 +108,22 @@ export default function RestaurantPage() {
       setCuisines(copyObj);
     }
   }
+  function handleChange2(checked) {
+    if (checked) {
+      setCuisines(prevCuisines => ({
+        ...prevCuisines,
+        [event.target.innerText]: checked
+      }))
+    } else {
+      const copyObj = cuisines
+      delete copyObj[event.target.innerText];
+      setCuisines(copyObj);
+    }
+  }
 
   return (
     <div>
-      <OrangeNavbar/>
+      <OrangeNavbar />
       <SearchAndFilterDiv>
         <img src={'location_black_24dp.svg'} />
         <OrangeInput placeholder="Playa Vista" />
@@ -119,35 +133,79 @@ export default function RestaurantPage() {
         return (
           <div onClick={() => clickHandler(entry)} key={entry.restaurant_id} >
             <RestaurantContainer name={entry.name} cuisine={entry.cuisines[0]} hours={entry.hours}></RestaurantContainer>
-            <UnderlineOrageThick/>
+            <UnderlineOrageThick />
           </div>
         )
       })}
       <div>
-        <Modal show={openModal} onClose={() => setOpenModal(false)}>
-          <ModalContentMain>
-            <Background>
-              <h2>Filters</h2>
+        <Modal show={openModal} showClose={false} onClose={() => setOpenModal(false)}>
+          <Modal.Card>
+            <Modal.Card.Header>
+              <Modal.Card.Title>Filters</Modal.Card.Title>
+            </Modal.Card.Header>
+            <Modal.Card.Body>
               <UnderlineOrage>Distance</UnderlineOrage>
               <Form.Field>
                 <Form.Control>
-                  <OrangeCheckBox defaultChecked>5 Miles</OrangeCheckBox>
+                  <Checkbox
+                    containerStyle={{ margin: 10 }}
+                    borderColor="#FF6C36"
+                    icon={
+                      <div
+                        style={{
+                          display: "flex",
+                          flex: 1,
+                          backgroundColor: "#FF6C36",
+                          alignSelf: "stretch",
+                        }}
+                      ></div>
+                    }
+                    checked={true}
+                    borderRadius={10}
+                    style={{ overflow: "hidden" }}
+                    size={20}
+                    label="5 Miles"></Checkbox>
                 </Form.Control>
               </Form.Field>
               <UnderlineOrage>Cuisines</UnderlineOrage>
-              <Form.Field >
-                <Form.Control >
-                  <OrangeCheckBox value={'American'} onChange={handleChange}>American</OrangeCheckBox>
-                  <OrangeCheckBox value={'Asian'} onChange={handleChange}>Asian</OrangeCheckBox>
-                  <OrangeCheckBox>Greek</OrangeCheckBox>
-                  <OrangeCheckBox>Italian</OrangeCheckBox>
-                  <OrangeCheckBox>Romanian</OrangeCheckBox>
-                  <OrangeCheckBox>Fusion</OrangeCheckBox>
-                  <OrangeButton onClick={filterHandler} >Apply</OrangeButton>
-                </Form.Control>
-              </Form.Field>
-            </Background>
-          </ModalContentMain>
+              <Checkbox
+                containerStyle={{ margin: 10 }}
+                borderColor="#FF6C36"
+                icon={
+                  <div
+                    style={{
+                      display: "flex",
+                      flex: 1,
+                      backgroundColor: "#FF6C36",
+                      alignSelf: "stretch",
+                    }}
+                  ></div>
+                }
+                borderRadius={10}
+                style={{ overflow: "hidden" }}
+                size={20}
+                label="Asian" name="Asian" onChange={handleChange2}></Checkbox>
+              <Checkbox
+                containerStyle={{ margin: 10 }}
+                borderColor="#FF6C36"
+                icon={
+                  <div
+                    style={{
+                      display: "flex",
+                      flex: 1,
+                      backgroundColor: "#FF6C36",
+                      alignSelf: "stretch",
+                    }}
+                  ></div>
+                }
+                borderRadius={10}
+                size={20}
+                label="American" onChange={handleChange2}></Checkbox>
+            </Modal.Card.Body>
+            <Modal.Card.Footer renderAs={Button.Group} align="right">
+              <OrangeButton onClick={filterHandler} >Apply</OrangeButton>
+            </Modal.Card.Footer>
+          </Modal.Card>
         </Modal>
       </div>
     </div>
