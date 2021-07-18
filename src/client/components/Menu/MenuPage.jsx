@@ -75,7 +75,7 @@ export default function MenuPage () {
   return(
     <MainConatiner>
       <OrangeNavbar needBackArrow={true}/>
-      <HeaderImage src = '/Dannys_bg.png'/>
+      <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
       {/* <img src={'Dannys_bg.png'}/> */}
       <RestaurantName>{restaurantName}</RestaurantName>
       <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px", boxShadow: "4px 4px 8px rgb(0 0 0 / 10%)"}}>

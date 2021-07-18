@@ -60,6 +60,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
   const currentOrders = useAppSelector(state => state.allOrderItems.orders)
   const [ currentGroupOrders, setCurrentGroupOrders ] = useState([])
   const currentGroupId = useAppSelector(state => state.currentGroup)
+  const currentRestaurant = useAppSelector(state => state.currentRestaurant)
 
   const history = useHistory();
 
@@ -76,7 +77,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
   return (
     <ConfirmationContainer>
       <OrangeNavbar/>
-      <HeaderImage src ='/Dannys_bg.png'/>
+      <HeaderImage src ={currentRestaurant.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
 
       <TopContainer>
         <ThankYouMessage>

@@ -57,7 +57,7 @@ export default function FriendMenuItemPage () {
   return(
     <MainConatiner>
       <OrangeNavbar/>
-      <HeaderImage src="/Dannys_bg.png"/>
+      <HeaderImage src ={currentOrder.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
       {/* <img src='Dannys_bg.png'/> */}
       <FoodName>{currentOrder.food}</FoodName>
       <StyledDescription>{item.description}</StyledDescription>
