@@ -129,6 +129,7 @@ const UserName = styled.h3`
 
 const Options = styled(Link)`
   color: #4a4a4a;
+  margin: 8px;
 `;
 
 
@@ -159,9 +160,9 @@ const SideBarMenu = ({sideBarOpen}) => {
           >
             <SideBarOptions>
               <UserName>{userName || ''}</UserName>
-              <Options to="/profile">Account</Options>
-              <Options to="/history">Your Orders</Options>
-              <p onClick={handleLogOutClick}>Log Out</p>
+              <Options to="/profile">📓  Account</Options>
+              <Options to="/history">🧾  My Orders</Options>
+              <Options onClick={handleLogOutClick}>✌️  Log Out</Options>
             </SideBarOptions>
           </SideBarContainer>
         </div>
