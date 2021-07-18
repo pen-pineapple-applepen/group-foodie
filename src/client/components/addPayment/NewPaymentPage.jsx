@@ -55,8 +55,10 @@ export default function NewPaymentPage() {
       user_id: userId
     }})
       .then(res => {
-        console.log('successfully added payment!');
-        // dispatch(allActions.createPaymentsList(formattedCards))
+        console.log(res);
+        console.log(values.newCCNumber)
+        console.log(newCCType)
+        dispatch(allActions.addPayment({id: res, cardNumber: })
         // history.goBack();
       })
       .catch(err => {
