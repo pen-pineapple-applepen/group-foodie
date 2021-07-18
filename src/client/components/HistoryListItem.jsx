@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const ListItem = styled.li`
   display: flex;
   align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
 `;
 
-const OrderPic = styled.span`
+const OrderPic = styled.img.attrs((props) => ({
+  src: props.restaurant === 1 ? '/American_Thumb.png' : '/Asian_Thumb.png',
+  alt: 'Restaurant picture'
+}))`
   margin-right: 20px;
+  height: 70px;
+  width: 70px;
 `;
 
 const OrderDescription = styled.div`
   display: flex;
   flex-direction: column;
+  font-size: 13px;
+  width: 100%;
 `;
 
 const OrderLine = styled.div`
@@ -34,8 +44,8 @@ const StatusDiv = styled.div`
 `;
 
 const StatusIndicator = styled.div`
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   margin-right: 5px;
   background-color: ${(props) => props.status === 'Live' ? '#00FF78' : '#919191'};
@@ -43,11 +53,15 @@ const StatusIndicator = styled.div`
 
 
 // helpers
-const formatDate = (dateInput) => {
-  // DD/MM/YYYY
+const formatDate = (dateStr) => {
+  const dateInput = new Date(dateStr + 'Z');
+
   let day = dateInput.getDate();
   let month = dateInput.getMonth() + 1;
   const year = dateInput.getFullYear();
+  const hour = dateInput.getHours();
+  let displayHour;
+  let min = dateInput.getMinutes();
 
   if (day < 10) {
     day = `0${day}`;
@@ -57,24 +71,43 @@ const formatDate = (dateInput) => {
     month = `0${month}`;
   }
 
-  return `${month}/${day}/${year}`;
+  if (hour === 0) {
+    displayHour = '12';
+  } else if (hour > 12 && hour < 24) {
+    displayHour = hour - 12;
+  } else {
+    displayHour = hour;
+  }
+
+  if (min < 10) {
+    min = `0${min}`;
+  }
+
+  return `${month}/${day}/${year} ${displayHour}:${min} ${hour < 12 ? 'AM' : 'PM'}`;
 };
 
 
 const HistoryListItem = (props) => {
   const { type, order } = props;
 
+  const [personCount, setPersonCount] = useState(0);
+
+  useEffect(async () => {
+    const res = await axios.get(`/api/orders/${order.group_id}/group`);
+    setPersonCount(res.data.length);
+  }, []);
+
   return (
     <ListItem>
-      <OrderPic>image</OrderPic>
+      <OrderPic restaurant={order.restaurant_id} />
       <OrderDescription>
-        <h3>Restaurant name</h3>
+        <h3>{order.restaurant_id === 1 ? 'Melody Bar & Grill' : 'Asian Street Eats by Chef Hung'}</h3>
       <MiddleLine>
         <span>{formatDate(order.date)}</span>
         <span>{`$${order.price}`}</span>
       </MiddleLine>
       <OrderLine>
-        <CountText># of people</CountText>
+        <CountText>{personCount === 1 ? '1 person' : `${personCount} people`}</CountText>
         <StatusDiv>
           {type !== 'Complete' && (
             <StatusIndicator status={type}/>
