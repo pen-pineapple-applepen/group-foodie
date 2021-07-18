@@ -102,7 +102,7 @@ const OrderShare = () => {
   // [] needs to be selectedPayment (test this)
 
   const fetchPaymentData = () => {
-    axios.get('/api/payments/user/2')
+    axios.get(`/api/payments/user/${userId}`)
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];
@@ -234,7 +234,7 @@ const OrderShare = () => {
               />
             </div>
           </Payment> :
-          <Payment>
+          <Payment onClick={() => history.push('/PaymentOptions')}>
             <div>
               Add Card
             </div>
