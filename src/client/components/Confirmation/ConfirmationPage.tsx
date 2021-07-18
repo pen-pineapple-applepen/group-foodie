@@ -7,6 +7,7 @@ import CurrentOrderList from "./CurrentOrderList";
 import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useHistory } from 'react-router-dom';
 
 interface ConfirmationProps {
 
@@ -72,8 +73,10 @@ function Confirmation({}: ConfirmationProps): ReactElement {
   const currentRestaurantId = useAppSelector(state => state.currentRestaurant)
   const [ copied, setCopied ] = useState(false);
 
+  const history = useHistory();
+
   function copyToClipBoard() {
-    navigator.clipboard.writeText(`localhost:4000/Friends/${currentGroupId}${currentRestaurantId.id}`)
+    navigator.clipboard.writeText(`localhost:4000/Friends/${currentGroupId}/${currentRestaurantId.id}`)
     setCopied(true);
     setTimeout(()=> setCopied(false), 2000);
   }
@@ -93,7 +96,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
         <Link
           onClick={copyToClipBoard}
         >
-          localhost:4000/Friends/{currentGroupId}{currentRestaurantId.id}
+          localhost:4000/Friends/{currentGroupId}/{currentRestaurantId.id}
         </Link>
         <AnimatePresence>
           {copied &&
@@ -115,7 +118,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
         currentOrders={currentOrders}
       />
 
-      <FlexEndButton>
+      <FlexEndButton onClick={() => history.push('/Chat/ChatPage')}>
         Chat
       </FlexEndButton>
     </ConfirmationContainer>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import SignUpPage from './SignUpPage.jsx';
+
 
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({});

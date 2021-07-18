@@ -68,7 +68,7 @@ export default function MenuPage () {
 
   return(
     <MainConatiner>
-      <OrangeNavbar/>
+      <OrangeNavbar needBackArrow={true}/>
       <HeaderImage src = '/Dannys_bg.png'/>
       {/* <img src={'Dannys_bg.png'}/> */}
       <h2>{restaurantName}</h2>

@@ -60,13 +60,21 @@ const Payment = styled.div`
   align-items: center;
 `;
 
-
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: left;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
+const EnterDateTime = styled.div`
+  padding-top: 20px;
+  padding-bottom: 10px;
+`
+const PaymentInformationDiv = styled.div`
+  padding-top: 15px;
+`
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
@@ -131,16 +139,20 @@ const OrderShare = () => {
     const bodyParams = { due_date: orderDate.toISOString().slice(0, -5) }
     try {
       const groupId = await axios.post(`/api/groups`, bodyParams)
+      dispatch(allActions.updateCurrentGroup(groupId.data[0].id))
       let currentUserOrdersCopy = [];
       for (var i = 0; i < currentUserOrders.length; i++) {
         currentUserOrdersCopy.push({...currentUserOrders[i]})
       }
+      console.log('GroupID',groupId)
+      dispatch(allActions.updateCurrentGroup(groupId.data[0].id));
       const ordersTaggedWithGroupId = currentUserOrdersCopy.map(order => {
         order.group_id = groupId.data[0].id;
         // order.date = groupId.data[0].due_date;
         order.date = new Date().toISOString().slice(0, -5);
         return order;
       })
+      console.log('After',ordersTaggedWithGroupId)
       for(let order of ordersTaggedWithGroupId) {
         axios.post(`/api/orders/${userId}/user`, order)
       }
@@ -152,10 +164,10 @@ const OrderShare = () => {
 
   return (
     <MainContainer>
-      <OrangeNavbar />
-      <div>
+      <OrangeNavbar needBackArrow={true}/>
+      <EnterDateTime>
         Enter Date and Time:
-      </div>
+      </EnterDateTime>
       <Line>
         <DatePicker
         selected={orderDate}
@@ -200,9 +212,9 @@ const OrderShare = () => {
           <OrderShareModal openModal={openModal} setOpenModal={setOpenModal} guestEmails={guestEmails} setGuestEmails={setGuestEmails}/>
         </Line>
       </div>
-      <div>
+      <PaymentInformationDiv>
         Payment Information:
-      </div>
+      </PaymentInformationDiv>
       <div>
         {Object.keys(selectedPayment).length !== 0 ?
           <Payment onClick={() => history.push('/PaymentOptions')}>

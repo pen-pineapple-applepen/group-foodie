@@ -48,19 +48,12 @@ const FlexEndButton = styled(OrangeButton)`
   width: 70vw;
   color: white;
 `
-const WhatYourFriendsOrdered = styled.h3`
-  font-size: 13px;
-  top: 15px;
-  padding-bottom: -15px;
-  font-style: italic;
-`
 
 
-function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
-  const currentOrders = useAppSelector(state => state.allOrderItems.orders)
+function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
+  // const currentOrders = useAppSelector(state => state.allOrderItems.orders)
   const [ currentGroupOrders, setCurrentGroupOrders ] = useState([])
   const currentGroupId = useAppSelector(state => state.currentGroup)
-
   const history = useHistory();
 
   const handleStartOrder = () => {
@@ -80,27 +73,21 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
 
       <TopContainer>
         <ThankYouMessage>
-          Share Order for Danny's
+          Thank you for yor order!
         </ThankYouMessage>
       </TopContainer>
-      <span>Time left to put in your order:</span>
+      <span>Time left until order is placed:</span>
       <CountDownTimer/>
 
-      <WhatYourFriendsOrdered>
-        what your friends have ordered so far:
-      </WhatYourFriendsOrdered>
-
-      <CurrentOrderList currentOrders={currentGroupOrders}/>
+      <CurrentOrderList
+        currentOrders={currentGroupOrders}
+      />
 
       <FlexEndButton onClick={() => history.push('/Chat/ChatPage')}>
         Chat
-      </FlexEndButton>
-
-      <FlexEndButton onClick={handleStartOrder}>
-        Start Your Order
       </FlexEndButton>
     </ConfirmationContainer>
   )
 }
 
-export default FriendInitialConfirmation;
+export default FriendFinalConfirmation;

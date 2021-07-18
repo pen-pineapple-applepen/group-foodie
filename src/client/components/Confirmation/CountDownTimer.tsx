@@ -34,11 +34,12 @@ const EditButton = styled.button`
 
 function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
   const [ dueDate, setDueDate ] = useState('')
+  const [ dateIsSet, setDateIsSet ] = useState(false);
   const groupId = useAppSelector(state => state.currentGroup)
   const isLoggedIn = useAppSelector(state => state.loginDetails.loggedIn)
 
   const countdownRenderer = () => {
-    const { days, hours, minutes, seconds, completed } = calcTimeDelta("2021-07-17T00:07:26") // needs to be updated with dynamic 'dueDate' state
+    const { days, hours, minutes, seconds, completed } = calcTimeDelta(dueDate) // needs to be updated with dynamic 'dueDate' state
       if (completed) {
         return <p>An order has been placed!</p>
       } else {
@@ -48,16 +49,18 @@ function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
 
   useEffect(async () => {
     const dateData = await axios.get(`/api/groups/${groupId}`)
-    const date = dateData.data
+    const date = dateData.data[0].due_date;
     setDueDate(date);
+    setDateIsSet(true);
   }, [])
 
   return (
     <TimerContainer>
+      {dateIsSet &&
       <Countdown
-        date={"2021-07-17T00:07:26"}
+        date={dueDate}
         renderer={countdownRenderer}
-      />
+      />}
       {isLoggedIn && <EditButton>edit</EditButton>}
     </TimerContainer>
   )

@@ -18,13 +18,14 @@ import OrderHistory from './OrderHistory';
 import MenuPage from './Menu/MenuPage';
 import MenuItemPage from './Menu/MenuItemPage';
 import RestaurantPage from './RestaurantsPage';
-import ChatPage from './ChatPage';
-import NewPaymentPage from './NewPaymentPage';
+import ChatPage from './Chat/ChatPage';
+import NewPaymentPage from './addPayment/NewPaymentPage';
 import PaymentOptions from './PaymentOptions';
 import Confirmation from './Confirmation/ConfirmationPage';
 import FriendMenuPage from './friendsView/FriendMenuPage';
 import OrderShare from './OrderShare.jsx';
 import FriendInitialConfirmationPage from './friendsView/FriendInitialConfirmationPage';
+import FriendFinalConfirmationPage from './friendsView/FriendFinalConfirmationPage';
 import FriendMenuItemPage from './friendsView/FriendMenuItemPage';
 
 function App() {
@@ -45,17 +46,17 @@ function App() {
             <Route exact path="/MenuItem" component={MenuItemPage} />
             <Route exact path="/LandingPage" component={landingPage} />
             <Route exact path="/Friends/:group_id/:restaurant_id" component={FriendNameInputPage} />
-            <Route exact path="/ChatPage" component={ChatPage} />
+            <Route exact path="/Chat/ChatPage" component={ChatPage} />
             <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
             <Route exact path="/MenuItem/Friends/" component={FriendMenuItemPage} />"
             <Route exact path="/ShareOrder" component={OrderShare} />"
             <Route exact path="/Confirmation" component={Confirmation} />"
             <Route exact path="/Friends/Confirmation" component={FriendInitialConfirmationPage} />"
+            <Route exact path="/Friends/ConfirmationEnd" component={FriendFinalConfirmationPage} />"
             <Route exact path="/PaymentOptions" component={PaymentOptions} />"
             <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
             <Redirect to="/" />
           </Switch>
-          {/* <NewPaymentPage /> */}
         </div>
       </Router>
     </div>

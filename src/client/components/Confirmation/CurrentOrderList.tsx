@@ -11,7 +11,11 @@ interface CurrentOrderListProps {
 }
 
 const OrderListContainer = styled.div`
-  padding-top: 35px;
+  padding-top: 25px;
+  overflow: scroll;
+  overflow-y: scroll;
+  max-height: 300px;
+  box-shadow: 4px 4px 8px rgb(0 0 0 / 10%);
 `
 
 

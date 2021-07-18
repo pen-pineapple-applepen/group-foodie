@@ -18,6 +18,11 @@ const CheckoutButton = styled(OrangeButton)`
   width: 50%;
 `;
 
+const StyledDescription = styled.p`
+  margin: 10%;
+
+`;
+
 export default function MenuItemPage () {
   const currentOrder = useAppSelector((state)=>state.currentMenuItem)
   const item = useAppSelector((state)=>state.currentItemQuantityPrice)
@@ -43,11 +48,11 @@ export default function MenuItemPage () {
 
   return(
     <MainConatiner>
-      <OrangeNavbar/>
+      <OrangeNavbar needBackArrow={true}/>
       <HeaderImage src="/Dannys_bg.png"/>
       {/* <img src='Dannys_bg.png'/> */}
-      <h2>{currentOrder.itemName}</h2>
-      <p>{item.description}</p>
+      <h2>{currentOrder.food}</h2>
+      <StyledDescription>{item.description}</StyledDescription>
       <p>${item.price}</p>
       <MenuItemIncrementor/>
       <CheckoutButton onClick={()=> clickHandler()}>Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}</CheckoutButton>
