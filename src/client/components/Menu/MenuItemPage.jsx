@@ -51,7 +51,7 @@ export default function MenuItemPage () {
       <OrangeNavbar needBackArrow={true}/>
       <HeaderImage src="/Dannys_bg.png"/>
       {/* <img src='Dannys_bg.png'/> */}
-      <h2>{currentOrder.itemName}</h2>
+      <h2>{currentOrder.food}</h2>
       <StyledDescription>{item.description}</StyledDescription>
       <p>${item.price}</p>
       <MenuItemIncrementor/>
