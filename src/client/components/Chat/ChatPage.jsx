@@ -24,7 +24,7 @@ const chatDiv = () => {
 };
 
 export default function ChatPage () {
-  const restaurantName = useAppSelector(state => state.currentRestaurant.name);
+  const restaurant = useAppSelector(state => state.currentRestaurant);
   const [dueDate, setDueDate] = React.useState('');
   const currentGroupId = useAppSelector(state => state.currentGroup)
 
@@ -44,10 +44,10 @@ export default function ChatPage () {
         </div>
         <div>
           <div>
-          <img className="restaurantImg" src={"../Dannys_bg.png"} style={imgStyle}></img>
+          <img className="restaurantImg" src={restaurant.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} style={imgStyle}></img>
           </div>
           <div>
-            <p>{restaurantName}</p>
+            <p>{restaurant.name}</p>
             <p>Date: {dueDate}</p>
             {/* <p>3 People</p> */}
           </div>

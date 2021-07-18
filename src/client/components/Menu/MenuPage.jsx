@@ -19,6 +19,12 @@ const CheckoutButton = styled(OrangeButton)`
   width: 50%;
 `;
 
+const RestaurantName = styled.h2`
+  font-family: Helvetica;
+  font-size: 24px;
+  text-align: center;
+`;
+
 export default function MenuPage () {
   const currentItem = useAppSelector((state)=>state.currentMenuItem)
   const totalOrdersPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
@@ -69,10 +75,10 @@ export default function MenuPage () {
   return(
     <MainConatiner>
       <OrangeNavbar needBackArrow={true}/>
-      <HeaderImage src = '/Dannys_bg.png'/>
+      <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
       {/* <img src={'Dannys_bg.png'}/> */}
-      <h2>{restaurantName}</h2>
-      <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px"}}>
+      <RestaurantName>{restaurantName}</RestaurantName>
+      <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px", boxShadow: "4px 4px 8px rgb(0 0 0 / 10%)"}}>
       {menuList.map(entry=>{
         return(
       <div onClick={() => clickHandler(entry)} key={entry.menu_item_id}>
