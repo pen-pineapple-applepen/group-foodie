@@ -112,14 +112,21 @@ async function getPaymentsByUserId(req, res) {
   }
 }
 async function addPaymentByUserId(req, res) {
-  const { user_id } = req.params;
-  const { name, card_number, card_type, exp_date, cvv, zip_code } = req.body;
+  console.log('recieved request');
+  console.log('new line');
+  console.log(req.body)
+  console.log('new line');
+  const { name, card_number, card_type, exp_date, cvv, zip_code, user_id } = req.body.params;
+  console.log('new line');
+  console.log(req.body)
+  console.log('new line');
   try {
     const paymentId = await models.addPaymentByUserId(
       user_id, name, card_number, card_type, exp_date, cvv, zip_code
     )
     res.status(200).send(paymentId);
   } catch (err) {
+    console.log('controllers', err);
     res.status(404).send(err);
   }
 }

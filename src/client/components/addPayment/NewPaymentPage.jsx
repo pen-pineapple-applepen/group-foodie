@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '/src/client/state/hooks';
+import allActions from '/src/client/state/actions/allActions';
 import { OrangeNavbar, OrangeButton } from '/src/client/styles/shared.tsx';
 import { Button, Icon, Form } from 'react-bulma-components';
 import { useHistory } from 'react-router-dom';
-import { useAppSelector } from '/src/client/state/hooks.ts'
 import useForm from '../loginSignUpPage/formValidation.js';
 import validate from './paymentValidationRules.js';
 // import CreditCardInput from 'react-credit-card-input';
@@ -25,6 +26,7 @@ const AddPaymentHeader = styled.h2`
 
 export default function NewPaymentPage() {
   const [newCCType, setNewCCType] = useState('');
+  const dispatch = useAppDispatch();
 
   const userInfo = useAppSelector((state) => state.currentUser);
   const userId = userInfo.id;
@@ -43,17 +45,22 @@ export default function NewPaymentPage() {
   };
 
   const addPayment = () => {
-    axios.post(`/api/payments/${userId}`), {params: {
+    axios.post(`/api/payments/addPayment`, {params: {
       name: values.cardholderName,
       card_number: Number(values.newCCNumber),
       card_type: newCCType,
       exp_date: values.newCCExpiry,
       cvv: Number(values.newCVV),
       zip_code: Number(values.zipCode),
-      user_id: userId,
-    }}
+      user_id: userId
+    }})
       .then(res => {
-        console.log('successfully added payment!');
+        console.log(res.data[0]);
+        console.log(typeof values.newCCNumber)
+        console.log(typeof newCCType)
+        dispatch(allActions.addPayment({id: res.data[0], cardNumber: values.newCCNumber.slice(-4), cardType: newCCType, selected: false}));
+        dispatch(allActions.changeSelectedPayment(res.data[0]));
+        history.goBack();
       })
       .catch(err => {
         console.log(err);

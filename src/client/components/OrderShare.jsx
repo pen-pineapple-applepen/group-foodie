@@ -79,13 +79,14 @@ const PaymentInformationDiv = styled.div`
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
   const currentUserOrders = useAppSelector(state => state.allOrderItems.orders);
+  const selectedPaymentIndex = useAppSelector(state => state.currentPayments.selectedPaymentIndex);
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);
   const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
-  const selectedPayment = useAppSelector(state => state.currentPayments.selectedPayment);
   const dispatch = useAppDispatch();
   let [openModal, setOpenModal] = useState();
   const userId = useAppSelector(state => state.loginDetails.userId);
+  let [selectedPaymentId, makeSelectedPaymentId] = useState(0);
 
   const history = useHistory();
 
@@ -101,7 +102,7 @@ const OrderShare = () => {
   // [] needs to be selectedPayment (test this)
 
   const fetchPaymentData = () => {
-    axios.get('/api/payments/2')
+    axios.get(`/api/payments/user/${userId}`)
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];
@@ -109,12 +110,12 @@ const OrderShare = () => {
           formattedCards.push({
             id: response.data[i].id,
             cardNumber: String(response.data[i].card_number).slice(-4),
-            cardType: response.data[i].card_type
+            cardType: response.data[i].card_type,
+            selected: false
           })
         }
-        console.log(formattedCards);
+        formattedCards[selectedPaymentIndex].selected = true;
         dispatch(allActions.createPaymentsList(formattedCards));
-        // dispatch(allActions.addSelectedPayment(formattedCards[0]));
       }
     })
     .catch(err => {
@@ -216,14 +217,16 @@ const OrderShare = () => {
         Payment Information:
       </PaymentInformationDiv>
       <div>
-        {Object.keys(selectedPayment).length !== 0 ?
+        {paymentsList.length !== 0 ?
           <Payment onClick={() => history.push('/PaymentOptions')}>
             <div>
               <span>
-                ***{selectedPayment.cardNumber}
+                ***{paymentsList.filter(payment => (
+                  payment.selected === true))[0].cardNumber}
               </span>
               <span>
-                {selectedPayment.cardType}
+              {paymentsList.filter(payment => (
+                  payment.selected === true))[0].cardType}
               </span>
             </div>
             <div>
@@ -232,7 +235,7 @@ const OrderShare = () => {
               />
             </div>
           </Payment> :
-          <Payment>
+          <Payment onClick={() => history.push('/PaymentOptions')}>
             <div>
               Add Card
             </div>
