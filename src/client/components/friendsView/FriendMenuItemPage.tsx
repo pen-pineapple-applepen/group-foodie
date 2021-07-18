@@ -18,6 +18,19 @@ const CheckoutButton = styled(OrangeButton)`
   width: 50%;
 `;
 
+const StyledDescription = styled.p`
+  margin: 10%;
+  font-family: Helvetica-light;
+  font-size: 16px;
+  text-align: center;
+`;
+
+const FoodName = styled.h2`
+  font-family: Helvetica;
+  font-size: 24px;
+  text-align: center;
+`;
+
 export default function FriendMenuItemPage () {
   const currentOrder = useAppSelector((state)=>state.currentMenuItem)
   const item = useAppSelector((state)=>state.currentItemQuantityPrice)
@@ -46,8 +59,8 @@ export default function FriendMenuItemPage () {
       <OrangeNavbar/>
       <HeaderImage src="/Dannys_bg.png"/>
       {/* <img src='Dannys_bg.png'/> */}
-      <h2>{currentOrder.food}</h2>
-      <p>{item.description}</p>
+      <FoodName>{currentOrder.food}</FoodName>
+      <StyledDescription>{item.description}</StyledDescription>
       <p>${item.price}</p>
       <MenuItemIncrementor/>
       <CheckoutButton onClick={()=> clickHandler()}>Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}</CheckoutButton>
