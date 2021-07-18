@@ -114,11 +114,11 @@ async function getPaymentsByUserId(req, res) {
 async function addPaymentByUserId(req, res) {
   console.log('recieved request');
   console.log('new line');
-  console.log('req body params', req.body.params)
+  console.log(req.body)
   console.log('new line');
-  const { name, card_number, card_type, exp_date, cvv, zip_code, user_id } = req.body;
+  const { name, card_number, card_type, exp_date, cvv, zip_code, user_id } = req.body.params;
   console.log('new line');
-  console.log('req body', req.body)
+  console.log(req.body)
   console.log('new line');
   try {
     const paymentId = await models.addPaymentByUserId(
