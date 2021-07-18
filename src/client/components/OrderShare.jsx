@@ -137,7 +137,8 @@ const OrderShare = () => {
       }
       const ordersTaggedWithGroupId = currentUserOrdersCopy.map(order => {
         order.group_id = groupId.data[0].id;
-        order.date = groupId.data[0].due_date;
+        // order.date = groupId.data[0].due_date;
+        order.date = new Date().toISOString().slice(0, -5);
         return order;
       })
       for(let order of ordersTaggedWithGroupId) {
