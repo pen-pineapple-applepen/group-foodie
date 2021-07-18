@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '/src/client/state/hooks';
+import allActions from '/src/client/state/actions/allActions';
 import { OrangeNavbar, OrangeButton } from '/src/client/styles/shared.tsx';
 import { Button, Icon, Form } from 'react-bulma-components';
 import { useHistory } from 'react-router-dom';
-import { useAppSelector } from '/src/client/state/hooks.ts'
 import useForm from '../loginSignUpPage/formValidation.js';
 import validate from './paymentValidationRules.js';
 // import CreditCardInput from 'react-credit-card-input';
@@ -25,6 +26,7 @@ const AddPaymentHeader = styled.h2`
 
 export default function NewPaymentPage() {
   const [newCCType, setNewCCType] = useState('');
+  const dispatch = useAppDispatch();
 
   const userInfo = useAppSelector((state) => state.currentUser);
   const userId = userInfo.id;
@@ -54,6 +56,7 @@ export default function NewPaymentPage() {
     }})
       .then(res => {
         console.log('successfully added payment!');
+        // dispatch(allActions.createPaymentsList(formattedCards))
         // history.goBack();
       })
       .catch(err => {
