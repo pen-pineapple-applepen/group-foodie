@@ -55,9 +55,6 @@ export default function NewPaymentPage() {
       user_id: userId
     }})
       .then(res => {
-        console.log(res.data[0]);
-        console.log(typeof values.newCCNumber)
-        console.log(typeof newCCType)
         dispatch(allActions.addPayment({id: res.data[0], cardNumber: values.newCCNumber.slice(-4), cardType: newCCType, selected: false}));
         dispatch(allActions.changeSelectedPayment(res.data[0]));
         history.goBack();
