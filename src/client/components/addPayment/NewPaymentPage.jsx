@@ -43,18 +43,18 @@ export default function NewPaymentPage() {
   };
 
   const addPayment = () => {
-    axios.post(`/api/payments/${userId}`), {params: {
+    axios.post(`/api/payments/addPayment`, {params: {
       name: values.cardholderName,
       card_number: Number(values.newCCNumber),
       card_type: newCCType,
       exp_date: values.newCCExpiry,
       cvv: Number(values.newCVV),
       zip_code: Number(values.zipCode),
-      user_id: userId,
-    }}
+      user_id: userId
+    }})
       .then(res => {
         console.log('successfully added payment!');
-        history.goBack();
+        // history.goBack();
       })
       .catch(err => {
         console.log(err);

@@ -76,7 +76,7 @@ const PaymentInformationDiv = styled.div`
   padding-top: 15px;
 `
 
-const OrderShare = (props) => {
+const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
   const currentUserOrders = useAppSelector(state => state.allOrderItems.orders);
   const selectedPaymentIndex = useAppSelector(state => state.currentPayments.selectedPaymentIndex);
@@ -87,7 +87,6 @@ const OrderShare = (props) => {
   let [openModal, setOpenModal] = useState();
   const userId = useAppSelector(state => state.loginDetails.userId);
   let [selectedPaymentId, makeSelectedPaymentId] = useState(0);
-  console.log('props', props);
 
   const history = useHistory();
 
@@ -103,7 +102,7 @@ const OrderShare = (props) => {
   // [] needs to be selectedPayment (test this)
 
   const fetchPaymentData = () => {
-    axios.get('/api/payments/2')
+    axios.get('/api/payments/user/2')
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];

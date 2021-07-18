@@ -3,8 +3,10 @@ const controllers = require('../controllers.ts');
 const payments = express.Router();
 
 payments
-  .route('/:user_id')
-  .get(controllers.getPaymentsByUserId)
+  .route('/addPayment')
   .post(controllers.addPaymentByUserId)
+payments
+  .route('/user/:user_id')
+  .get(controllers.getPaymentsByUserId)
 
 module.exports = payments;
