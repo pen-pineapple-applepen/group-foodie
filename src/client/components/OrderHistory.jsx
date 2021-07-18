@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
 import { useHistory } from 'react-router-dom';
@@ -17,19 +18,22 @@ const Text = styled.span`
 `;
 
 const ListSeparator = styled.div`
-  width: 75%;
+  width: 50%;
   border-bottom: 1px solid #2d2d2d;
   margin: 30px 0;
 `;
 
 // HELPER FUNCTION
-const findStatus = (orderObj, dueDate) => {
+const findStatus = (orderObj, due_date) => {
   let status;
+
   const currentTime = new Date();
+  const submittedDate = new Date(orderObj.date + 'Z');
+  const dueDate = new Date(due_date + 'Z');
 
   if (dueDate < currentTime) {
     status = 'Complete';
-  } else if (currentTime > orderObj.date && currentTime < dueDate) {
+  } else if (currentTime > submittedDate && currentTime < dueDate) {
     status = 'Live';
   } else {
     status = 'Scheduled';
@@ -40,75 +44,31 @@ const findStatus = (orderObj, dueDate) => {
 
 
 const OrderHistory = (props) => {
-  // get current user data
   const currentUser = useAppSelector((state) => state.currentUser);
-  // get all orders for that user
-  // get group using group_id from each order object
-  // get restaurant name using restaurant_id from each order object
 
+  const [orders, setOrders] = useState([]);
   const [liveOrders, setLiveOrders] = useState([]);
   const [scheduledOrders, setScheduledOrders] = useState([]);
   const [completeOrders, setCompleteOrders] = useState([]);
 
+  const getAllOrders = async () => {
+    const allOrders = await axios.get(`/api/orders/${currentUser.id}/user`);
+    setOrders(allOrders.data);
+  };
+
   useEffect(() => {
-    // FAKE DATA
-    const fakeDueDateLive = new Date(2021, 6, 15, 10); // 7/14/2021 11PM
-    const fakeDueDateSched = new Date(2021, 6, 16, 16); // 7/16/2021 4PM
-    const fakeDueDateComplete = new Date(2021, 6, 13, 16); // 7/13/2021 4PM
+    getAllOrders();
+  }, [currentUser]);
 
-    const fakeDueDates = [fakeDueDateLive, fakeDueDateSched, fakeDueDateComplete];
-
-    const fakeLiveDate = new Date(2021, 6, 15, 9); // 7/14/2021 10PM
-    const fakeScheduledDate = new Date(2021, 6, 16, 15); // 7/16/2021 3PM
-    const fakeCompleteDate = new Date(2021, 6, 13, 15); // 7/13/2021 3PM
-
-    const fakeLiveOrder = {
-      "id": 3,
-      "user_id": 5,
-      "food": "PIZZA",
-      "quantity": 3,
-      "price": "3.50",
-      "date": fakeLiveDate,
-      "food_id": 423,
-      "group_id": 1,
-      "restaurant_id": 32
-    };
-
-    const fakeScheduledOrder = {
-      "id": 2,
-      "user_id": 5,
-      "food": "RAMEN",
-      "quantity": 1,
-      "price": "10.50",
-      "date": fakeScheduledDate,
-      "food_id": 426,
-      "group_id": 1,
-      "restaurant_id": 32
-    };
-
-    const fakeCompleteOrder = {
-      "id": 1,
-      "user_id": 5,
-      "food": "WINGS",
-      "quantity": 12,
-      "price": "33.70",
-      "date": fakeCompleteDate,
-      "food_id": 400,
-      "group_id": 1,
-      "restaurant_id": 32
-    };
-
-    const fakeOrders = [fakeLiveOrder, fakeScheduledOrder, fakeCompleteOrder];
-    // get request to find all orders for the current user (get user id from state)
-
+  const groupOrders = async () => {
     const liveArr = [];
     const scheduledArr = [];
     const completeArr = [];
 
-    fakeOrders.forEach((order, index) => {
-      // get request for the group using the orderObj's group_id
-      // due_date would come from group data
-      const status = findStatus(order, fakeDueDates[index]);
+    await Promise.all(orders.map(async (order) => {
+      const group = await axios.get(`/api/groups/${order.group_id}`);
+
+      const status = findStatus(order, group.data[0].due_date);
 
       if (status === 'Live') {
         liveArr.push(order);
@@ -117,12 +77,16 @@ const OrderHistory = (props) => {
       } else {
         completeArr.push(order);
       }
-    });
+    }));
 
     setLiveOrders(liveArr);
     setScheduledOrders(scheduledArr);
     setCompleteOrders(completeArr);
-  }, []);
+  };
+
+  useEffect(() => {
+    groupOrders();
+  }, [orders]);
 
   return (
     <OrderHistoryDiv>
@@ -131,7 +95,7 @@ const OrderHistory = (props) => {
       {liveOrders.length > 0 && (
         <HistoryList name="Live" orderList={liveOrders} />
       )}
-      {(liveOrders.length > 0 && scheduledOrders.length > 0) && (
+      {(liveOrders.length > 0 && (scheduledOrders.length > 0 || completeOrders.length > 0)) && (
         <ListSeparator />
       )}
       {scheduledOrders.length > 0 && (
