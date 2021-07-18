@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import styled from 'styled-components';
 import ChatComments from './ChatComments.jsx';
 import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
+import axios from 'axios';
 
 
 const Container = styled.div`
@@ -24,10 +25,15 @@ const chatDiv = () => {
 
 export default function ChatPage () {
   const restaurantName = useAppSelector(state => state.currentRestaurant.name);
+  const [dueDate, setDueDate] = React.useState('');
+  const currentGroupId = useAppSelector(state => state.currentGroup)
 
-  React.useEffect(() => {
-    // waiting for further data loaded
-    // setComments(getComments(comments));
+
+  React.useEffect(async () => {
+    const dateData = await axios.get(`/api/groups/${currentGroupId}`)
+    const date = dateData.data[0].due_date;
+    const formatedDate = date.slice(5, 7) + '/' + date.slice(8, 10) + '/' + date.slice(0, 4);
+    setDueDate(formatedDate);
   }, [])
 
   const orderDiv = () => {
@@ -42,8 +48,8 @@ export default function ChatPage () {
           </div>
           <div>
             <p>{restaurantName}</p>
-            <p>DD/MM/YYYY</p>
-            <p>3 People</p>
+            <p>Date: {dueDate}</p>
+            {/* <p>3 People</p> */}
           </div>
         </div>
       </div>

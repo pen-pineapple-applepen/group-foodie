@@ -54,7 +54,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   const history = useHistory();
   const friendName = useAppSelector(state => state.friendName)
   const { group_id, restaurant_id } = useParams<GroupIdParams>();
-  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup } = allActions;
+  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup, setCurrentUser } = allActions;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,8 +74,9 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
       })
       const userId = userIdData.data[0]
       console.log('user ID', userId);
-      dispatch(setUserId(userId))
-      dispatch(setCurrentUserId(userId))
+      dispatch(setCurrentUser({ first_name: friendName }));
+      dispatch(setUserId(userId));
+      dispatch(setCurrentUserId(userId));
     } catch (err) {
       console.log('error creating guest user ID', err);
     }
