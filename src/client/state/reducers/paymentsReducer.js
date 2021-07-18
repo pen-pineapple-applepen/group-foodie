@@ -27,7 +27,7 @@ export const paymentsReducer = createReducer (initialState, (builder) => {
       }
     })
     .addCase(addPayment, (state, action) => {
-      state.paymentsList.push(action.payload)
+      state.paymentsList = [...state.paymentsList, action.payload]
     })
 })
 
