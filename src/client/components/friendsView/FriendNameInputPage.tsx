@@ -74,7 +74,6 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
       })
       const userId = userIdData.data[0]
       console.log('user ID', userId);
-      dispatch(setCurrentUser({ first_name: friendName }));
       dispatch(setUserId(userId));
       dispatch(setCurrentUserId(userId));
     } catch (err) {
