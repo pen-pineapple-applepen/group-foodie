@@ -33,24 +33,25 @@ const EditButton = styled.button`
 `
 
 function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
-  const [ dueDate, setDueDate ] = useState('')
+  const [ dueDate, setDueDate ] = useState('');
   const [ dateIsSet, setDateIsSet ] = useState(false);
-  const groupId = useAppSelector(state => state.currentGroup)
-  const isLoggedIn = useAppSelector(state => state.loginDetails.loggedIn)
+  const groupId = useAppSelector(state => state.currentGroup);
+  const isLoggedIn = useAppSelector(state => state.loginDetails.loggedIn);
 
   const countdownRenderer = () => {
-    const { days, hours, minutes, seconds, completed } = calcTimeDelta(dueDate) // needs to be updated with dynamic 'dueDate' state
-      if (completed) {
-        return <p>An order has been placed!</p>
-      } else {
-        return <Timer>{days} days {hours} hours {minutes} minutes {seconds} seconds </Timer>
-      }
-  }
+    const { days, hours, minutes, seconds, completed } = calcTimeDelta(dueDate); // needs to be updated with dynamic 'dueDate' state
+
+    if (completed) {
+      return <p>An order has been placed!</p>;
+    } else {
+      return <Timer>{days} days {hours} hours {minutes} minutes {seconds} seconds </Timer>;
+    }
+  };
 
   useEffect(async () => {
-    const dateData = await axios.get(`/api/groups/${groupId}`)
+    const dateData = await axios.get(`/api/groups/${groupId}`);
     const date = dateData.data[0].due_date;
-    setDueDate(date);
+    setDueDate(date + 'Z');
     setDateIsSet(true);
   }, [])
 
@@ -66,4 +67,4 @@ function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
   )
 }
 
-export default CountDownTimer
+export default CountDownTimer;

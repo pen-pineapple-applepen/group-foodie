@@ -24,4 +24,4 @@ export const loginReducer = createReducer (initialState, (builder) => {
     .addCase(setCurrentUserId, (state, action) => {
       state.userId = action.payload;
     })
-})
+});
