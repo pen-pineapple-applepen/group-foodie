@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { OrangeNavbar, OrangeButton } from '../../styles/shared';
 import validate from './validationRules.js';
 import useForm from './formValidation.js';
+import { motion } from 'framer-motion';
 
 const StyledHeader = styled.h2`
 font-size: 20px;
@@ -45,9 +46,31 @@ export default function SignUpPage() {
 
   const { values, handleChange, errors, handleSubmit } = useForm(signUp, validate);
 
+  // animation stuff
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: '100%',
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+    },
+    out: {
+      opacity: 0,
+      x: '100%'
+    },
+  }
+
   return (
-    <div className="login-signup-background">
-      < OrangeNavbar needBackArrow={true} onBackArrowClick={goBack} />
+    <>
+    <OrangeNavbar needBackArrow={true} />
+    <motion.div className="login-signup-background"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
       <div className="login-signup-page-container">
         <StyledHeader>New Account</StyledHeader>
         <Form.Field className="login-form">
@@ -120,6 +143,7 @@ export default function SignUpPage() {
           <OrangeButton onClick={handleSubmit}>Sign Up</OrangeButton>
         </div>
       </div>
-    </div>
+    </motion.div>
+    </>
   )
 };

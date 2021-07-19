@@ -15,6 +15,12 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import OrderShareModal from "./OrderShareModal";
 import axios from "axios";
+import { motion, AnimatePresence } from 'framer-motion';
+
+const MaxWidthDiv = styled.div`
+  max-width: 375px;
+`
+
 
 const ColoredLine = () => (
   <hr
@@ -59,7 +65,7 @@ const Payment = styled.div`
   align-items: center;
 `;
 
-const MainContainer = styled.div`
+const MainContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -170,23 +176,56 @@ const OrderShare = () => {
     }
   }
 
+  const pageVariants = {
+    initial: {
+      x: '100%',
+      opacity: 0,
+      // scaleY: 0
+    },
+    in: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        type: 'spring',
+        ease: 'easeIn',
+      }
+    },
+    out: {
+      // x: '100%',
+      opacity: 0,
+      transition: {
+        duration: 0.8,
+        type: 'tween',
+      }
+    },
+  }
+
   return (
-    <MainContainer>
-      <OrangeNavbar needBackArrow={true}/>
+    <MaxWidthDiv>
+    <OrangeNavbar needBackArrow={true}/>
+    <MainContainer
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
       <EnterDateTime>
         Enter Date and Time:
       </EnterDateTime>
       <Line>
+
         <DatePicker
-        selected={orderDate}
-        onChange={(date) => setOrderDate(date)}
-        showTimeSelect
-        minDate={new Date()}
-        maxDate={addDays(new Date(), 14)}
-        minTime={new Date(new Date().setHours(minTimeHour, 0, 0, 0))}
-        maxTime={new Date(new Date().setHours(23, 59, 0, 0))}
-        dateFormat="MMMM d, yyyy h:mm aa"
+          selected={orderDate}
+          onChange={(date) => setOrderDate(date)}
+          showTimeSelect
+          minDate={new Date()}
+          maxDate={addDays(new Date(), 14)}
+          minTime={new Date(new Date().setHours(minTimeHour, 0, 0, 0))}
+          maxTime={new Date(new Date().setHours(23, 59, 0, 0))}
+          dateFormat="MMMM d, yyyy h:mm aa"
         />
+
       </Line>
       <Line>
         <ColoredLine />
@@ -261,6 +300,7 @@ const OrderShare = () => {
         </OrangeButton>
       </Line>
     </ MainContainer>
+    </MaxWidthDiv>
   )
 }
 

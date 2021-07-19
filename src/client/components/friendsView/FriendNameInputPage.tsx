@@ -8,8 +8,9 @@ import allActions from '../../state/actions/allActions';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { motion } from 'framer-motion';
 
-const ContainerDiv = styled.div`
+const ContainerDiv = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,11 +90,39 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
 
   }, [])
 
-  return (
-    <ContainerDiv>
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      // scaleY: 0
+    },
+    in: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        type: 'tween',
+        ease: 'easeIn',
+      }
+    },
+    out: {
+      opacity: 0,
+      transition: {
+        duration: 0.1,
+        type: 'tween',
+      }
+    },
+  }
 
-      <OrangeNavbar hasBurger={false}/>
-      <HeaderImage src ={restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+  return (
+    <>
+    <OrangeNavbar hasBurger={false}/>
+    <HeaderImage src ={restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+    <ContainerDiv
+    initial="initial"
+    animate="in"
+    exit="out"
+    variants={pageVariants}
+    >
+
 
       <NameInputDiv>
         <EnterHeader>
@@ -107,6 +136,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
       </PositionedOrangeButton>
 
     </ContainerDiv>
+    </>
   )
 }
 

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '/src/client/state/hooks.ts';
 import { Button, Icon, Form } from 'react-bulma-components';
 import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 
 export default function MainLoginPage() {
@@ -44,11 +45,36 @@ export default function MainLoginPage() {
       })
   }
 
+  // animation stuff
+  const pageVariants = {
+    initial: {
+      opacity: 0.5,
+    },
+    in: {
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+        type: 'tween',
+      }
+    },
+    out: {
+      opacity: 0.5,
+      transition: {
+        duration: 0.2,
+      }
+    },
+  }
 
   return (
-    <div className="login-signup-background">
+    <>
+    <OrangeNavbar hasBurger={false}/>
+    <motion.div className="login-signup-background"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
       <div className="login-signup-page-container">
-      <OrangeNavbar hasBurger={false}/>
         <Form.Field className="login-form">
           <Form.Label>Email</Form.Label>
           <Form.Control className="form-spacing-login">
@@ -77,6 +103,7 @@ export default function MainLoginPage() {
           <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
         </div>
       </div>
-    </div>
+    </motion.div>
+    </>
   )
 };

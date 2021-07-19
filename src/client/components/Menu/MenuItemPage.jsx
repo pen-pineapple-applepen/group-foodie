@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared.tsx';
 import MenuItemIncrementor from './MenuItemIncrementor.jsx';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-const MainConatiner = styled.div`
+const MainConatiner = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +26,7 @@ const StyledDescription = styled.p`
   text-align: center;
 `;
 
-const FoodName = styled.h2`
+const FoodName = styled(motion.h2)`
   font-family: Helvetica;
   font-size: 24px;
   text-align: center;
@@ -53,17 +54,56 @@ export default function MenuItemPage () {
     dispatch(allActions.UpdateTotalPrice(totalPrice.toFixed(2)));
   },[item])
 
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      scale: 0.9,
+      y: "50%"
+    },
+    in: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.3,
+        type: 'tween',
+      }
+    },
+    out: {
+      opacity: 0,
+      scale: 0.9,
+      y: "50%",
+      transition: {
+        duration: 0.2,
+        type: 'tween',
+      },
+    },
+  }
 
   return(
-    <MainConatiner>
+    <>
       <OrangeNavbar needBackArrow={true}/>
       <HeaderImage src ={currentOrder.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+      <FoodName
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3}}
+      >
+        {currentOrder.food}
+      </FoodName>
+    <MainConatiner
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariants}
+    >
       {/* <img src='Dannys_bg.png'/> */}
-      <FoodName>{currentOrder.food}</FoodName>
       <StyledDescription>{item.description}</StyledDescription>
       <p>${item.price}</p>
       <MenuItemIncrementor/>
       <CheckoutButton onClick={()=> clickHandler()}>Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>
+    </>
   )
 }
