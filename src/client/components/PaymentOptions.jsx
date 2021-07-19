@@ -40,17 +40,10 @@ const Checkmark = styled.div`
 `;
 
 const SelectedPayment = styled.div`
-  font-weight: bold;
   font-style: italic;
   margin-right: 10px;
 `;
 
-const SelectedCard = styled.div`
-  margin-left: 10px;
-  font-weight: bold;
-  font-style: italic;
-  margin-right: 10px;
-`;
 
 
 // const PaymentContainer = styled.div`
