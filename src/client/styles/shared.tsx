@@ -132,6 +132,11 @@ const Options = styled(Link)`
   margin: 8px;
 `;
 
+const Logout = styled.p`
+  margin: 8px;
+  padding: 0;
+`;
+
 
 const SideBarMenu = ({sideBarOpen}) => {
   const userName = useAppSelector(state => state.currentUser.first_name);
@@ -162,7 +167,7 @@ const SideBarMenu = ({sideBarOpen}) => {
               <UserName>{userName || ''}</UserName>
               <Options to="/profile">📓  Account</Options>
               <Options to="/history">🧾  My Orders</Options>
-              <Options onClick={handleLogOutClick}>✌️  Log Out</Options>
+              <Logout onClick={handleLogOutClick}>✌️  Log Out</Logout>
             </SideBarOptions>
           </SideBarContainer>
         </div>
