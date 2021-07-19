@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Block, Content, Image, Media, Modal, Columns } from 'react-bulma-components';
 import {OrangeButton} from '../styles/shared.tsx';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const emailsContainer = styled.div`
   display: flex;
@@ -20,6 +21,23 @@ const emailContainer = styled.div`
 
 function OrderShareModal(props) {
   return (
+    <AnimatePresence>
+
+      <motion.div
+      initial={{ scale: 0 }}
+      animate={{
+        scale: 1,
+        transition: {
+          duration: 0.3
+        }
+      }}
+      exit={{
+        scale: 0,
+        transition: {
+          delay: 0.3
+        }
+      }}
+      >
     <Modal
         show={props.openModal === 'card'}
         showClose={false}
@@ -63,6 +81,8 @@ function OrderShareModal(props) {
         </Modal.Card.Footer>
       </Modal.Card>
     </Modal>
+    </motion.div>
+    </AnimatePresence>
   )
 }
 

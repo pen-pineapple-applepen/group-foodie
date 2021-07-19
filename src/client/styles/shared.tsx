@@ -51,6 +51,7 @@ const OrangeNavbarContainer = styled(Navbar)`
   justify-content: center;
   align-items: center;
   height: 60px;
+  width: 100vw;
   border-radius: 0 0 22px 22px;
 `
 const NavbarBrand = styled(Navbar.Brand)`
@@ -99,7 +100,7 @@ const HeaderImageImg = styled.div<HeaderImageProps>`
   top: -50px;
   width: 100vw;
   height: 250px;
-  z-index: -11;
+  /* z-index: -11; */
 `
 
 const SideBarContainer = styled(motion.div)`
@@ -172,6 +173,7 @@ const SideBarMenu = ({sideBarOpen, toggleMenu}: SideBarMenuProps) => {
             animate={{ opacity: 0.8}}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
+            onClick={toggleMenu}
           />
           <SideBarContainer
             initial={{ x: '-100%' }}

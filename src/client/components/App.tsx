@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
         <div className="RouterContainer">
-          <AnimatePresence>
+          <AnimatePresence exitBeforeEnter={true}>
             <Switch location={location} key={location.pathname}>
               <Route exact path="/" component={mainLoginPage} />
               <Route exact path="/SignUp" component={SignUpPage} />

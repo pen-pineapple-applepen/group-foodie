@@ -81,29 +81,29 @@ export default function MenuPage () {
     in: {
       opacity: 1,
       transition: {
-        duration: 0.5,
-        type: 'tween',
+        duration: 0.3,
+        // type: 'tween',
       }
     },
     out: {
       opacity: 0,
       transition: {
-        duration: 0.2,
-        type: 'tween',
+        duration: 0.3,
+        // type: 'tween',
       },
     },
   }
 
   return(
+    <>
+    <OrangeNavbar needBackArrow={true}/>
+    <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
     <MainConatiner
       initial="initial"
       animate="in"
       exit="out"
       variants={pageVariants}
     >
-      <OrangeNavbar needBackArrow={true}/>
-      <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
-      {/* <img src={'Dannys_bg.png'}/> */}
       <RestaurantName>{restaurantName}</RestaurantName>
       <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px", boxShadow: "4px 4px 8px rgb(0 0 0 / 10%)"}}>
       {menuList.map(entry=>{
@@ -116,5 +116,6 @@ export default function MenuPage () {
       </div>
       <CheckoutButton onClick={handleCheckout}>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>
+    </>
   )
 }

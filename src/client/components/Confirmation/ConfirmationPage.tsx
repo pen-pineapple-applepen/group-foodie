@@ -25,7 +25,7 @@ export interface Order {
   restaurant_id: number,
 }
 
-const ConfirmationContainer = styled.div`
+const ConfirmationContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,9 +81,35 @@ function Confirmation({}: ConfirmationProps): ReactElement {
     setTimeout(()=> setCopied(false), 2000);
   }
 
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+      transition: {
+        duration: 1.5,
+        // type: 'tween',
+      }
+    },
+    out: {
+      opacity: 0,
+      transition: {
+        duration: 0.8,
+        type: 'tween',
+      },
+    },
+  }
+
   return (
-    <ConfirmationContainer>
-      <OrangeNavbar/>
+    <>
+    <OrangeNavbar/>
+    <ConfirmationContainer
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
       <HeaderImage src ={currentRestaurantId === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
 
       <TopContainer>
@@ -122,6 +148,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
         Chat
       </FlexEndButton>
     </ConfirmationContainer>
+    </>
   )
 }
 

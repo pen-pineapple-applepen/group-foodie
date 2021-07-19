@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import styled from 'styled-components';
 import axios from 'axios';
 import { OrangeButton, OrangeInput } from '/src/client/styles/shared.tsx';
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 const divStyle = {
@@ -57,8 +58,15 @@ export default function ChatComments (props) {
   const displayMultiComments = (comments) => {
     return(
       <>
+
         {comments.map((comment, index) => {
           return (
+            <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1, originX: -0.8 }}
+            transition={{ duration: 0.2 }}
+            key={index}
+          >
             <div className="commentDiv" key={index} style={commentDivStyle}>
               <label type="name">
                 {comment.first_name}
@@ -68,6 +76,7 @@ export default function ChatComments (props) {
                 {comment.text}
               </label>
             </div>
+        </motion.div>
           )
         })}
       </>
@@ -89,14 +98,22 @@ export default function ChatComments (props) {
     const getNewCommentIn2Secs = setTimeout(() => {
       setPosted(posted + 1);
     }, 2000);
-
+    return () => clearTimeout(getNewCommentIn2Secs)
   }, [posted]);
 
 
   return(
     <div className="chatComments" >
       <form style={divStyle}>
+        <AnimatePresence>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.2 }}
+        >
         {displayMultiComments(comments)}
+        </motion.div>
+        </AnimatePresence>
       </form>
       <PostInput type="text" placeholder="Comment here" value={chat} onChange={e => {setChat(e.target.value)}}>
         </PostInput>
