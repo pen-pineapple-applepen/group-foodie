@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 import { AnimatePresence } from 'framer-motion';
 import {
-  BrowserRouter as Router,
+  useLocation,
   Switch,
   Route,
   Redirect,
@@ -29,14 +29,14 @@ import FriendFinalConfirmationPage from './friendsView/FriendFinalConfirmationPa
 import FriendMenuItemPage from './friendsView/FriendMenuItemPage';
 
 function App() {
+  const location = useLocation();
 
   // these are just some test examples
   return (
     <div className="App">
-      <Router>
         <div className="RouterContainer">
           <AnimatePresence>
-            <Switch>
+            <Switch location={location} key={location.pathname}>
               <Route exact path="/" component={mainLoginPage} />
               <Route exact path="/SignUp" component={SignUpPage} />
               <Route exact path="/Restaurants" component={RestaurantPage} />
@@ -60,7 +60,6 @@ function App() {
             </Switch>
           </AnimatePresence>
         </div>
-      </Router>
     </div>
   );
 }

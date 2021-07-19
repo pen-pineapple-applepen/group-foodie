@@ -6,8 +6,9 @@ import MenuItemContainer from './MenuItemContainer.jsx';
 import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
-const MainConatiner = styled.div`
+const MainConatiner = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,8 +73,34 @@ export default function MenuPage () {
     getMenuList(currentItem.restaurant_id)
   },[])
 
+  //animation stuff
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        type: 'tween',
+      }
+    },
+    out: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        type: 'tween',
+      },
+    },
+  }
+
   return(
-    <MainConatiner>
+    <MainConatiner
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
       <OrangeNavbar needBackArrow={true}/>
       <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
       {/* <img src={'Dannys_bg.png'}/> */}
