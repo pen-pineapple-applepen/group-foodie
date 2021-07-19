@@ -97,7 +97,7 @@ function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
     exit="out"
     variants={pageVariants}
     >
-    <HeaderImage src ={currentRestaurant.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+    <HeaderImage src ={currentRestaurant.id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
 
       <TopContainer>
         <ThankYouMessage>

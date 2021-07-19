@@ -72,7 +72,7 @@ const LandingPage = () => {
 
   return (
     <PageContainer>
-      <OrangeNavbar needBackArrow={true}/>
+      <OrangeNavbar needBackArrow={false}/>
       <AnimatedContainer className="login-signup-background"
         initial="initial"
         animate="in"
