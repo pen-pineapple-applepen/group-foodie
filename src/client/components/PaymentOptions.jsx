@@ -4,7 +4,9 @@ import { useHistory } from 'react-router-dom';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Heading } from 'react-bulma-components';
-import {OrangeButton} from '../styles/shared.tsx';
+import { OrangeButton, OrangeNavbar } from '../styles/shared.tsx';
+import { Button } from 'react-bulma-components'
+import { Table } from 'react-bulma-components';
 
 
 const MainContainer = styled.div`
@@ -17,18 +19,18 @@ const MainContainer = styled.div`
 const PaymentsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 const PaymentContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: space-between;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin-bottom: 20px;
 `;
 const Card = styled.div`
-  margin-left: 10px;
+  margin-right: 10px;
 `;
 const CheckoutButton = styled(OrangeButton)`
   margin-top: 200px;
@@ -38,15 +40,13 @@ const Checkmark = styled.div`
 `;
 
 const SelectedPayment = styled.div`
-  font-weight: bold;
   font-style: italic;
+  margin-right: 10px;
 `;
 
-const SelectedCard = styled.div`
-  margin-left: 10px;
-  font-weight: bold;
-  font-style: italic;
-`;
+const PaymentButton = styled(Button)`
+  font-weight: bold
+`
 
 
 
@@ -62,33 +62,36 @@ const PaymentOptions = (props) => {
   const history = useHistory();
 
   return (
-    <MainContainer>
-      <Heading size={3}>
-        Payment Options
-      </Heading>
-      <Heading size={5}>
-        Payment Method
-      </Heading>
-      <PaymentsContainer>
-      {currentPayments.map((payment, index) => payment.selected === true ? (
-        <PaymentContainer key={index} id={payment.id} onClick={handlePaymentClick}>
-          <SelectedPayment id={payment.id}>{payment.cardNumber}</SelectedPayment>
-          <SelectedCard id={payment.id}>{payment.cardType}</SelectedCard>
-        </PaymentContainer> ) : (
+    <div>
+      <OrangeNavbar needBackArrow={true} onBackArrowClick={() => {history.goBack()}} />
+      <MainContainer>
+        <Heading size={3}>
+          Payment Options
+        </Heading>
+        <Heading size={5}>
+          Payment Method
+        </Heading>
+        <PaymentsContainer>
+        {currentPayments.map((payment, index) => payment.selected === true ? (
           <PaymentContainer key={index} id={payment.id} onClick={handlePaymentClick}>
-            <div id={payment.id} >{payment.cardNumber}</div>
-            <Card id={payment.id}>{payment.cardType}</Card>
-          </PaymentContainer>
-        )
-      )}
-      </PaymentsContainer>
-      <Heading size={5} onClick={() => history.push('/NewPaymentPage')}>
-        Add Payment Method
-      </Heading>
-      <CheckoutButton onClick={() => history.goBack('/ShareOrder')}>
-        Confirm Payment
-      </CheckoutButton>
-    </MainContainer>
+            <SelectedPayment id={payment.id}>{payment.cardNumber + '  ' + payment.cardType}</SelectedPayment>
+            <img id={payment.id} className='checkbox'src={"./checkmark.png"} />
+          </PaymentContainer> ) : (
+            <PaymentContainer key={index} id={payment.id} onClick={handlePaymentClick}>
+              <Card id={payment.id} >{payment.cardNumber + '  ' + payment.cardType}</Card>
+              <img id={payment.id} className='uncheckbox'src={"./checkmark.png"} />
+            </PaymentContainer>
+          )
+        )}
+        </PaymentsContainer>
+        <PaymentButton size={5} onClick={() => history.push('/NewPaymentPage')}>
+          Add Payment Method
+        </PaymentButton>
+        <CheckoutButton onClick={() => history.goBack('/ShareOrder')}>
+          Confirm Payment
+        </CheckoutButton>
+      </MainContainer>
+    </div>
   )
 }
 

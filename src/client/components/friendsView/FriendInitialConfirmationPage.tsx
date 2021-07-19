@@ -61,6 +61,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
   const currentOrders = useAppSelector(state => state.allOrderItems.orders);
   const [ currentGroupOrders, setCurrentGroupOrders ] = useState([]);
   const currentGroupId = useAppSelector(state => state.currentGroup);
+
   const currentRestaurant = useAppSelector(state => state.currentRestaurant)
 
   const history = useHistory();
