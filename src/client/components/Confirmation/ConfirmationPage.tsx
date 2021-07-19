@@ -84,7 +84,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
   return (
     <ConfirmationContainer>
       <OrangeNavbar/>
-      <HeaderImage src ='/Dannys_bg.png'/>
+      <HeaderImage src ={currentRestaurantId === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
 
       <TopContainer>
         <ThankYouMessage>

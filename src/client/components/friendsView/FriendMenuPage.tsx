@@ -108,10 +108,10 @@ export default function FriendMenuPage () {
   return(
     <MainConatiner>
       <OrangeNavbar/>
-      <HeaderImage src = '/Dannys_bg.png'/>
+      <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
       {/* <img src={'Dannys_bg.png'}/> */}
       <h2>{restaurantName}</h2>
-      <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px"}}>
+      <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px", boxShadow: "4px 4px 8px rgb(0 0 0 / 10%)"}}>
       {menuList.map(entry=>{
         return(
       <div onClick={() => clickHandler(entry)} key={entry.menu_item_id}>

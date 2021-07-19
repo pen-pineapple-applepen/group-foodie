@@ -7,6 +7,8 @@ export default function paymentValidate (values) {
 
   if (!values.newCCNumber) {
     errors.newCCNumber = 'Please enter a valid credit card number';
+  } else if (values.newCCNumber.length > 9) {
+    errors.newCCNumber = 'Card length is too long';
   }
 
   if (!values.newCVV) {

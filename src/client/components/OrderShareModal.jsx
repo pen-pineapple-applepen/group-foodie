@@ -40,9 +40,6 @@ function OrderShareModal(props) {
                     <Columns.Column>
                       {email}
                     </Columns.Column>
-                    <Columns.Column>
-                        {email}
-                    </Columns.Column>
                   </Columns>
                 ))}
               </div>

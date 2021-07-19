@@ -54,7 +54,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   const history = useHistory();
   const friendName = useAppSelector(state => state.friendName)
   const { group_id, restaurant_id } = useParams<GroupIdParams>();
-  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup, setCurrentUser } = allActions;
+  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup, } = allActions;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +93,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
     <ContainerDiv>
 
       <OrangeNavbar hasBurger={false}/>
-      <HeaderImage src='/Dannys_bg.png'/>
+      <HeaderImage src ={restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
 
       <NameInputDiv>
         <EnterHeader>
