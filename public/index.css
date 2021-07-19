@@ -88,6 +88,18 @@ table {
   width: 30px;
 }
 
+.checkbox {
+	height: 20px;
+  width: 20px;
+}
+
+.uncheckbox {
+	height: 20px;
+  width: 20px;
+	visibility: hidden;
+}
+
+
 .form-spacing-login {
 	margin-bottom: 15px;
 }

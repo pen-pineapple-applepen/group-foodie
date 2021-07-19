@@ -74,6 +74,10 @@ const EnterDateTime = styled.div`
 const PaymentInformationDiv = styled.div`
   padding-top: 15px;
 `
+const SmallText = styled.div`
+  font-size: 10px;
+  margin-bottom: 10px;
+`
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
@@ -191,9 +195,9 @@ const OrderShare = () => {
         <div>
           Share Order with Friends:
         </div>
-        <Line>
+        <SmallText>
           ** An order link to share will also be given after you submit your payment information **
-        </Line>
+        </SmallText>
         <LineCenter>
           <input type="text" name='email:' placeholder='Enter email(s)' value={guestEmail} onChange={handleGuestEmailChange} />
           <CenteredButton>
@@ -226,6 +230,9 @@ const OrderShare = () => {
               <span>
                 ***{paymentsList.filter(payment => (
                   payment.selected === true))[0].cardNumber}
+              </span>
+              <span>
+                {'  '}
               </span>
               <span>
               {paymentsList.filter(payment => (
