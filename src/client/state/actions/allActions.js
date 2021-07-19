@@ -7,7 +7,7 @@ import { addItemToOrders, addToPriceTotal, resetAllOrders } from '../reducers/al
 import { updateCurrentRestaurantId, updateCurrentRestaurantName } from '../reducers/restaurantReducer';
 import { addFriendName } from '../reducers/friendReducer'
 import { updateCurrentGroup } from '../reducers/groupReducer';
-import { createPaymentsList, changeSelectedPayment, addPayment} from '../reducers/paymentsReducer';
+import { createPaymentsList, purgePaymentsList, changeSelectedPayment, addPayment} from '../reducers/paymentsReducer';
 import { addEmail, removeEmail, resetEmails } from '../reducers/emailFriendsReducer';
 
 const allActions = {
@@ -36,6 +36,7 @@ const allActions = {
   setGroupId,
   setCurrentUserId,
   createPaymentsList,
+  purgePaymentsList,
   changeSelectedPayment,
   addPayment,
   addEmail,

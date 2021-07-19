@@ -142,12 +142,13 @@ const SideBarMenu = ({sideBarOpen}) => {
   const userName = useAppSelector(state => state.currentUser.first_name);
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { logOut, setCurrentUser, updateCurrentGroup, setCurrentUserId } = allActions;
+  const { logOut, setCurrentUser, updateCurrentGroup, setCurrentUserId, purgePaymentsList } = allActions;
 
   const handleLogOutClick = () => {
     dispatch(setCurrentUser({}));
     dispatch(updateCurrentGroup(0));
     dispatch(setCurrentUserId(0));
+    dispatch(purgePaymentsList());
     dispatch(logOut());
     history.push('/');
 

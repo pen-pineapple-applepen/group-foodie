@@ -3,6 +3,7 @@ import { createReducer, createAction } from '@reduxjs/toolkit';
 export const createPaymentsList = createAction('CREATE_PAYMENTS');
 export const changeSelectedPayment = createAction('CHANGE_SELECTEDPAYMENT');
 export const addPayment = createAction('ADD_PAYMENT');
+export const purgePaymentsList = createAction('PURGE_PAYMENTS');
 
 // logIn will only store the UserId in state!
 
@@ -16,6 +17,10 @@ export const paymentsReducer = createReducer (initialState, (builder) => {
     .addCase(createPaymentsList, (state, action) => {
       state.paymentsList = action.payload;
       // action.payload will be an array of the payments
+    })
+    .addCase(purgePaymentsList, (state, action) => {
+      state.paymentsList = [];
+      state.selectedPaymentIndex = 0;
     })
     .addCase(changeSelectedPayment, (state, action) => {
       state.paymentsList[state.selectedPaymentIndex].selected = false;
