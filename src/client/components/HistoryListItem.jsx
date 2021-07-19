@@ -34,6 +34,10 @@ const MiddleLine = styled(OrderLine)`
   margin: 10px 0;
 `;
 
+const RestaurantName = styled.h3`
+  font-weight: 600;
+`;
+
 const CountText = styled.span`
   margin-right: 20px;
 `;
@@ -89,25 +93,19 @@ const formatDate = (dateStr) => {
 
 const HistoryListItem = (props) => {
   const { type, order } = props;
-
-  const [personCount, setPersonCount] = useState(0);
-
-  useEffect(async () => {
-    const res = await axios.get(`/api/orders/${order.group_id}/group`);
-    setPersonCount(res.data.length);
-  }, []);
+  const { group_id, restaurant_id, date, price, peopleCount } = order;
 
   return (
     <ListItem>
-      <OrderPic restaurant={order.restaurant_id} />
+      <OrderPic restaurant={restaurant_id} />
       <OrderDescription>
-        <h3>{order.restaurant_id === 1 ? 'Melody Bar & Grill' : 'Asian Street Eats by Chef Hung'}</h3>
+        <RestaurantName>{restaurant_id === 1 ? 'Melody Bar & Grill' : 'Asian Street Eats by Chef Hung'}</RestaurantName>
       <MiddleLine>
-        <span>{formatDate(order.date)}</span>
-        <span>{`$${order.price}`}</span>
+        <span>{formatDate(date)}</span>
+        <span>{`$${(Math.round(price * 100) / 100).toFixed(2)}`}</span>
       </MiddleLine>
       <OrderLine>
-        <CountText>{personCount === 1 ? '1 person' : `${personCount} people`}</CountText>
+        <CountText>{peopleCount === 1 ? '1 person' : `${peopleCount} people`}</CountText>
         <StatusDiv>
           {type !== 'Complete' && (
             <StatusIndicator status={type}/>
