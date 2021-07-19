@@ -8,8 +8,7 @@ import { useHistory } from 'react-router-dom';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Button, Block, Modal } from 'react-bulma-components';
-import {OrangeButton} from '../styles/shared.tsx';
-import { OrangeNavbar } from '../styles/shared.tsx';
+import { OrangeButton, OrangeNavbar, ProfileImage } from '../styles/shared.tsx';
 import DatePicker from "react-datepicker";
 import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";
@@ -87,6 +86,7 @@ const OrderShare = () => {
   let [openModal, setOpenModal] = useState();
   const userId = useAppSelector(state => state.loginDetails.userId);
   let [selectedPaymentId, makeSelectedPaymentId] = useState(0);
+  const currentEmails = useAppSelector(state => state.currentEmails.emails);
 
   const history = useHistory();
 
@@ -98,6 +98,7 @@ const OrderShare = () => {
 
   useEffect(() => {
     fetchPaymentData();
+    setGuestEmails(currentEmails);
   }, []);
   // [] needs to be selectedPayment (test this)
 
@@ -128,8 +129,12 @@ const OrderShare = () => {
   }
 
   const handleGuestEmailSubmit = () => {
-    setGuestEmails([...guestEmails, guestEmail]);
-    setGuestEmail('');
+    if(guestEmail && !(currentEmails.indexOf(guestEmail)>=0)) {
+      dispatch(allActions.addEmail(guestEmail));
+      setGuestEmail('');
+    } else {
+      return
+    }
   }
 
   const handleModalClick = () => {
@@ -157,6 +162,7 @@ const OrderShare = () => {
       for(let order of ordersTaggedWithGroupId) {
         axios.post(`/api/orders/${userId}/user`, order)
       }
+      dispatch(allActions.resetEmails())
       history.push('/Confirmation')
     } catch (err) {
       console.log('err', err)
@@ -194,7 +200,7 @@ const OrderShare = () => {
         <LineCenter>
           <input type="text" name='email:' placeholder='Enter email(s)' value={guestEmail} onChange={handleGuestEmailChange} />
           <CenteredButton>
-            <CircleButton onClick={handleGuestEmailSubmit} />
+            <CircleButton onClick={handleGuestEmailSubmit}>Add</CircleButton>
           </CenteredButton>
         </LineCenter>
         <Line>
@@ -206,11 +212,11 @@ const OrderShare = () => {
             setOpenModal('card');
             }}
           >
-            {guestEmails.length === 1 ?
-              guestEmails.length + ' Person Added' :
-              guestEmails.length + ' People Added'}
+            {currentEmails.length === 1 ?
+              currentEmails.length + ' Person Added' :
+              currentEmails.length + ' People Added'}
           </OrangeButton>
-          <OrderShareModal openModal={openModal} setOpenModal={setOpenModal} guestEmails={guestEmails} setGuestEmails={setGuestEmails}/>
+          <OrderShareModal openModal={openModal} setOpenModal={setOpenModal} guestEmails={currentEmails}/>
         </Line>
       </div>
       <PaymentInformationDiv>
@@ -246,7 +252,7 @@ const OrderShare = () => {
         }
       </div>
       <Line>
-        <OrangeButton onClick={happensWhenShareOrderClick}>
+        <OrangeButton onClick={paymentsList.length===0 ? ()=>{} : happensWhenShareOrderClick}>
           Share Order
         </OrangeButton>
       </Line>
