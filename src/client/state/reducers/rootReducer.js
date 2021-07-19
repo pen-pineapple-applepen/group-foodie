@@ -9,6 +9,7 @@ import { restaurantReducer } from './restaurantReducer';
 import { friendReducer } from './friendReducer';
 import { groupReducer } from './groupReducer';
 import { paymentsReducer } from './paymentsReducer';
+import { emailFriendsRecucer } from './emailFriendsReducer';
 
 const rootReducer = combineReducers({
   names: namesReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   currentRestaurant: restaurantReducer,
   friendName: friendReducer,
   currentGroup: groupReducer,
-  currentPayments: paymentsReducer
+  currentPayments: paymentsReducer,
+  currentEmails: emailFriendsRecucer,
 });
 
 export default rootReducer;
