@@ -44,16 +44,9 @@ const SelectedPayment = styled.div`
   margin-right: 10px;
 `;
 
-
-
-// const PaymentContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   margin-bottom: 20px;
-// `;
-
+const PaymentButton = styled(Button)`
+  font-weight: bold
+`
 
 
 
@@ -91,9 +84,9 @@ const PaymentOptions = (props) => {
           )
         )}
         </PaymentsContainer>
-        <Button size={5} onClick={() => history.push('/NewPaymentPage')}>
+        <PaymentButton size={5} onClick={() => history.push('/NewPaymentPage')}>
           Add Payment Method
-        </Button>
+        </PaymentButton>
         <CheckoutButton onClick={() => history.goBack('/ShareOrder')}>
           Confirm Payment
         </CheckoutButton>
