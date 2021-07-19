@@ -34,10 +34,6 @@ margin-left: auto;
 margin-right: auto;
 `;
 
-const OrangeCheckBox = styled(Form.Checkbox)`
-
-`;
-
 const SearchAndFilterDiv = styled.div`
   display: flex;
   flex-direction: row;

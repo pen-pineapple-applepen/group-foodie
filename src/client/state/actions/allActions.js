@@ -8,10 +8,10 @@ import { updateCurrentRestaurantId, updateCurrentRestaurantName } from '../reduc
 import { addFriendName } from '../reducers/friendReducer'
 import { updateCurrentGroup } from '../reducers/groupReducer';
 import { createPaymentsList, changeSelectedPayment, addPayment} from '../reducers/paymentsReducer';
+import { addEmail, removeEmail, resetEmails } from '../reducers/emailFriendsReducer';
 
 const allActions = {
   addName,
-  // addEmail,
   setCurrentUser,
   logIn,
   logOut,
@@ -37,7 +37,10 @@ const allActions = {
   setCurrentUserId,
   createPaymentsList,
   changeSelectedPayment,
-  addPayment
+  addPayment,
+  addEmail,
+  removeEmail,
+  resetEmails
 }
 
 export default allActions;
