@@ -9,6 +9,7 @@ import { Modal, Button, Form } from 'react-bulma-components';
 import axios from 'axios';
 import Checkbox from "react-custom-checkbox";
 import * as Icon from "react-icons/fi";
+import { motion } from 'framer-motion';
 
 const Background = styled.div`
   background-color:white;
@@ -107,9 +108,39 @@ export default function RestaurantPage() {
     }
   }
 
+  // animation stuff
+  const pageVariants = {
+    initial: {
+      y: '100%',
+      // scaleY: 0
+    },
+    in: {
+      y: 0,
+      transition: {
+        duration: 0.6,
+        type: 'spring',
+        ease: 'easeIn',
+      }
+    },
+    out: {
+      opacity: 0,
+      transition: {
+        duration: 0.15,
+        type: 'spring',
+        ease: 'easeIn',
+      }
+    },
+  }
+
   return (
-    <div>
-      <OrangeNavbar needBackArrow={true}/>
+    <>
+    <OrangeNavbar needBackArrow={true}/>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
       <SearchAndFilterDiv>
         <img src={'location_black_24dp.svg'} />
         <OrangeInput placeholder="Playa Vista" />
@@ -214,7 +245,8 @@ export default function RestaurantPage() {
           </Modal.Card>
         </Modal>
       </div>
-    </div>
+    </motion.div>
+    </>
   )
 }
 

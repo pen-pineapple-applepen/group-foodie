@@ -6,8 +6,9 @@ import MenuItemContainer from './MenuItemContainer.jsx';
 import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared.tsx';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
-const MainConatiner = styled.div`
+const MainConatiner = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,11 +73,37 @@ export default function MenuPage () {
     getMenuList(currentItem.restaurant_id)
   },[])
 
+  //animation stuff
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        // type: 'tween',
+      }
+    },
+    out: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        // type: 'tween',
+      },
+    },
+  }
+
   return(
-    <MainConatiner>
-      <OrangeNavbar needBackArrow={true}/>
-      <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
-      {/* <img src={'Dannys_bg.png'}/> */}
+    <>
+    <OrangeNavbar needBackArrow={true}/>
+    <HeaderImage src ={currentItem.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
+    <MainConatiner
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
       <RestaurantName>{restaurantName}</RestaurantName>
       <div style={{overflow: "scroll", overflowY: "scroll", maxHeight: "400px", boxShadow: "4px 4px 8px rgb(0 0 0 / 10%)"}}>
       {menuList.map(entry=>{
@@ -89,5 +116,6 @@ export default function MenuPage () {
       </div>
       <CheckoutButton onClick={handleCheckout}>Checkout ${totalOrdersPrice.toFixed(2)}</CheckoutButton>
     </MainConatiner>
+    </>
   )
 }

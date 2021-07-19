@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -31,6 +31,10 @@ interface backArrowProps {
 interface HeaderImageProps {
   src: string,
 }
+interface SideBarMenuProps {
+  sideBarOpen: boolean,
+  setActive: () => {},
+}
 
 // utility subcomponents to create larger components
 const SizedImage = styled(Image)`
@@ -47,6 +51,7 @@ const OrangeNavbarContainer = styled(Navbar)`
   justify-content: center;
   align-items: center;
   height: 60px;
+  width: 100vw;
   border-radius: 0 0 22px 22px;
 `
 const NavbarBrand = styled(Navbar.Brand)`
@@ -95,7 +100,7 @@ const HeaderImageImg = styled.div<HeaderImageProps>`
   top: -50px;
   width: 100vw;
   height: 250px;
-  z-index: -11;
+  /* z-index: -11; */
 `
 
 const SideBarContainer = styled(motion.div)`
@@ -105,11 +110,11 @@ const SideBarContainer = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   width: 100vw;
-  height: 93.5vh;
+  height: 100vh;
   z-index: 100;
   background-color: white;
   border: 1px solid white;
-  border-bottom-left-radius: 100px;
+  border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
 `
 const SideBarOptions = styled(motion.div)`
@@ -121,6 +126,15 @@ const SideBarOptions = styled(motion.div)`
   p {
     padding-bottom: 8px;
   }
+`
+const BackGroundDimmer = styled(motion.div)`
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
 `
 const UserName = styled.h3`
   margin-bottom: 30px;
@@ -138,11 +152,12 @@ const Logout = styled.p`
 `;
 
 
-const SideBarMenu = ({sideBarOpen}) => {
+const SideBarMenu = ({sideBarOpen, toggleMenu}: SideBarMenuProps) => {
   const userName = useAppSelector(state => state.currentUser.first_name);
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { logOut, setCurrentUser, updateCurrentGroup, setCurrentUserId, purgePaymentsList } = allActions;
+  const dimmerRef = useRef(null)
 
   const handleLogOutClick = () => {
     dispatch(setCurrentUser({}));
@@ -151,13 +166,21 @@ const SideBarMenu = ({sideBarOpen}) => {
     dispatch(purgePaymentsList());
     dispatch(logOut());
     history.push('/');
-
   }
+
+
 
   return (
     <AnimatePresence>
       {sideBarOpen && (
         <div>
+          <BackGroundDimmer
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.8}}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            onClick={toggleMenu}
+          />
           <SideBarContainer
             initial={{ x: '-100%' }}
             animate={{ x: '-50%' }}
@@ -210,14 +233,14 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({
   onBackArrowClick,
   hasBurger = true
 }) => {
-  const [active, setActive] = useState(false);
+  const [ active, setActive ] = useState(false);
   const [ sideBarOpen, setSideBarOpen ] = useState(false);
 
   const loggedIn = useAppSelector(state => state.loginDetails.loggedIn);
   const history = useHistory();
 
   const toggleMenu = () => {
-    setActive(!active);
+    setActive(false);
   }
   const handleBackArrowClick = () => {
     history.goBack();
@@ -231,7 +254,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({
 
   return (
     <>
-      <SideBarMenu sideBarOpen={sideBarOpen}/>
+      <SideBarMenu sideBarOpen={sideBarOpen} toggleMenu={toggleMenu}/>
       <OrangeNavbarContainer className="is-fixed-top" active={active}>
         <NavbarBrand>
 
