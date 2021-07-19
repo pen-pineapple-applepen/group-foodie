@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { motion } from 'framer-motion';
+import { updateCurrentRestaurantName } from '../../state/reducers/restaurantReducer';
 
 const ContainerDiv = styled(motion.div)`
   display: flex;
@@ -47,6 +48,7 @@ interface FriendNameInputPageProps {
 interface GroupIdParams {
   group_id: string,
   restaurant_id: string,
+  restaurant_name: string,
 }
 
 
@@ -54,8 +56,8 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   const dispatch = useAppDispatch();
   const history = useHistory();
   const friendName = useAppSelector(state => state.friendName)
-  const { group_id, restaurant_id } = useParams<GroupIdParams>();
-  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup, } = allActions;
+  const { group_id, restaurant_id, restaurant_name } = useParams<GroupIdParams>();
+  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup, updateCurrentRestaurantName } = allActions;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +89,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
     dispatch(setGroupId(Number(group_id)));
     dispatch(updateCurrentGroup(Number(group_id)));
     dispatch(UpdateRestaurantId(Number(restaurant_id)));
+    dispatch(updateCurrentRestaurantName(restaurant_name));
 
   }, [])
 
@@ -115,7 +118,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   return (
     <>
     <OrangeNavbar hasBurger={false}/>
-    <HeaderImage src ={restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+    <HeaderImage src ={Number(restaurant_id) === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
     <ContainerDiv
     initial="initial"
     animate="in"

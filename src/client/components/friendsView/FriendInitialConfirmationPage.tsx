@@ -101,7 +101,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
   return (
     <>
     <OrangeNavbar/>
-    <HeaderImage src ={currentRestaurant.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+    <HeaderImage src ={currentRestaurant.id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
     <ConfirmationContainer
     initial="initial"
     animate="in"
@@ -111,7 +111,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
 
       <TopContainer>
         <ThankYouMessage>
-          Share Order for Danny's
+          Share Order for {currentRestaurant.name}
         </ThankYouMessage>
       </TopContainer>
       <span>Time left to put in your order:</span>

@@ -30,6 +30,7 @@ export default function ChatPage () {
 
 
   React.useEffect(async () => {
+    console.log('restaurantid', restaurant.restaurant_id)
     const dateData = await axios.get(`/api/groups/${currentGroupId}`)
     const date = dateData.data[0].due_date;
     const formatedDate = date.slice(5, 7) + '/' + date.slice(8, 10) + '/' + date.slice(0, 4);
@@ -44,7 +45,7 @@ export default function ChatPage () {
         </div>
         <div>
           <div>
-          <img className="restaurantImg" src={restaurant.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} style={imgStyle}></img>
+          <img className="restaurantImg" src={restaurant.id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} style={imgStyle}></img>
           </div>
           <div>
             <p>{restaurant.name}</p>

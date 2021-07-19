@@ -76,7 +76,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
   const history = useHistory();
 
   function copyToClipBoard() {
-    navigator.clipboard.writeText(`localhost:4000/Friends/${currentGroupId}/${currentRestaurantId.id}`)
+    navigator.clipboard.writeText(`localhost:4000/Friends/${currentGroupId}/${currentRestaurantId.id}/${currentRestaurantId.name}`)
     setCopied(true);
     setTimeout(()=> setCopied(false), 2000);
   }
@@ -110,7 +110,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
       exit="out"
       variants={pageVariants}
     >
-      <HeaderImage src ={currentRestaurantId === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+      <HeaderImage src ={currentRestaurantId.id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
 
       <TopContainer>
         <ThankYouMessage>
@@ -122,7 +122,7 @@ function Confirmation({}: ConfirmationProps): ReactElement {
         <Link
           onClick={copyToClipBoard}
         >
-          localhost:4000/Friends/{currentGroupId}/{currentRestaurantId.id}
+          localhost:4000/Friends/{currentGroupId}/{currentRestaurantId.id}/{currentRestaurantId.name}
         </Link>
         <AnimatePresence>
           {copied &&
