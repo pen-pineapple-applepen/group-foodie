@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
-import styled from 'styled-components';
+import { AnimatePresence } from 'framer-motion';
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,28 +35,30 @@ function App() {
     <div className="App">
       <Router>
         <div className="RouterContainer">
-          <Switch>
-            <Route exact path="/" component={mainLoginPage} />
-            <Route exact path="/SignUp" component={SignUpPage} />
-            <Route exact path="/Restaurants" component={RestaurantPage} />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/friends" component={FriendsList} />
-            <Route exact path="/history" component={OrderHistory} />
-            <Route exact path="/Menu" component={MenuPage} />
-            <Route exact path="/MenuItem" component={MenuItemPage} />
-            <Route exact path="/LandingPage" component={landingPage} />
-            <Route exact path="/Friends/:group_id/:restaurant_id" component={FriendNameInputPage} />
-            <Route exact path="/Chat/ChatPage" component={ChatPage} />
-            <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
-            <Route exact path="/MenuItem/Friends/" component={FriendMenuItemPage} />"
-            <Route exact path="/ShareOrder" component={OrderShare} />"
-            <Route exact path="/Confirmation" component={Confirmation} />"
-            <Route exact path="/Friends/Confirmation" component={FriendInitialConfirmationPage} />"
-            <Route exact path="/Friends/ConfirmationEnd" component={FriendFinalConfirmationPage} />"
-            <Route exact path="/PaymentOptions" component={PaymentOptions} />"
-            <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
-            <Redirect to="/" />
-          </Switch>
+          <AnimatePresence>
+            <Switch>
+              <Route exact path="/" component={mainLoginPage} />
+              <Route exact path="/SignUp" component={SignUpPage} />
+              <Route exact path="/Restaurants" component={RestaurantPage} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/friends" component={FriendsList} />
+              <Route exact path="/history" component={OrderHistory} />
+              <Route exact path="/Menu" component={MenuPage} />
+              <Route exact path="/MenuItem" component={MenuItemPage} />
+              <Route exact path="/LandingPage" component={landingPage} />
+              <Route exact path="/Friends/:group_id/:restaurant_id" component={FriendNameInputPage} />
+              <Route exact path="/Chat/ChatPage" component={ChatPage} />
+              <Route exact path="/Menu/Friends/" component={FriendMenuPage} />"
+              <Route exact path="/MenuItem/Friends/" component={FriendMenuItemPage} />"
+              <Route exact path="/ShareOrder" component={OrderShare} />"
+              <Route exact path="/Confirmation" component={Confirmation} />"
+              <Route exact path="/Friends/Confirmation" component={FriendInitialConfirmationPage} />"
+              <Route exact path="/Friends/ConfirmationEnd" component={FriendFinalConfirmationPage} />"
+              <Route exact path="/PaymentOptions" component={PaymentOptions} />"
+              <Route exact path="/NewPaymentPage" component={NewPaymentPage} />"
+              <Redirect to="/" />
+            </Switch>
+          </AnimatePresence>
         </div>
       </Router>
     </div>
