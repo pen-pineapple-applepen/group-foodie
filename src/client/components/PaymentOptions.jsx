@@ -74,10 +74,12 @@ const PaymentOptions = (props) => {
         <PaymentContainer key={index} id={payment.id} onClick={handlePaymentClick}>
           <SelectedPayment id={payment.id}>{payment.cardNumber}</SelectedPayment>
           <SelectedCard id={payment.id}>{payment.cardType}</SelectedCard>
+          <img className='checkbox'src={"./checkbox-checked-50.png"} />
         </PaymentContainer> ) : (
           <PaymentContainer key={index} id={payment.id} onClick={handlePaymentClick}>
             <div id={payment.id} >{payment.cardNumber}</div>
             <Card id={payment.id}>{payment.cardType}</Card>
+            <img className='checkbox'src={"./checkbox-unchecked-50.png"} />
           </PaymentContainer>
         )
       )}
