@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Button, Icon, Form, Image, Navbar } from 'react-bulma-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -33,17 +33,13 @@ interface HeaderImageProps {
 }
 interface SideBarMenuProps {
   sideBarOpen: boolean,
+  toggleMenu: () => {},
   setActive: () => {},
 }
 
 // utility subcomponents to create larger components
 const SizedImage = styled(Image)`
 `
-// const OrangeNavbarContainer = styled(Navbar)`
-//   background-color: #FF6C36;
-//   border-radius: 0 0 22px 22px;
-//   z-index: -11;
-// `
 
 const OrangeNavbarContainer = styled(Navbar)`
   background-color: #FF6C36;
