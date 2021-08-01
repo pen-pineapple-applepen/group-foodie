@@ -39,7 +39,7 @@ export default function FriendMenuPage () {
   const restaurantName = useAppSelector((state)=>state.currentRestaurant.name)
   const friendsOrders = useAppSelector<Array<Order>>((state) => state.allOrderItems.orders)
   const currentGroupId = useAppSelector((state) => state.currentGroup);
-  const currentUserId = useAppSelector((state) => state.loginDetails.userId);
+  const currentUserId = useAppSelector((state) => state.currentUser.id);
 
   const dispatch = useAppDispatch();
   const history = useHistory();

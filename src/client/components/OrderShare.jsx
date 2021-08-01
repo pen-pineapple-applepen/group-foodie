@@ -94,7 +94,7 @@ const OrderShare = () => {
   const paymentsList = useAppSelector(state => state.currentPayments.paymentsList);
   const dispatch = useAppDispatch();
   let [openModal, setOpenModal] = useState();
-  const userId = useAppSelector(state => state.loginDetails.userId);
+  const userId = useAppSelector(state => state.currentUser.id);
   let [selectedPaymentId, makeSelectedPaymentId] = useState(0);
   const currentEmails = useAppSelector(state => state.currentEmails.emails);
 
