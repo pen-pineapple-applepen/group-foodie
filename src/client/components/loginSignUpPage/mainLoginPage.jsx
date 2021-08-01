@@ -26,10 +26,10 @@ export default function MainLoginPage() {
     axios.get('/api/users/login', {params: {email: email, password: password}})
       .then (res => {
         if (res.data.hasCorrectCredentials === true) {
-          dispatch(allActions.logIn(res.data.id));
           axios.get(`/api/users/${res.data.id}`)
-            .then((results) => {
-              dispatch(allActions.setCurrentUser(results.data))
+          .then((results) => {
+            dispatch(allActions.setCurrentUser(results.data))
+            dispatch(allActions.logIn());
             })
             .catch((err) => {
               console.log(err);

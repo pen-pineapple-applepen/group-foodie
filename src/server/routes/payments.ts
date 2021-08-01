@@ -3,7 +3,7 @@ const controllers = require('../controllers.ts');
 const payments = express.Router();
 
 payments
-  .route('/addPayment')
+  .route('/addPayment/:user_id')
   .post(controllers.addPaymentByUserId)
 payments
   .route('/user/:user_id')
