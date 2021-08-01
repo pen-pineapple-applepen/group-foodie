@@ -10,6 +10,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { motion } from 'framer-motion';
 import { updateCurrentRestaurantName } from '../../state/reducers/restaurantReducer';
+import { User } from '../../state/reducers/currentUserReducer';
 
 const ContainerDiv = styled(motion.div)`
   display: flex;
@@ -57,7 +58,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   const history = useHistory();
   const friendName = useAppSelector(state => state.friendName)
   const { group_id, restaurant_id, restaurant_name } = useParams<GroupIdParams>();
-  const { addFriendName, setUserId, UpdateRestaurantId, setGroupId, setCurrentUserId, updateCurrentGroup, updateCurrentRestaurantName } = allActions;
+  const { addFriendName, UpdateRestaurantId, setGroupId, setCurrentUser, updateCurrentGroup, updateCurrentRestaurantName } = allActions;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,18 +68,20 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
 
   const handleClick = async () => {
     try {
-      const userIdData = await axios.post('/api/users/create', {
+      const userInfo: User = {
+        id: 0,
         first_name: friendName,
         last_name: '',
         email: '',
         username: 'GUEST',
         password: '',
         guest: true,
-      })
+        loggedIn: false,
+      }
+      const userIdData = await axios.post('/api/users/create', userInfo)
       const userId = userIdData.data[0]
-      console.log('user ID', userId);
-      dispatch(setUserId(userId));
-      dispatch(setCurrentUserId(userId));
+      userInfo.id = userId;
+      dispatch(setCurrentUser(userInfo));
     } catch (err) {
       console.log('error creating guest user ID', err);
     }
