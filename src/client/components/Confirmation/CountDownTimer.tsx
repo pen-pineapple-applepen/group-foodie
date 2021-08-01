@@ -36,7 +36,7 @@ function CountDownTimer({edit}: CountDownTimerProps): ReactElement {
   const [ dueDate, setDueDate ] = useState('');
   const [ dateIsSet, setDateIsSet ] = useState(false);
   const groupId = useAppSelector(state => state.currentGroup);
-  const isLoggedIn = useAppSelector(state => state.loginDetails.loggedIn);
+  const isLoggedIn = useAppSelector(state => state.currentUser.loggedIn);
 
   const countdownRenderer = () => {
     const { days, hours, minutes, seconds, completed } = calcTimeDelta(dueDate); // needs to be updated with dynamic 'dueDate' state

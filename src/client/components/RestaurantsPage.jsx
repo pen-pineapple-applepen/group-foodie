@@ -43,7 +43,7 @@ const SearchAndFilterDiv = styled.div`
 `;
 
 export default function RestaurantPage() {
-  const userId = useAppSelector((state) => state.loginDetails.userId)
+  const userId = useAppSelector((state) => state.currentUser.id)
   const dispatch = useAppDispatch();
   const history = useHistory();
 
@@ -68,7 +68,6 @@ export default function RestaurantPage() {
   }
 
   function clickHandler(entry) {
-    dispatch(allActions.setUserId(userId))
     dispatch(allActions.UpdateRestaurantId(entry.restaurant_id))
     dispatch(allActions.updateCurrentRestaurantId(entry.restaurant_id))
     dispatch(allActions.updateCurrentRestaurantName(entry.name))

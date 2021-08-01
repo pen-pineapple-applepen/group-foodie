@@ -34,7 +34,7 @@ export default function ChatComments (props) {
   const [chat, setChat] = React.useState(['']);
   const [posted, setPosted] = React.useState(1);
   const currentGroupId = useAppSelector(state => state.currentGroup);
-  const currentUserId = useAppSelector(state => state.loginDetails.userId);
+  const currentUserId = useAppSelector(state => state.currentUser.id);
   const currentUserName = useAppSelector(state => state.currentUser.first_name);
 
   const handlePost = (userId, groupId, chat) => {

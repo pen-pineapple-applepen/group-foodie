@@ -232,7 +232,7 @@ export const OrangeNavbar: (props: orangeNavbarProps) => JSX.Element = ({
   const [ active, setActive ] = useState(false);
   const [ sideBarOpen, setSideBarOpen ] = useState(false);
 
-  const loggedIn = useAppSelector(state => state.loginDetails.loggedIn);
+  const loggedIn = useAppSelector(state => state.currentUser.loggedIn);
   const history = useHistory();
 
   const toggleMenu = () => {
