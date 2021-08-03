@@ -3,7 +3,7 @@
   <img src="https://github.com/erikeh/erikeh-demo-assets/blob/master/GroupFoodie-demo_aug3_v2.gif" alt="group-foodie-demo" />
 </div>
 	
-Group Foodie is an application built around the idea of starting and sharing a group food order among friends or coworkers, with the ability to start an order, chat about the order, and add onto an existing order with a persistent timer that ultimately "submits" the order
+Group Foodie is an application built around the idea of starting and sharing a group food order among friends or coworkers, with the ability to start an order, chat about the order, and add onto an existing order with a persistent timer that ultimately "submits" the order.
 
 ## About
 This project was created by a team of 7 (including myself) as a proof of concept demo for a food-delivery app idea. While built in the browser, this application was designed with a mobile-experience in mind. I was the only person on the team that used typescript, so the project is currently a hybrid of javascript and typescript. There are personal plans to refactor this into a type-safe project eventually.
@@ -16,7 +16,7 @@ I was in charge of several things:
 4. I created every animation of the application
 5. I did all the webpack/babel/tslint/eslint configuration to work nicely in a hybrid TS & JS project
 
-Due to my code being in typescript, it is quite easy to differentiate what I worked on, and what others worked on
+Due to my code being in typescript, it is quite easy to differentiate what I worked on, and what others worked on.
 	
 ## Quick Start
 ### Seed Initial Database (WIP)
