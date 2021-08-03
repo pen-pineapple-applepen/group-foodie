@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server",
+    "start": "nodemon -r esm api",
     "database": "psql -U postgres -h localhost -d groupfoodie -f src/server/db/schema.sql",
     "build": "webpack --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +21,7 @@
     "connect-history-api-fallback": "^1.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "framer-motion": "^4.1.17",
     "knex": "^0.95.7",

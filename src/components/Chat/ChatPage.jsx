@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import styled from 'styled-components';
 import ChatComments from './ChatComments.jsx';
-import { OrangeButton, OrangeNavbar } from '/src/client/styles/shared.tsx';
+import { OrangeButton, OrangeNavbar } from '../../styles/shared.tsx';
 import axios from 'axios';
 
 

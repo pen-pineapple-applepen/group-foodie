@@ -1,4 +1,5 @@
-// payments
+import db from '../../db';
+
 const getPaymentsByUserId = async (user_id) => {
   const payments = await db('payment_info')
     .where({ user_id: user_id })
@@ -19,4 +20,9 @@ const addPaymentByUserId = async (
       user_id,
     }, 'id')
   return insertedId;
+}
+
+export default {
+  getPaymentsByUserId,
+  addPaymentByUserId,
 }

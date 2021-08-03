@@ -3,7 +3,7 @@ import webpack from "webpack";
 import autoprefixer from "autoprefixer";
 
 const config: webpack.Configuration = {
-  entry: "./src/index.jsx",
+  entry: "src/index.jsx",
   module: {
     rules: [
       {

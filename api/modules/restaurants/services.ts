@@ -1,3 +1,6 @@
+const restaurants = require('./restaurants');
+const menus = require('./menus');
+
 const getRestaurantsByZipCode = async (zip_code) => {
   const restaurantsData = restaurants.restaurants;
 
@@ -21,4 +24,9 @@ const getMenuByRestaurantId = async (restaurant_id) => {
   const menuItems = currentRestaurant.menu_items;
 
   return menuItems;
+}
+
+export default {
+  getRestaurantsByZipCode,
+  getMenuByRestaurantId,
 }

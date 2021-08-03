@@ -1,12 +1,14 @@
-const express = require('express');
-const controllers = require('../controllers.ts');
+/* eslint-disable prettier/prettier */
+import express from'express';
+import paymentsHandlers from'../handlers';
+
 const payments = express.Router();
 
 payments
   .route('/addPayment/:user_id')
-  .post(controllers.addPaymentByUserId)
+  .post(paymentsHandlers.addPaymentByUserId)
 payments
   .route('/user/:user_id')
-  .get(controllers.getPaymentsByUserId)
+  .get(paymentsHandlers.getPaymentsByUserId)
 
-module.exports = payments;
+export default payments;

@@ -1,7 +1,6 @@
 import { combineReducers } from "redux"
 import { namesReducer } from './namesReducer';
 import { currentUserReducer } from './currentUserReducer';
-import { loginReducer } from './loginReducer';
 import { menuItemReducer } from './menuItemReducer';
 import { orderItemReducer } from './orderItemReducer';
 import { allOrderItemsReducer } from './allOrderItemsReducer';
@@ -13,7 +12,6 @@ import { emailFriendsRecucer } from './emailFriendsReducer';
 
 const rootReducer = combineReducers({
   names: namesReducer,
-  loginDetails: loginReducer,
   currentUser: currentUserReducer,
   currentItemQuantityPrice: menuItemReducer,
   currentMenuItem: orderItemReducer,

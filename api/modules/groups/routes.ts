@@ -1,13 +1,15 @@
-const express = require('express');
-const controllers = require('../controllers.ts');
+/* eslint-disable prettier/prettier */
+import express from 'express';
+import groupsHandlers from './handlers';
+
 const groups = express.Router();
 
 groups
   .route('/:group_id/')
-  .get(controllers.getDueDateByGroupId)
+  .get(groupsHandlers.getDueDateByGroupId)
 
 groups
   .route('/')
-  .post(controllers.createGroup)
+  .post(groupsHandlers.createGroup)
 
-module.exports = groups;
+export default groups;

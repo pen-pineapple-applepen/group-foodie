@@ -1,18 +1,20 @@
-const express = require('express');
-const controllers = require('../controllers.ts');
+/* eslint-disable prettier/prettier */
+import express from 'express';
+import ordersHandlers from './handlers';
+
 const orders = express.Router();
 
 orders
   .route('/:order_id')
-  .get(controllers.getOneOrderById)
+  .get(ordersHandlers.getOneOrderById)
 
 orders
   .route('/:group_id/group')
-  .get(controllers.getOrdersByGroupId)
+  .get(ordersHandlers.getOrdersByGroupId)
 
 orders
   .route('/:user_id/user')
-  .get(controllers.getOrdersByUserId)
-  .post(controllers.addOrder)
+  .get(ordersHandlers.getOrdersByUserId)
+  .post(ordersHandlers.addOrder)
 
-module.exports = orders;
+export default orders;

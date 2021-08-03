@@ -21,7 +21,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'import/extensions': 1,
+    // 'import/extensions': [1, 'never'],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],

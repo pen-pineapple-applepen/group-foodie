@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { BackArrow, ProfileImage, OrangeButton, OrangeNavbar } from '../styles/shared';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import allActions from '/src/client/state/actions/allActions.js';
+import allActions from '../state/actions/allActions';
 
 const ProfileDiv = styled.div`
   display: flex;

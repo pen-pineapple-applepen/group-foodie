@@ -1,13 +1,15 @@
-const express = require('express');
+/* eslint-disable prettier/prettier */
+import express from'express';
+import restaurantsHandlers from'../handlers';
+
 const restaurants = express.Router();
-const controllers = require('../controllers.ts');
 
 restaurants
   .route('/:zip_code')
-  .get(controllers.getRestaurantsByZipCode)
+  .get(restaurantsHandlers.getRestaurantsByZipCode)
 
 restaurants
   .route('/:restaurant_id/menu')
-  .get(controllers.getMenuByRestaurantId)
+  .get(restaurantsHandlers.getMenuByRestaurantId)
 
-module.exports = restaurants;
+export default restaurants;

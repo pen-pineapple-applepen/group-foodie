@@ -1,13 +1,15 @@
-const express = require('express');
-const controllers = require('../controllers.ts');
+/* eslint-disable prettier/prettier */
+import express from 'express';
+import commentsHandlers from './handlers';
+
 const comments = express.Router();
 
 comments
   .route('/:user_id/create')
-  .post(controllers.createComment)
+  .post(commentsHandlers.createComment)
 
 comments
   .route('/:group_id/group')
-  .get(controllers.getCommentsByGroupId)
+  .get(commentsHandlers.getCommentsByGroupId)
 
-module.exports = comments;
+export default comments;
