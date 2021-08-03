@@ -49,7 +49,7 @@ async function checkPasswordWithEmail(req, res) {
   console.log("req.query:", req.query);
   const { email, password } = req.query;
   try {
-    const passwordIsCorrect = await models.checkPasswordWithEmail(email, password)
+    const passwordIsCorrect = await usersServices.checkPasswordWithEmail(email, password)
     console.log('password checks out');
     res.status(200).send(passwordIsCorrect);
   } catch (err) {
