@@ -1,4 +1,4 @@
-import commentsServices from './services';
+import commentsServices from './services.ts';
 
 async function getCommentsByGroupId(req, res) {
   const { group_id } = req.params;

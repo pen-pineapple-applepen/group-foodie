@@ -1,4 +1,4 @@
-import paymentsServices from './services';
+import paymentsServices from './services.ts';
 
 async function getPaymentsByUserId(req, res) {
   const { user_id } = req.params;

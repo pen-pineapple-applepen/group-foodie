@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import express from 'express';
-import usersHandlers from './handlers';
+import usersHandlers from './handlers.ts';
 
 const users = express.Router();
 

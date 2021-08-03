@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import express from'express';
-import paymentsHandlers from'../handlers';
+import paymentsHandlers from'./handlers.ts';
 
 const payments = express.Router();
 

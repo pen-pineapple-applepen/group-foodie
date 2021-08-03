@@ -6,8 +6,8 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'airbnb-typescript',
     'plugin:import/typescript',
-    'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
@@ -19,9 +19,14 @@ module.exports = {
     ecmaVersion: 12,
   },
   plugins: ['react', '@typescript-eslint'],
+  settings: {
+    'import/resolver': {
+      typescript: {},
+     },
+  },
   rules: {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    // 'import/extensions': [1, 'never'],
+    // 'import/extensions': 'never',
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],

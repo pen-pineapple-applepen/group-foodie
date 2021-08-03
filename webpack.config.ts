@@ -3,7 +3,7 @@ import webpack from "webpack";
 import autoprefixer from "autoprefixer";
 
 const config: webpack.Configuration = {
-  entry: "src/index.jsx",
+  entry: "./src/index.jsx",
   module: {
     rules: [
       {
@@ -41,7 +41,7 @@ const config: webpack.Configuration = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".jsx"],
+    extensions: ["", ".tsx", ".ts", ".js", ".jsx"],
   },
   output: {
     path: path.resolve(__dirname, "public"),

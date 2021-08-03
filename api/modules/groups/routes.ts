@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import express from 'express';
-import groupsHandlers from './handlers';
+import groupsHandlers from './handlers.ts';
 
 const groups = express.Router();
 

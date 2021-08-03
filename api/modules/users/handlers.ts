@@ -1,4 +1,4 @@
-import usersServices from './services'
+import usersServices from './services.ts'
 
 async function getOneUser(req, res) {
   const { user_id } = req.params;

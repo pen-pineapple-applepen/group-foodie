@@ -1,4 +1,4 @@
-import restaurantsServices from './services';
+import restaurantsServices from './services.ts';
 
 async function getRestaurantsByZipCode(req, res) {
   let { zip_code } = req.params;
@@ -27,5 +27,4 @@ async function getMenuByRestaurantId(req, res) {
 export default {
   getRestaurantsByZipCode,
   getMenuByRestaurantId,
-  checkPasswordWithEmail,
 }

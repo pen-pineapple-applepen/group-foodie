@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import express from 'express';
-import ordersHandlers from './handlers';
+import ordersHandlers from './handlers.ts';
 
 const orders = express.Router();
 

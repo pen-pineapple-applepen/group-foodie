@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import express from 'express';
-import commentsHandlers from './handlers';
+import commentsHandlers from './handlers.ts';
 
 const comments = express.Router();
 
