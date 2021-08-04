@@ -1,4 +1,4 @@
-import ordersServices from './services.ts';
+import ordersServices from './services';
 
 async function getOneOrderById(req, res) {
   const { order_id } = req.params;

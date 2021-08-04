@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Heading } from 'react-bulma-components';
-import { OrangeButton, OrangeNavbar } from '../styles/shared.tsx';
+import { OrangeButton, OrangeNavbar } from '../styles/shared';
 import { Button } from 'react-bulma-components'
 import { Table } from 'react-bulma-components';
 

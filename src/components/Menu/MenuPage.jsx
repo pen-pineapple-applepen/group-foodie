@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
 import MenuItemContainer from './MenuItemContainer.jsx';
-import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared.tsx';
+import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';

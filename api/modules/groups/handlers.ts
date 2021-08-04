@@ -1,4 +1,4 @@
-import groupsServices from './services.ts';
+import groupsServices from './services';
 
 async function getDueDateByGroupId(req, res) {
   const { group_id } = req.params;

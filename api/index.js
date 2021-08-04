@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import history from 'connect-history-api-fallback';
-import router from './router.ts';
+import router from './router';
 
 const app = express();
 const port = 4000;

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import express from'express';
-import restaurantsHandlers from'./handlers.ts';
+import restaurantsHandlers from'./handlers';
 
 const restaurants = express.Router();
 

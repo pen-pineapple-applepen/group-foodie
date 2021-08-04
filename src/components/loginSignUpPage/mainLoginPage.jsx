@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components'
 import allActions from '../../state/actions/allActions.js';
-import { useAppDispatch, useAppSelector } from '../../state/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Button, Icon, Form } from 'react-bulma-components';
-import { OrangeButton, OrangeNavbar } from '../../styles/shared.tsx';
+import { OrangeButton, OrangeNavbar } from '../../styles/shared';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 

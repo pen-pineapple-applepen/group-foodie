@@ -1,4 +1,4 @@
-import restaurantsServices from './services.ts';
+import restaurantsServices from './services';
 
 async function getRestaurantsByZipCode(req, res) {
   let { zip_code } = req.params;

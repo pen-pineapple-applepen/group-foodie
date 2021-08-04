@@ -4,7 +4,7 @@ import allActions from '../state/actions/allActions';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import RestaurantContainer from './RestaurantContainer.jsx';
-import { OrangeInput, OrangeButton, OrangeNavbar } from '../styles/shared.tsx';
+import { OrangeInput, OrangeButton, OrangeNavbar } from '../styles/shared';
 import { Modal, Button, Form } from 'react-bulma-components';
 import axios from 'axios';
 import Checkbox from "react-custom-checkbox";
