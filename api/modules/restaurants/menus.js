@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   "menus": [
     {
       "restaurant_id": 1,

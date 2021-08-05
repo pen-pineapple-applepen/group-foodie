@@ -37,12 +37,12 @@ async function getOrdersByUserId(req: Request, res: Response) {
 async function addOrder(req: Request, res: Response) {
   const { user_id } = req.params;
   const {
-    food, quantity, price, date, food_id, group_id, restaurant_id, live
+    food, quantity, price, date, food_id, group_id, restaurant_id,
   } = req.body;
 
   try {
     const orderId = await ordersServices.addOrder(
-      Number(user_id), food, quantity, price, date, food_id, group_id, restaurant_id, live
+      Number(user_id), food, quantity, price, date, food_id, group_id, restaurant_id,
     )
     console.log(`successfully added order with ID: ${orderId} and userID: ${user_id}`)
     res.status(200).send(orderId);

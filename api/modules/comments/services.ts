@@ -5,7 +5,7 @@ const getCommentsByGroupId = async (group_id: number) => {
   return comments;
 };
 
-const createComment = async (user_id: number, text: string, date: string, group_id: number) => {
+const createComment = async (user_id: number, text: string, date: Date, group_id: number) => {
   const insertedId = await db('comments').insert(
     {
       user_id,

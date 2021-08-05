@@ -1,4 +1,6 @@
-const db = require('knex')({
+import knex from 'knex';
+
+const db = knex({
   client: 'postgresql',
   connection: {
     host: 'localhost',
@@ -9,4 +11,4 @@ const db = require('knex')({
   },
 });
 
-module.exports = db;
+export default db;

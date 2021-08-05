@@ -19,12 +19,11 @@ const addOrder = async (
   user_id: number,
   food: string,
   quantity: number,
-  price: string,
+  price: number,
   date: string,
   food_id: number,
   group_id: number,
   restaurant_id: number,
-  live: boolean,
 ) => {
   const insertedId = await db('orders').insert(
     {
@@ -36,7 +35,6 @@ const addOrder = async (
       food_id,
       group_id,
       restaurant_id,
-      live,
     },
     'id'
   );

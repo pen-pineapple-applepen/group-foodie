@@ -1,5 +1,5 @@
-const restaurants = require('./restaurants');
-const menus = require('./menus');
+import restaurants from './restaurants';
+import menus from './menus';
 
 interface FormattedRestaurant {
   restaurant_id: number;
@@ -10,7 +10,6 @@ interface FormattedRestaurant {
 }
 
 interface MenuItem {
-  resuarant_id: number;
   menu_item_id: number;
   menu_item_name: string;
   menu_item_description: string;
@@ -56,8 +55,7 @@ const getRestaurantsByZipCode = async (zip_code: number) => {
     formattedRestaurant.hours = restaurant.hours;
     acc.push(formattedRestaurant)
     return acc;
-
-  }, [])
+  }, [] as FormattedRestaurant[])
   return allRestaurants;
 }
 
@@ -68,7 +66,7 @@ const getMenuByRestaurantId = async (restaurant_id: number) => {
   if (currentRestaurant) {
     menuItems = currentRestaurant.menu_items;
   } else {
-    menuItems = undefined;
+    throw new Error('current restaurant does not exist');
   }
 
   return menuItems;
