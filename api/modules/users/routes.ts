@@ -1,25 +1,26 @@
 /* eslint-disable prettier/prettier */
 import express from 'express';
-import userController from './controller';
+import { UsersController } from './controller';
+const usersController = new UsersController();
 
 const users = express.Router();
 
 users
   .route('/create')
-  .post(userController.createUser)
+  .post(usersController.createUser)
 
 users
   .route('/login')
-  .get(userController.checkPasswordWithEmail)
+  .get(usersController.checkPasswordWithEmail)
 
 users
   .route('/:user_id')
-  .get(userController.getOneUser)
+  .get(usersController.getOneUser)
 
 
 users
   .route('/:user_id/friends')
-  .get(userController.getFriends)
-  .post(userController.createFriend)
+  .get(usersController.getFriends)
+  .post(usersController.createFriend)
 
 export default users;

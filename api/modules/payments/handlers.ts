@@ -1,15 +1,16 @@
+import { Request, Response } from 'express';
 import paymentsServices from './services';
 
-async function getPaymentsByUserId(req, res) {
+async function getPaymentsByUserId(req: Request, res: Response) {
   const { user_id } = req.params;
   try {
-    const payments = await paymentsServices.getPaymentsByUserId(user_id);
+    const payments = await paymentsServices.getPaymentsByUserId(Number(user_id));
     res.status(200).send(payments);
   } catch (err) {
     res.status(404).send(err);
   }
 }
-async function addPaymentByUserId(req, res) {
+async function addPaymentByUserId(req: Request, res: Response) {
   const { name, card_number, card_type, exp_date, cvv, zip_code, user_id } = req.body.params;
 
   try {

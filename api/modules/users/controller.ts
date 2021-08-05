@@ -13,7 +13,7 @@ interface IUsersController {
   checkPasswordWithEmail(req: Request, res: Response): Promise<void>;
 }
 
-class UsersController implements IUsersController {
+export class UsersController implements IUsersController {
   async getOneUser(req: Request, res: Response) {
     const { user_id } = req.params;
     try {

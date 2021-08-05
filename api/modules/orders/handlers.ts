@@ -1,6 +1,7 @@
+import { Request, Response } from 'express';
 import ordersServices from './services';
 
-async function getOneOrderById(req, res) {
+async function getOneOrderById(req: Request, res: Response) {
   const { order_id } = req.params;
   try {
     const order = await ordersServices.getOneOrderById(Number(order_id))
@@ -11,7 +12,7 @@ async function getOneOrderById(req, res) {
   }
 }
 
-async function getOrdersByGroupId(req, res) {
+async function getOrdersByGroupId(req: Request, res: Response) {
   const { group_id } = req.params;
   try {
     const orders = await ordersServices.getOrdersByGroupId(Number(group_id))
@@ -22,7 +23,7 @@ async function getOrdersByGroupId(req, res) {
   }
 }
 
-async function getOrdersByUserId(req, res) {
+async function getOrdersByUserId(req: Request, res: Response) {
   const { user_id } = req.params;
   try {
     const orders = await ordersServices.getOrdersByUserId(Number(user_id))
@@ -33,7 +34,7 @@ async function getOrdersByUserId(req, res) {
   }
 }
 
-async function addOrder(req, res) {
+async function addOrder(req: Request, res: Response) {
   const { user_id } = req.params;
   const {
     food, quantity, price, date, food_id, group_id, restaurant_id, live
@@ -41,7 +42,7 @@ async function addOrder(req, res) {
 
   try {
     const orderId = await ordersServices.addOrder(
-      user_id, food, quantity, price, date, food_id, group_id, restaurant_id, live
+      Number(user_id), food, quantity, price, date, food_id, group_id, restaurant_id, live
     )
     console.log(`successfully added order with ID: ${orderId} and userID: ${user_id}`)
     res.status(200).send(orderId);
