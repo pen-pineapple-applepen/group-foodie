@@ -1,4 +1,5 @@
 import knex from 'knex';
+import { Container } from 'typedi';
 
 const db = knex({
   client: 'postgresql',
@@ -10,5 +11,8 @@ const db = knex({
     port: 5432,
   },
 });
+
+// const databaseToken = new Token('DATABASE_ACCESS');
+Container.set('DATA_ACCESS', db);
 
 export default db;

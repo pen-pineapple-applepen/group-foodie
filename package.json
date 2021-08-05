@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --loader ts-node/esm --experimental-specifier-resolution=node api",
+    "start": "ts-node-dev api",
+    "start:experimental": "nodemon --loader ts-node/esm --experimental-specifier-resolution=node api",
     "database": "psql -U postgres -h localhost -d groupfoodie -f src/server/db/schema.sql",
     "build": "webpack --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -46,8 +47,10 @@
     "react-router-dom": "^5.2.0",
     "react-time-picker": "^4.3.0",
     "redux": "^4.1.0",
+    "reflect-metadata": "^0.1.13",
     "sass-loader": "^12.1.0",
-    "style-loader": "^3.1.0"
+    "style-loader": "^3.1.0",
+    "typedi": "^0.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -73,12 +76,14 @@
     "css-loader": "^5.2.7",
     "eslint": "^7.30.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "styled-components": "^5.3.0",
     "ts-node": "^10.1.0",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2"

@@ -1,8 +1,12 @@
 import { Knex } from 'knex';
-// import db from '../../db';
+import { Service } from 'typedi';
+import { Container, Token } from 'typedi';
+import db from '../../db';
 import { User, Friend, Credentials } from './users.types';
 
- interface UsersService {
+Container.set('DATA_ACCESS', db);
+
+interface UsersService {
   getOneUserInfo(user_id: string): Promise<User>;
   createUser(
     first_name: string,
@@ -17,14 +21,17 @@ import { User, Friend, Credentials } from './users.types';
   checkPasswordWithEmail(email: string, password: string): Promise<Credentials>;
 }
 
-export class UsersServiceImpl implements UsersService {
+@Service()
+export default class UsersServiceImpl implements UsersService {
+  // constructor(private readonly db: Knex) {
+  // }
 
-  constructor(private readonly db: Knex) {}
+  db: Knex = Container.get('DATA_ACCESS');
 
   async getOneUserInfo(user_id: string): Promise<User> {
     const user = await this.db('users')
       .select('id', 'first_name', 'last_name', 'email', 'username', 'password', 'guest')
-       /* knex incompatibility with TS */
+      /* knex incompatibility with TS */
       .where({ id: user_id } as any);
     return user[0];
   }
@@ -53,16 +60,16 @@ export class UsersServiceImpl implements UsersService {
 
   async getFriends(user_id: number): Promise<any[]> {
     const friends = await this.db
-    .select('users.id as id', 'first_name', 'last_name', 'username', 'email', 'password', 'guest')
-    .from('users')
-    .join('friends_join_table', function () {
-      this.on('friends_join_table.friend_id', '=', 'users.id').andOn(
-        'friends_join_table.user_id',
-        '=',
-        user_id.toString()
-      );
-    });
-  return friends;
+      .select('users.id as id', 'first_name', 'last_name', 'username', 'email', 'password', 'guest')
+      .from('users')
+      .join('friends_join_table', function () {
+        this.on('friends_join_table.friend_id', '=', 'users.id').andOn(
+          'friends_join_table.user_id',
+          '=',
+          user_id.toString()
+        );
+      });
+    return friends;
   }
 
   async createFriend(user_id: number, friend_id: number): Promise<void> {
@@ -74,19 +81,20 @@ export class UsersServiceImpl implements UsersService {
 
   async checkPasswordWithEmail(email: string, password: string): Promise<any> {
     const emailsThatMatchPassword = await this.db
-    .select('email', 'id')
-    .from('users')
-    .where({ email, password });
+      .select('email', 'id')
+      .from('users')
+      .where({ email, password });
 
-  if (emailsThatMatchPassword.length) {
+    if (emailsThatMatchPassword.length) {
+      return {
+        hasCorrectCredentials: true,
+        id: emailsThatMatchPassword[0].id,
+      };
+    }
+    console.log('error logging in');
     return {
-      hasCorrectCredentials: true,
-      id: emailsThatMatchPassword[0].id,
+      hasCorrectCredentials: false,
+      id: null,
     };
-  }
-  return {
-    hasCorrectCredentials: false,
-    id: null,
-  };
   }
 }

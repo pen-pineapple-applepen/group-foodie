@@ -1,9 +1,10 @@
-import { UsersServiceImpl } from './service';
+import { Request, Response } from 'express';
+import { Service } from 'typedi';
+import UsersServiceImpl from './service';
 import db from '../../db';
 import { CheckCredentialsDTO, FriendDTO, UserDTO } from './dto';
-import { Request, Response } from 'express';
 
-const usersService = new UsersServiceImpl(db);
+// const usersService = new UsersServiceImpl(db);
 
 interface IUsersController {
   getOneUser(req: Request, res: Response): Promise<void>;
@@ -13,11 +14,14 @@ interface IUsersController {
   checkPasswordWithEmail(req: Request, res: Response): Promise<void>;
 }
 
-export class UsersController implements IUsersController {
+@Service()
+export default class UsersController implements IUsersController {
+  constructor(private readonly usersService: UsersServiceImpl) {}
+
   async getOneUser(req: Request, res: Response) {
     const { user_id } = req.params;
     try {
-      const user = await usersService.getOneUserInfo(user_id);
+      const user = await this.usersService.getOneUserInfo(user_id);
       // map user object to DTO here
       res.status(200).send(user);
     } catch (err) {
@@ -29,7 +33,7 @@ export class UsersController implements IUsersController {
   async createUser(req: Request, res: Response) {
     const { first_name, last_name, email, username, password, guest } = req.body;
     try {
-      const userId = await usersService.createUser(
+      const userId = await this.usersService.createUser(
         first_name,
         last_name,
         email,
@@ -47,7 +51,7 @@ export class UsersController implements IUsersController {
   async getFriends(req: Request, res: Response) {
     const { user_id } = req.params;
     try {
-      const friends = await usersService.getFriends(Number(user_id));
+      const friends = await this.usersService.getFriends(Number(user_id));
       res.status(200).send(friends);
     } catch (err) {
       console.log('error getting friends: ', err);
@@ -59,7 +63,7 @@ export class UsersController implements IUsersController {
     const { user_id } = req.params;
     const { friend_id } = req.body;
     try {
-      await usersService.createFriend(Number(user_id), Number(friend_id));
+      await this.usersService.createFriend(Number(user_id), Number(friend_id));
       res.status(200).send('created friend');
     } catch (err) {
       console.log('error creating friend: ', err);
@@ -71,7 +75,7 @@ export class UsersController implements IUsersController {
     console.log('req.query:', req.query);
     const { email, password } = req.query;
     try {
-      const passwordIsCorrect = await usersService.checkPasswordWithEmail(
+      const passwordIsCorrect = await this.usersService.checkPasswordWithEmail(
         email as string,
         password as string
       );

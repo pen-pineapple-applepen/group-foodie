@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -25,5 +26,4 @@ app.use('/api', router);
 
 app.listen(port, () => {
   console.log('listening on port: ', port);
-
 });

@@ -1,7 +1,11 @@
 /* eslint-disable prettier/prettier */
+import { Container } from 'typedi';
 import express from 'express';
-import { UsersController } from './controller';
-const usersController = new UsersController();
+import UsersController from './controller';
+
+// const usersController = new UsersController();
+const usersController = Container.get(UsersController)
+// console.log('userController instance: ', usersController.getOneUser);
 
 const users = express.Router();
 
