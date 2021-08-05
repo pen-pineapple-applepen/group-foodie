@@ -2,9 +2,12 @@
 import { Container } from 'typedi';
 import express from 'express';
 import UsersController from './controller';
+import { UsersServiceImpl } from './service';
 
-// const usersController = new UsersController();
-const usersController = Container.get(UsersController)
+const usersService = new UsersServiceImpl();
+
+const usersController = new UsersController(usersService);
+// const usersController = Container.get(UsersController)
 // console.log('userController instance: ', usersController.getOneUser);
 
 const users = express.Router();
@@ -20,7 +23,6 @@ users
 users
   .route('/:user_id')
   .get(usersController.getOneUser)
-
 
 users
   .route('/:user_id/friends')

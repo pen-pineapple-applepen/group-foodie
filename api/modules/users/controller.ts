@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
 import { Service } from 'typedi';
-import UsersServiceImpl from './service';
+import { UsersServiceImpl, UsersService } from './service';
 import db from '../../db';
 import { CheckCredentialsDTO, FriendDTO, UserDTO } from './dto';
-
-// const usersService = new UsersServiceImpl(db);
 
 interface IUsersController {
   getOneUser(req: Request, res: Response): Promise<void>;
@@ -14,11 +12,15 @@ interface IUsersController {
   checkPasswordWithEmail(req: Request, res: Response): Promise<void>;
 }
 
-@Service()
+// @Service()
 export default class UsersController implements IUsersController {
-  constructor(private readonly usersService: UsersServiceImpl) {}
+  usersService: UsersService;
 
-  async getOneUser(req: Request, res: Response) {
+  constructor(usersService: UsersServiceImpl) {
+    this.usersService = usersService;
+  }
+
+  async getOneUser(req: Request, res: Response): Promise<void> {
     const { user_id } = req.params;
     try {
       const user = await this.usersService.getOneUserInfo(user_id);
@@ -30,7 +32,7 @@ export default class UsersController implements IUsersController {
     }
   }
 
-  async createUser(req: Request, res: Response) {
+  async createUser(req: Request, res: Response): Promise<void> {
     const { first_name, last_name, email, username, password, guest } = req.body;
     try {
       const userId = await this.usersService.createUser(
@@ -48,7 +50,7 @@ export default class UsersController implements IUsersController {
     }
   }
 
-  async getFriends(req: Request, res: Response) {
+  async getFriends(req: Request, res: Response): Promise<void> {
     const { user_id } = req.params;
     try {
       const friends = await this.usersService.getFriends(Number(user_id));
@@ -59,7 +61,7 @@ export default class UsersController implements IUsersController {
     }
   }
 
-  async createFriend(req: Request, res: Response) {
+  async createFriend(req: Request, res: Response): Promise<void> {
     const { user_id } = req.params;
     const { friend_id } = req.body;
     try {
@@ -71,7 +73,7 @@ export default class UsersController implements IUsersController {
     }
   }
 
-  async checkPasswordWithEmail(req: Request, res: Response) {
+  async checkPasswordWithEmail(req: Request, res: Response): Promise<void> {
     console.log('req.query:', req.query);
     const { email, password } = req.query;
     try {
@@ -83,6 +85,7 @@ export default class UsersController implements IUsersController {
       res.status(200).send(passwordIsCorrect);
     } catch (err) {
       console.log('error getting restaurant: ', err);
+      console.log('this is: ', this);
       res.status(400).send(err);
     }
   }
