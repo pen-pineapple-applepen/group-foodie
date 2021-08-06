@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 import { Service, Inject } from 'typedi';
-import { User, EmailsThatMatchPassword } from './users.types';
+import { User, EmailsThatMatchPassword } from './types';
 import UserMapper from './mapper';
 import { UserDTO, CredentialsDTO } from './dto';
 
@@ -90,6 +90,7 @@ export class UsersServiceImpl implements UsersService {
       .select('email', 'id')
       .from('users')
       .where({ email, password });
+
     const loginDetails = UserMapper.toCheckPasswordWithEmailDTO(emailsThatMatchPassword);
     return loginDetails;
   }

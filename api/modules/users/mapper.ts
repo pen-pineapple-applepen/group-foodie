@@ -1,4 +1,4 @@
-import { User, Credentials, EmailsThatMatchPassword } from './users.types';
+import { User, EmailsThatMatchPassword } from './types';
 import { UserDTO, CredentialsDTO } from './dto';
 
 export default class UserMapper {
