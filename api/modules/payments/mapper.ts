@@ -2,7 +2,7 @@ import { PaymentDTO } from './dto';
 import { Payment } from './types';
 
 export default class PaymentsMapper {
-  public static toPaymentDTO(payment: Payment): PaymentDTO {
+  static toPaymentDTO(payment: Payment): PaymentDTO {
     return {
       id: payment.id,
       name: payment.name,
@@ -15,13 +15,14 @@ export default class PaymentsMapper {
     };
   }
 
-  public static toPaymentsDTO(payments: Payment[]): PaymentDTO[] {
+  static toPaymentsDTO(payments: Payment[]): PaymentDTO[] {
     return payments.map((payment) => {
       return this.toPaymentDTO(payment);
     });
   }
 
-  public static toInsertedPaymentIdDTO(insertedId: number[]): number[] {
+  // useless right now, but good to have the abstraction implemented when we need it
+  static toInsertedPaymentIdDTO(insertedId: number[]): number[] {
     return insertedId;
   }
 }

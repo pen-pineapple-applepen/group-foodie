@@ -1,6 +1,7 @@
 import { Knex } from 'knex';
 import { Inject, Service } from 'typedi';
 import { OrderDTO } from './dto';
+import OrdersMapper from './mapper';
 
 export interface OrdersService {
   getOneOrderById(order_id: number): Promise<OrderDTO>;
@@ -28,17 +29,20 @@ export class OrdersServiceImpl implements OrdersService {
 
   getOneOrderById = async (order_id: number): Promise<OrderDTO> => {
     const [order] = await this.db('orders').where({ id: order_id });
-    return order;
+    const orderDTO = OrdersMapper.toOrderDTO(order);
+    return orderDTO;
   };
 
   getOrdersByGroupId = async (group_id: number): Promise<OrderDTO[]> => {
     const orders = await this.db('orders').where({ group_id });
-    return orders;
+    const ordersDTO = OrdersMapper.toOrdersDTO(orders);
+    return ordersDTO;
   };
 
   getOrdersByUserId = async (user_id: number): Promise<OrderDTO[]> => {
     const orders = await this.db('orders').where({ user_id });
-    return orders;
+    const ordersDTO = OrdersMapper.toOrdersDTO(orders);
+    return ordersDTO;
   };
 
   addOrder = async (
@@ -66,6 +70,7 @@ export class OrdersServiceImpl implements OrdersService {
       },
       'id'
     );
-    return insertedId;
+    const insertedIdDTO = OrdersMapper.toInsertedIdDTO(insertedId);
+    return insertedIdDTO;
   };
 }
