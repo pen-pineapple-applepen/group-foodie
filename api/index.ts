@@ -3,6 +3,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import history from 'connect-history-api-fallback';
+import 'dotenv/config';
 import router from './router';
 
 const app = express();
@@ -19,11 +20,11 @@ app.use(
       },
     ],
   })
-  );
-  app.use(express.json());
-  app.use(express.static(path.join(__dirname, '../public')));
-  app.use('/api', router);
+);
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../public')));
+app.use('/api', router);
 
-  app.listen(port, () => {
-    console.log('listening on port: ', port);
-  });
+app.listen(port, () => {
+  console.log('listening on port: ', port);
+});
