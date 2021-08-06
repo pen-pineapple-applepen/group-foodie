@@ -14,7 +14,7 @@ interface UsersController {
 
 @Service()
 export default class UsersControllerImpl implements UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersServiceImpl) {}
 
   getOneUser = async (req: Request, res: Response): Promise<void> => {
     const { user_id } = req.params;
@@ -73,15 +73,13 @@ export default class UsersControllerImpl implements UsersController {
     console.log('req.query:', req.query);
     const { email, password } = req.query;
     try {
-      const passwordIsCorrect = await this.usersService.checkPasswordWithEmail(
+      const credentials = await this.usersService.checkPasswordWithEmail(
         email as string,
         password as string
       );
-      console.log('password checks out');
-      res.status(200).send(passwordIsCorrect);
+      res.status(200).send(credentials);
     } catch (err) {
       console.log('error getting restaurant: ', err);
-      console.log('this is: ', this);
       res.status(400).send(err);
     }
   }
