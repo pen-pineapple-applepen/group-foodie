@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
 import { Service } from 'typedi';
-import { UsersServiceImpl, UsersService } from './service';
-import db from '../../db';
-import { CredentialsDTO, UserDTO } from './dto';
+import { UsersServiceImpl } from './service';
 
 interface UsersController {
   getOneUser(req: Request, res: Response): Promise<void>;
@@ -20,13 +18,12 @@ export default class UsersControllerImpl implements UsersController {
     const { user_id } = req.params;
     try {
       const user = await this.usersService.getOneUserInfo(user_id);
-      // map user object to DTO here
       res.status(200).send(user);
     } catch (err) {
       console.log('error getting one user: ', err);
       res.status(404).send(err);
     }
-  }
+  };
 
   createUser = async (req: Request, res: Response): Promise<void> => {
     const { first_name, last_name, email, username, password, guest } = req.body;
@@ -55,7 +52,7 @@ export default class UsersControllerImpl implements UsersController {
       console.log('error getting friends: ', err);
       res.status(404).send(err);
     }
-  }
+  };
 
   createFriend = async (req: Request, res: Response): Promise<void> => {
     const { user_id } = req.params;
@@ -67,7 +64,7 @@ export default class UsersControllerImpl implements UsersController {
       console.log('error creating friend: ', err);
       res.status(404).send(err);
     }
-  }
+  };
 
   checkPasswordWithEmail = async (req: Request, res: Response): Promise<void> => {
     console.log('req.query:', req.query);
@@ -82,5 +79,5 @@ export default class UsersControllerImpl implements UsersController {
       console.log('error getting restaurant: ', err);
       res.status(400).send(err);
     }
-  }
+  };
 }

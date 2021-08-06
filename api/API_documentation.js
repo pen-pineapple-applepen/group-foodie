@@ -200,7 +200,7 @@ payments
 ----------------------------------
 Get all payment options by user ID
 ----------------------------------
-endpoint: '/payments/:user_id/'
+endpoint: '/payments/:user_id/user'
 request type: GET
 returns:
 [
@@ -249,7 +249,7 @@ returns:
 --------------------------------------
 Create 1 new payment option by user ID
 --------------------------------------
-endpoint: '/payments/:user_id/'
+endpoint: '/payments/:user_id/user'
 request type: POST
 additional body params: {
   name: string,

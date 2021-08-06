@@ -11,7 +11,7 @@ const db = knex({
     port: 5432,
   },
 });
-
+Container.set('DATABASE_ACCESS', db);
 // const databaseToken = new Token('DATABASE_ACCESS');
 
 export default db;

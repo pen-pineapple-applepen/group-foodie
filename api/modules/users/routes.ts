@@ -9,7 +9,6 @@ Container.set('DATABASE_ACCESS', db);
 // getting controller instance with injected dependency
 const usersController = Container.get(UsersControllerImpl)
 
-
 const users = express.Router();
 
 users

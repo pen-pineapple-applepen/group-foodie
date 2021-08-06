@@ -113,7 +113,7 @@ const OrderShare = () => {
   // [] needs to be selectedPayment (test this)
 
   const fetchPaymentData = () => {
-    axios.get(`/api/payments/user/${userId}`)
+    axios.get(`/api/payments/${userId}/user`)
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];

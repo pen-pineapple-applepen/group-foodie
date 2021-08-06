@@ -3,7 +3,7 @@ import { Service } from 'typedi';
 import restaurants from './restaurants';
 import menus from './menus';
 import RestaurantsMapper from './mapper';
-import { MenuData, Restaurant } from './restaurants.types';
+import { MenuData, Restaurant } from './types';
 import { FormattedRestaurantDTO, MenuItemDTO } from './dto';
 
 /**

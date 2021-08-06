@@ -1,4 +1,4 @@
-import { MenuItem, Restaurant } from './restaurants.types';
+import { MenuItem, Restaurant } from './types';
 import { FormattedRestaurantDTO, MenuItemDTO } from './dto';
 
 export default class RestaurantsMapper {
