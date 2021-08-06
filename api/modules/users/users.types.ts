@@ -8,7 +8,12 @@ export interface User {
   guest: boolean;
 }
 
-export interface CheckCredentials {
+export interface Credentials {
   hasCorrectCredentials: boolean;
   id: number;
+}
+
+export interface EmailsThatMatchPassword {
+  id: number;
+  email: string;
 }

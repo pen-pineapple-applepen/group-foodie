@@ -1,6 +1,5 @@
-import { Service } from 'typedi';
-import { User, CheckCredentials } from './users.types';
-import { UserDTO, CheckCredentialsDTO } from './dto';
+import { User, Credentials, EmailsThatMatchPassword } from './users.types';
+import { UserDTO, CredentialsDTO } from './dto';
 
 export default class UserMapper {
   public static toUserDTO(user: User): UserDTO {
@@ -21,7 +20,18 @@ export default class UserMapper {
     });
   }
 
-  // public static toCheckPasswordWithEmailDTO() {}
+  public static toCheckPasswordWithEmailDTO(
+    emailsThatMatchPassword: EmailsThatMatchPassword[]
+  ): CredentialsDTO {
+    const credentials = emailsThatMatchPassword.length
+      ? {
+          hasCorrectCredentials: true,
+          id: emailsThatMatchPassword[0].id,
+        }
+      : {
+          hasCorrectCredentials: false,
+          id: null,
+        };
+    return credentials;
+  }
 }
-
-// export typeof UserMap;
