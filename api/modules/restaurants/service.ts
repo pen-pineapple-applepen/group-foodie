@@ -1,9 +1,10 @@
 /* eslint-disable class-methods-use-this */
+import { Service } from 'typedi';
 import restaurants from './restaurants';
 import menus from './menus';
 import RestaurantsMapper from './mapper';
-import { FormattedRestaurant, MenuItem, MenuData, Restaurant } from './restaurants.types';
-import { FormattedRestaurantDTO, MenuItemDTO, MenuDataDTO, RestaurantDTO } from './dto';
+import { MenuData, Restaurant } from './restaurants.types';
+import { FormattedRestaurantDTO, MenuItemDTO } from './dto';
 
 /**
  * Due to demonstration purposes of this application, restaurant and menu data are mocked
@@ -15,6 +16,7 @@ export interface RestaurantsService {
   getMenuByRestaurantId(restaurant_id: number): Promise<MenuItemDTO[]>;
 }
 
+@Service()
 export class RestaurantsServiceImpl implements RestaurantsService {
   async getRestaurantsByZipcode(zip_code: number): Promise<FormattedRestaurantDTO[]> {
     const restaurantsData: Restaurant[] = restaurants.restaurants;

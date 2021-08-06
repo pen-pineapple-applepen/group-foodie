@@ -1,5 +1,5 @@
-import { FormattedRestaurant, MenuItem, MenuData, Restaurant } from './restaurants.types';
-import { FormattedRestaurantDTO, MenuItemDTO, MenuDataDTO, RestaurantDTO } from './dto';
+import { MenuItem, Restaurant } from './restaurants.types';
+import { FormattedRestaurantDTO, MenuItemDTO } from './dto';
 
 export default class RestaurantsMapper {
   public static toRestaurantDTO(restaurant: Restaurant): FormattedRestaurantDTO {

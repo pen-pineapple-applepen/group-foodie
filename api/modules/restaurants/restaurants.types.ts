@@ -1,11 +1,3 @@
-export interface FormattedRestaurant {
-  restaurant_id: number;
-  name: string;
-  street: string;
-  cuisines: string[];
-  hours: string;
-}
-
 export interface MenuItem {
   menu_item_id: number;
   menu_item_name: string;
