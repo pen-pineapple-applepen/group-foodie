@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { Service } from 'typedi';
-import { UsersService, IUsersService } from './service';
+import { UsersServiceImpl, UsersService } from './service';
 import db from '../../db';
-import { CheckCredentialsDTO, UserDTO } from './dto';
+import { CredentialsDTO, UserDTO } from './dto';
 
-interface IUsersController {
+interface UsersController {
   getOneUser(req: Request, res: Response): Promise<void>;
   createUser(req: Request, res: Response): Promise<void>;
   getFriends(req: Request, res: Response): Promise<void>;
@@ -13,7 +13,7 @@ interface IUsersController {
 }
 
 @Service()
-export default class UsersController implements IUsersController {
+export default class UsersControllerImpl implements UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   getOneUser = async (req: Request, res: Response): Promise<void> => {

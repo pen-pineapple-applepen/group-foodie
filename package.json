@@ -2,7 +2,7 @@
   "name": "group-foodie-webpack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "ts-node-dev api",
     "start:experimental": "nodemon --loader ts-node/esm --experimental-specifier-resolution=node api",
@@ -77,6 +77,7 @@
     "eslint": "^7.30.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-import-resolver-webpack": "^0.13.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",

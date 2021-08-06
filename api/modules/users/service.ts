@@ -1,11 +1,10 @@
 import { Knex } from 'knex';
 import { Service, Inject } from 'typedi';
-// import db from '../../db';
 import { User, EmailsThatMatchPassword } from './users.types';
 import UserMapper from './mapper';
 import { UserDTO, CredentialsDTO } from './dto';
 
-export interface IUsersService {
+export interface UsersService {
   getOneUserInfo(user_id: string): Promise<UserDTO>;
   createUser(
     first_name: string,
@@ -21,7 +20,7 @@ export interface IUsersService {
 }
 
 @Service()
-export class UsersService implements IUsersService {
+export class UsersServiceImpl implements UsersService {
   constructor(
     @Inject('DATABASE_ACCESS')
     private db: Knex

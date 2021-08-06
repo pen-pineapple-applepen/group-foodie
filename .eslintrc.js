@@ -35,6 +35,7 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '', 'x'] }],
     'import/extensions': [1, 'never'],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    '@typescript-eslint/naming-convention': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
   },
