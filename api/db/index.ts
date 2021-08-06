@@ -13,6 +13,5 @@ const db = knex({
 });
 
 // const databaseToken = new Token('DATABASE_ACCESS');
-Container.set('DATA_ACCESS', db);
 
 export default db;

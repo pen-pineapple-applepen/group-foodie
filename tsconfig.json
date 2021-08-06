@@ -16,6 +16,7 @@
     "jsx": "react",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
   },
   "include": ["src", "api"]
 }

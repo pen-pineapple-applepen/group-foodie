@@ -2,13 +2,12 @@
 import { Container } from 'typedi';
 import express from 'express';
 import UsersController from './controller';
-import { UsersServiceImpl } from './service';
+import db from '../../db';
 
-const usersService = new UsersServiceImpl();
+Container.set('DATABASE_ACCESS', db);
+// getting controller instance with injected dependency
+const usersController = Container.get(UsersController)
 
-const usersController = new UsersController(usersService);
-// const usersController = Container.get(UsersController)
-// console.log('userController instance: ', usersController.getOneUser);
 
 const users = express.Router();
 

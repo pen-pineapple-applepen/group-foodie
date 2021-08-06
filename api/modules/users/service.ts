@@ -1,11 +1,11 @@
 import { Knex } from 'knex';
-import { Container, Service, Token } from 'typedi';
-import db from '../../db';
+import { Service, Inject } from 'typedi';
+// import db from '../../db';
 import { User, Friend, Credentials } from './users.types';
+import UserMap from './mapper';
+import { UserDTO, FriendDTO, CheckCredentialsDTO } from './dto';
 
-// Container.set('DATA_ACCESS', db);
-
-export interface UsersService {
+export interface IUsersService {
   getOneUserInfo(user_id: string): Promise<User>;
   createUser(
     first_name: string,
@@ -20,18 +20,21 @@ export interface UsersService {
   checkPasswordWithEmail(email: string, password: string): Promise<Credentials>;
 }
 
-// @Service()
-export class UsersServiceImpl implements UsersService {
-  // constructor(private readdb: Knex) {}
-
-  // db: Knex = Container.get('DATA_ACCESS');
+@Service()
+export class UsersService implements IUsersService {
+  constructor(
+    @Inject('DATABASE_ACCESS')
+    private db: Knex,
+    private userMap: UserMap
+  ) {}
 
   async getOneUserInfo(user_id: string): Promise<User> {
-    const user = await db('users')
+    const [user]: User[] = await this.db('users')
       .select('id', 'first_name', 'last_name', 'email', 'username', 'password', 'guest')
       /* knex incompatibility with TS */
       .where({ id: user_id } as any);
-    return user[0];
+    const userDTO = this.userMap.toUserDTO(user);
+    return userDTO;
   }
 
   async createUser(
@@ -42,7 +45,7 @@ export class UsersServiceImpl implements UsersService {
     password: string,
     guest: boolean
   ): Promise<number[]> {
-    const insertedId = await db('users').insert(
+    const insertedId = await this.db('users').insert(
       {
         first_name,
         last_name,
@@ -56,8 +59,8 @@ export class UsersServiceImpl implements UsersService {
     return insertedId;
   }
 
-  async getFriends(user_id: number): Promise<any[]> {
-    const friends = await db
+  async getFriends(user_id: number): Promise<Friend[]> {
+    const friends = await this.db
       .select('users.id as id', 'first_name', 'last_name', 'username', 'email', 'password', 'guest')
       .from('users')
       .join('friends_join_table', function () {
@@ -71,14 +74,14 @@ export class UsersServiceImpl implements UsersService {
   }
 
   async createFriend(user_id: number, friend_id: number): Promise<void> {
-    await db('friends_join_table').insert({
+    await this.db('friends_join_table').insert({
       user_id,
       friend_id,
     });
   }
 
   async checkPasswordWithEmail(email: string, password: string): Promise<any> {
-    const emailsThatMatchPassword = await db
+    const emailsThatMatchPassword = await this.db
       .select('email', 'id')
       .from('users')
       .where({ email, password });
