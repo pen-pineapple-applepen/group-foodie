@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
-import { OrangeNavbar, OrangeButton } from '../../styles/shared.tsx';
+import { OrangeNavbar, OrangeButton } from '../../styles/shared';
 import { Button, Icon, Form } from 'react-bulma-components';
 import { useHistory } from 'react-router-dom';
 import useForm from '../loginSignUpPage/formValidation.js';

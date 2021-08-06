@@ -2,7 +2,7 @@ import * as React from "react";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import styled from "styled-components";
 import axios from "axios";
-import { OrangeButton, OrangeInput } from "../../styles/shared.tsx";
+import { OrangeButton, OrangeInput } from "../../styles/shared";
 import { motion, AnimatePresence } from "framer-motion";
 
 const divStyle = {

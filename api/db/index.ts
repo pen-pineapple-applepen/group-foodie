@@ -1,4 +1,7 @@
-const db = require('knex')({
+import knex from 'knex';
+import { Container } from 'typedi';
+
+const db = knex({
   client: 'postgresql',
   connection: {
     host: 'localhost',
@@ -9,4 +12,6 @@ const db = require('knex')({
   },
 });
 
-module.exports = db;
+// const databaseToken = new Token('DATABASE_ACCESS');
+
+export default db;

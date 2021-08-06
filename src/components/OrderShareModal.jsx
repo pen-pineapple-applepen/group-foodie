@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Block, Content, Image, Media, Modal, Columns } from 'react-bulma-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import {OrangeButton } from '../styles/shared.tsx';
+import {OrangeButton } from '../styles/shared';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import allActions from '../state/actions/allActions';
 

@@ -1,25 +1,31 @@
 /* eslint-disable prettier/prettier */
+import { Container } from 'typedi';
 import express from 'express';
-import usersHandlers from './handlers.ts';
+import UsersController from './controller';
+import db from '../../db';
+
+Container.set('DATABASE_ACCESS', db);
+// getting controller instance with injected dependency
+const usersController = Container.get(UsersController)
+
 
 const users = express.Router();
 
 users
   .route('/create')
-  .post(usersHandlers.createUser)
+  .post(usersController.createUser)
 
 users
   .route('/login')
-  .get(usersHandlers.checkPasswordWithEmail)
+  .get(usersController.checkPasswordWithEmail)
 
 users
   .route('/:user_id')
-  .get(usersHandlers.getOneUser)
-
+  .get(usersController.getOneUser)
 
 users
   .route('/:user_id/friends')
-  .get(usersHandlers.getFriends)
-  .post(usersHandlers.createFriend)
+  .get(usersController.getFriends)
+  .post(usersController.createFriend)
 
 export default users;

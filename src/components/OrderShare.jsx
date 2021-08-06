@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import allActions from '../state/actions/allActions';
 import styled from 'styled-components';
 import { Button, Block, Modal } from 'react-bulma-components';
-import { OrangeButton, OrangeNavbar, ProfileImage } from '../styles/shared.tsx';
+import { OrangeButton, OrangeNavbar, ProfileImage } from '../styles/shared';
 import DatePicker from "react-datepicker";
 import { addDays } from 'date-fns';
 import setHours from "date-fns/setHours";

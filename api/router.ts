@@ -1,12 +1,12 @@
 import express from 'express';
 
-// importing individual routes.ts
-import users from './modules/users/routes.ts';
-import comments from './modules/comments/routes.ts';
-import orders from './modules/orders/routes.ts';
-import payments from './modules/payments/routes.ts';
-import groups from './modules/groups/routes.ts';
-import restaurants from './modules/restaurants/routes.ts';
+// importing individual routes
+import users from './modules/users/routes';
+import comments from './modules/comments/routes';
+import orders from './modules/orders/routes';
+import payments from './modules/payments/routes';
+import groups from './modules/groups/routes';
+import restaurants from './modules/restaurants/routes';
 
 const router = express.Router();
 

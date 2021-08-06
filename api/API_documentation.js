@@ -65,6 +65,7 @@ returns:
       "id": 2,
       "first_name": "Zachary",
       "last_name": "Dessant",
+      "username": "zachrose234"
       "email": "zdessant1@spiegel.de",
       "password": "eglXuvyD",
       "guest": false
@@ -73,6 +74,7 @@ returns:
       "id": 3,
       "first_name": "Lalo",
       "last_name": "Ciabatteri",
+      "username": "zachrose234",
       "email": "lciabatteri2@dot.gov",
       "password": "C9llAB8Zl",
       "guest": false
@@ -81,6 +83,7 @@ returns:
       "id": 4,
       "first_name": "Alexander",
       "last_name": "Stancer",
+      "username": "zachrose234",
       "email": "astancer3@hugedomains.com",
       "password": "29qyT1dU",
       "guest": false

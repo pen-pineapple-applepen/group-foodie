@@ -13,6 +13,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: ['./tsconfig.json'],
     ecmaFeatures: {
       jsx: true,
     },
@@ -20,14 +21,21 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     'import/resolver': {
-      typescript: {},
+      typescript: {
+        "alwaysTryTypes": true,
+        // "paths": "./tsconfig.json",
+      },
      },
   },
   rules: {
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    // 'import/extensions': 'never',
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '', 'x'] }],
+    'import/extensions': [1, 'never'],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    '@typescript-eslint/naming-convention': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
   },

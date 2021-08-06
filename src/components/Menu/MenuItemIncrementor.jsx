@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
-import {OrangeButton} from '../../styles/shared.tsx';
+import {OrangeButton} from '../../styles/shared';
 
 const CirleButton = styled(OrangeButton)`
   border-radius: 31.5px;
