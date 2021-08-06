@@ -111,19 +111,20 @@ get 1 order by order ID
 endpoint: '/orders/:order_id'
 request type: GET
 returns:
-[
-  {
-      "id": 1,
-      "user_id": 5,
-      "food": "PIZZA",
-      "quantity": 3,
-      "price": "3.50",
-      "date": "12/20/2020",
-      "food_id": 423,
-      "group_id": 1,
-      "restaurant_id": 32
-  }
-]
+
+{
+    "id": 1,
+    "user_id": 5,
+    "food": "PIZZA",
+    "quantity": 3,
+    "price": "3.50",
+    "date": "12/20/2020",
+    "food_id": 423,
+    "group_id": 1,
+    "restaurant_id": 32,
+    "live": false,
+}
+
 
 --------------------------
 Get all orders by group ID
