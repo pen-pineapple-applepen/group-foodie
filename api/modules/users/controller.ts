@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Service } from 'typedi';
 import { UsersService, IUsersService } from './service';
 import db from '../../db';
-import { CheckCredentialsDTO, FriendDTO, UserDTO } from './dto';
+import { CheckCredentialsDTO, UserDTO } from './dto';
 
 interface IUsersController {
   getOneUser(req: Request, res: Response): Promise<void>;

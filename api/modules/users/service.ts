@@ -1,12 +1,12 @@
 import { Knex } from 'knex';
 import { Service, Inject } from 'typedi';
 // import db from '../../db';
-import { User, Friend, Credentials } from './users.types';
-import UserMap from './mapper';
-import { UserDTO, FriendDTO, CheckCredentialsDTO } from './dto';
+import { User, CheckCredentials } from './users.types';
+import UserMapper from './mapper';
+import { UserDTO, CheckCredentialsDTO } from './dto';
 
 export interface IUsersService {
-  getOneUserInfo(user_id: string): Promise<User>;
+  getOneUserInfo(user_id: string): Promise<UserDTO>;
   createUser(
     first_name: string,
     last_name: string,
@@ -15,25 +15,24 @@ export interface IUsersService {
     password: string,
     guest: boolean
   ): Promise<number[]>;
-  getFriends(user_id: number): Promise<Friend[]>;
+  getFriends(user_id: number): Promise<UserDTO[]>;
   createFriend(user_id: number, friend_id: number): Promise<void>;
-  checkPasswordWithEmail(email: string, password: string): Promise<Credentials>;
+  checkPasswordWithEmail(email: string, password: string): Promise<CheckCredentials>;
 }
 
 @Service()
 export class UsersService implements IUsersService {
   constructor(
     @Inject('DATABASE_ACCESS')
-    private db: Knex,
-    private userMap: UserMap
+    private db: Knex
   ) {}
 
-  async getOneUserInfo(user_id: string): Promise<User> {
+  async getOneUserInfo(user_id: string): Promise<UserDTO> {
     const [user]: User[] = await this.db('users')
       .select('id', 'first_name', 'last_name', 'email', 'username', 'password', 'guest')
-      /* knex incompatibility with TS */
+      // knex thinks there should be a string here, but this is correct knex syntax
       .where({ id: user_id } as any);
-    const userDTO = this.userMap.toUserDTO(user);
+    const userDTO = UserMapper.toUserDTO(user);
     return userDTO;
   }
 
@@ -59,18 +58,25 @@ export class UsersService implements IUsersService {
     return insertedId;
   }
 
-  async getFriends(user_id: number): Promise<Friend[]> {
-    const friends = await this.db
+  async getFriends(user_id: number): Promise<UserDTO[]> {
+    const friends: User[] = await this.db
       .select('users.id as id', 'first_name', 'last_name', 'username', 'email', 'password', 'guest')
       .from('users')
       .join('friends_join_table', function () {
         this.on('friends_join_table.friend_id', '=', 'users.id').andOn(
           'friends_join_table.user_id',
           '=',
-          user_id.toString()
+          /**
+           * knex expects strings as "variables", so when inserting an actual variable
+           * that evaluates to anything else (in this case number), it throws a type error.
+           * could potentially change type definitions in d.ts, but cast as any is a
+           * simpler one-off solution in this case
+           */
+          user_id as any
         );
       });
-    return friends;
+    const friendsDTO = UserMapper.toFriendsDTO(friends);
+    return friendsDTO;
   }
 
   async createFriend(user_id: number, friend_id: number): Promise<void> {

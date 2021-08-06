@@ -19,11 +19,11 @@ app.use(
       },
     ],
   })
-);
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
-app.use('/api', router);
+  );
+  app.use(express.json());
+  app.use(express.static(path.join(__dirname, '../public')));
+  app.use('/api', router);
 
-app.listen(port, () => {
-  console.log('listening on port: ', port);
-});
+  app.listen(port, () => {
+    console.log('listening on port: ', port);
+  });

@@ -1,11 +1,11 @@
 import { Service } from 'typedi';
-import { User } from './users.types';
-import { UserDTO } from './dto';
+import { User, CheckCredentials } from './users.types';
+import { UserDTO, CheckCredentialsDTO } from './dto';
 
-@Service()
-export default class UserMap {
+export default class UserMapper {
   public static toUserDTO(user: User): UserDTO {
     return {
+      id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
@@ -15,7 +15,13 @@ export default class UserMap {
     };
   }
 
-  // public static toFriendDTO()
+  public static toFriendsDTO(friends: User[]): UserDTO[] {
+    return friends.map((friend) => {
+      return this.toUserDTO(friend);
+    });
+  }
+
+  // public static toCheckPasswordWithEmailDTO() {}
 }
 
 // export typeof UserMap;

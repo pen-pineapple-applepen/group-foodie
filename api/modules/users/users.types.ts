@@ -8,16 +8,7 @@ export interface User {
   guest: boolean;
 }
 
-export interface Friend {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-  guest: boolean;
-}
-
-export interface Credentials {
+export interface CheckCredentials {
   hasCorrectCredentials: boolean;
   id: number;
 }
