@@ -1,15 +1,17 @@
 /* eslint-disable prettier/prettier */
 import express from 'express';
-import groupsHandlers from './handlers';
+import { Container } from 'typedi';
+import { GroupsControllerImpl } from './controller';
 
+const groupsController = Container.get(GroupsControllerImpl);
 const groups = express.Router();
 
 groups
   .route('/:group_id/')
-  .get(groupsHandlers.getDueDateByGroupId)
+  .get(groupsController.getDueDateByGroupId)
 
 groups
   .route('/')
-  .post(groupsHandlers.createGroup)
+  .post(groupsController.createGroup)
 
 export default groups;

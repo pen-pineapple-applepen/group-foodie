@@ -6,3 +6,5 @@ src/server/db/scott_index.js
 schema_scott.sql
 seed_scott.js
 src/server/db/index.js
+README2.md
+.env

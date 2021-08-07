@@ -1,11 +1,10 @@
 import { Knex } from 'knex';
 import { Service, Inject } from 'typedi';
-// import db from '../../db';
-import { User, CheckCredentials } from './users.types';
+import { User, EmailsThatMatchPassword } from './types';
 import UserMapper from './mapper';
-import { UserDTO, CheckCredentialsDTO } from './dto';
+import { UserDTO, CredentialsDTO } from './dto';
 
-export interface IUsersService {
+export interface UsersService {
   getOneUserInfo(user_id: string): Promise<UserDTO>;
   createUser(
     first_name: string,
@@ -17,11 +16,11 @@ export interface IUsersService {
   ): Promise<number[]>;
   getFriends(user_id: number): Promise<UserDTO[]>;
   createFriend(user_id: number, friend_id: number): Promise<void>;
-  checkPasswordWithEmail(email: string, password: string): Promise<CheckCredentials>;
+  checkPasswordWithEmail(email: string, password: string): Promise<CredentialsDTO>;
 }
 
 @Service()
-export class UsersService implements IUsersService {
+export class UsersServiceImpl implements UsersService {
   constructor(
     @Inject('DATABASE_ACCESS')
     private db: Knex
@@ -86,22 +85,13 @@ export class UsersService implements IUsersService {
     });
   }
 
-  async checkPasswordWithEmail(email: string, password: string): Promise<any> {
-    const emailsThatMatchPassword = await this.db
+  async checkPasswordWithEmail(email: string, password: string): Promise<CredentialsDTO> {
+    const emailsThatMatchPassword: EmailsThatMatchPassword[] = await this.db
       .select('email', 'id')
       .from('users')
       .where({ email, password });
 
-    if (emailsThatMatchPassword.length) {
-      return {
-        hasCorrectCredentials: true,
-        id: emailsThatMatchPassword[0].id,
-      };
-    }
-    console.log('error logging in');
-    return {
-      hasCorrectCredentials: false,
-      id: null,
-    };
+    const loginDetails = UserMapper.toCheckPasswordWithEmailDTO(emailsThatMatchPassword);
+    return loginDetails;
   }
 }

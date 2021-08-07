@@ -8,7 +8,7 @@ export interface UserDTO {
   guest: boolean;
 }
 
-export interface CheckCredentialsDTO {
-  hasCorrectCredentials: true;
-  id: number;
+export interface CredentialsDTO {
+  hasCorrectCredentials: boolean;
+  id: number | null;
 }

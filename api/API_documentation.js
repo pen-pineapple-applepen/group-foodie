@@ -65,6 +65,7 @@ returns:
       "id": 2,
       "first_name": "Zachary",
       "last_name": "Dessant",
+      "username": "zachrose234"
       "email": "zdessant1@spiegel.de",
       "password": "eglXuvyD",
       "guest": false
@@ -73,6 +74,7 @@ returns:
       "id": 3,
       "first_name": "Lalo",
       "last_name": "Ciabatteri",
+      "username": "zachrose234",
       "email": "lciabatteri2@dot.gov",
       "password": "C9llAB8Zl",
       "guest": false
@@ -81,6 +83,7 @@ returns:
       "id": 4,
       "first_name": "Alexander",
       "last_name": "Stancer",
+      "username": "zachrose234",
       "email": "astancer3@hugedomains.com",
       "password": "29qyT1dU",
       "guest": false
@@ -108,19 +111,20 @@ get 1 order by order ID
 endpoint: '/orders/:order_id'
 request type: GET
 returns:
-[
-  {
-      "id": 1,
-      "user_id": 5,
-      "food": "PIZZA",
-      "quantity": 3,
-      "price": "3.50",
-      "date": "12/20/2020",
-      "food_id": 423,
-      "group_id": 1,
-      "restaurant_id": 32
-  }
-]
+
+{
+    "id": 1,
+    "user_id": 5,
+    "food": "PIZZA",
+    "quantity": 3,
+    "price": "3.50",
+    "date": "12/20/2020",
+    "food_id": 423,
+    "group_id": 1,
+    "restaurant_id": 32,
+    "live": false,
+}
+
 
 --------------------------
 Get all orders by group ID
@@ -197,7 +201,7 @@ payments
 ----------------------------------
 Get all payment options by user ID
 ----------------------------------
-endpoint: '/payments/:user_id/'
+endpoint: '/payments/:user_id/user'
 request type: GET
 returns:
 [
@@ -246,7 +250,7 @@ returns:
 --------------------------------------
 Create 1 new payment option by user ID
 --------------------------------------
-endpoint: '/payments/:user_id/'
+endpoint: '/payments/:user_id/user'
 request type: POST
 additional body params: {
   name: string,
