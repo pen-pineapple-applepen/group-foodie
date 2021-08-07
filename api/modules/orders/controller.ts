@@ -62,7 +62,6 @@ export class OrdersControllerImpl implements OrdersController {
         restaurant_id,
         live
       );
-      console.log(`successfully added order with ID: ${orderId} and userID: ${user_id}`);
       res.status(200).send(orderId);
     } catch (err) {
       console.log('error creating order: ', err);

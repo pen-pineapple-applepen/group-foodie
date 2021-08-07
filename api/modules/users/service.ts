@@ -29,7 +29,7 @@ export class UsersServiceImpl implements UsersService {
   async getOneUserInfo(user_id: string): Promise<UserDTO> {
     const [user]: User[] = await this.db('users')
       .select('id', 'first_name', 'last_name', 'email', 'username', 'password', 'guest')
-      // knex thinks there should be a string here, but this is correct knex syntax
+      // knex type definition thinks there should be a string here, but this is correct knex syntax
       .where({ id: user_id } as any);
     const userDTO = UserMapper.toUserDTO(user);
     return userDTO;

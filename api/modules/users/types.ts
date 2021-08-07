@@ -17,11 +17,3 @@ export interface EmailsThatMatchPassword {
   id: number;
   email: string;
 }
-
-/**
- * client ---> API
-
-   API ----> Client
-      {data}
- *
- */
