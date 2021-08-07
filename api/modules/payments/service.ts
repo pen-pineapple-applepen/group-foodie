@@ -52,5 +52,5 @@ export class PaymentsServiceImpl implements PaymentsService {
       'id'
     );
     return PaymentsMapper.toInsertedPaymentIdDTO(insertedId);
-  }
+  };
 }
