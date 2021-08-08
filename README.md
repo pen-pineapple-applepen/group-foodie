@@ -6,7 +6,7 @@
 Group Foodie is an application built around the idea of starting and sharing a group food order among friends or coworkers, with the ability to start an order, chat about the order, and add onto an existing order with a persistent timer that ultimately "submits" the order.
 
 ## About
-This project was created by a team of 7 (including myself) as a proof of concept demo for a food-delivery app idea. While built in the browser, this application was designed with a mobile-experience in mind. I was the only person on the team that used typescript, so the project is currently a hybrid of javascript and typescript. The structure of the API may be a little overkill for a project of this size (using DTOs to map domain objects, dependency injection etc.), but everything was written with best practices of a scalable project in mind.
+This project was created by a team of 7 (including myself) as a proof of concept demo for a food-delivery app idea. While built in the browser, this application was designed with a mobile-experience in mind. I was the only person on the team that used typescript, so the project is currently a hybrid of javascript and typescript. The structure of the API may be a little overkill for a project of this size (such as converting domain objects to DTOs), but everything was written with best practices of a scalable project in mind.
 
 ## Where should i look to see the work that YOU did?
 I was in charge of several things:
