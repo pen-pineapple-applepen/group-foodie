@@ -42,7 +42,7 @@ returns:
 -----------------
 Create 1 new user
 -----------------
-endpoint: '/users/create'
+endpoint: '/users'
 request type: POST
 additional body params: {
   first_name: string
@@ -127,10 +127,18 @@ returns:
 
 
 --------------------------
-Get all orders by group ID
+Get all orders
 --------------------------
-endpoint: 'orders/:group_id/group'
+endpoint: '/orders'
 request type: GET
+
+query parameters:
+__________________________________________
+| PARAMETER | TYPE   | DESCRIPTION        |
+|  group_id | number | filter by group id |
+|  user_id  | number | filter by user id  |
+
+
 returns:
 [
   {

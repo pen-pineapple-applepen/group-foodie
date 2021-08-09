@@ -4,8 +4,8 @@ import { OrdersServiceImpl } from './service';
 
 export interface OrdersController {
   getOneOrderById(req: Request, res: Response): Promise<void>;
-  getOrdersByGroupId(req: Request, res: Response): Promise<void>;
-  getOrdersByUserId(req: Request, res: Response): Promise<void>;
+  getOrders(req: Request, res: Response): Promise<void>;
+  // getOrdersByUserId(req: Request, res: Response): Promise<void>;
   addOrder(req: Request, res: Response): Promise<void>;
 }
 
@@ -24,24 +24,14 @@ export class OrdersControllerImpl implements OrdersController {
     }
   };
 
-  getOrdersByGroupId = async (req: Request, res: Response): Promise<void> => {
-    const { group_id } = req.params;
+  getOrders = async (req: Request, res: Response): Promise<void> => {
+    const group_id = req.query.group_id || undefined;
+    const user_id = req.query.user_id || undefined;
     try {
-      const orders = await this.ordersService.getOrdersByGroupId(Number(group_id));
+      const orders = await this.ordersService.getOrders(Number(group_id), Number(user_id));
       res.status(200).send(orders);
     } catch (err) {
       console.log('error getting order by group ID: ', err);
-      res.status(404).send(err);
-    }
-  };
-
-  getOrdersByUserId = async (req: Request, res: Response): Promise<void> => {
-    const { user_id } = req.params;
-    try {
-      const orders = await this.ordersService.getOrdersByUserId(Number(user_id));
-      res.status(200).send(orders);
-    } catch (err) {
-      console.log('error getting order by User ID: ', err);
       res.status(404).send(err);
     }
   };

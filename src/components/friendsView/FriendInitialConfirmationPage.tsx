@@ -71,7 +71,7 @@ function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
   }
 
   useEffect( async () => {
-    const currentOrdersData = await axios.get(`/api/orders/${currentGroupId}/group`)
+    const currentOrdersData = await axios.get(`/api/orders?group_id=${currentGroupId}`)
     setCurrentGroupOrders(currentOrdersData.data)
     console.log(currentOrdersData.data)
   }, [])
