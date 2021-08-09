@@ -9,10 +9,10 @@ const payments = express.Router();
 
 payments
   .route('/:user_id/user')
-  .post(paymentsController.addPaymentByUserId)
 
-payments
-  .route('/:user_id/user')
-  .get(paymentsController.getPaymentsByUserId)
+  payments
+  .route('/')
+  .post(paymentsController.addPayment)
+  .get(paymentsController.getPayments)
 
 export default payments;

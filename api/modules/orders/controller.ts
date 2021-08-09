@@ -37,8 +37,8 @@ export class OrdersControllerImpl implements OrdersController {
   };
 
   addOrder = async (req: Request, res: Response): Promise<void> => {
-    const { user_id } = req.params;
-    const { food, quantity, price, date, food_id, group_id, restaurant_id, live } = req.body;
+    // const { user_id } = req.params;
+    const { user_id, food, quantity, price, date, food_id, group_id, restaurant_id, live } = req.body;
 
     try {
       const orderId = await this.ordersService.addOrder(
