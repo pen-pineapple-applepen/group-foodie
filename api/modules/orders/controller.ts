@@ -42,7 +42,7 @@ export class OrdersControllerImpl implements OrdersController {
 
     try {
       const orderId = await this.ordersService.addOrder(
-        Number(user_id),
+        user_id,
         food,
         quantity,
         price,
