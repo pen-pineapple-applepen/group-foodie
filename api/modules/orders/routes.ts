@@ -10,14 +10,11 @@ const orders = express.Router();
 orders
   .route('/')
   .get(ordersController.getOrders)
+  .post(ordersController.addOrder)
 
 orders
   .route('/:order_id')
   .get(ordersController.getOneOrderById)
 
-
-orders
-  .route('/:user_id/user')
-  .post(ordersController.addOrder)
 
 export default orders;

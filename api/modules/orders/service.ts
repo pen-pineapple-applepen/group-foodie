@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Knex } from 'knex';
 import { Inject, Service } from 'typedi';
 import { OrderDTO } from './dto';
@@ -35,14 +34,13 @@ export class OrdersServiceImpl implements OrdersService {
   };
 
   getOrders = async (group_id?: number, user_id?: number): Promise<OrderDTO[]> => {
-    const orders = await this.db('orders')
-      .where((qb) => {
-        if (group_id) {
-          qb.where({ group_id });
-        }
-        if (user_id) {
-          qb.where({ user_id });
-        }
+    const orders = await this.db('orders').where((qb) => {
+      if (group_id) {
+        qb.where({ group_id });
+      }
+      if (user_id) {
+        qb.where({ user_id });
+      }
     });
     const ordersDTO = OrdersMapper.toOrdersDTO(orders);
     return ordersDTO;

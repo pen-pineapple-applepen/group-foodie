@@ -60,6 +60,7 @@ export default function FriendMenuPage () {
   async function postOrdersToDB () {
     for (let order of friendsOrders) {
       const bodyParams = {
+        user_id: currentUserId,
         food: order.food,
         quantity: order.quantity,
         price: order.price,
@@ -70,7 +71,7 @@ export default function FriendMenuPage () {
         live: true,
       }
       try {
-        await axios.post(`/api/orders/${currentUserId}/user`, bodyParams)
+        await axios.post(`/api/orders`, bodyParams)
       } catch (err) {
         console.log('error posting friends orders: ', err);
       }
