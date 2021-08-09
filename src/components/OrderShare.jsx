@@ -169,6 +169,7 @@ const OrderShare = () => {
       })
       for(let order of ordersTaggedWithGroupId) {
         axios.post(`/api/orders`, order)
+        console.log('user_id for order: ', order.user_id);
       }
       dispatch(allActions.resetEmails())
       history.push('/Confirmation')
