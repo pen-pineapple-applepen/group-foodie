@@ -1,13 +1,37 @@
 import { setCurrentUser, logIn, logOut } from '../reducers/currentUserReducer';
 import { addName, setNumber } from '../reducers/namesReducer';
 
-import { addItem, subtractItem, UpdateItemPrice, UpdateItemDescription, resetItemQuantity } from '../reducers/menuItemReducer';
-import { UpdateItemName, UpdateItemId, UpdateItemQuantity, UpdateTotalPrice, UpdateRestaurantId, setUserId, setGroupId } from '../reducers/orderItemReducer';
-import { addItemToOrders, addToPriceTotal, resetAllOrders } from '../reducers/allOrderItemsReducer';
-import { updateCurrentRestaurantId, updateCurrentRestaurantName } from '../reducers/restaurantReducer';
-import { addFriendName } from '../reducers/friendReducer'
+import {
+  addItem,
+  subtractItem,
+  updateMenuItemPrice,
+  updateMenuItemDescription,
+  resetMenuItemQuantity,
+} from '../reducers/menuItemReducer';
+import {
+  addItemToOrders,
+  addToPriceTotal,
+  resetAllOrders,
+  updateItemName,
+  updateItemId,
+  updateItemQuantity,
+  updateTotalPrice,
+  updateRestaurantId,
+  setUserId,
+  setGroupId,
+} from '../reducers/orderItemsReducer';
+import {
+  updateCurrentRestaurantId,
+  updateCurrentRestaurantName,
+} from '../reducers/restaurantReducer';
+import { addFriendName } from '../reducers/friendReducer';
 import { updateCurrentGroup } from '../reducers/groupReducer';
-import { createPaymentsList, purgePaymentsList, changeSelectedPayment, addPayment} from '../reducers/paymentsReducer';
+import {
+  createPaymentsList,
+  purgePaymentsList,
+  changeSelectedPayment,
+  addPayment,
+} from '../reducers/paymentsReducer';
 import { addEmail, removeEmail, resetEmails } from '../reducers/emailFriendsReducer';
 
 const allActions = {
@@ -18,15 +42,15 @@ const allActions = {
   addItem,
   addToPriceTotal,
   addItemToOrders,
-  UpdateItemPrice,
-  UpdateItemDescription,
-  resetItemQuantity,
+  updateMenuItemPrice,
+  updateMenuItemDescription,
+  resetMenuItemQuantity,
   subtractItem,
-  UpdateItemName,
-  UpdateItemId,
-  UpdateItemQuantity,
-  UpdateTotalPrice,
-  UpdateRestaurantId,
+  updateItemName,
+  updateItemId,
+  updateItemQuantity,
+  updateTotalPrice,
+  updateRestaurantId,
   updateCurrentRestaurantName,
   updateCurrentRestaurantId,
   resetAllOrders,
@@ -40,7 +64,7 @@ const allActions = {
   addPayment,
   addEmail,
   removeEmail,
-  resetEmails
-}
+  resetEmails,
+};
 
 export default allActions;

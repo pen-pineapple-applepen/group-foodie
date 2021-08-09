@@ -33,11 +33,11 @@ interface Order {
 }
 
 export default function FriendMenuPage() {
-  const currentItem = useAppSelector((state) => state.currentMenuItem);
-  const totalOrdersPrice = useAppSelector((state) => state.allOrderItems.ordersTotal);
+  const currentItem = useAppSelector((state) => state.orderItems.currentOrder);
+  const totalOrdersPrice = useAppSelector((state) => state.orderItems.ordersTotal);
   const restaurantName = useAppSelector((state) => state.currentRestaurant.name);
   const currentUserId = useAppSelector((state) => state.currentUser.id);
-  const friendsOrders = useAppSelector((state) => state.allOrderItems.orders);
+  const friendsOrders = useAppSelector((state) => state.orderItems.orders);
   const currentGroupId = useAppSelector((state) => state.currentGroup);
 
   const dispatch = useAppDispatch();
@@ -79,10 +79,10 @@ export default function FriendMenuPage() {
   }
 
   function clickHandler(entry) {
-    dispatch(allActions.UpdateItemName(entry.menu_item_name));
-    dispatch(allActions.UpdateItemPrice(entry.menu_item_pricing.toFixed(2)));
-    dispatch(allActions.UpdateItemDescription(entry.menu_item_description));
-    dispatch(allActions.UpdateItemId(entry.menu_item_id));
+    dispatch(allActions.updateItemName(entry.menu_item_name));
+    dispatch(allActions.updateMenuItemPrice(entry.menu_item_pricing.toFixed(2)));
+    dispatch(allActions.updateMenuItemDescription(entry.menu_item_description));
+    dispatch(allActions.updateItemId(entry.menu_item_id));
     dispatch(allActions.setUserId(currentUserId));
     history.push('/MenuItem/Friends');
   }
@@ -95,14 +95,14 @@ export default function FriendMenuPage() {
   //Resets Current Selected Item
   React.useEffect(() => {
     //Menu Item
-    dispatch(allActions.UpdateItemPrice(0));
-    dispatch(allActions.resetItemQuantity());
-    dispatch(allActions.UpdateItemDescription(''));
+    dispatch(allActions.updateMenuItemPrice(0));
+    dispatch(allActions.resetMenuItemQuantity());
+    dispatch(allActions.updateMenuItemDescription(''));
     //Order Item
-    dispatch(allActions.UpdateItemId(0));
-    dispatch(allActions.UpdateItemName(''));
-    dispatch(allActions.UpdateItemQuantity(0));
-    dispatch(allActions.UpdateTotalPrice(0));
+    dispatch(allActions.updateItemId(0));
+    dispatch(allActions.updateItemName(''));
+    dispatch(allActions.updateItemQuantity(0));
+    dispatch(allActions.updateTotalPrice(0));
     //Get Menu List
     getMenuList(currentItem.restaurant_id);
   }, []);

@@ -33,8 +33,8 @@ const FoodName = styled(motion.h2)`
 `;
 
 export default function FriendMenuItemPage() {
-  const currentOrder = useAppSelector((state) => state.currentMenuItem);
-  const item = useAppSelector((state) => state.currentItemQuantityPrice);
+  const currentOrder = useAppSelector((state) => state.orderItems.currentOrder);
+  const item = useAppSelector((state) => state.menuItem);
   const dispatch = useAppDispatch();
   const totalPrice = item.price * item.count;
   const history = useHistory();
@@ -50,7 +50,7 @@ export default function FriendMenuItemPage() {
   }
 
   React.useEffect(() => {
-    dispatch(allActions.UpdateTotalPrice(totalPrice.toFixed(2)));
+    dispatch(allActions.updateTotalPrice(totalPrice.toFixed(2)));
   }, [item]);
 
   const pageVariants = {

@@ -58,7 +58,7 @@ const WhatYourFriendsOrdered = styled.h3`
 
 
 function FriendInitialConfirmation({}: ConfirmationProps): ReactElement {
-  const currentOrders = useAppSelector(state => state.allOrderItems.orders);
+  const currentOrders = useAppSelector(state => state.orderItems.orders);
   const [ currentGroupOrders, setCurrentGroupOrders ] = useState([]);
   const currentGroupId = useAppSelector(state => state.currentGroup);
 

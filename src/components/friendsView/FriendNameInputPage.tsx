@@ -58,7 +58,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   const history = useHistory();
   const friendName = useAppSelector(state => state.friendName)
   const { group_id, restaurant_id, restaurant_name } = useParams<GroupIdParams>();
-  const { addFriendName, UpdateRestaurantId, setGroupId, setCurrentUser, updateCurrentGroup, updateCurrentRestaurantName } = allActions;
+  const { addFriendName, updateRestaurantId, setGroupId, setCurrentUser, updateCurrentGroup, updateCurrentRestaurantName } = allActions;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +91,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
   useEffect(() => {
     dispatch(setGroupId(Number(group_id)));
     dispatch(updateCurrentGroup(Number(group_id)));
-    dispatch(UpdateRestaurantId(Number(restaurant_id)));
+    dispatch(updateRestaurantId(Number(restaurant_id)));
     dispatch(updateCurrentRestaurantName(restaurant_name));
 
   }, [])
