@@ -29,6 +29,7 @@ const RestaurantName = styled.h2`
 export default function MenuPage () {
   const currentItem = useAppSelector((state)=>state.currentMenuItem)
   const totalOrdersPrice = useAppSelector((state)=>state.allOrderItems.ordersTotal)
+  const currentUserId = useAppSelector((state) => state.currentUser.id)
   const restaurantName = useAppSelector((state)=>state.currentRestaurant.name)
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -51,6 +52,7 @@ export default function MenuPage () {
     dispatch(allActions.UpdateItemPrice(entry.menu_item_pricing.toFixed(2)));
     dispatch(allActions.UpdateItemDescription(entry.menu_item_description));
     dispatch(allActions.UpdateItemId(entry.menu_item_id));
+    dispatch(allActions.setUserId(currentUserId));
     history.push("/MenuItem");
   }
 

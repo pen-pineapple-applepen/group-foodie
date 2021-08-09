@@ -78,7 +78,7 @@ export default function FriendNameInputPage({}: FriendNameInputPageProps): JSX.E
         guest: true,
         loggedIn: false,
       }
-      const userIdData = await axios.post('/api/users/create', userInfo)
+      const userIdData = await axios.post('/api/users', userInfo)
       const userId = userIdData.data[0]
       userInfo.id = userId;
       dispatch(setCurrentUser(userInfo));

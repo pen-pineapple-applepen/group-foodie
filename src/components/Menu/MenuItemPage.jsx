@@ -44,7 +44,7 @@ export default function MenuItemPage () {
     if(item.count===0){
       return
     } else {
-      dispatch(allActions.addToPriceTotal(totalPrice));//
+      dispatch(allActions.addToPriceTotal(totalPrice));
       dispatch(allActions.addItemToOrders(currentOrder));
       history.push("/Menu");
     }
