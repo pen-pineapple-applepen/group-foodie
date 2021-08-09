@@ -27,7 +27,7 @@ export default function SignUpPage() {
   }
 
   const signUp = () => {
-    axios.post('/api/users/create', {
+    axios.post('/api/users', {
       first_name: values.firstName,
       last_name: values.lastName,
       email: values.email,

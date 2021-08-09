@@ -5,8 +5,8 @@ import { Payment } from './types';
 import PaymentsMapper from './mapper';
 
 export interface PaymentsService {
-  getPaymentsByUserId(user_id: number): Promise<PaymentDTO[]>;
-  addPaymentByUserId(
+  getPayments(user_id?: number): Promise<PaymentDTO[]>;
+  addPayment(
     user_id: string,
     name: string,
     card_number: number,
@@ -24,13 +24,17 @@ export class PaymentsServiceImpl implements PaymentsService {
     private db: Knex
   ) {}
 
-  getPaymentsByUserId = async (user_id: number): Promise<PaymentDTO[]> => {
-    const payments: Payment[] = await this.db('payment_info').where({ user_id });
+  getPayments = async (user_id?: number): Promise<PaymentDTO[]> => {
+    const payments: Payment[] = await this.db('payment_info').where((qb) => {
+      if (user_id) {
+        qb.where({ user_id });
+      }
+    });
     const paymentsDTO: PaymentDTO[] = PaymentsMapper.toPaymentsDTO(payments);
     return paymentsDTO;
   };
 
-  addPaymentByUserId = async (
+  addPayment = async (
     user_id: string,
     name: string,
     card_number: number,

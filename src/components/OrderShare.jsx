@@ -113,7 +113,7 @@ const OrderShare = () => {
   // [] needs to be selectedPayment (test this)
 
   const fetchPaymentData = () => {
-    axios.get(`/api/payments/${userId}/user`)
+    axios.get(`/api/payments?user_id=${userId}`)
     .then(response => {
       if (response.data.length !== 0) {
         let formattedCards = [];
@@ -162,12 +162,13 @@ const OrderShare = () => {
       }
       dispatch(allActions.updateCurrentGroup(groupId.data[0].id));
       const ordersTaggedWithGroupId = currentUserOrdersCopy.map(order => {
+        order.user_id = userId;
         order.group_id = groupId.data[0].id;
         order.date = new Date().toISOString().slice(0, -5);
         return order;
       })
       for(let order of ordersTaggedWithGroupId) {
-        axios.post(`/api/orders/${userId}/user`, order)
+        axios.post(`/api/orders`, order)
       }
       dispatch(allActions.resetEmails())
       history.push('/Confirmation')

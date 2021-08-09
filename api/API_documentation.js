@@ -42,7 +42,7 @@ returns:
 -----------------
 Create 1 new user
 -----------------
-endpoint: '/users/create'
+endpoint: '/users'
 request type: POST
 additional body params: {
   first_name: string
@@ -127,10 +127,18 @@ returns:
 
 
 --------------------------
-Get all orders by group ID
+Get all orders
 --------------------------
-endpoint: 'orders/:group_id/group'
+endpoint: '/orders'
 request type: GET
+
+query parameters:
+__________________________________________
+| PARAMETER | TYPE   | DESCRIPTION        |
+|  group_id | number | filter by group id |
+|  user_id  | number | filter by user id  |
+
+
 returns:
 [
   {
@@ -158,31 +166,12 @@ returns:
 ]
 
 --------------------------
-Get all orders by user ID
---------------------------
-endpoint: '/orders/:user_id/user'
-request type: GET
-returns:
-[
-  {
-      "id": 1,
-      "user_id": 5,
-      "food": "PIZZA",
-      "quantity": 3,
-      "price": "3.50",
-      "date": "12/20/2020",
-      "food_id": 423,
-      "group_id": 1,
-      "restaurant_id": 32
-  }
-]
-
---------------------------
 Create new order by user ID
 --------------------------
-endpoint: '/orders/:user_id/user'
+endpoint: '/orders'
 request type: POST
 additional body params: {
+  user_id: number,
   food: string,
   quantity: number,
   price: DECIMAL number, // eg. 3.00 NOT 3
@@ -201,8 +190,14 @@ payments
 ----------------------------------
 Get all payment options by user ID
 ----------------------------------
-endpoint: '/payments/:user_id/user'
+endpoint: '/payments'
 request type: GET
+
+query parameters:
+__________________________________________
+| PARAMETER | TYPE   | DESCRIPTION        |
+|  user_id  | number | filter by user id  |
+
 returns:
 [
   {
@@ -248,11 +243,12 @@ returns:
 ]
 
 --------------------------------------
-Create 1 new payment option by user ID
+Create 1 new payment option
 --------------------------------------
-endpoint: '/payments/:user_id/user'
+endpoint: '/payments'
 request type: POST
 additional body params: {
+  user_id: number,
   name: string,
   card_number: number,
   card_type: string,
@@ -304,8 +300,13 @@ comments
 --------------------------------------
 get all comments by group ID
 --------------------------------------
-endpoint: '/comments/:group_id/group'
+endpoint: '/comments'
 request type: GET
+query parameters:
+__________________________________________
+| PARAMETER | TYPE   | DESCRIPTION        |
+| group_id  | number | filter by group id |
+
 returns:
 [
   {
@@ -327,8 +328,9 @@ returns:
 --------------------------------------
 create new comment by user ID
 --------------------------------------
-endpoint: '/comments/:user_id/create'
+endpoint: '/comments'
 additional body params: {
+  user_id: number,
   text: string,
   date: string,
   group_id: number,

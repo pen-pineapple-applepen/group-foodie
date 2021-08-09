@@ -5,8 +5,8 @@ import OrdersMapper from './mapper';
 
 export interface OrdersService {
   getOneOrderById(order_id: number): Promise<OrderDTO>;
-  getOrdersByGroupId(group_id: number): Promise<OrderDTO[]>;
-  getOrdersByUserId(user_id: number): Promise<OrderDTO[]>;
+  getOrders(group_id: number, user_id: number): Promise<OrderDTO[]>;
+  // getOrdersByUserId(user_id: number): Promise<OrderDTO[]>;
   addOrder(
     user_id: number,
     food: string,
@@ -33,14 +33,15 @@ export class OrdersServiceImpl implements OrdersService {
     return orderDTO;
   };
 
-  getOrdersByGroupId = async (group_id: number): Promise<OrderDTO[]> => {
-    const orders = await this.db('orders').where({ group_id });
-    const ordersDTO = OrdersMapper.toOrdersDTO(orders);
-    return ordersDTO;
-  };
-
-  getOrdersByUserId = async (user_id: number): Promise<OrderDTO[]> => {
-    const orders = await this.db('orders').where({ user_id });
+  getOrders = async (group_id?: number, user_id?: number): Promise<OrderDTO[]> => {
+    const orders = await this.db('orders').where((qb) => {
+      if (group_id) {
+        qb.where({ group_id });
+      }
+      if (user_id) {
+        qb.where({ user_id });
+      }
+    });
     const ordersDTO = OrdersMapper.toOrdersDTO(orders);
     return ordersDTO;
   };

@@ -38,7 +38,8 @@ export default function ChatComments(props) {
     // console.log('clicked')
     // Hard code here
     axios
-      .post(`/api/comments/${userId}/create`, {
+      .post(`/api/comments`, {
+        user_id: userId,
         text: chat,
         date: new Date(),
         group_id: groupId,
@@ -77,7 +78,7 @@ export default function ChatComments(props) {
   };
 
   async function getComments(group_id) {
-    const result = await axios.get(`/api/comments/${group_id}/group`);
+    const result = await axios.get(`/api/comments?group_id=${group_id}`);
     for (let obj of result.data) {
       const userdata = await axios.get(`/api/users/${obj.user_id}`);
       obj.first_name = userdata.data.first_name;

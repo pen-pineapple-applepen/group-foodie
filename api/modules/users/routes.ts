@@ -12,7 +12,7 @@ const usersController = Container.get(UsersControllerImpl)
 const users = express.Router();
 
 users
-  .route('/create')
+  .route('/')
   .post(usersController.createUser)
 
 users
