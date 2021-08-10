@@ -23,13 +23,13 @@ export default function MainLoginPage() {
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
-    axios.get('/api/users/login', {params: {email: email, password: password}})
-      .then (res => {
+    axios.get('/api/users/login', { params: { email: email, password: password } })
+      .then(res => {
         if (res.data.hasCorrectCredentials === true) {
           axios.get(`/api/users/${res.data.id}`)
-          .then((results) => {
-            dispatch(allActions.setCurrentUser(results.data))
-            dispatch(allActions.logIn());
+            .then((results) => {
+              dispatch(allActions.setCurrentUser(results.data))
+              dispatch(allActions.logIn());
             })
             .catch((err) => {
               console.log(err);
@@ -67,43 +67,43 @@ export default function MainLoginPage() {
 
   return (
     <>
-    <OrangeNavbar hasBurger={false}/>
-    <motion.div className="login-signup-background"
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-    >
-      <div className="login-signup-page-container">
-        <Form.Field className="login-form">
-          <Form.Label>Email</Form.Label>
-          <Form.Control className="form-spacing-login">
-            <Form.Input
-              placeholder="Email"
-              onChange={e => {setEmail(e.target.value)}}
-            />
-            <Icon align="left" size="small">
-              <i className="fas fa-envelope" />
-            </Icon>
-          </Form.Control>
-          <Form.Label>Password</Form.Label>
-          <Form.Control className="form-spacing-login">
-            <Form.Input
-              type="password"
-              placeholder="Password"
-              onChange={e => {setPassword(e.target.value)}}
-            />
-            <Icon align="left" size="medium">
-              <i className="fas fa-key" />
-            </Icon>
-          </Form.Control>
-        </Form.Field>
-        <div className='login-buttons'>
-          <OrangeButton onClick={handleLogin}>Login</OrangeButton>
-          <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
+      <OrangeNavbar hasBurger={false} />
+      <motion.div className="login-signup-background"
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+      >
+        <div className="login-signup-page-container">
+          <Form.Field className="login-form">
+            <Form.Label>Email</Form.Label>
+            <Form.Control className="form-spacing-login">
+              <Form.Input
+                placeholder="Email"
+                onChange={e => { setEmail(e.target.value) }}
+              />
+              <Icon align="left" size="small">
+                <i className="fas fa-envelope" />
+              </Icon>
+            </Form.Control>
+            <Form.Label>Password</Form.Label>
+            <Form.Control className="form-spacing-login">
+              <Form.Input
+                type="password"
+                placeholder="Password"
+                onChange={e => { setPassword(e.target.value) }}
+              />
+              <Icon align="left" size="medium">
+                <i className="fas fa-key" />
+              </Icon>
+            </Form.Control>
+          </Form.Field>
+          <div className='login-buttons'>
+            <OrangeButton onClick={handleLogin}>Login</OrangeButton>
+            <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
     </>
   )
 };

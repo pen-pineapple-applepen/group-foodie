@@ -4,10 +4,10 @@ import { Container } from 'typedi';
 const db = knex({
   client: 'postgresql',
   connection: {
-    host: process.env.DB_HOST || 'localhost',
+    host: 'localhost',
     database: 'groupfoodie',
-    user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD || '',
+    user: 'postgres',
+    password: 'hrlax44',
     port: 5432,
   },
 });

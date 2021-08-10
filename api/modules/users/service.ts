@@ -28,7 +28,7 @@ export class UsersServiceImpl implements UsersService {
 
   async getOneUserInfo(user_id: string): Promise<UserDTO> {
     const [user]: User[] = await this.db('users')
-      .select('id', 'first_name', 'last_name', 'email', 'username', 'password', 'guest')
+      .select('id', 'first_name', 'last_name', 'email', 'username', 'guest')
       // knex thinks there should be a string here, but this is correct knex syntax
       .where({ id: user_id } as any);
     const userDTO = UserMapper.toUserDTO(user);
@@ -59,7 +59,7 @@ export class UsersServiceImpl implements UsersService {
 
   async getFriends(user_id: number): Promise<UserDTO[]> {
     const friends: User[] = await this.db
-      .select('users.id as id', 'first_name', 'last_name', 'username', 'email', 'password', 'guest')
+      .select('users.id as id', 'first_name', 'last_name', 'username', 'email', 'guest')
       .from('users')
       .join('friends_join_table', function () {
         this.on('friends_join_table.friend_id', '=', 'users.id').andOn(
