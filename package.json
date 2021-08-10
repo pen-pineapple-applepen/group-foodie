@@ -8,11 +8,17 @@
     "start:experimental": "nodemon --loader ts-node/esm --experimental-specifier-resolution=node api",
     "database": "psql -U postgres -h localhost -d groupfoodie -f api/db/schema.sql",
     "build": "webpack --watch --mode=development",
-    "test": "jest"
+    "test": "NODE_ENV=test jest --testTimeout=10000"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.14.5",
     "@babel/preset-flow": "^7.14.5",

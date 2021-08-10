@@ -2,15 +2,21 @@ import { CommentsControllerImpl } from './controller';
 import { CommentsServiceImpl } from './service';
 import db from '../../db';
 
-let commentsService;
-let commentsController: any;
+jest.mock('./service');
 
-beforeEach(() => {
-  commentsService = new CommentsServiceImpl(db);
-  commentsController = new CommentsControllerImpl(commentsService);
-});
+let commentsService: CommentsServiceImpl;
+let commentsController: CommentsControllerImpl;
 
 describe('comments controller', () => {
+  beforeEach(() => {
+    commentsService = new CommentsServiceImpl(db);
+    commentsController = new CommentsControllerImpl(commentsService);
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
   const mockRequest = (body?, params?) => ({
     body,
     params,
@@ -21,17 +27,20 @@ describe('comments controller', () => {
     res.status = jest.fn().mockReturnValue(res);
     res.json = jest.fn().mockReturnValue(res);
     return res;
-  }
+  };
 
   it('should call the appropriate service', () => {
     const req = mockRequest({}, { group_id: 1 });
     const res = mockResponse();
-    jest.spyOn(commentsController, 'getCommentsByGroupId');
-    jest.spyOn(commentsService, 'getCommentsByGroupId');
 
-    commentsController.getCommentsByGroupId(mockRequest, mockResponse);
-    expect(commentsService.getCommentsByGroupId).toHaveBeenCalledTimes(1);
+    const mockGetComments = jest.fn();
+    commentsService.getComments = mockGetComments;
 
+    commentsController.getComments(mockRequest, mockResponse);
+    expect(mockGetComments).toHaveBeenCalledTimes(1);
   });
 
-})
+  it('should respond', () => {
+
+  })
+});
