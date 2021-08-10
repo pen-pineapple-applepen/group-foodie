@@ -14,6 +14,14 @@ font-weight: bold;
 margin-bottom: 5px;
 `;
 
+const ButtonDiv = styled.div`
+display: flex;
+flex-direction: column;
+margin-top: 5px;
+margin-bottom: 8px;
+`;
+
+
 export default function SignUpPage() {
   const [username, setUsername] = useState('');
 
@@ -139,9 +147,9 @@ export default function SignUpPage() {
             )}
           </Form.Control>
         </Form.Field>
-        <div className='login-buttons'>
+        <ButtonDiv>
           <OrangeButton onClick={handleSubmit}>Sign Up</OrangeButton>
-        </div>
+        </ButtonDiv>
       </div>
     </motion.div>
     </>

@@ -206,7 +206,7 @@ export const OrangeButton = styled(Button)`
   color: white;
   margin-top: 20px;
   font-weight: bold;
-`
+`;
 export const OrangeInput = styled.input`
   background: transparent;
   border: none;
@@ -215,7 +215,22 @@ export const OrangeInput = styled.input`
     outline: none;
     border-bottom: 1px solid #2e6bbb
   }
-`
+`;
+
+export const FormControlLogin = styled(Form.Control)`
+  margin-bottom: 15px;
+`;
+
+export const LoginSignUpContainer = styled.div`
+  margin: 20%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+`;
 
 
 /////////////////////////////////////

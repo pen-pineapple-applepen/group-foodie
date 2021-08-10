@@ -4,10 +4,16 @@ import styled from 'styled-components'
 import allActions from '../../state/actions/allActions.js';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Button, Icon, Form } from 'react-bulma-components';
-import { OrangeButton, OrangeNavbar } from '../../styles/shared';
+import { OrangeButton, OrangeNavbar, FormControlLogin, LoginSignUpContainer } from '../../styles/shared';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 8px;
+`;
 
 export default function MainLoginPage() {
   const [email, setEmail] = useState('');
@@ -74,10 +80,10 @@ export default function MainLoginPage() {
         exit="out"
         variants={pageVariants}
       >
-        <div className="login-signup-page-container">
+        <LoginSignUpContainer>
           <Form.Field className="login-form">
             <Form.Label>Email</Form.Label>
-            <Form.Control className="form-spacing-login">
+            <FormControlLogin>
               <Form.Input
                 placeholder="Email"
                 onChange={e => { setEmail(e.target.value) }}
@@ -85,9 +91,9 @@ export default function MainLoginPage() {
               <Icon align="left" size="small">
                 <i className="fas fa-envelope" />
               </Icon>
-            </Form.Control>
+            </FormControlLogin>
             <Form.Label>Password</Form.Label>
-            <Form.Control className="form-spacing-login">
+            <FormControlLogin>
               <Form.Input
                 type="password"
                 placeholder="Password"
@@ -96,13 +102,13 @@ export default function MainLoginPage() {
               <Icon align="left" size="medium">
                 <i className="fas fa-key" />
               </Icon>
-            </Form.Control>
+            </FormControlLogin>
           </Form.Field>
-          <div className='login-buttons'>
+          <ButtonDiv>
             <OrangeButton onClick={handleLogin}>Login</OrangeButton>
             <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
-          </div>
-        </div>
+          </ButtonDiv>
+        </LoginSignUpContainer>
       </motion.div>
     </>
   )
