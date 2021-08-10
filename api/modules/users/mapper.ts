@@ -9,7 +9,6 @@ export default class UserMapper {
       last_name: user.last_name,
       email: user.email,
       username: user.username,
-      password: user.password,
       guest: user.guest,
     };
   }
