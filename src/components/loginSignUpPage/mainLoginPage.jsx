@@ -4,16 +4,9 @@ import styled from 'styled-components'
 import allActions from '../../state/actions/allActions.js';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Button, Icon, Form } from 'react-bulma-components';
-import { OrangeButton, OrangeNavbar, FormControlLogin, LoginSignUpContainer } from '../../styles/shared';
+import { OrangeButton, OrangeNavbar, FormControlLogin, LoginSignUpContainer, ButtonContainer } from '../../styles/shared';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-const ButtonDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-  margin-bottom: 8px;
-`;
 
 export default function MainLoginPage() {
   const [email, setEmail] = useState('');
@@ -104,10 +97,10 @@ export default function MainLoginPage() {
               </Icon>
             </FormControlLogin>
           </Form.Field>
-          <ButtonDiv>
+          <ButtonContainer>
             <OrangeButton onClick={handleLogin}>Login</OrangeButton>
             <OrangeButton onClick={handleHomeClick}>Sign Up</OrangeButton>
-          </ButtonDiv>
+          </ButtonContainer>
         </LoginSignUpContainer>
       </motion.div>
     </>

@@ -221,6 +221,10 @@ export const FormControlLogin = styled(Form.Control)`
   margin-bottom: 15px;
 `;
 
+export const FormControlSignUp = styled(Form.Control)`
+  margin-bottom: 2px;
+`;
+
 export const LoginSignUpContainer = styled.div`
   margin: 20%;
   position: absolute;
@@ -230,6 +234,20 @@ export const LoginSignUpContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 10px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 8px;
+`;
+
+export const StyledFormField = styled(Form.Field)`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 `;
 
 
