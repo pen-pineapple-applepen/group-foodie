@@ -15,9 +15,11 @@ export class CommentsControllerImpl implements CommentsController {
     const group_id = req.query.group_id || undefined;
     try {
       const comments = await this.commentsService.getComments(Number(group_id));
-      res.status(200).send(comments);
+      res.status(200);
+      res.send(comments);
     } catch (err) {
-      res.status(404).send(err);
+      res.status(404);
+      res.send(err);
     }
   };
 

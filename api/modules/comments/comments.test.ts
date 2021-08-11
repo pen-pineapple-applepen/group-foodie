@@ -1,15 +1,18 @@
+import { getMockReq, getMockRes } from '@jest-mock/express';
 import { CommentsControllerImpl } from './controller';
 import { CommentsServiceImpl } from './service';
-import db from '../../db';
+// import db from '../../db';
 
-jest.mock('./service');
+const { res, next, clearMockRes } = getMockRes();
 
 let commentsService: CommentsServiceImpl;
 let commentsController: CommentsControllerImpl;
+let db;
 
 describe('comments controller', () => {
-  beforeEach(() => {
-    commentsService = new CommentsServiceImpl(db);
+  beforeAll(() => {
+    jest.mock('./service');
+    commentsService = require('./service');
     commentsController = new CommentsControllerImpl(commentsService);
   });
 
@@ -17,30 +20,49 @@ describe('comments controller', () => {
     jest.resetAllMocks();
   });
 
-  const mockRequest = (body?, params?, query?) => ({
-    body,
-    params,
-    query,
+  beforeEach(() => {
+    clearMockRes();
   });
-
-  const mockResponse = () => {
-    const res = {} as any;
-    res.status = function () {
-      return this;
-    };
-    res.send = jest.fn().mockReturnValue(res);
-    res.json = jest.fn().mockReturnValue(res);
-    return res;
-  };
 
   it('should call the appropriate service', async () => {
-    const req = mockRequest({}, {}, { group_id: 1 });
-    const res = mockResponse();
+    const req = getMockReq({ query: { group_id: 1 } });
     const getCommentsService = jest.fn();
+    const createCommentService = jest.fn();
     commentsService.getComments = getCommentsService;
+    commentsService.createComment = createCommentService;
     await commentsController.getComments(req, res);
+    await commentsController.createComment(req, res);
     expect(getCommentsService).toBeCalled();
+    expect(createCommentService).toBeCalled();
+  });
+});
+
+describe('comments service', () => {
+  beforeAll(() => {
+    jest.mock('../../db');
+    db = require('../../db');
+    commentsService = new CommentsServiceImpl(db);
   });
 
-  it('should respond ', () => {});
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  beforeEach(() => {
+    clearMockRes();
+  });
+
+  it('should successfully return when called with valid parameters', async () => {
+    const req = getMockReq({ query: { group_id: 1 } });
+    const comments = {
+      name: 'pikachu',
+      message: 'pika pi?',
+    };
+    const getCommentsService = jest.fn().mockResolvedValue(comments);
+    commentsService.getComments = getCommentsService;
+
+    const returnValue = await commentsService.getComments(1);
+    expect(getCommentsService).toBeCalled();
+    expect(returnValue).toBe(comments);
+  });
 });
