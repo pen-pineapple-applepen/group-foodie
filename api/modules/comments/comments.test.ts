@@ -17,30 +17,30 @@ describe('comments controller', () => {
     jest.resetAllMocks();
   });
 
-  const mockRequest = (body?, params?) => ({
+  const mockRequest = (body?, params?, query?) => ({
     body,
     params,
+    query,
   });
 
   const mockResponse = () => {
     const res = {} as any;
-    res.status = jest.fn().mockReturnValue(res);
+    res.status = function () {
+      return this;
+    };
+    res.send = jest.fn().mockReturnValue(res);
     res.json = jest.fn().mockReturnValue(res);
     return res;
   };
 
-  it('should call the appropriate service', () => {
-    const req = mockRequest({}, { group_id: 1 });
+  it('should call the appropriate service', async () => {
+    const req = mockRequest({}, {}, { group_id: 1 });
     const res = mockResponse();
-
-    const mockGetComments = jest.fn();
-    commentsService.getComments = mockGetComments;
-
-    commentsController.getComments(mockRequest, mockResponse);
-    expect(mockGetComments).toHaveBeenCalledTimes(1);
+    const getCommentsService = jest.fn();
+    commentsService.getComments = getCommentsService;
+    await commentsController.getComments(req, res);
+    expect(getCommentsService).toBeCalled();
   });
 
-  it('should respond', () => {
-
-  })
+  it('should respond ', () => {});
 });
