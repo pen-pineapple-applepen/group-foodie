@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { nextTick } from 'process';
 import { Service } from 'typedi';
 import { UsersServiceImpl } from './service';
 
 interface UsersController {
-  getOneUser(req: Request, res: Response): Promise<void>;
+  getOneUser(req: Request, res: Response, next: NextFunction): Promise<void>;
   createUser(req: Request, res: Response): Promise<void>;
   getFriends(req: Request, res: Response): Promise<void>;
   createFriend(req: Request, res: Response): Promise<void>;
@@ -14,14 +15,13 @@ interface UsersController {
 export default class UsersControllerImpl implements UsersController {
   constructor(private readonly usersService: UsersServiceImpl) {}
 
-  getOneUser = async (req: Request, res: Response): Promise<void> => {
+  getOneUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { user_id } = req.params;
     try {
       const user = await this.usersService.getOneUserInfo(user_id);
       res.status(200).send(user);
     } catch (err) {
-      console.log('error getting one user: ', err);
-      res.status(404).send(err);
+      next(err);
     }
   };
 
