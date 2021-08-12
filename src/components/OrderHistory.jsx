@@ -52,7 +52,7 @@ const OrderHistory = (props) => {
   const [completeOrders, setCompleteOrders] = useState([]);
 
   const getAllOrders = async () => {
-    const allOrders = await axios.get(`/api/orders/${currentUser.id}/user`);
+    const allOrders = await axios.get(`/api/orders?user_id=${currentUser.id}`);
     setOrders(allOrders.data);
   };
 

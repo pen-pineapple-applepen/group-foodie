@@ -4,7 +4,6 @@ export interface User {
   last_name: string;
   email: string;
   username: string;
-  password: string;
   guest: boolean;
 }
 
@@ -17,11 +16,3 @@ export interface EmailsThatMatchPassword {
   id: number;
   email: string;
 }
-
-/**
- * client ---> API
-
-   API ----> Client
-      {data}
- *
- */

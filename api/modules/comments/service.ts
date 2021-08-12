@@ -1,11 +1,10 @@
 import { Knex } from 'knex';
 import { Inject, Service } from 'typedi';
-// import db from '../../db';
 import { CommentDTO } from './dto';
 import CommentsMapper from './mapper';
 
 export interface CommentsService {
-  getCommentsByGroupId(group_id: number): Promise<CommentDTO[]>;
+  getComments(group_id?: number): Promise<CommentDTO[]>;
   createComment(user_id: number, text: string, date: Date, group_id: number): Promise<number[]>;
 }
 
@@ -16,8 +15,12 @@ export class CommentsServiceImpl implements CommentsService {
     private readonly db: Knex
   ) {}
 
-  getCommentsByGroupId = async (group_id: number): Promise<CommentDTO[]> => {
-    const comments = await this.db('comments').where({ group_id });
+  getComments = async (group_id?: number): Promise<CommentDTO[]> => {
+    const comments = await this.db('comments').where((qb) => {
+      if (group_id) {
+        qb.where({ group_id });
+      }
+    });
     const commentsDTO = CommentsMapper.toCommentsDTO(comments);
     return commentsDTO;
   };

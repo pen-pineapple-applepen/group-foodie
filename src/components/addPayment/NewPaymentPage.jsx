@@ -45,7 +45,7 @@ export default function NewPaymentPage() {
   };
 
   const addPayment = () => {
-    axios.post(`/api/payments/${userId}/user`, {params: {
+    axios.post(`/api/payments`, {params: {
       name: values.cardholderName,
       card_number: Number(values.newCCNumber),
       card_type: newCCType,

@@ -8,11 +8,8 @@ const commentsController = Container.get(CommentsControllerImpl);
 const comments = express.Router();
 
 comments
-  .route('/:user_id/create')
+  .route('/')
+  .get(commentsController.getComments)
   .post(commentsController.createComment)
-
-comments
-  .route('/:group_id/group')
-  .get(commentsController.getCommentsByGroupId)
 
 export default comments;
