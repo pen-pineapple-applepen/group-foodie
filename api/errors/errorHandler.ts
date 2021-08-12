@@ -8,10 +8,11 @@ export function errorHandler(
   next: NextFunction
 ): void {
   console.error(err);
-  const statusCode = err.statusCode || 500;
+  const status = err.httpStatusCode.status || 'Internal Server Error';
+  const statusCode = err.httpStatusCode.statusCode || 500;
   const message = err.message || 'something went wrong';
   res.status(statusCode).json({
-    status: 'Not Found',
+    status,
     statusCode,
     message,
   });

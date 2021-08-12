@@ -3,7 +3,7 @@ import { Service, Inject } from 'typedi';
 import { User, EmailsThatMatchPassword } from './types';
 import UserMapper from './mapper';
 import { UserDTO, CredentialsDTO } from './dto';
-import Api404Error from '../../errors/api404Error';
+import ApiError from '../../errors/apiError';
 
 export interface UsersService {
   getOneUserInfo(user_id: string): Promise<UserDTO>;
@@ -33,7 +33,7 @@ export class UsersServiceImpl implements UsersService {
       // knex thinks there should be a string here, but this is correct knex syntax
       .where({ id: user_id } as any);
     if (!user) {
-      throw new Api404Error(`User with user ID ${user_id} was not found`);
+      throw new ApiError(`User with user ID ${user_id} was not found`);
     }
     const userDTO = UserMapper.toUserDTO(user);
     return userDTO;
@@ -79,7 +79,7 @@ export class UsersServiceImpl implements UsersService {
         );
       });
     if (!friends) {
-      throw new Api404Error(`Friends of user ${user_id} not found`);
+      throw new ApiError(`Friends of user ${user_id} not found`);
     }
     const friendsDTO = UserMapper.toFriendsDTO(friends);
     return friendsDTO;

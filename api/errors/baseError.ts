@@ -1,23 +1,24 @@
+import { HttpStatusCode } from "./httpStatusCodes";
+
 interface baseError {
   name: string;
   statusCode: number;
   isOperational: boolean;
-  description: string;
 }
 
 export default class BaseError extends Error {
   public readonly message: string;
 
-  public readonly statusCode: number;
+  public readonly httpStatusCode: HttpStatusCode;
 
   public readonly isOperational: boolean;
 
-  constructor(message: string, statusCode: number, isOperational: boolean, description: string) {
-    super(description);
+  constructor(message: string, httpStatusCode: HttpStatusCode, isOperational: boolean) {
+    super();
 
     Object.setPrototypeOf(this, new.target.prototype);
     this.message = message;
-    this.statusCode = statusCode;
+    this.httpStatusCode = httpStatusCode;
     this.isOperational = isOperational;
     Error.captureStackTrace(this);
   }
