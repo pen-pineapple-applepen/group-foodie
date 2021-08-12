@@ -33,8 +33,8 @@ const MenuList = styled.div`
 `;
 
 export default function MenuPage() {
-  const currentItem = useAppSelector((state) => state.orderItems.currentOrder);
-  const totalOrdersPrice = useAppSelector((state) => state.orderItems.ordersTotal);
+  const currentItem = useAppSelector((state) => state.orders.currentOrder);
+  const totalOrdersPrice = useAppSelector((state) => state.orders.ordersTotal);
   const restaurantName = useAppSelector((state) => state.currentRestaurant.name);
   const dispatch = useAppDispatch();
   const history = useHistory();

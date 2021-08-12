@@ -33,8 +33,8 @@ const FoodName = styled(motion.h2)`
 `;
 
 export default function MenuItemPage() {
-  const currentOrder = useAppSelector((state) => state.orderItems.currentOrder);
-  const item = useAppSelector((state) => state.menuItem);
+  const currentOrder = useAppSelector((state) => state.orders.currentOrder);
+  const item = useAppSelector((state) => state.item);
   const dispatch = useAppDispatch();
   const totalPrice = item.price * item.count;
   const history = useHistory();
@@ -92,7 +92,6 @@ export default function MenuItemPage() {
         {currentOrder.food}
       </FoodName>
       <MainConatiner initial="initial" animate="in" exit="out" variants={pageVariants}>
-        {/* <img src='Dannys_bg.png'/> */}
         <StyledDescription>{item.description}</StyledDescription>
         <p>${item.price}</p>
         <MenuItemIncrementor />

@@ -12,7 +12,7 @@ export const setUserId = createAction('SET_USER_ID');
 export const setGroupId = createAction('SET_GROUP_ID');
 
 const initialState = {
-  orders: [],
+  allOrders: [],
   ordersTotal: 0,
   currentOrder: {
     user_id: 0,
@@ -27,16 +27,16 @@ const initialState = {
   },
 };
 
-export const orderItemsReducer = createReducer(initialState, (builder) => {
+export const ordersReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addItemToOrders, (state, action) => {
-      state.orders.push(action.payload);
+      state.allOrders.push(action.payload);
     })
     .addCase(addToPriceTotal, (state, action) => {
       state.ordersTotal += action.payload;
     })
     .addCase(resetAllOrders, (state, action) => {
-      state.orders = [];
+      state.allOrders = [];
       state.ordersTotal = 0;
     })
     .addCase(updateItemName, (state, action) => {

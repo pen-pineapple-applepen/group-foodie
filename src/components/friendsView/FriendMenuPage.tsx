@@ -20,6 +20,12 @@ const CheckoutButton = styled(OrangeButton)`
   width: 50%;
 `;
 
+const MenuList = styled.div`
+  overflow-y: scroll;
+  max-height: 400px;
+  box-shadow: 4px 4px 8px rgb(0 0 0 / 10%);
+`;
+
 interface Order {
   user_id: number;
   food: string;
@@ -33,11 +39,11 @@ interface Order {
 }
 
 export default function FriendMenuPage() {
-  const currentItem = useAppSelector((state) => state.orderItems.currentOrder);
-  const totalOrdersPrice = useAppSelector((state) => state.orderItems.ordersTotal);
+  const currentItem = useAppSelector((state) => state.orders.currentOrder);
+  const totalOrdersPrice = useAppSelector((state) => state.orders.ordersTotal);
   const restaurantName = useAppSelector((state) => state.currentRestaurant.name);
   const currentUserId = useAppSelector((state) => state.currentUser.id);
-  const friendsOrders = useAppSelector((state) => state.orderItems.orders);
+  const friendsOrders = useAppSelector((state) => state.orders.allOrders);
   const currentGroupId = useAppSelector((state) => state.currentGroup);
 
   const dispatch = useAppDispatch();
@@ -134,14 +140,7 @@ export default function FriendMenuPage() {
       <MainConatiner initial="initial" animate="in" exit="out" variants={pageVariants}>
         {/* <img src={'Dannys_bg.png'}/> */}
         <h2>{restaurantName}</h2>
-        <div
-          style={{
-            overflow: 'scroll',
-            overflowY: 'scroll',
-            maxHeight: '400px',
-            boxShadow: '4px 4px 8px rgb(0 0 0 / 10%)',
-          }}
-        >
+        <MenuList>
           {menuList.map((entry) => {
             return (
               <div onClick={() => clickHandler(entry)} key={entry.menu_item_id}>
@@ -153,7 +152,7 @@ export default function FriendMenuPage() {
               </div>
             );
           })}
-        </div>
+        </MenuList>
         <CheckoutButton onClick={handleCheckout}>
           Checkout ${totalOrdersPrice.toFixed(2)}
         </CheckoutButton>

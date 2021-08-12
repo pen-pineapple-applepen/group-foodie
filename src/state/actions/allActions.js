@@ -7,7 +7,7 @@ import {
   updateMenuItemPrice,
   updateMenuItemDescription,
   resetMenuItemQuantity,
-} from '../reducers/menuItemReducer';
+} from '../reducers/itemReducer';
 import {
   addItemToOrders,
   addToPriceTotal,
@@ -19,7 +19,7 @@ import {
   updateRestaurantId,
   setUserId,
   setGroupId,
-} from '../reducers/orderItemsReducer';
+} from '../reducers/ordersReducer';
 import {
   updateCurrentRestaurantId,
   updateCurrentRestaurantName,

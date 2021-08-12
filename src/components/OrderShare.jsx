@@ -87,7 +87,7 @@ const SmallText = styled.div`
 
 const OrderShare = () => {
   const [orderDate, setOrderDate] = useState(new Date());
-  const currentUserOrders = useAppSelector(state => state.orderItems.orders);
+  const currentUserOrders = useAppSelector(state => state.orders.allOrders);
   const selectedPaymentIndex = useAppSelector(state => state.currentPayments.selectedPaymentIndex);
   let [guestEmail, setGuestEmail] = useState('');
   let [guestEmails, setGuestEmails] = useState([]);

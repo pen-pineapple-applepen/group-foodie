@@ -16,7 +16,7 @@ const MainConatiner = styled.div`
 `;
 
 export default function MenuItemIncrementor() {
-  const count = useAppSelector((state) => state.menuItem.count);
+  const count = useAppSelector((state) => state.item.count);
   const dispatch = useAppDispatch();
 
   function subtractHandler() {

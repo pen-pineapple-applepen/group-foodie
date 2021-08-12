@@ -63,7 +63,7 @@ const CopyConfirm = styled(motion.div)`
 `;
 
 function Confirmation(): ReactElement {
-  const currentOrders = useAppSelector((state) => state.orderItems.orders);
+  const currentOrders = useAppSelector((state) => state.orders.allOrders);
   const currentGroupId = useAppSelector((state) => state.currentGroup);
   const currentRestaurantId = useAppSelector((state) => state.currentRestaurant);
   const [copied, setCopied] = useState(false);

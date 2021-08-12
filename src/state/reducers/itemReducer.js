@@ -12,7 +12,7 @@ const initialState = {
   description: '',
 };
 
-export const menuItemReducer = createReducer(initialState, (builder) => {
+export const itemReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addItem, (state, action) => {
       state.count += 1;
