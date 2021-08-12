@@ -69,6 +69,7 @@ export default function RestaurantPage() {
 
   function clickHandler(entry) {
     dispatch(allActions.updateRestaurantId(entry.restaurant_id));
+    dispatch(allActions.setUserId(userId));
     dispatch(allActions.updateCurrentRestaurantId(entry.restaurant_id));
     dispatch(allActions.updateCurrentRestaurantName(entry.name));
     history.push('/Menu');
