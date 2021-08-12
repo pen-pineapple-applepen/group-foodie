@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { nextTick } from 'process';
 import { Service } from 'typedi';
+import { validationResult } from 'express-validator';
 import { UsersServiceImpl } from './service';
 
 interface UsersController {
@@ -16,8 +17,8 @@ export default class UsersControllerImpl implements UsersController {
   constructor(private readonly usersService: UsersServiceImpl) {}
 
   getOneUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const { user_id } = req.params;
     try {
+      const { user_id } = req.params;
       const user = await this.usersService.getOneUserInfo(user_id);
       res.status(200).send(user);
     } catch (err) {
@@ -41,7 +42,7 @@ export default class UsersControllerImpl implements UsersController {
       console.log('error creating user: ', err);
       res.status(404).send(err);
     }
-  }
+  };
 
   getFriends = async (req: Request, res: Response): Promise<void> => {
     const { user_id } = req.params;

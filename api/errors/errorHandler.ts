@@ -9,11 +9,11 @@ export function errorHandler(
 ): void {
   console.error(err);
   const statusCode = err.statusCode || 500;
-  const name = err.name || 'something went wrong';
+  const message = err.message || 'something went wrong';
   res.status(statusCode).json({
-    status: 'error',
+    status: 'Not Found',
     statusCode,
-    name,
+    message,
   });
 }
 

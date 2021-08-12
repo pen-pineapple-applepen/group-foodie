@@ -2,6 +2,7 @@
 import { Container } from 'typedi';
 import express from 'express';
 import UsersControllerImpl from './controller';
+import userValidator from './userValidator';
 import db from '../../db';
 
 Container.set('DATABASE_ACCESS', db);
@@ -14,6 +15,7 @@ const users = express.Router();
 users
   .route('/')
   .post(usersController.createUser)
+  .get(userValidator.getOneUser, usersController.getOneUser)
 
 users
   .route('/login')
