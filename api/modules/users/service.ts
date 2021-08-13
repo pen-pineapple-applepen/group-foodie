@@ -7,7 +7,7 @@ import ApiError from '../../errors/apiError';
 import httpErrors from '../../errors/httpErrors';
 
 export interface UsersService {
-  getOneUserInfo(user_id: string): Promise<UserDTO>;
+  getOneUser(user_id: number): Promise<UserDTO>;
   createUser(
     first_name: string,
     last_name: string,
@@ -28,7 +28,10 @@ export class UsersServiceImpl implements UsersService {
     private db: Knex
   ) {}
 
-  async getOneUserInfo(user_id: string): Promise<UserDTO> {
+  async getOneUser(user_id: number): Promise<UserDTO> {
+    if (!user_id) {
+      throw new ApiError('user id is undefined', httpErrors.NOT_FOUND);
+    }
     const [user]: User[] = await this.db('users')
       .select('id', 'first_name', 'last_name', 'email', 'username', 'guest')
       // knex thinks there should be a string here, but this is correct knex syntax

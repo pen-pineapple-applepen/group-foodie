@@ -23,6 +23,7 @@ export const userValidator = {
       if (!errors.isEmpty()) {
         throw new ApiError('user id is not defined', httpErrors.BAD_REQUEST, errors.array());
       }
+      next();
     },
   ],
   createUser: [
