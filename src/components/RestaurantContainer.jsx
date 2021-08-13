@@ -17,10 +17,10 @@ const InfoContainer = styled.div`
 `;
 
 const Image = styled.img`
-  background-color: #FF6C36;
+  background-color: #ff6c36;
   min-width: 154px;
   height: 117px;
-  position:relative;
+  position: relative;
 `;
 
 const Name = styled.div`
@@ -34,12 +34,11 @@ const SubInfo = styled.div`
   padding: 2px 2px;
 `;
 
-export default function RestaurantContainer ({name, cuisine, hours, id}) {
-
-  return(
+export default function RestaurantContainer({ name, cuisine, hours, id }) {
+  return (
     <MainConatiner>
       <div>
-        <Image src={cuisine==='Asian' ? 'Asian_Thumb.png': 'American_Thumb.png'}></Image>
+        <Image src={cuisine === 'Asian' ? 'Asian_Thumb.png' : 'American_Thumb.png'} />
       </div>
       <InfoContainer>
         <Name>
@@ -53,5 +52,5 @@ export default function RestaurantContainer ({name, cuisine, hours, id}) {
         </SubInfo>
       </InfoContainer>
     </MainConatiner>
-  )
+  );
 }
