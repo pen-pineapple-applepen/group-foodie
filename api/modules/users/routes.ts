@@ -14,7 +14,7 @@ const users = express.Router();
 
 users
   .route('/')
-  .post(usersController.createUser)
+  .post(userValidator.createUser, usersController.createUser)
   .get(userValidator.getOneUser, usersController.getOneUser)
 
 users
