@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
-import {OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared';
+import { OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared';
 import MenuItemIncrementor from './MenuItemIncrementor.jsx';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -32,33 +32,32 @@ const FoodName = styled(motion.h2)`
   text-align: center;
 `;
 
-export default function MenuItemPage () {
-  const currentOrder = useAppSelector((state)=>state.currentMenuItem)
-  const item = useAppSelector((state)=>state.currentItemQuantityPrice)
+export default function MenuItemPage() {
+  const currentOrder = useAppSelector((state) => state.orders.currentOrder);
+  const item = useAppSelector((state) => state.item);
   const dispatch = useAppDispatch();
-  const totalPrice = item.price*item.count;
+  const totalPrice = item.price * item.count;
   const history = useHistory();
 
-
-  function clickHandler () {
-    if(item.count===0){
-      return
+  function clickHandler() {
+    if (item.count === 0) {
+      return;
     } else {
       dispatch(allActions.addToPriceTotal(totalPrice));
       dispatch(allActions.addItemToOrders(currentOrder));
-      history.push("/Menu");
+      history.push('/Menu');
     }
   }
 
-  React.useEffect(()=>{
-    dispatch(allActions.UpdateTotalPrice(totalPrice.toFixed(2)));
-  },[item])
+  React.useEffect(() => {
+    dispatch(allActions.updateTotalPrice(totalPrice.toFixed(2)));
+  }, [item]);
 
   const pageVariants = {
     initial: {
       opacity: 0,
       scale: 0.9,
-      y: "50%"
+      y: '50%',
     },
     in: {
       opacity: 1,
@@ -67,43 +66,39 @@ export default function MenuItemPage () {
       transition: {
         duration: 0.3,
         type: 'tween',
-      }
+      },
     },
     out: {
       opacity: 0,
       scale: 0.9,
-      y: "50%",
+      y: '50%',
       transition: {
         duration: 0.2,
         type: 'tween',
       },
     },
-  }
+  };
 
-  return(
+  return (
     <>
-      <OrangeNavbar needBackArrow={true}/>
-      <HeaderImage src ={currentOrder.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'}/>
+      <OrangeNavbar needBackArrow={true} />
+      <HeaderImage src={currentOrder.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
       <FoodName
-        initial={{ opacity: 0}}
-        animate={{ opacity: 1}}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3}}
+        transition={{ duration: 0.3 }}
       >
         {currentOrder.food}
       </FoodName>
-    <MainConatiner
-          initial="initial"
-          animate="in"
-          exit="out"
-          variants={pageVariants}
-    >
-      {/* <img src='Dannys_bg.png'/> */}
-      <StyledDescription>{item.description}</StyledDescription>
-      <p>${item.price}</p>
-      <MenuItemIncrementor/>
-      <CheckoutButton onClick={()=> clickHandler()}>Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}</CheckoutButton>
-    </MainConatiner>
+      <MainConatiner initial="initial" animate="in" exit="out" variants={pageVariants}>
+        <StyledDescription>{item.description}</StyledDescription>
+        <p>${item.price}</p>
+        <MenuItemIncrementor />
+        <CheckoutButton onClick={() => clickHandler()}>
+          Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}
+        </CheckoutButton>
+      </MainConatiner>
     </>
-  )
+  );
 }

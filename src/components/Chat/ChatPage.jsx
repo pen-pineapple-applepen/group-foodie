@@ -30,7 +30,6 @@ export default function ChatPage () {
 
 
   React.useEffect(async () => {
-    console.log('restaurantid', restaurant.restaurant_id)
     const dateData = await axios.get(`/api/groups/${currentGroupId}`)
     const date = dateData.data[0].due_date;
     const formatedDate = date.slice(5, 7) + '/' + date.slice(8, 10) + '/' + date.slice(0, 4);

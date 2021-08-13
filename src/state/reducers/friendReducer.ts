@@ -2,8 +2,7 @@ import { createReducer, createAction } from '@reduxjs/toolkit';
 
 export const addFriendName = createAction<string>('ADD_FRIEND_NAME');
 
-
-let initialState = ''
+let initialState = '';
 
 export const friendReducer = createReducer (initialState, (builder) => {
   builder

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
-import {OrangeButton} from '../../styles/shared';
+import { OrangeButton } from '../../styles/shared';
 
 const CirleButton = styled(OrangeButton)`
   border-radius: 31.5px;
@@ -15,25 +15,25 @@ const MainConatiner = styled.div`
   justify-content: space-between;
 `;
 
-export default function MenuItemIncrementor () {
-  const count = useAppSelector((state)=>state.currentItemQuantityPrice.count)
+export default function MenuItemIncrementor() {
+  const count = useAppSelector((state) => state.item.count);
   const dispatch = useAppDispatch();
 
-  function subtractHandler () {
-    dispatch(allActions.subtractItem())
-    dispatch(allActions.UpdateItemQuantity(count-1));
+  function subtractHandler() {
+    dispatch(allActions.subtractItem());
+    dispatch(allActions.updateItemQuantity(count - 1));
   }
 
-  function addHandler () {
-    dispatch(allActions.addItem())
-    dispatch(allActions.UpdateItemQuantity(count+1));
+  function addHandler() {
+    dispatch(allActions.addItem());
+    dispatch(allActions.updateItemQuantity(count + 1));
   }
 
-  return(
+  return (
     <MainConatiner>
-      <CirleButton onClick={()=>subtractHandler()}>-</CirleButton>
+      <CirleButton onClick={() => subtractHandler()}>-</CirleButton>
       <div>{count}</div>
-      <CirleButton onClick={()=>addHandler()}>+</CirleButton>
+      <CirleButton onClick={() => addHandler()}>+</CirleButton>
     </MainConatiner>
-  )
+  );
 }
