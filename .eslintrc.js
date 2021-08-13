@@ -38,5 +38,10 @@ module.exports = {
     '@typescript-eslint/naming-convention': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { exceptAfterSingleLine: true },
+    ]
   },
 };

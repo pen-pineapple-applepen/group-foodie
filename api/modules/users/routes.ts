@@ -2,6 +2,7 @@
 import { Container } from 'typedi';
 import express from 'express';
 import UsersControllerImpl from './controller';
+import userValidator from './userValidator';
 import db from '../../db';
 
 Container.set('DATABASE_ACCESS', db);
@@ -13,19 +14,20 @@ const users = express.Router();
 
 users
   .route('/')
-  .post(usersController.createUser)
-
-users
-  .route('/login')
-  .get(usersController.checkPasswordWithEmail)
-
-users
-  .route('/:user_id')
+  .post(userValidator.createUser, usersController.createUser)
   .get(usersController.getOneUser)
 
 users
+  .route('/login')
+  .get(userValidator.checkPasswordWithEmail, usersController.checkPasswordWithEmail)
+
+users
+  .route('/:user_id')
+  .get(userValidator.getOneUser, usersController.getOneUser)
+
+users
   .route('/:user_id/friends')
-  .get(usersController.getFriends)
-  .post(usersController.createFriend)
+  .get(userValidator.getFriends, usersController.getFriends)
+  .post(userValidator.createFriend, usersController.createFriend)
 
 export default users;
