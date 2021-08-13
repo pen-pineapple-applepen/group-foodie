@@ -113,7 +113,7 @@ export const userValidator = {
       .exists()
       .withMessage('password is undefined')
       .isString()
-      .withMessage('password is undefined or not a string'),
+      .withMessage('password is not a string'),
     (req: Request, res: Response, next: NextFunction): void | ApiError => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {

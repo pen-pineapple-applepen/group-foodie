@@ -89,6 +89,9 @@ export class UsersServiceImpl implements UsersService {
   }
 
   async createFriend(user_id: number, friend_id: number): Promise<void> {
+    if (!user_id || !friend_id) {
+      throw new ApiError('user id and/or friend id are not defined', httpErrors.BAD_REQUEST);
+    }
     await this.db('friends_join_table').insert({
       user_id,
       friend_id,
@@ -96,6 +99,9 @@ export class UsersServiceImpl implements UsersService {
   }
 
   async checkPasswordWithEmail(email: string, password: string): Promise<CredentialsDTO> {
+    if (!email || !password) {
+      throw new ApiError('email and/or password are not defined', httpErrors.BAD_REQUEST);
+    }
     const emailsThatMatchPassword: EmailsThatMatchPassword[] = await this.db
       .select('email', 'id')
       .from('users')

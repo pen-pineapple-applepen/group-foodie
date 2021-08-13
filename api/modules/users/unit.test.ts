@@ -198,7 +198,6 @@ describe('createUser service', () => {
 });
 
 describe('getFriends service', () => {
-  let mockUserInfo: User;
   let tracker: Tracker;
 
   beforeEach((done) => {
@@ -244,5 +243,86 @@ describe('getFriends service', () => {
     const mapperSpy = jest.spyOn(UserMapper, 'toFriendsDTO');
     const friends = await usersService.getFriends(userIdWithFriends);
     expect(mapperSpy).toHaveBeenCalledWith(friends);
+  });
+});
+
+describe('createFriend service', () => {
+  let tracker: Tracker;
+
+  beforeEach((done) => {
+    mockDb.mock(db);
+    tracker = mockDb.getTracker();
+    tracker.install();
+    usersService = new UsersServiceImpl(db);
+    done();
+  });
+
+  afterEach(() => {
+    tracker.uninstall();
+    mockDb.unmock(db);
+  });
+
+  test('missing parameters should throw 404 error', async () => {
+    expect.assertions(2);
+    try {
+      await usersService.createFriend();
+      throw 'expected promise to reject, instead resolved';
+    } catch (err) {
+      expect(err.httpError).toBe(httpErrors.BAD_REQUEST);
+      expect(err.message).toBe('user id and/or friend id are not defined');
+    }
+  });
+
+  test('should send no response if successfully created', async () => {
+    expect.assertions(1);
+    tracker.on('query', (query) => {
+      query.response('friend');
+    });
+    const shouldBeUndefined = await usersService.createFriend(1, 2);
+    expect(shouldBeUndefined).toBeUndefined();
+  });
+});
+
+describe('checkPasswordWithEmail service', () => {
+  let tracker: Tracker;
+
+  beforeEach((done) => {
+    mockDb.mock(db);
+    tracker = mockDb.getTracker();
+    tracker.install();
+    usersService = new UsersServiceImpl(db);
+    done();
+  });
+
+  afterEach(() => {
+    tracker.uninstall();
+    mockDb.unmock(db);
+  });
+
+  test('missing parameters should throw 404 error', async () => {
+    expect.assertions(2);
+    try {
+      await usersService.checkPasswordWithEmail();
+      throw 'expected promise to reject, instead resolved';
+    } catch (err) {
+      expect(err.httpError).toBe(httpErrors.BAD_REQUEST);
+      expect(err.message).toBe('email and/or password are not defined');
+    }
+  });
+
+  test('should call mapper after retrieving friends', async () => {
+    const mockEmailsThatMatchPassword = {
+      id: 1,
+      email: 'ash@pokemail.com',
+    };
+    tracker.on('query', (query) => {
+      query.response([mockEmailsThatMatchPassword]);
+    });
+    const mapperSpy = jest.spyOn(UserMapper, 'toCheckPasswordWithEmailDTO');
+    const loginDetails = await usersService.checkPasswordWithEmail(
+      'pika@pokemail.com',
+      'pikapassword123'
+    );
+    expect(mapperSpy).toHaveBeenCalledWith([mockEmailsThatMatchPassword]);
   });
 });
