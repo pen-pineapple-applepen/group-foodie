@@ -182,8 +182,6 @@ describe('createUser service', () => {
     tracker.on('query', (query) => {
       query.response(insertedId);
     });
-    // db().where.mockResolvedValue(mockUserInfo);
-    // usersService = new UsersServiceImpl(db);
     const returnedId = await usersService.createUser(
       mockUserInfo.first_name,
       mockUserInfo.last_name,
