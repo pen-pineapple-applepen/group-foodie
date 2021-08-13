@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@reduxjs/toolkit": "^1.6.0",
     "@types/jest": "^26.0.24",
+    "@types/mock-knex": "^0.4.3",
     "autoprefixer": "^10.3.1",
     "bootstrap": "^5.0.2",
     "connect-history-api-fallback": "^1.6.0",
