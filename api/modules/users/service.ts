@@ -3,6 +3,8 @@ import { Service, Inject } from 'typedi';
 import { User, EmailsThatMatchPassword } from './types';
 import UserMapper from './mapper';
 import { UserDTO, CredentialsDTO } from './dto';
+import ApiError from '../../errors/apiError';
+import httpErrors from '../../errors/httpErrors';
 
 export interface UsersService {
   getOneUserInfo(user_id: string): Promise<UserDTO>;
@@ -31,6 +33,9 @@ export class UsersServiceImpl implements UsersService {
       .select('id', 'first_name', 'last_name', 'email', 'username', 'guest')
       // knex thinks there should be a string here, but this is correct knex syntax
       .where({ id: user_id } as any);
+    if (!user) {
+      throw new ApiError(`User with user ID ${user_id} was not found`, httpErrors.NOT_FOUND);
+    }
     const userDTO = UserMapper.toUserDTO(user);
     return userDTO;
   }
@@ -54,6 +59,9 @@ export class UsersServiceImpl implements UsersService {
       },
       'id'
     );
+    if (!insertedId) {
+      throw new ApiError('error creating new User', httpErrors.NOT_FOUND);
+    }
     return insertedId;
   }
 
@@ -74,6 +82,9 @@ export class UsersServiceImpl implements UsersService {
           user_id as any
         );
       });
+    if (!friends) {
+      throw new ApiError(`Friends of user ${user_id} not found`, httpErrors.NOT_FOUND);
+    }
     const friendsDTO = UserMapper.toFriendsDTO(friends);
     return friendsDTO;
   }
