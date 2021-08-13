@@ -1,16 +1,16 @@
-export interface HttpStatusCode {
+export interface HttpError {
   status: 'Ok' | 'Bad Request' | 'Not Found' | 'Internal Server Error';
   statusCode: 200 | 400 | 404 | 500;
 }
 
-export interface AllStatusCodes {
-  OK: HttpStatusCode;
-  BAD_REQUEST: HttpStatusCode;
-  NOT_FOUND: HttpStatusCode;
-  INTERNAL_SERVER: HttpStatusCode;
+export interface AllErrors {
+  OK: HttpError;
+  BAD_REQUEST: HttpError;
+  NOT_FOUND: HttpError;
+  INTERNAL_SERVER: HttpError;
 }
 
-const httpStatusCodes: AllStatusCodes = {
+const allErrors: AllErrors = {
   OK: {
     status: 'Ok',
     statusCode: 200,
@@ -29,4 +29,4 @@ const httpStatusCodes: AllStatusCodes = {
   },
 };
 
-export default httpStatusCodes;
+export default allErrors;

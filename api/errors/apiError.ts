@@ -1,4 +1,4 @@
-import httpStatusCodes, { HttpStatusCode } from './httpStatusCodes';
+import httpErrors, { HttpError } from './httpErrors';
 import BaseError from './baseError';
 
 class ApiError extends BaseError {
@@ -8,11 +8,11 @@ class ApiError extends BaseError {
 
   constructor(
     message: string,
-    httpStatusCode: HttpStatusCode = httpStatusCodes.NOT_FOUND,
+    httpError: HttpError = httpErrors.NOT_FOUND,
     additionalLog: any = undefined,
     isOperational = true
   ) {
-    super(message, httpStatusCode, isOperational);
+    super(message, httpError, isOperational);
     this.additionalLog = additionalLog;
   }
 }

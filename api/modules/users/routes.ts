@@ -15,19 +15,19 @@ const users = express.Router();
 users
   .route('/')
   .post(userValidator.createUser, usersController.createUser)
-  .get(userValidator.getOneUser, usersController.getOneUser)
-
-users
-  .route('/login')
-  .get(usersController.checkPasswordWithEmail)
-
-users
-  .route('/:user_id')
   .get(usersController.getOneUser)
 
 users
+  .route('/login')
+  .get(userValidator.checkPasswordWithEmail, usersController.checkPasswordWithEmail)
+
+users
+  .route('/:user_id')
+  .get(userValidator.getOneUser, usersController.getOneUser)
+
+users
   .route('/:user_id/friends')
-  .get(usersController.getFriends)
-  .post(usersController.createFriend)
+  .get(userValidator.getFriends, usersController.getFriends)
+  .post(userValidator.createFriend, usersController.createFriend)
 
 export default users;

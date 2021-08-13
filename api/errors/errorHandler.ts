@@ -4,8 +4,8 @@ import BaseError from './baseError';
 
 export function errorHandler(err: ApiError, req: Request, res: Response, next: NextFunction): void {
   console.error(err);
-  const status = err.httpStatusCode.status || 'Internal Server Error';
-  const statusCode = err.httpStatusCode.statusCode || 500;
+  const status = err.httpError.status || 'Internal Server Error';
+  const statusCode = err.httpError.statusCode || 500;
   const message = err.message || 'something went wrong';
   const { additionalLog } = err;
   res.status(statusCode).json({
