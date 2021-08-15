@@ -60,6 +60,9 @@ export class PaymentsServiceImpl implements PaymentsService {
       },
       'id'
     );
+    if (!insertedId) {
+      throw new ApiError('error adding payment', httpErrors.BAD_REQUEST);
+    }
     return PaymentsMapper.toInsertedPaymentIdDTO(insertedId);
   };
 }
