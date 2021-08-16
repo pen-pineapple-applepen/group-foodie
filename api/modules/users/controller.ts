@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Service } from 'typedi';
 import { UsersServiceImpl } from './service';
 
-interface UsersController {
+export interface UsersController {
   getOneUser(req: Request, res: Response, next: NextFunction): Promise<void>;
   createUser(req: Request, res: Response, next: NextFunction): Promise<void>;
   getFriends(req: Request, res: Response, next: NextFunction): Promise<void>;
@@ -11,13 +11,13 @@ interface UsersController {
 }
 
 @Service()
-export default class UsersControllerImpl implements UsersController {
+export class UsersControllerImpl implements UsersController {
   constructor(private readonly usersService: UsersServiceImpl) {}
 
   getOneUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { user_id } = req.params;
-      const user = await this.usersService.getOneUserInfo(user_id);
+      const user = await this.usersService.getOneUser(Number(user_id));
       res.status(200).send(user);
     } catch (err) {
       next(err);
@@ -67,7 +67,6 @@ export default class UsersControllerImpl implements UsersController {
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    console.log('req.query:', req.query);
     const { email, password } = req.query;
     try {
       const credentials = await this.usersService.checkPasswordWithEmail(

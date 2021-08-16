@@ -1,6 +1,5 @@
 import { Knex } from 'knex';
 import { Inject, Service } from 'typedi';
-// import db from '../../db';
 import { CommentDTO } from './dto';
 import CommentsMapper from './mapper';
 

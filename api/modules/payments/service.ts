@@ -3,6 +3,8 @@ import { Service, Inject } from 'typedi';
 import { PaymentDTO } from './dto';
 import { Payment } from './types';
 import PaymentsMapper from './mapper';
+import ApiError from '../../errors/apiError';
+import httpErrors from '../../errors/httpErrors';
 
 export interface PaymentsService {
   getPayments(user_id?: number): Promise<PaymentDTO[]>;
@@ -30,6 +32,9 @@ export class PaymentsServiceImpl implements PaymentsService {
         qb.where({ user_id });
       }
     });
+    if (!payments) {
+      throw new ApiError('error getting payments', httpErrors.NOT_FOUND);
+    }
     const paymentsDTO: PaymentDTO[] = PaymentsMapper.toPaymentsDTO(payments);
     return paymentsDTO;
   };
@@ -55,6 +60,9 @@ export class PaymentsServiceImpl implements PaymentsService {
       },
       'id'
     );
+    if (!insertedId) {
+      throw new ApiError('error adding payment', httpErrors.BAD_REQUEST);
+    }
     return PaymentsMapper.toInsertedPaymentIdDTO(insertedId);
   };
 }

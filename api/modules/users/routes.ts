@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Container } from 'typedi';
 import express from 'express';
-import UsersControllerImpl from './controller';
+import { UsersControllerImpl } from './controller';
 import userValidator from './userValidator';
 import db from '../../db';
 
