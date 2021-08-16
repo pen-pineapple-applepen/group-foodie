@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { body, param, query, ValidationChain, validationResult } from 'express-validator';
-import { exists } from 'fs';
+import { body, param, query, validationResult } from 'express-validator';
 import ApiError from '../../errors/apiError';
 import httpErrors from '../../errors/httpErrors';
 
