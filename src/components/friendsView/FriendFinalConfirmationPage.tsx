@@ -49,7 +49,7 @@ const FlexEndButton = styled(OrangeButton)`
 `;
 
 function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
-  // const currentOrders = useAppSelector(state => state.allOrderItems.orders)
+  // const currentOrders = useAppSelector(state => state.orders.allOrders)
   const [currentGroupOrders, setCurrentGroupOrders] = useState([]);
   const currentGroupId = useAppSelector((state) => state.currentGroup);
   const currentRestaurant = useAppSelector((state) => state.currentRestaurant);

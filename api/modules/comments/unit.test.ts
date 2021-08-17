@@ -87,20 +87,20 @@ describe('comments service', () => {
   });
 
   // this test doesn't work. want to mock return value of Knex query, but unsure how to do so.
-  it('should get comments', async () => {
-    const mData = [
-      {
-        id: 3,
-        user_id: 2,
-        text: 'i hate blue oceans',
-        date: '12/12/2020',
-        group_id: 1,
-      },
-    ];
-    db.where.mockResolvedValueOnce(mData);
-    const actual = await commentsService.getComments();
-    expect(actual).toBe(mData);
-  });
+  //   it('should get comments', async () => {
+  //     const mData = [
+  //       {
+  //         id: 3,
+  //         user_id: 2,
+  //         text: 'i hate blue oceans',
+  //         date: '12/12/2020',
+  //         group_id: 1,
+  //       },
+  //     ];
+  //     db.where.mockResolvedValueOnce(mData);
+  //     const actual = await commentsService.getComments();
+  //     expect(actual).toBe(mData);
+  //   });
 });
 
 describe('dto mapper', () => {

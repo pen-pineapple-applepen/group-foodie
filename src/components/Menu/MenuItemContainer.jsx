@@ -19,7 +19,7 @@ const InfoContainer = styled.div`
 const Image = styled.img`
   min-width: 154px;
   height: 117px;
-  position : relative;
+  position: relative;
 `;
 
 const Name = styled.div`
@@ -33,10 +33,14 @@ const SubInfo = styled.div`
   padding: 10px 10px;
 `;
 
-export default function MenuItemContainer ({name, price, category}) {
-  return(
+export default function MenuItemContainer({ name, price, category }) {
+  return (
     <MainConatiner>
-        {category==='entree' ? <Image src={'/lunch_icon_24dp.svg'}/> : <Image src={'/local_cafe_black_24dp.svg'}/>}
+      {category === 'entree' ? (
+        <Image src={'/lunch_icon_24dp.svg'} />
+      ) : (
+        <Image src={'/local_cafe_black_24dp.svg'} />
+      )}
       <InfoContainer>
         <Name>
           <h3>{name}</h3>
@@ -46,5 +50,5 @@ export default function MenuItemContainer ({name, price, category}) {
         </SubInfo>
       </InfoContainer>
     </MainConatiner>
-  )
+  );
 }

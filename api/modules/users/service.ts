@@ -7,7 +7,7 @@ import ApiError from '../../errors/apiError';
 import httpErrors from '../../errors/httpErrors';
 
 export interface UsersService {
-  getOneUserInfo(user_id: string): Promise<UserDTO>;
+  getOneUser(user_id: number): Promise<UserDTO>;
   createUser(
     first_name: string,
     last_name: string,
@@ -28,14 +28,16 @@ export class UsersServiceImpl implements UsersService {
     private db: Knex
   ) {}
 
-  async getOneUserInfo(user_id: string): Promise<UserDTO> {
-    const [user]: User[] = await this.db('users')
+  async getOneUser(user_id: number): Promise<UserDTO> {
+    const userData: User[] = await this.db('users')
       .select('id', 'first_name', 'last_name', 'email', 'username', 'guest')
       // knex thinks there should be a string here, but this is correct knex syntax
       .where({ id: user_id } as any);
-    if (!user) {
-      throw new ApiError(`User with user ID ${user_id} was not found`, httpErrors.NOT_FOUND);
+
+    if (!userData[0] || !userData.length) {
+      throw new ApiError(`user with user ID ${user_id} was not found`, httpErrors.NOT_FOUND);
     }
+    const user = userData[0];
     const userDTO = UserMapper.toUserDTO(user);
     return userDTO;
   }
@@ -60,7 +62,7 @@ export class UsersServiceImpl implements UsersService {
       'id'
     );
     if (!insertedId) {
-      throw new ApiError('error creating new User', httpErrors.NOT_FOUND);
+      throw new ApiError('error creating new user', httpErrors.NOT_FOUND);
     }
     return insertedId;
   }
@@ -82,14 +84,14 @@ export class UsersServiceImpl implements UsersService {
           user_id as any
         );
       });
-    if (!friends) {
-      throw new ApiError(`Friends of user ${user_id} not found`, httpErrors.NOT_FOUND);
-    }
     const friendsDTO = UserMapper.toFriendsDTO(friends);
     return friendsDTO;
   }
 
   async createFriend(user_id: number, friend_id: number): Promise<void> {
+    if (!user_id || !friend_id) {
+      throw new ApiError('user id and/or friend id are not defined', httpErrors.BAD_REQUEST);
+    }
     await this.db('friends_join_table').insert({
       user_id,
       friend_id,
@@ -97,6 +99,9 @@ export class UsersServiceImpl implements UsersService {
   }
 
   async checkPasswordWithEmail(email: string, password: string): Promise<CredentialsDTO> {
+    if (!email || !password) {
+      throw new ApiError('email and/or password are not defined', httpErrors.BAD_REQUEST);
+    }
     const emailsThatMatchPassword: EmailsThatMatchPassword[] = await this.db
       .select('email', 'id')
       .from('users')
