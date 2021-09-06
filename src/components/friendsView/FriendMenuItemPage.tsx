@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
@@ -39,7 +40,7 @@ export default function FriendMenuItemPage() {
   const totalPrice = item.price * item.count;
   const history = useHistory();
 
-  function handleClick() {
+  function handleCheckout() {
     if (item.count === 0) {
       return;
     }
@@ -48,8 +49,8 @@ export default function FriendMenuItemPage() {
     history.push('/Menu/Friends');
   }
 
-  React.useEffect(() => {
-    dispatch(allActions.updateTotalPrice(totalPrice.toFixed(2)));
+  useEffect(() => {
+    dispatch(allActions.updateTotalPrice(Number(totalPrice.toFixed(2))));
   }, [item]);
 
   const pageVariants = {
@@ -95,7 +96,7 @@ export default function FriendMenuItemPage() {
         <StyledDescription>{item.description}</StyledDescription>
         <p>${item.price}</p>
         <MenuItemIncrementor />
-        <CheckoutButton onClick={handleClick}>
+        <CheckoutButton onClick={handleCheckout}>
           Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}
         </CheckoutButton>
       </MainConatiner>

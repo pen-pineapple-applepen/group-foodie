@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { ReactElement } from 'react';
-import CountDownTimer from './CountDownTimer';
+import styled from 'styled-components';
 import CurrentOrderListItem from './CurrentOrderListItem';
 import { Order } from './ConfirmationPage';
-import styled from 'styled-components';
 
 interface CurrentOrderListProps {
   currentOrders: Order[];

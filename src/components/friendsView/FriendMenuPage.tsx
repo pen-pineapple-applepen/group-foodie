@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
 import styled from 'styled-components';
@@ -26,18 +27,6 @@ const MenuList = styled.div`
   box-shadow: 4px 4px 8px rgb(0 0 0 / 10%);
 `;
 
-interface Order {
-  user_id: number;
-  food: string;
-  quantity: number;
-  price: number;
-  date: string;
-  food_id: number;
-  group_id: number;
-  restuarant_id: number;
-  live: boolean;
-}
-
 export default function FriendMenuPage() {
   const currentItem = useAppSelector((state) => state.orders.currentOrder);
   const totalOrdersPrice = useAppSelector((state) => state.orders.ordersTotal);
@@ -48,10 +37,10 @@ export default function FriendMenuPage() {
 
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const [menuList, setMenuList] = React.useState([]);
+  const [menuList, setMenuList] = useState([]);
 
   //axios call function for intial array of menu items and local storage
-  async function getMenuList(restaurantid) {
+  async function getMenuList(restaurantid: number) {
     let localMenuData = localStorage.getItem(`MenuListData_${restaurantid}`);
     if (!localMenuData) {
       const rawData = await axios.get(`/api/restaurants/${restaurantid}/menu`);
@@ -99,7 +88,7 @@ export default function FriendMenuPage() {
   }
 
   //Resets Current Selected Item
-  React.useEffect(() => {
+  useEffect(() => {
     //Menu Item
     dispatch(allActions.updateMenuItemPrice(0));
     dispatch(allActions.resetMenuItemQuantity());

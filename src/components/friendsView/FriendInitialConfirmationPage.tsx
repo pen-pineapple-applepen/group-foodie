@@ -10,18 +10,6 @@ import CountDownTimer from '../Confirmation/CountDownTimer';
 import CurrentOrderList from '../Confirmation/CurrentOrderList';
 import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 
-export interface Order {
-  id: number;
-  user_id: number;
-  food: string;
-  quantity: number;
-  price: string;
-  date: string;
-  food_id: number;
-  group_id: number;
-  restaurant_id: number;
-}
-
 const ConfirmationContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;

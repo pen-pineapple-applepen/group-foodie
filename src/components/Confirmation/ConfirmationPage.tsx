@@ -8,18 +8,6 @@ import CountDownTimer from './CountDownTimer';
 import CurrentOrderList from './CurrentOrderList';
 import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 
-export interface Order {
-  id: number;
-  user_id: number;
-  food: string;
-  quantity: number;
-  price: string;
-  date: string;
-  food_id: number;
-  group_id: number;
-  restaurant_id: number;
-}
-
 const ConfirmationContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -86,7 +74,6 @@ function Confirmation(): ReactElement {
       opacity: 1,
       transition: {
         duration: 1.5,
-        // type: 'tween',
       },
     },
     out: {
