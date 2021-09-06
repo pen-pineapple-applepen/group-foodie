@@ -29,7 +29,7 @@ const initialState: User = {
 export const currentUserReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setCurrentUser, (state, action) => {
-      const {payload} = action;
+      const { payload } = action;
       return payload;
     })
     .addCase(logIn, (state, action) => {
@@ -37,5 +37,5 @@ export const currentUserReducer = createReducer(initialState, (builder) => {
     })
     .addCase(logOut, (state, action) => {
       state.loggedIn = false;
-    })
+    });
 });

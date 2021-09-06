@@ -1,14 +1,14 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { ReactElement } from "react";
-import CountDownTimer from "../Confirmation/CountDownTimer";
-import CurrentOrderList from "../Confirmation/CurrentOrderList";
-import { OrangeNavbar, HeaderImage, OrangeButton } from "../../styles/shared";
-import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { motion } from "framer-motion";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import { ReactElement } from 'react';
+import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import axios from 'axios';
+import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import CountDownTimer from '../Confirmation/CountDownTimer';
+import CurrentOrderList from '../Confirmation/CurrentOrderList';
+import { OrangeNavbar, HeaderImage, OrangeButton } from '../../styles/shared';
 
 interface ConfirmationProps {}
 
@@ -56,7 +56,7 @@ function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
   const history = useHistory();
 
   const handleStartOrder = () => {
-    history.push("/Menu/Friends");
+    history.push('/Menu/Friends');
   };
 
   useEffect(async () => {
@@ -80,7 +80,7 @@ function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
       opacity: 0,
       transition: {
         duration: 0.8,
-        type: "tween",
+        type: 'tween',
       },
     },
   };
@@ -89,7 +89,7 @@ function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
     <>
       <OrangeNavbar />
       <ConfirmationContainer initial="initial" animate="in" exit="out" variants={pageVariants}>
-        <HeaderImage src={currentRestaurant.id === 1 ? "/Dannys_bg.png" : "/Bowl.png"} />
+        <HeaderImage src={currentRestaurant.id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
 
         <TopContainer>
           <ThankYouMessage>Thank you for yor order!</ThankYouMessage>
@@ -100,7 +100,7 @@ function FriendFinalConfirmation({}: ConfirmationProps): ReactElement {
 
         <CurrentOrderList currentOrders={currentGroupOrders} />
 
-        <FlexEndButton onClick={() => history.push("/Chat/ChatPage")}>Chat</FlexEndButton>
+        <FlexEndButton onClick={() => history.push('/Chat/ChatPage')}>Chat</FlexEndButton>
       </ConfirmationContainer>
     </>
   );

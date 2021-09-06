@@ -1,11 +1,11 @@
-import * as React from "react";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import * as React from 'react';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
-import styled from "styled-components";
-import { OrangeButton, OrangeNavbar, HeaderImage } from "../../styles/shared";
-import MenuItemIncrementor from "../Menu/MenuItemIncrementor";
-import { useHistory } from "react-router-dom";
-import { motion } from "framer-motion";
+import styled from 'styled-components';
+import { OrangeButton, OrangeNavbar, HeaderImage } from '../../styles/shared';
+import MenuItemIncrementor from '../Menu/MenuItemIncrementor';
+import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const MainConatiner = styled(motion.div)`
   display: flex;
@@ -39,14 +39,13 @@ export default function FriendMenuItemPage() {
   const totalPrice = item.price * item.count;
   const history = useHistory();
 
-  function clickHandler() {
+  function handleClick() {
     if (item.count === 0) {
       return;
-    } else {
-      dispatch(allActions.addToPriceTotal(totalPrice)); //
-      dispatch(allActions.addItemToOrders(currentOrder));
-      history.push("/Menu/Friends");
     }
+    dispatch(allActions.addToPriceTotal(totalPrice));
+    dispatch(allActions.addItemToOrders(currentOrder));
+    history.push('/Menu/Friends');
   }
 
   React.useEffect(() => {
@@ -57,7 +56,7 @@ export default function FriendMenuItemPage() {
     initial: {
       opacity: 0,
       scale: 0.9,
-      y: "50%",
+      y: '50%',
     },
     in: {
       opacity: 1,
@@ -65,17 +64,17 @@ export default function FriendMenuItemPage() {
       scale: 1,
       transition: {
         duration: 0.3,
-        type: "tween",
+        type: 'tween',
       },
     },
     out: {
       opacity: 0,
 
       scale: 0.9,
-      y: "50%",
+      y: '50%',
       transition: {
         duration: 0.2,
-        type: "tween",
+        type: 'tween',
       },
     },
   };
@@ -83,7 +82,7 @@ export default function FriendMenuItemPage() {
   return (
     <>
       <OrangeNavbar />
-      <HeaderImage src={currentOrder.restaurant_id === 1 ? "/Dannys_bg.png" : "/Bowl.png"} />
+      <HeaderImage src={currentOrder.restaurant_id === 1 ? '/Dannys_bg.png' : '/Bowl.png'} />
       <FoodName
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -96,7 +95,7 @@ export default function FriendMenuItemPage() {
         <StyledDescription>{item.description}</StyledDescription>
         <p>${item.price}</p>
         <MenuItemIncrementor />
-        <CheckoutButton onClick={() => clickHandler()}>
+        <CheckoutButton onClick={handleClick}>
           Add to order{`(${item.count})`} ${totalPrice.toFixed(2)}
         </CheckoutButton>
       </MainConatiner>
