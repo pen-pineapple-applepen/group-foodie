@@ -1,23 +1,9 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { ReactElement } from 'react';
-import CountDownTimer from './CountDownTimer';
-import { Order } from './ConfirmationPage';
 import { ProfileImage } from '../../styles/shared';
 import styled from 'styled-components';
 import axios from 'axios';
-
-const testOrder = {
-  id: 1,
-  user_id: 5,
-  food: 'PIZZA',
-  quantity: 3,
-  price: '3.50',
-  date: '12/20/2020',
-  food_id: 423,
-  group_id: 1,
-  restaurant_id: 32,
-};
 
 interface CurrentOrderListItemProps {
   userId: number;

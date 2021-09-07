@@ -1,17 +1,34 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 
-export const addItemToOrders = createAction('ADD_ITEM_TO_ORDERS');
-export const addToPriceTotal = createAction('ADD_TO_PRICE_TOTAL');
+export const addItemToOrders = createAction<Order>('ADD_ITEM_TO_ORDERS');
+export const addToPriceTotal = createAction<number>('ADD_TO_PRICE_TOTAL');
 export const resetAllOrders = createAction('RESET_ALL_ORDERS');
 export const updateItemName = createAction('UPDATE_ITEM_NAME');
 export const updateItemId = createAction('UPDATE_ITEM_ID');
 export const updateItemQuantity = createAction('UPDATE_ITEM_QUANTITY');
-export const updateTotalPrice = createAction('UPDATE_TOTAL_PRICE');
+export const updateTotalPrice = createAction<number>('UPDATE_TOTAL_PRICE');
 export const updateRestaurantId = createAction('UPDATE_RESTAURANT_ID');
 export const setUserId = createAction('SET_USER_ID');
 export const setGroupId = createAction('SET_GROUP_ID');
 
-const initialState = {
+export interface Order {
+  user_id: number;
+  food: string;
+  quantity: number;
+  price: number;
+  date: string;
+  food_id: number;
+  group_id: number;
+  restaurant_id?: number;
+  live?: boolean;
+}
+
+interface OrdersState {
+  allOrders: Order[];
+  ordersTotal: number;
+  currentOrder: Order;
+}
+const initialState: OrdersState = {
   allOrders: [],
   ordersTotal: 0,
   currentOrder: {

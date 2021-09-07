@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { ReactElement } from 'react';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import allActions from '../../state/actions/allActions';
-import styled from 'styled-components';
 
 const MainConatiner = styled.div`
   display: flex;
